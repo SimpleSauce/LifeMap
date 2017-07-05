@@ -21,16 +21,6 @@ public class ViewController {
         return "nav/results";
     }
 
-    @GetMapping("/login")
-    public String siteLogin() {
-        return "user/login";
-    }
-
-    @GetMapping("/register")
-    public String siteRegister() {
-        return "user/register";
-    }
-
     @GetMapping("/profile")
     public String siteProfile() {
         return "user/profile";
