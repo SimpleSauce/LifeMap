@@ -12,7 +12,7 @@
 
   let marker = new google.maps.Marker({
     position: map.center,
-    map: map,
+    map: map
   });
 
   let pos;
@@ -38,13 +38,13 @@
     });
   };
 
-  let locationRequest = () => {
+  let getLocationInfo = () => {
     $.ajax().done(() => {
 
     });
   };
 
-  let jobRequest = () => {
+  let getJobInfo = () => {
     $.ajax().done(() => {
 
     });
