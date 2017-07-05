@@ -4,8 +4,9 @@
 
   //Variable Declarations================================
   const geoCodeIt = new google.maps.Geocoder;
-  const cityInput = $('#city-input');
   const goButton = $('#get-info');
+  let locationDisplay = $('#location-info');
+  let locationHeader = $('#location-name');
 
   // let map = new google.maps.Map($('#map')[0], {
   //   center: {lat: 29.427038, lng: -98.489576},
@@ -66,25 +67,48 @@
 
   //===================LOCATION AJAX REQUEST/BUILD===================
   const getLocationInfo = () => {
+    // let parsedInput = $('#city-input').val().replace(/\s+/g , '-');
     $.ajax({
       url: "https://api.teleport.org/api/cities/?search=" + $('#city-input').val(),
       type: "GET"
     }).done((data) => {
-      buildLocation(data);
+      buildLocationInfo(data);
+      $.ajax({
+        url: data._embedded['city:search-results'][0]._links['city:item'].href,
+        type: "GET"
+      }).done((data) => {
+        $.ajax({
+          url: data._links['city:urban_area'].href,
+          type: "GET"
+        }).done((data) => {
+          $.ajax({
+            url: data._links['ua:salaries'].href,
+            type: "GET"
+          }).done((data) => {
+            console.log(data);
+          })
+        });
+      });
     });
 
-    $.ajax({
-      url: "https://api.teleport.org/api/urban_areas/slug:" + $('#city-input').val(),
-      type: "GET"
-    }).done((data) => {
-      buildLocation(urbanData);
-    });
+    // $.ajax({
+    //   url: "https://api.teleport.org/api/urban_areas/slug:" + $('#city-input').val() + "/",
+    //   type: "GET"
+    // }).done((data) => {
+    //   buildUrbanInfo(data);
+    // });
   };
 
-  const buildLocation = (data, urbanData) => {
+  const buildLocationInfo = (data) => {
     console.log(data);
-    $('#location-name').text(data._embedded['city:search-results'][0].matching_alternate_names[0].name);
+locationHeader.text(data._embedded['city:search-results'][0].matching_full_name);
     $('#location-info').text(data);
+
+  };
+
+  const buildUrbanInfo = (data) => {
+    console.log(data);
+
   };
   //===================JOB AJAX REQUEST/BUILD===================
   const getJobInfo = () => {
