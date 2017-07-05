@@ -1,6 +1,6 @@
-package repositories;
+package com.simplesauce.repositories;
 
-import models.SearchResults;
+import com.simplesauce.models.SearchResults;
 import org.springframework.data.repository.CrudRepository;
 
 public interface SearchResultsRepo extends CrudRepository<SearchResults, Long>{

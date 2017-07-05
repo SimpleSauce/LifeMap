@@ -1,6 +1,6 @@
-package repositories;
+package com.simplesauce.repositories;
 
-import models.User;
+import com.simplesauce.models.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepo extends CrudRepository<User, Long>{
