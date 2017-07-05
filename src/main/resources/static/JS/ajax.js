@@ -33,19 +33,33 @@
   }
 
   let mapRequest = () => {
-    $.ajax().done(() => {
+    $.ajax({
+
+    }).done(() => {
 
     });
   };
 
   let getLocationInfo = () => {
-    $.ajax().done(() => {
+    $.ajax({
+      url: "https://api.teleport.org/api/cities/?search=" + $('#someElementId'),
+      type: "GET",
+      data: {
 
+      }
+    }).done(() => {
+      buildLocation(data);
     });
   };
 
+  let buildLocation = (data) => {
+    console.log(data._)
+  };
+
   let getJobInfo = () => {
-    $.ajax().done(() => {
+    $.ajax({
+
+    }).done(() => {
 
     });
   };
