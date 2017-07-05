@@ -1,9 +1,11 @@
-package models;
+package com.simplesauce.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "search_results")
 public class SearchResults {
 
   @Id

@@ -1,4 +1,4 @@
-package models;
+package com.simplesauce.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotBlank;
