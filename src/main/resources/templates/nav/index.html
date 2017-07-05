@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments :: head(Title)" />
+<head th:replace="fragments :: head('Home Page')" />
 <body>
 <nav th:replace="fragments :: navbar" />
 
-<h1 style="text-align: center">This is a test</h1>
-<br />
+<div id="map"></div>
+<h1 id="location-name">City Name Goes Here</h1>
+<div id="location-info"></div>
+
+<input id="city-input" placeholder="City Name" type="text"/>
+<button id="get-info">GO</button>
 
 <footer th:replace="fragments :: footer" />
 
