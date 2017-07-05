@@ -3,7 +3,14 @@
 <head th:replace="fragments :: head(title)" />
 <body>
 <nav th:replace="fragments :: navbar" />
-<h1>This is a test</h1>
+
+<div id="map"></div>
+<h1 id="location-name">City Name Goes Here</h1>
+<div id="location-info"></div>
+
+<input id="city-input" placeholder="City Name" type="text"/>
+<button id="get-info">GO</button>
+
 <footer th:replace="fragments :: footer" />
 
 <script th:replace="fragments :: scripts" />
