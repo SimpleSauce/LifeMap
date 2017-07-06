@@ -17,6 +17,10 @@ a:visited {
     margin-top: 11%;
 }
 
+img {
+    width: 100%;
+}
+
 /* End of content wrapper */
 
 .navbar {
@@ -31,6 +35,30 @@ a:visited {
 @media (max-width: 650px) {
     .navbar {
         flex-wrap: wrap;
+    }
+
+    .content-wrap {
+        margin-top: 60%;
+    }
+
+    .bar {
+        flex-wrap: wrap;
+    }
+    .icon {
+        order: 0 !important;
+    }
+    .name {
+        order: 1 !important;
+        width: 100%;
+        margin: 15px;
+    }
+    .search {
+        order: 2 !important;
+        width: 100%;
+    }
+
+    .search input {
+        width: 30%;
     }
 }
 
@@ -53,25 +81,7 @@ a:visited {
     flex: 1;
 }
 .search input {
-    width: 30%;
-}
-
-@media (max-width: 650px) {
-    .bar {
-        flex-wrap: wrap;
-    }
-    .icon {
-        order: 0 !important;
-    }
-    .name {
-        order: 1 !important;
-        width: 100%;
-        margin: 15px;
-    }
-    .search {
-        order: 2 !important;
-        width: 100%;
-    }
+    width: 70%;
 }
 /* End of Navbar */
 
