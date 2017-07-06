@@ -4,6 +4,19 @@
 <body>
 <nav th:replace="fragments :: navbar" />
 
+<h1>Log In</h1>
+
+<form th:action="@{/results}" th:method="post">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" />
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" />
+    <br/>
+    <input id="moveBtn" type="submit" value="Log In" />
+</form>
+
+
+
 <footer th:replace="fragments :: footer" />
 
 <script th:replace="fragments :: scripts" />

@@ -4,6 +4,13 @@
 <body>
 <nav th:replace="fragments :: navbar" />
 
+
+<form th:action="@{/login}" th:method="post">
+  <h1>this is the results page</h1>
+</form>
+
+
+
 <footer th:replace="fragments :: footer" />
 
 <script th:replace="fragments :: scripts" />
