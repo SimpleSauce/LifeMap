@@ -31,6 +31,16 @@ body {
     opacity: 0.5;
     padding: 10px;
 }
+#map {
+  background-color: azure;
+  border-radius: 50%;
+  height: 400px;
+  width: 400px;
+}
+
+a:visited {
+    color: #00B4FF;
+}
 
 .search {
     flex: 1;
