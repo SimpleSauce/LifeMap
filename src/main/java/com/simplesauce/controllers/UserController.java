@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 /**
  * Created by everardosifuentes on 7/5/17.
@@ -37,7 +40,13 @@ public class UserController {
     }
 
     @PostMapping("/user/register")
-    public String saveUser(@ModelAttribute User user){
+    public String saveUser(@Valid User user, Errors validation, Model model){
+
+        if(validation.hasErrors()){
+            model.addAttribute("errors", validation);
+            model.addAttribute("user", user);
+            return "user/register";
+        }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
@@ -46,13 +55,12 @@ public class UserController {
 
     }
 
-//    @PostMapping("/user/register")
-//    public String saveUser(@ModelAttribute User user) {
-//
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        usersDao.save(user);
-//
-//        return "redirect:/login";
-//    }
+
+
+
+
+
+
+
 
 }
