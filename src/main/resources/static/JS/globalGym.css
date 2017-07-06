@@ -11,6 +11,13 @@ body {
     color: #FFFFFF;
 }
 
+#map {
+  background-color: azure;
+  border-radius: 50%;
+  height: 400px;
+  width: 400px;
+}
+
 a:visited {
     color: #00B4FF;
 }

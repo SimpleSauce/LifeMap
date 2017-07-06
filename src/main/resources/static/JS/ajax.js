@@ -7,12 +7,16 @@
   const goButton = $('#get-info');
   let locationDisplay = $('#location-info');
   let locationHeader = $('#location-name');
+  const sanAntonioLocation = {lat: 29, lng: -98};
+  const map = new google.maps.Map(document.getElementById('map'), {
+    center: sanAntonioLocation,
+    zoom: 14
+  });
 
   //===================LOCATION AJAX REQUEST/BUILD===================
-  const getLocationInfo = () => {
-    // let parsedInput = $('#city-input').val().replace(/\s+/g , '-');
+  const getLocationInfo = (cityName) => {
     $.ajax({
-      url: "https://api.teleport.org/api/cities/?search=" + $('#city-input').val(),
+      url: "https://api.teleport.org/api/cities/?search=" + cityName,
       type: "GET"
     }).done((data) => {
       $.ajax({
@@ -50,10 +54,13 @@
 
   //===================JOB INFORMATION BUILDERS===================
 
+
   let buildLocationInfo = (data) => {
+    let lat = data.location.latlon.latitude;
+    let lng = data.location.latlon.longitude;
     console.log(data);
     $('#location-info').text(data);
-
+    map.setCenter({lat: lat, lng: lng});
   };
 
   let buildUrbanInfo = (data) => {
@@ -77,18 +84,58 @@
   };
 
   //========================GOOGLE API METHODS========================
-  let map;
-  function initMap() {
-    map = new google.maps.Map($('#map'), {
-      center: {lat: -34.397, lng: 150.644},
-      zoom: 8
+
+  //Takes input from the search bar and sends it to the getLocationInfo() method. Also re-centers the map onto the location specified.
+  const geoCoder = () => {
+    geoCodeIt.geocode({'address': $('#city-input').val()},
+      (results, status) => {
+        if(status =='OK') {
+          map.setCenter(results[0].geometry.location);
+          new google.maps.Marker({
+            postion: results[0].geometry.location,
+            map: map
+          });
+          console.log(results[0].address_components[3].long_name);
+          getLocationInfo(results[0].address_components[3].long_name)
+        } else {
+          console.log("Geocode wasn't successful for reason: " + status);
+        }
+      }
+    );
+  };
+
+  //========================GLASSDOOR API METHODS========================
+  //Retrieves end-user's IP address from Json object and transfers it to the GlassDoor API.
+  $.getJSON('https://freegeoip.net/json/', function(data) {
+  let ip = data.ip;
+  jobSearchByArea(ip);
+  });
+
+  //Retrieves Job information by state from GlassDoor API
+  const jobSearchByArea = (ip, location) => {
+    const request = $.ajax({
+      url: "http://api.glassdoor.com/api/api.htm?t.p=167558&t.k=kRjES33TNWE",
+      dataType: "jsonp",
+      data: {
+        userip: ip,
+        // radius: "25",
+        useragent: '',
+        format: "json",
+        l: location,
+        action: "jobs-stats",
+        v: "1",
+        returnStates: "false",
+        admLevelRequested: "1"
+      }
     });
-  }
+    request.done((data) => {
+      console.log(data);
+    })
+  };
 
   $(document).keyup(function(e){
 
     if (e.keyCode === 13) {
-      getLocationInfo();
       geoCoder();
     }
   });
