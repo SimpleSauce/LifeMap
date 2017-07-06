@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments :: head('Home Page')" />
+<style>
+  #map {
+    height: 400px;
+    width: 400px;
+  }
+</style>
 <body>
+<div id="location-image"></div>
+
 <nav th:replace="fragments :: navbar" />
 
 <div id="map"></div>
