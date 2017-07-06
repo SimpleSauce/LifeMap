@@ -8,6 +8,17 @@ body {
     color: #FFFFFF;
 }
 
+a:visited {
+    color: #00B4FF;
+}
+
+/* Main content wrapper */
+.content-wrap {
+    margin-top: 11%;
+}
+
+/* End of content wrapper */
+
 .navbar {
     position: fixed;
     display: flex;
@@ -17,7 +28,13 @@ body {
     padding: 10px;
 }
 
-/* Custom Nav Bar */
+@media (max-width: 650px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+}
+
+/* Custom Navbar */
 *,*:before, *:after {
     box-sizing: inherit;
 }
@@ -27,19 +44,9 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
-    background: black;
-    opacity: 0.5;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
     padding: 10px;
-}
-#map {
-  background-color: azure;
-  border-radius: 50%;
-  height: 400px;
-  width: 400px;
-}
-
-a:visited {
-    color: #00B4FF;
 }
 
 .search {
@@ -66,14 +73,7 @@ a:visited {
         width: 100%;
     }
 }
-
-/* End */
-
-@media (max-width: 650px) {
-    .navbar {
-        flex-wrap: wrap;
-    }
-}
+/* End of Navbar */
 
 /*.nav-links {*/
     /*float: right;*/
@@ -81,6 +81,21 @@ a:visited {
     /*text-align: center;*/
     /*padding: 7px 8px;*/
 /*}*/
+
+/* Map Stuff */
+.map-wrap {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+#map {
+    background-color: azure;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+}
+/* End of Map */
 
 .test{
     display: flex;
@@ -98,8 +113,4 @@ footer{
     display: flex;
     align-items: center;
     width: 100%;
-}
-
-a:visited {
-    color: #00B4FF;
 }
