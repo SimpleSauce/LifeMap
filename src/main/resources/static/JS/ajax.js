@@ -10,7 +10,7 @@
   const sanAntonioLocation = {lat: 29, lng: -98};
   const map = new google.maps.Map(document.getElementById('map'), {
     center: sanAntonioLocation,
-    zoom: 14
+    zoom: 16
   });
 
   //===================LOCATION AJAX REQUEST/BUILD===================
@@ -60,7 +60,7 @@
     let lng = data.location.latlon.longitude;
     console.log(data);
     $('#location-info').text(data);
-    map.setCenter({lat: lat, lng: lng});
+    //map.setCenter({lat: lat, lng: lng});
   };
 
   let buildUrbanInfo = (data) => {
@@ -80,12 +80,12 @@
 
   let locationImageDisplay = (data) => {
     $('#location-image').html(`<img src="${data.photos[0].image.web}" alt="picture"/>`);
-    console.log(data);
   };
 
   //========================GOOGLE API METHODS========================
   let autocomplete = new google.maps.places.Autocomplete(document.getElementById('city-input'));
   autocomplete.bindTo('bounds', map);
+
   //Takes input from the search bar and sends it to the getLocationInfo() method. Also re-centers the map onto the location specified.
   const geoCoder = () => {
     geoCodeIt.geocode({'address': $('#city-input').val()},
@@ -105,6 +105,21 @@
     );
   };
 
+  const commuteFinder = (origin, dest) => {
+    $.ajax({
+      url: "https://maps.googleapis.com/maps/api/distancematrix/json?",
+      type: "GET",
+      data: {
+        units: "imperial",
+        origins: origin,
+        destination: dest,
+        key:MAPS_KEY
+      }
+    }).done((data) => {
+      console.log(data);
+    });
+  };
+
   //========================GLASSDOOR API METHODS========================
   //Retrieves end-user's IP address from Json object and transfers it to the GlassDoor API.
   $.getJSON('https://freegeoip.net/json/', function(data) {
@@ -118,8 +133,9 @@
       url: "http://api.glassdoor.com/api/api.htm?t.p=167558&t.k=kRjES33TNWE",
       dataType: "jsonp",
       data: {
+        jc: "29",
         userip: ip,
-        // radius: "25",
+        radius: "25",
         useragent: '',
         format: "json",
         l: location,
