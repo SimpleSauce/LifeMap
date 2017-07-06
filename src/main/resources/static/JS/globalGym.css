@@ -25,6 +25,7 @@ a:visited {
 [class*="col-"] {
     width: 95%;
 }
+
 @media only screen and (min-width: 504px) {
     .col-1-T {width: 25%;}
     .col-2-T {width: 50%;}
