@@ -6,8 +6,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
   <title th:text="${title}"></title>
+
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
   <link rel="stylesheet" href="js/globalGym.css"/>
+
   <link rel="shortcut icon" href="/img/logoplaceholder.ico" type="image/ico"/>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -22,32 +24,35 @@
   <img src="/img/logoplaceholder.svg" alt="logo" width="32" height="32"/>
   <a href="/"><h2>LifeMap</h2></a>
   <ul>
-    <li><a href="/">Home</a></li>
-    <li sec:authorize="isAuthenticated()">
-      <a href="/profile">Profile</a>
-    </li>
-    <li sec:authorize="isAuthenticated()">
-      <form th:action="@{'/logout'}" th:method="post">
-        <button>Log Out</button>
-      </form>
-    </li>
-    <li sec:authorize="!isAuthenticated()"><a href="/login">Log In</a></li>
-    <li sec:authorize="!isAuthenticated()"><a href="/register">Join Us!</a></li>
+    <div class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li sec:authorize="isAuthenticated()">
+        <a href="/profile">Profile</a>
+      </li>
+      <li sec:authorize="isAuthenticated()">
+        <form th:action="@{'/logout'}" th:method="post">
+          <button>Log Out</button>
+        </form>
+      </li>
+      <li sec:authorize="!isAuthenticated()"><a href="/login">Log In</a></li>
+      <li sec:authorize="!isAuthenticated()"><a href="/register">Join Us!</a></li>
+    </div>
   </ul>
 </nav>
 
 <footer th:fragment="footer">
-  <ul>
-    <li>
-      <a href="/about">The SimpleSauce Team</a>
-    </li>
-  </ul>
+  <a href="/about">The SimpleSauce Team</a>
 </footer>
 
 <!--SCRIPTS FRAGMENT-->
 <scripts th:fragment="scripts">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script th:src="${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('google.maps.key') + '&amp;libraries=places'}"></script>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    const MAPS_KEY = "@environment.getProperty('google.maps.key')";
+    /*]]>*/
+  </script>
   <script src="/js/ajax.js"></script>
 </scripts>
 
