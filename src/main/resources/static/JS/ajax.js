@@ -84,7 +84,8 @@
   };
 
   //========================GOOGLE API METHODS========================
-
+  let autocomplete = new google.maps.places.Autocomplete(document.getElementById('city-input'));
+  autocomplete.bindTo('bounds', map);
   //Takes input from the search bar and sends it to the getLocationInfo() method. Also re-centers the map onto the location specified.
   const geoCoder = () => {
     geoCodeIt.geocode({'address': $('#city-input').val()},
