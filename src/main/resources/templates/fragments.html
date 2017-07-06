@@ -6,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
   <title th:text="${title}"></title>
-  <link rel="stylesheet" href="js/globalGym.css"/>
+  <link rel="stylesheet" href="/JS/globalGym.css"/>
   <link rel="shortcut icon" href="/img/logoplaceholder.ico" type="image/ico"/>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -21,31 +21,29 @@
   <img src="/img/logoplaceholder.svg" alt="logo" width="32" height="32"/>
   <a href="/"><h2>LifeMap</h2></a>
   <ul>
-    <li><a href="/">Home</a></li>
-    <li sec:authorize="isAuthenticated()">
-      <a href="/profile">Profile</a>
-    </li>
-    <li sec:authorize="isAuthenticated()">
-      <form th:action="@{'/logout'}" th:method="post">
-        <button>Log Out</button>
-      </form>
-    </li>
-    <li sec:authorize="!isAuthenticated()"><a href="/login">Log In</a></li>
-    <li sec:authorize="!isAuthenticated()"><a href="/register">Join Us!</a></li>
+    <div class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li sec:authorize="isAuthenticated()">
+        <a href="/profile">Profile</a>
+      </li>
+      <li sec:authorize="isAuthenticated()">
+        <form th:action="@{'/logout'}" th:method="post">
+          <button>Log Out</button>
+        </form>
+      </li>
+      <li sec:authorize="!isAuthenticated()"><a href="/login">Log In</a></li>
+      <li sec:authorize="!isAuthenticated()"><a href="/register">Join Us!</a></li>
+    </div>
   </ul>
 </nav>
 
 <footer th:fragment="footer">
-  <ul>
-    <li>
-      <a href="/about">The SimpleSauce Team</a>
-    </li>
-  </ul>
+  <a href="/about">The SimpleSauce Team</a>
 </footer>
 
 <!--SCRIPTS FRAGMENT-->
 <scripts th:fragment="scripts">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
   <script th:src="${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('google.maps.key')}"></script>
   <script src="/js/ajax.js"></script>
   <!--<script src="http://api.glassdoor.com/api/api.htm?t.p=167558&t.k;=kRjES33TNWE-->
