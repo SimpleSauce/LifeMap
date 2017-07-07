@@ -1,13 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments :: head(title)" />
+<head th:replace="fragments :: head('Home Page')" />
 <body>
-<nav th:replace="fragments :: navbar" />
+<!--Custom navbar for main page-->
+<div class="bar">
+    <a class="name" href="/">
+        <h2>
+            Life Map
+        </h2>
+    </a>
+    <div class="search">
+        <h1 id="location-name">City Name Goes Here</h1>
+        <input id="city-input" placeholder="Company Address" type="text"/>
+        <div id="persons-selector">
+          <img id="persons-image" src="/img/009-user-black-close-up-shape.svg" alt="one"/>
+        </div>
+        <form id="get-info" action="/">
+          <button>GO</button>
+        </form>
+    </div>
+    <div class="icon icon-1"></div>
+    <div class="icon icon-2"></div>
+</div>
 
-<h1>This is a test</h1>
+<div class="content-wrap">
+  <!--Temp location for Search Info-->
+  <div class="map-wrap">
+      <h1>Location Info Here</h1>
+      <div id="location-image"></div>
+      <div id="location-info"></div>
+      <div id="map"></div>
+  </div>
 
-<footer th:replace="fragments :: footer" />
+  <!--Dummy text-->
+  <div class="info-card" id="coffee-cost">
 
+  </div>
+  <div class="info-card" id="fitness-cost">
+
+  </div>
+  <div class="info-card" id="meal-cost">
+
+  </div>
+  <div class="info-card" id="happiness">
+
+  </div>
+  <div class="info-card" id="today-temp">
+
+  </div>
+  <div class="info-card" id="apartment-cost">
+
+  </div>
+  <div class="info-card">
+
+  </div>
+  <div class="info-card">
+
+  </div>
+  <div class="info-card">
+
+  </div>
+
+    <footer th:replace="fragments :: footer" />
+</div>
 <script th:replace="fragments :: scripts" />
 </body>
 </html>

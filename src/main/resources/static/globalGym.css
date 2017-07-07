@@ -1,0 +1,129 @@
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    background: #515151;
+    color: #FFFFFF;
+}
+
+a:visited {
+    color: #00B4FF;
+}
+
+/* Main content wrapper */
+.content-wrap {
+    margin-top: 11%;
+}
+
+img {
+    width: 100%;
+}
+
+/* End of content wrapper */
+
+.navbar {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: transparent;
+    padding: 10px;
+}
+
+@media (max-width: 650px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+    .content-wrap {
+        margin-top: 60%;
+    }
+
+    .bar {
+        flex-wrap: wrap;
+    }
+    .icon {
+        order: 0 !important;
+    }
+    .name {
+        order: 1 !important;
+        width: 100%;
+        margin: 15px;
+    }
+    .search {
+        order: 2 !important;
+        width: 100%;
+    }
+
+    .search input {
+        width: 30%;
+    }
+}
+
+/* Custom Navbar */
+*,*:before, *:after {
+    box-sizing: inherit;
+}
+
+.bar {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    padding: 10px;
+}
+
+.search {
+    flex: 1;
+}
+.search input {
+    width: 70%;
+}
+/* End of Navbar */
+
+/*.nav-links {*/
+    /*float: right;*/
+    /*display: block;*/
+    /*text-align: center;*/
+    /*padding: 7px 8px;*/
+/*}*/
+
+/* Map Stuff */
+.map-wrap {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+
+#map {
+    background-color: azure;
+    border-radius: 50%;
+    height: 400px;
+    width: 400px;
+}
+
+/* End of Map */
+
+.test{
+    display: flex;
+    border: 1px solid #FFFFFF;
+    margin-top: 30px;
+}
+
+.text-test {
+    display: inline-flex;
+    text-align: center;
+    margin-top: 30px;
+
+}
+
+footer{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}

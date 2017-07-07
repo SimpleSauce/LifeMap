@@ -1,6 +1,7 @@
 package com.simplesauce.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 
@@ -14,14 +15,16 @@ public class User {
   private long id;
 
   @Column(nullable = false, unique = true)
-  @NotBlank(message = "Username can't be blank")
+  @NotBlank(message = "Username can\'t be blank")
   private String username;
 
   @Column(nullable = false, unique = true)
+  @NotBlank(message = "Email can\'t be blank")
+  @Email(message = "Invalid format")
   private String email;
 
   @Column(nullable = false)
-  @NotBlank(message = "Password can't be blank. That's not very secure...")
+  @NotBlank(message = "Password can\'t be blank")
   @JsonIgnore
   private String password;
 

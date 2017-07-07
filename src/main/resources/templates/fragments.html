@@ -6,8 +6,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
   <title th:text="${title}"></title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="/style.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+  <link rel="stylesheet" href="js/globalGym.css"/>
+  <link rel="stylesheet" href="JS/login.css" />
   <link rel="shortcut icon" href="/img/logoplaceholder.ico" type="image/ico"/>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -20,36 +22,38 @@
 <!--NAV BAR FRAGMENT-->
 <nav th:fragment="navbar" class="navbar navbar-default" id="nav-bar">
   <img src="/img/logoplaceholder.svg" alt="logo" width="32" height="32"/>
-  <a href="/placeholder"><h2>LifeMap</h2></a>
+  <a href="/"><h2>LifeMap</h2></a>
   <ul>
-    <li><a href="/placeholder">Home</a></li>
-    <li sec:authorize="isAuthenticated()">
-      <a href="/placeholder">Profile</a>
-    </li>
-    <li sec:authorize="isAuthenticated()">
-      <form th:action="@{'/logout'}" th:method="post">
-        <button>Log Out</button>
-      </form>
-    </li>
-    <li sec:authorize="!isAuthenticated()"><a href="/login">Log In</a></li>
-    <li sec:authorize="!isAuthenticated()"><a href="/users/create">Join Us!</a></li>
+    <div class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li sec:authorize="isAuthenticated()">
+        <a href="/profile">Profile</a>
+      </li>
+      <li sec:authorize="isAuthenticated()">
+        <form th:action="@{'/logout'}" th:method="post">
+          <button>Log Out</button>
+        </form>
+      </li>
+      <li sec:authorize="!isAuthenticated()"><a href="/login">Log In</a></li>
+      <li sec:authorize="!isAuthenticated()"><a href="/register">Join Us!</a></li>
+    </div>
   </ul>
 </nav>
 
 <footer th:fragment="footer">
-  <ul>
-    <li>
-      <a href="/simplesauce">The SimpleSauce Team</a>
-    </li>
-  </ul>
+  <a href="/about">The SimpleSauce Team</a>
 </footer>
 
 <!--SCRIPTS FRAGMENT-->
 <scripts th:fragment="scripts">
+  <input id="openWeatherMapKey" type="hidden" th:value="${@environment.getProperty('openweathermaps.key')}"/>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script th:src="${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('google.maps.key') + '&amp;callback=initMap'}"></script>
-  <!--<script src="http://api.glassdoor.com/api/api.htm?t.p=167558&t.k;=kRjES33TNWE-->
-<!--&userip=0.0.0.0&useragent=&format=json&v=1&action=jobs-stats&returnStates=true&admLevelRequested=1"></script>-->
+  <script th:src="${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('google.maps.key') + '&amp;libraries=places'}"></script>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    const MAPS_KEY = "@environment.getProperty('google.maps.key')";
+    /*]]>*/
+  </script>
   <script src="/js/ajax.js"></script>
 </scripts>
 

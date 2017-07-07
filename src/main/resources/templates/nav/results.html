@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments :: head(Results)" />
 <body>
+<nav th:replace="fragments :: navbar" />
 
+
+<form th:action="@{/login}" th:method="post">
+  <h1>this is the results page</h1>
+</form>
+
+
+
+<footer th:replace="fragments :: footer" />
+
+<script th:replace="fragments :: scripts" />
 </body>
 </html>
