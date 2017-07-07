@@ -3,7 +3,7 @@ body, html{
 }
 
 #username{
-    width: 510px;
+
     border-radius: 2px;
     background-color: #515151;
     color: white;
@@ -11,7 +11,6 @@ body, html{
 
 
 #password{
-    width: 510px;
     border-radius: 2px;
     background-color: #515151;
     color: white;
@@ -41,8 +40,7 @@ body, html{
 }
 
 #moveFldsDiv{
-    margin-left: 250px;
-    margin-top: 100px;
+    /*border: 1px solid white;*/
 }
 
 #moveBtn{
