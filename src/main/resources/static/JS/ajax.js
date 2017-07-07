@@ -6,6 +6,14 @@
   const geoCodeIt = new google.maps.Geocoder;
   const goButton = $('#get-info');
   const cityInput = $('#city-input');
+  const personsSelector = $('#persons-selector');
+  const personsSelectorImage = $('#persons-image');
+  const openMapsKey = $('#openWeatherMapKey').val();
+  const onePersonImg = "../img/009-user-black-close-up-shape.svg";
+  const twoPersonImg = "../img/010-couple-users-silhouette.svg";
+  const threePersonImg = "../img/008-multiple-users-silhouette.svg";
+  let radius = 25;
+  let beds = 1;
   let locationDisplay = $('#location-info');
   let locationHeader = $('#location-name');
   const sanAntonioLocation = {lat: 29, lng: -98};
@@ -58,6 +66,21 @@
       });
     });
   };
+  //===================WEATHER INFORMATION REQUESTS===================
+  const requestWeather = (lat, lng) => {
+    console.log(openMapsKey);
+    $.ajax({
+      url: "http://api.openweathermap.org/data/2.5/weather?",
+      data: {
+      APPID: openMapsKey,
+        units: "imperial",
+        lat: lat,
+        lon: lng
+      }
+    }).done((data) => {
+      buildWeather(data);
+    })
+  };
 
   //===================JOB INFORMATION BUILDERS===================
   let buildLocationInfo = (data) => {
@@ -102,8 +125,12 @@
     $('#coffee-cost').text(data.categories[3].data[3].currency_dollar_value.toFixed(2));
     $('#fitness-cost').text(data.categories[3].data[5].currency_dollar_value.toFixed(2));
     $('#meal-cost').text(data.categories[3].data[8].currency_dollar_value.toFixed(2));
-    $('#today-temp').text();
     console.log(data.categories);
+  };
+
+  const buildWeather = (data) => {
+    console.log(data);
+    $('#today-temp').text(data.main.temp);
   };
 
   //========================GOOGLE API METHODS========================
@@ -122,27 +149,15 @@
             map: map
           });
           console.log(results[0].address_components[3].long_name);
-          getLocationInfo(results[0].address_components[3].long_name)
+          getLocationInfo(results[0].address_components[3].long_name);
+          jobSearchByArea(results[0].address_components[3].long_name);
+          console.log(results);
+          requestWeather(results[0].geometry.location.lat, results[0].geometry.location.lng);
         } else {
           console.log("Geocode wasn't successful for reason: " + status);
         }
       }
     );
-  };
-
-  const commuteFinder = (origin, dest) => {
-    $.ajax({
-      url: "https://maps.googleapis.com/maps/api/distancematrix/json?",
-      type: "GET",
-      data: {
-        units: "imperial",
-        origins: origin,
-        destination: dest,
-        key:MAPS_KEY
-      }
-    }).done((data) => {
-      console.log(data);
-    });
   };
 
   //========================GLASSDOOR API METHODS========================
@@ -160,7 +175,7 @@
       data: {
         jc: "29",
         userip: ip,
-        radius: "25",
+        radius: radius,
         useragent: '',
         format: "json",
         l: location,
@@ -175,12 +190,28 @@
     })
   };
 
+  //=================RENTRENT API====================
+  const personsImageChanger = () => {
+    (beds <= 3) ? beds += 1 : beds = 1;
+
+    switch(beds) {
+      case 1: personsSelectorImage.attr('src', onePersonImg);
+      break;
+      case 2: personsSelectorImage.attr('src', twoPersonImg);
+      break;
+      case 3: personsSelectorImage.attr('src', threePersonImg);
+    }
+  };
+
+  //=================CLICKING AND KEYSTROKES FUNCTIONS==================
+  personsSelector.on('click', personsImageChanger());
+
   //TODO Fix this Go button functionality
   goButton.submit(geoCoder());
 
   $(document).keyup(function(e){
     if (e.keyCode === 13) {
-      geoCoder();
+      geoCoder(beds);
     }
   });
 
