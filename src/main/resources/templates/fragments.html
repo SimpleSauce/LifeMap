@@ -6,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
   <title th:text="${title}"></title>
-  <link rel="stylesheet" href="globalGym.css"/>
+  <link rel="stylesheet" href="/globalGym.css"/>
   <link rel="shortcut icon" href="/img/logoplaceholder.ico" type="image/ico"/>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -43,6 +43,7 @@
 
 <!--SCRIPTS FRAGMENT-->
 <scripts th:fragment="scripts">
+  <input id="openWeatherMapKey" type="hidden" th:value="${@environment.getProperty('openweathermaps.key')}"/>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script th:src="${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('google.maps.key') + '&amp;libraries=places'}"></script>
   <script th:inline="javascript">
