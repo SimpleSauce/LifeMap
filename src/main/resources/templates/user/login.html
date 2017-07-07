@@ -6,7 +6,10 @@
 
 
 <div id="moveFldsDiv" class="col-sm-6 col-sm-offset-3 text-center content-wrap">
-    <h1>Log In</h1>
+    <h1 id="loginHeader">LifeMap</h1>
+
+    <br/>
+
     <form th:action="@{/login}" th:method="post" class="form-horizontal">
 
         <div class="form-group">
@@ -25,7 +28,7 @@
 
         <br/>
 
-        <input id="moveBtn" type="submit" value="Log In"/>
+        <input class="align-center semi-transparent-button" type="submit" value="Log In"/>
 
 
         <div id="LoginErrorDiv">
@@ -38,7 +41,7 @@
 </div>
 
 
-<footer th:replace="fragments :: footer"/>
+<!--<footer th:replace="fragments :: footer"/>-->
 
 <script th:replace="fragments :: scripts"/>
 </body>
