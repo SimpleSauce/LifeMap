@@ -1,0 +1,66 @@
+body, html{
+    background-color: #3a4043;
+}
+
+#username{
+
+    border-radius: 2px;
+    background-color: #515151;
+    color: white;
+}
+
+
+#password{
+    border-radius: 2px;
+    background-color: #515151;
+    color: white;
+}
+
+#usernameLbl{
+    font-size: 15px;
+}
+
+
+#passwordLbl{
+    font-size: 15px;
+}
+
+
+
+/*#addYourDetails{*/
+/*background-color: #545454;*/
+/*color: white;*/
+/*}*/
+
+
+#btnSubmit{
+    margin-left: 240px;
+    margin-top: 120px;
+    border-radius: 1px;
+}
+
+#moveFldsDiv{
+    /*border: 1px solid white;*/
+}
+
+#moveBtn{
+    margin-left: 425px;
+    margin-top: 100px;
+}
+
+#titleLbl{
+    margin-left: 450px;
+    margin-top: 50px;
+}
+
+.error{
+    color: red;
+    font-size: large;
+}
+
+#errorDiv{
+    margin-top: 160px;
+    margin-left: -90px;
+}
+
+

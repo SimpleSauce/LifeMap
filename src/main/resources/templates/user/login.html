@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments :: head(Login)" />
+<head th:replace="fragments :: head(Login)"/>
 <body>
-<nav th:replace="fragments :: navbar" />
-
-<h1>Log In</h1>
-
-<form th:action="@{/login}" th:method="post">
-    <label for="username">Username</label>
-    <input id="username" name="username" type="text" />
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" />
-    <br/>
-    <input id="moveBtn" type="submit" value="Log In" />
+<nav th:replace="fragments :: navbar"/>
 
 
+<div id="moveFldsDiv" class="col-sm-6 col-sm-offset-3 text-center content-wrap">
+    <h1>Log In</h1>
+    <form th:action="@{/login}" th:method="post" class="form-horizontal">
 
-    <div id="LoginErrorDiv">
-        <div class="error" th:if="${param.error}">
-            Invalid Username and Password.
+        <div class="form-group">
+            <label id="usernameLbl" for="username" class="col-sm-2 control-label">Username</label>
+            <div class="col-sm-10">
+                <input id="username" class="col-sm-10" name="username" type="text"/>
+            </div>
         </div>
-        <!--<div class="error" th:if="${param.logout}">-->
-            <!--You have been logged out.-->
-        <!--</div>-->
-    </div>
 
-</form>
+        <div class="form-group">
+            <label id="passwordLbl" for="password" class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-10">
+                <input id="password" class="col-sm-10" name="password" type="password"/>
+            </div>
+        </div>
+
+        <br/>
+
+        <input id="moveBtn" type="submit" value="Log In"/>
 
 
+        <div id="LoginErrorDiv">
+            <div class="error" th:if="${param.error}">
+                Invalid Username and Password.
+            </div>
+        </div>
 
-<footer th:replace="fragments :: footer" />
+    </form>
+</div>
 
-<script th:replace="fragments :: scripts" />
+
+<footer th:replace="fragments :: footer"/>
+
+<script th:replace="fragments :: scripts"/>
 </body>
 </html>
