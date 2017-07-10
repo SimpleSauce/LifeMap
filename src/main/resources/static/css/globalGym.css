@@ -8,13 +8,31 @@ body {
   background: #515151;
   color: #FFFFFF;
 }
+/*===================NAV BAR===================*/
+.bar {
+  height: 75px;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  top: 0;
+  padding: 5px;
+}
+
+.search {
+  flex: 1;
+}
+.search input {
+  width: 70%;
+}
 
 #logo {
   display: inline;
 }
 
-#location-image {
-  width: 100%;
+#city-input {
+  color: #515151;
 }
 
 #persons-image {
@@ -27,118 +45,89 @@ body {
   background-color: rgba(0, 180, 255, 0.66);
 }
 
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+#persons-img:hover .tooltip {
+  visibility: visible;
+}
+
 a:visited {
   color: #00B4FF;
 }
 
-/* Main content wrapper */
+/*===================CONTENT BELOW NAVBAR===================*/
+
+/*Wraps everything below navbar*/
 #content-wrap {
-  margin-top: 5%;
+  margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
+/*Wraps location-image, location-name and location-info*/
+#city-info-wrap {
+
+}
+
+#location-image {
+  width: 100%;
+}
+
+#location-name {
+
+}
+
+#location-info {
+  background-color: #1BB0CE;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 #563444;
+  text-align: center;
+}
+
+/*Self-explanatory, sits in its own section*/
+#map {
+  margin: 5px auto;
+  z-index: 1;
+  background-color: azure;
+  height: 300px;
+  width: 90%;
+}
+
+/*==================INFO CARDS CSS==================*/
 #info-card-container {
   justify-content: center;
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
   display: flex;
+  flex-direction: column;
 }
 
 .info-card {
-  background-color: rgba(0, 180, 255, 0.67);
-  flex-basis: 80%;
-  height: 60%;
-  width: 30%;
-}
-
-.navbar {
-  z-index: 0;
-  position: fixed;
   display: flex;
-  align-items: center;
-  width: 100%;
-  background: transparent;
-  padding: 10px;
-}
-
-.navbar-item {
-  margin: 2px;
-}
-
-@media (max-width: 650px) {
-
-  .navbar {
-    flex-wrap: wrap;
-  }
-
-  .bar {
-    height: 5%;
-    flex-wrap: wrap;
-  }
-
-  .icon {
-    order: 0 !important;
-  }
-
-  .name {
-    order: 1 !important;
-    width: 100%;
-    margin: 15px;
-  }
-
-  .search {
-    order: 2 !important;
-    width: 100%;
-  }
-
-  /*.search input {*/
-    /*width: 30%;*/
-  /*}*/
-}
-
-.bar {
-  position: fixed;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  background-color: rgba(0,0,0,0.5);
-  top: 0;
-  padding: 10px;
-}
-
-.search {
-  flex: 1;
-}
-.search input {
-  width: 70%;
-}
-
-.map-wrap {
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
-}
-
-#map {
-  z-index: 1;
-  background-color: azure;
-  border-radius: 5%;
-  height: 80%;
-  width: 80%;
-}
-
-/* End of Map */
-
-.test{
-  display: flex;
-  border: 1px solid #FFFFFF;
-  margin-top: 30px;
-}
-
-.text-test {
-  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  box-shadow: 0 4px 8px 0 #563444;
+  margin: 5px auto;
+  height: 300px;
+  width: 360px;
   text-align: center;
-  margin-top: 30px;
+  background-color: rgba(235, 235, 188, 0.67);
+}
 
+.info-card-img {
+  width: 32px;
+  height: 32px;
 }
 
 footer{
@@ -146,3 +135,5 @@ footer{
   align-items: center;
   width: 100%;
 }
+
+/*==================MEDIUM AND LARGE SIZE CHANGES==================*/
