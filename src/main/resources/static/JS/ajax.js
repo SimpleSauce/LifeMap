@@ -9,9 +9,9 @@
   const personsSelector = $('#persons-selector');
   const personsSelectorImage = $('#persons-image');
   const openMapsKey = $('#openWeatherMapKey').val();
-  const onePersonImg = "../img/009-user-black-close-up-shape.svg";
-  const twoPersonImg = "../img/010-couple-users-silhouette.svg";
-  const threePersonImg = "../img/008-multiple-users-silhouette.svg";
+  const onePersonImg = "./img/009-user-black-close-up-shape.svg";
+  const twoPersonImg = "./img/010-couple-users-silhouette.svg";
+  const threePersonImg = "./img/008-multiple-users-silhouette.svg";
   let radius = 25;
   let beds = 1;
   let locationDisplay = $('#location-info');
@@ -117,7 +117,7 @@
   };
 
   let locationImageDisplay = (data) => {
-    $('#location-image').html(`<img src="${data.photos[0].image.web}" alt="picture"/>`);
+    $('#image-container').html(`<img  id="location-image" src="${data.photos[0].image.web}" alt="picture"/>`);
   };
 
   //Retrieves City Data from Teleport API and displays it to the view.
@@ -190,21 +190,30 @@
     })
   };
 
-  //=================RENTRENT API====================
   const personsImageChanger = () => {
-    (beds <= 3) ? beds += 1 : beds = 1;
+    (beds < 3) ? beds++  : beds = 1;
 
     switch(beds) {
       case 1: personsSelectorImage.attr('src', onePersonImg);
-      break;
+        console.log(beds);
+        break;
       case 2: personsSelectorImage.attr('src', twoPersonImg);
-      break;
+        console.log(beds);
+        break;
       case 3: personsSelectorImage.attr('src', threePersonImg);
+        console.log(beds);
+        break;
+      default: return null;
     }
   };
 
+  personsSelectorImage.on('click', () => {
+    console.log('Click!');
+    personsImageChanger(beds);
+    console.log(beds);
+  });
+
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
-  personsSelector.on('click', personsImageChanger());
 
   //TODO Fix this Go button functionality
   goButton.submit(geoCoder());
