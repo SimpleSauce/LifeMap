@@ -14,12 +14,14 @@
   const fitnessImg = "./img/007-weightlifting.svg";
   const happyImg = "./img/004-happy.svg";
   const sadImg = "./img/003-arrogant.svg";
+  const workHarderImg = "./img/workharder.png";
   let radius = 25;
-  let beds = 2;
   const cardContainer = $('#info-card-container');
   let locationDisplay = $('#location-info');
   let locationHeader = $('#location-name');
   const sanAntonioLocation = {lat: 29, lng: -98};
+  let markers = [];
+  let jobsArray = [];
   const map = new google.maps.Map(document.getElementById('map'), {
     center: sanAntonioLocation,
     zoom: 16
@@ -61,13 +63,6 @@
       map: map
     });
   };
-
-  // const addJobsMarker = (location, map) => {
-  //   let marker = new google.maps.Marker({
-  //     position: location,
-  //     map: map
-  //   })
-  // };
 
   //===================LOCATION AJAX REQUEST/BUILD===================
   const getLocationInfo = (cityName) => {
@@ -181,25 +176,62 @@
   };
 
   let buildSalaryInfo = (data) => {
+
     console.log(data);
+    let selectBox = '';
+
+    data.salaries.forEach((val) => {
+      selectBox += `<option value="${val.job.title}">${val.job.title}</option>`;
+    });
+
+    let htmlString = `<div class="colored-tile"></div>
+        <div id="salary-img" class="section">
+        <div class="info-card" id="coffee-cost">
+        <img class="info-card-img" src="" alt="coffee">
+        <select id="job-dropdown">
+        ${selectBox}
+        </select>
+        </div>
+        </div>`;
+
+    cardContainer.append(htmlString);
   };
 
   let locationImageDisplay = (data) => {
     $('#image-container').html(`<img id="location-image" src="${data.photos[0].image.web}" alt="picture"/>`);
   };
 
-  //Retrieves City Data from Teleport API and displays it to the view.
+  let userDetails = (data) => {
+
+  };
+
+  //Retrieves City Data from Teleport API and displays it to the Index view.
   let buildDetails = (data) => {
+    //Housing Variables
     let smApt = data.categories[8].data[2].currency_dollar_value.toFixed(0);
     let medApt = data.categories[8].data[1].currency_dollar_value.toFixed(0);
     let lgApt = data.categories[8].data[0].currency_dollar_value.toFixed(0);
 
+    //Cost Of Living Variables
+    let coffeeCost = data.categories[3].data[3].currency_dollar_value.toFixed(2);
+    let fitnessCost = data.categories[3].data[5].currency_dollar_value.toFixed(2);
+    let mealCost = data.categories[3].data[8].currency_dollar_value.toFixed(2);
+
+    cardContainer.append(`
+      <div class="colored-tile"></div>
+      <div id="startup-img" class="section">
+        <div class="info-card" id="startup-info">
+          <img class="info-card-img" src="${coffeeImg}" alt="coffee">
+          $${coffeeCost}
+        </div>
+      </div>
+    `);
     cardContainer.append(`
       <div class="colored-tile"></div>
       <div id="coffee-img" class="section">
         <div class="info-card" id="coffee-cost">
           <img class="info-card-img" src="${coffeeImg}" alt="coffee">
-          $${data.categories[3].data[3].currency_dollar_value.toFixed(2)}
+          $${coffeeCost}
         </div>
       </div>
     `);
@@ -208,7 +240,7 @@
       <div id="fitness-img" class="section">
         <div class="info-card" id="fitness-cost">
           <img class="info-card-img" src="${fitnessImg}" alt="fitness">
-          $${data.categories[3].data[5].currency_dollar_value.toFixed(2)}
+          $${fitnessCost}
         </div>
       </div>
     `);
@@ -217,7 +249,7 @@
       <div id="meal-img" class="section">
         <div class="info-card" id="meal-cost">
           <img class="info-card-img" src="${mealImg}" alt="meal">
-          $${data.categories[3].data[8].currency_dollar_value.toFixed(2)}
+          $${mealCost}
         </div>
       </div>
     `);
@@ -263,6 +295,7 @@
       url: "http://api.indeed.com/ads/apisearch?",
       dataType: "jsonp",
       data: {
+        st: "jobsite",
         publisher: indeedKey,
         jc: "29",
         userip: ip,
@@ -276,12 +309,42 @@
     });
     request.done((data) => {
       console.log(data);
+      // jobsArrayPusher(data);
     })
   };
 
-  let jobsArray = () => {
-
-  };
+  // let jobsArrayPusher = (data) => {
+  //   data.results.forEach((val) => {
+  //     jobsArray.push(`{lat: ${val.latitude}, lng: ${val.longitude}}`);
+  //   });
+  //   addJobsMarker(jobsArray, map);
+  //   console.log(data.results);
+  //   console.log(jobsArray);
+  // };
+  //
+  // const clearMarker = () => {
+  //   for (let i = 0; i < markers.length; i++) {
+  //     markers[i].setMap(null);
+  //   }
+  //   markers = [];
+  // };
+  //
+  // const markerDrop = () => {
+  //   clearMarker();
+  //   for (let i = 0; i < jobsArray.length; i++) {
+  //     timedMarkerDrop(jobsArray[i], i * 200);
+  //   }
+  // };
+  //
+  // const timedMarkerDrop = (position, timeout) => {
+  //   window.setTimeout(() => {
+  //     markers.push(new google.maps.Marker({
+  //       position: position,
+  //       map: map,
+  //       animation: google.maps.Animation.DROP
+  //     }));
+  //   }, timeout);
+  // };
 
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
   //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
