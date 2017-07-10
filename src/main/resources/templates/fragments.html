@@ -3,23 +3,26 @@
 
 <!--HEAD FRAGMENT-->
 <head th:fragment="head(title)">
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1"/>
-    <title th:text="${title}"></title>
-    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet"/>
-
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="js/globalGym.css"/>
-
-    <link rel="shortcut icon" href="/img/logoplaceholder.ico" type="image/ico"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
+  <title th:text="${title}"></title>
+  <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/css/globalGym.css" />
+  <link rel="stylesheet" href="/css/jobsPage.css" />
+  <link rel="stylesheet" href="/css/login.css" />
+  <!--<link rel="shortcut icon" href="./img/logoplaceholder.ico" type="image/ico"/>-->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          crossorigin="anonymous">
+  </script>
 </head>
 
 <body>
 
 <!--NAV BAR FRAGMENT-->
 <nav th:fragment="navbar" class="navbar navbar-default" id="nav-bar">
-  <img src="/img/logoplaceholder.svg" alt="logo" width="32" height="32"/>
+  <img src="/img/push-pin-on-map.svg" alt="logo" id="logo" />
   <a href="/"><h2>LifeMap</h2></a>
   <ul>
     <div class="nav-links">
@@ -39,7 +42,7 @@
 </nav>
 
 <footer th:fragment="footer">
-  <a href="/about">The SimpleSauce Team</a>
+  <a class="cntr-text" href="/about">The SimpleSauce Team</a>
 </footer>
 
 <!--SCRIPTS FRAGMENT-->

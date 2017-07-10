@@ -14,6 +14,7 @@
   const fitnessImg = "./img/007-weightlifting.svg";
   const happyImg = "./img/004-happy.svg";
   const sadImg = "./img/003-arrogant.svg";
+  const expandImg = "./img/expand-btn.svg";
   const workHarderImg = "./img/workharder.png";
   let radius = 25;
   const cardContainer = $('#info-card-container');
@@ -155,6 +156,7 @@
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
           <img class="info-card-img" src="${happyImg}" alt="happiness">
+          <img class="expand-btn" src="${expandImg}" alt="expand">
           ${avg}
         </div>
       </div>
@@ -165,6 +167,7 @@
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
           <img class="info-card-img" src="${sadImg}" alt="happiness">
+          <img class="expand-btn" src="${expandImg}" alt="expand">
           ${avg}
         </div>
       </div>
@@ -231,6 +234,8 @@
       <div id="coffee-img" class="section">
         <div class="info-card" id="coffee-cost">
           <img class="info-card-img" src="${coffeeImg}" alt="coffee">
+          <img class="expand-btn" src="${expandImg}" alt="expand">
+          $${data.categories[3].data[3].currency_dollar_value.toFixed(2)}
           $${coffeeCost}
         </div>
       </div>
@@ -240,6 +245,8 @@
       <div id="fitness-img" class="section">
         <div class="info-card" id="fitness-cost">
           <img class="info-card-img" src="${fitnessImg}" alt="fitness">
+          <img class="expand-btn" src="${expandImg}" alt="expand">
+          $${data.categories[3].data[5].currency_dollar_value.toFixed(2)}
           $${fitnessCost}
         </div>
       </div>
@@ -249,6 +256,8 @@
       <div id="meal-img" class="section">
         <div class="info-card" id="meal-cost">
           <img class="info-card-img" src="${mealImg}" alt="meal">
+          <img class="expand-btn" src="${expandImg}" alt="expand">
+          $${data.categories[3].data[8].currency_dollar_value.toFixed(2)}
           $${mealCost}
         </div>
       </div>
@@ -257,6 +266,7 @@
       <div class="colored-tile"></div>
       <div id="apartment-img" class="section">
         <div class="info-card" id="apartment-cost">
+        <img class="expand-btn" src="${expandImg}" alt="expand">
           <span>Large Apartment: $${lgApt}</span>
           <span>Medium Apartment: $${medApt}</span>
           <span>Small Apartment: $${smApt}</span>
@@ -272,6 +282,7 @@
       <div class="colored-tile"></div>
       <div id="weather-img" class="section">
         <div class="info-card" id="today-temp">
+        <img class="expand-btn" src="${expandImg}" alt="expand">
           ${data.main.temp.toFixed(0) + degreeSymbol}
         </div>
       </div>

@@ -26,4 +26,9 @@ public class ViewController {
         return "user/profile";
     }
 
+    @GetMapping("/jobs")
+    public String siteJobs() {
+        return "nav/jobs";
+    }
+
 }

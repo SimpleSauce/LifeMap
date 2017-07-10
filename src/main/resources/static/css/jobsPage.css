@@ -1,0 +1,53 @@
+body {
+    outline: none;
+}
+
+.cntr-text {
+    width: 100%;
+    text-align: center;
+}
+
+.bar {
+    color: black;
+    height: 14vh;
+}
+
+#logo {
+    width: 5vw;
+    height: 10vh;
+    margin-right: 1%;
+    margin-left: 1%;
+    position: fixed;
+    left: 10px;
+    display: inline;
+}
+
+#map {
+    border-radius: 8px;
+}
+
+#city-input {
+    width: 50vw;
+    height: 10vh;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.go {
+    color: #FFFFFF;
+    width: 4vw;
+    height: 10vh;
+    border-radius: 8px;
+    font-size: x-large;
+    background: none;
+    border: 1px solid #FFFFFF;
+    opacity: 0.8;
+}
+
+.expand-btn {
+    width: 10vw;
+    height: 10vh;
+    position: absolute;
+    margin-left: 20vw;
+    margin-top: -16vh;
+}
