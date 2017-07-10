@@ -11,7 +11,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
     <link rel="stylesheet" href="js/globalGym.css"/>
-    <link rel="stylesheet" href="JS/login.css"/>
 
     <link rel="shortcut icon" href="/img/logoplaceholder.ico" type="image/ico"/>
 </head>
@@ -42,7 +41,9 @@
                 </li>
                 <li sec:authorize="isAuthenticated()">
                     <form th:action="@{'/logout'}" th:method="post">
-                        <button class="btn btn-link">Log Out</button>
+                        <div>
+                            <button class="btn btn-link">Log Out</button>
+                        </div>
                     </form>
                 </li>
                 <li sec:authorize="!isAuthenticated()"><a href="/login">Log In</a></li>
