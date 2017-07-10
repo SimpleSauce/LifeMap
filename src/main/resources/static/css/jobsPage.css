@@ -14,40 +14,40 @@ body {
 
 #logo {
     width: 5vw;
-    height: 15vh;
+    height: 10vh;
     margin-right: 1%;
     margin-left: 1%;
+    position: fixed;
+    left: 10px;
+    display: inline;
 }
 
 #map {
     border-radius: 8px;
 }
 
-#persons-selector {
-    width: 3vw;
-    height: 10vh;
-    display: inline;
-    background-color: rgba(0, 180, 255, 0.66);
-}
-
 #city-input {
     width: 50vw;
     height: 10vh;
     border-radius: 8px;
-}
-
-#persons-image {
-    width: 4vw;
-    height: 11vh;
-    margin-left: .5vw;
-    margin-right: .5vw;
-    margin-top: .5vh;
-    border-radius: 12px;
+    text-align: center;
 }
 
 .go {
+    color: #FFFFFF;
     width: 4vw;
     height: 10vh;
     border-radius: 8px;
     font-size: x-large;
+    background: none;
+    border: 1px solid #FFFFFF;
+    opacity: 0.8;
+}
+
+.expand-btn {
+    width: 10vw;
+    height: 10vh;
+    position: absolute;
+    margin-left: 20vw;
+    margin-top: -16vh;
 }

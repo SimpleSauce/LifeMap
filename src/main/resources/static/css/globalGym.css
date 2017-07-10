@@ -4,6 +4,10 @@ html, body {
   box-sizing: border-box;
 }
 
+body input:focus {
+    outline: none;
+}
+
 body {
   margin: 0;
   font-family: Edelsans, Avenir, sans-serif;
@@ -34,20 +38,13 @@ body {
 }
 
 #logo {
-  position: fixed;
-  left: 10px;
-  display: inline;
+
 }
 
 #city-input {
   color: #515151;
   width: 50vw;
   border-radius: 8px;
-}
-
-#get-info {
-  background: none;
-  border: none;
 }
 
 a:visited {
@@ -103,7 +100,7 @@ a:visited {
 }
 
 .colored-tile:nth-of-type(odd) {
-  background-color: #bffff0;
+    background-color: #1BB0CE;
 }
 
 .section {
@@ -138,13 +135,17 @@ a:visited {
   margin: 5px auto;
   height: 300px;
   width: 360px;
+  font-size: 2vw;
   text-align: center;
   background-color: rgba(235, 235, 188, 0.67);
 }
 
 .info-card-img {
-  width: 32px;
-  height: 32px;
+    width: 10vw;
+    height: 10vh;
+    margin-left: -1.2vw;
+    margin-top: -10vh;
+    margin-bottom: 16vh;
 }
 
 /*==================INDIVIDUAL INFO BACKGROUNDS==================*/
