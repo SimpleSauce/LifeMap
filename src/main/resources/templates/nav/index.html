@@ -1,65 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments :: head('Home Page')" />
+<head th:replace="fragments :: head('LifeMap')" />
 <body>
 <!--Custom navbar for main page-->
 <div class="bar">
-    <a class="name" href="/">
-        <h2>
-            Life Map
-        </h2>
-    </a>
-    <div class="search">
-        <h1 id="location-name">City Name Goes Here</h1>
-        <input id="city-input" placeholder="Company Address" type="text"/>
-        <div id="persons-selector">
-          <img id="persons-image" src="/img/009-user-black-close-up-shape.svg" alt="one"/>
-        </div>
-        <form id="get-info" action="/">
-          <button>GO</button>
-        </form>
-    </div>
-    <div class="icon icon-1"></div>
-    <div class="icon icon-2"></div>
+
+  <a class="navbar-item" id="logo" href="/">
+    <img src="http://via.placeholder.com/32x32"/>
+  </a>
+  <input class="navbar-item" id="city-input" placeholder="Company Address" type="text"/>
+  <div class="navbar-item" id="persons-selector">
+    <span class="tooltip">How many ppl are moving?</span>
+    <img class="navbar-item" id="persons-image" src="./img/009-user-black-close-up-shape.svg" alt="one" />
+  </div>
+  <button class="navbar-item" id="get-info">GO</button>
 </div>
 
-<div class="content-wrap">
+<div id="content-wrap">
   <!--Temp location for Search Info-->
-  <div class="map-wrap">
-      <h1>Location Info Here</h1>
-      <div id="location-image"></div>
+  <div class="city-info-wrap">
+      <div id="image-container"></div>
+    <h1 id="location-name">Type An Address!</h1>
       <div id="location-info"></div>
-      <div id="map"></div>
   </div>
 
-  <!--Dummy text-->
-  <div class="info-card" id="coffee-cost">
+  <div id="map"></div>
 
-  </div>
-  <div class="info-card" id="fitness-cost">
-
-  </div>
-  <div class="info-card" id="meal-cost">
-
-  </div>
-  <div class="info-card" id="happiness">
-
-  </div>
-  <div class="info-card" id="today-temp">
-
-  </div>
-  <div class="info-card" id="apartment-cost">
-
-  </div>
-  <div class="info-card">
-
-  </div>
-  <div class="info-card">
-
-  </div>
-  <div class="info-card">
-
-  </div>
+  <div id="info-card-container"></div>
 
     <footer th:replace="fragments :: footer" />
 </div>

@@ -4,16 +4,19 @@
 
   //Variable Declarations================================
   const geoCodeIt = new google.maps.Geocoder;
+  const degreeSymbol = '\u2109';
   const goButton = $('#get-info');
   const cityInput = $('#city-input');
-  const personsSelector = $('#persons-selector');
-  const personsSelectorImage = $('#persons-image');
   const openMapsKey = $('#openWeatherMapKey').val();
-  const onePersonImg = "../img/009-user-black-close-up-shape.svg";
-  const twoPersonImg = "../img/010-couple-users-silhouette.svg";
-  const threePersonImg = "../img/008-multiple-users-silhouette.svg";
+  const indeedKey = $('#indeedKey').val();
+  const coffeeImg = "./img/011-coffee.svg";
+  const mealImg = "./img/006-cereal.svg";
+  const fitnessImg = "./img/007-weightlifting.svg";
+  const happyImg = "./img/004-happy.svg";
+  const sadImg = "./img/003-arrogant.svg";
   let radius = 25;
-  let beds = 1;
+  let beds = 2;
+  const cardContainer = $('#info-card-container');
   let locationDisplay = $('#location-info');
   let locationHeader = $('#location-name');
   const sanAntonioLocation = {lat: 29, lng: -98};
@@ -21,6 +24,48 @@
     center: sanAntonioLocation,
     zoom: 16
   });
+
+  //========================GOOGLE API METHODS========================
+  let autocomplete = new google.maps.places.Autocomplete(document.getElementById('city-input'));
+  autocomplete.bindTo('bounds', map);
+
+  //Takes input from the search bar and sends it to the getLocationInfo() method. Also re-centers the map onto the location specified.
+  const geoCoder = () => {
+    (!cityInput.val().match(/([0-9])+/) && cityInput.val() !== '') ? alert('needs to be an address.' +
+      '') : geoCodeIt.geocode({'address': cityInput.val()},
+      (results, status) => {
+        if(status =='OK') {
+          map.setCenter(results[0].geometry.location);
+          addLocationMarker(results[0].geometry.location, map);
+          console.log(results);
+          //Calls these two methods and passes the City Name (which Teleport API is set up to use).
+          getLocationInfo(results[0].address_components[3].long_name);
+          ipGetter(results[0].address_components[7].long_name);
+
+          //Calls requestWeather and passes the latitude and longitude from results.
+          requestWeather(results[0].geometry.location.lat, results[0].geometry.location.lng);
+        } else {
+          console.log("Geocode wasn't successful for reason: " + status);
+        }
+      }
+    );
+  };
+
+  const addLocationMarker = (location, map) => {
+    let marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+  };
+
+  const addJobsMarker = (location, map) => {
+    let marker = new google.maps.Marker({
+      position: location,
+      map: map
+    })
+  };
+
+  //TODO <<<<------------Marker Placement Goes Here------------>>>>
 
   //===================LOCATION AJAX REQUEST/BUILD===================
   const getLocationInfo = (cityName) => {
@@ -66,9 +111,9 @@
       });
     });
   };
+
   //===================WEATHER INFORMATION REQUESTS===================
   const requestWeather = (lat, lng) => {
-    console.log(openMapsKey);
     $.ajax({
       url: "http://api.openweathermap.org/data/2.5/weather?",
       data: {
@@ -82,18 +127,18 @@
     })
   };
 
-  //===================JOB INFORMATION BUILDERS===================
+  //===================INFORMATION BUILDERS FOR THE VIEW===================
   let buildLocationInfo = (data) => {
-    console.log(data);
+    // console.log(data);
     $('#location-info').text(data);
   };
 
   let buildUrbanInfo = (data) => {
     locationHeader.text(data.full_name);
-    console.log(data);
-
+    // console.log(data);
   };
 
+  //Takes 17 metrics (provided by Teleport API), and averages them all to produce a single metric.
   let buildScoreInfo = (data) => {
     const scoreArray = [];
     let sum = 0;
@@ -102,87 +147,108 @@
     data.categories.forEach((val) => {
       scoreArray.push(val.score_out_of_10);
     });
-
     scoreArray.forEach((val) => {
       sum += val;
-      avg = (sum / 17);
+      avg = (sum / 17).toFixed(1);
     });
-    $('#happiness').text(avg);
-    console.log(avg);
-    console.log(data);
+
+    if(avg >= 6) {
+      cardContainer.append(`
+      <div class="info-card" id="happiness">
+        <img class="info-card-img" src="${happyImg}" alt="happiness">
+        ${avg}
+      </div>
+      `);
+    } else {
+      cardContainer.append(`
+      <div class="info-card" id="happiness">
+        <img class="info-card-img" src="${sadImg}" alt="happiness">
+        ${avg}
+      </div>
+      `);
+    }
+
+    // console.log(avg);
+    // console.log(data);
   };
 
   let buildSalaryInfo = (data) => {
-    console.log(data);
+    // console.log(data);
   };
 
   let locationImageDisplay = (data) => {
-    $('#location-image').html(`<img src="${data.photos[0].image.web}" alt="picture"/>`);
+    $('#image-container').html(`<img id="location-image" src="${data.photos[0].image.web}" alt="picture"/>`);
   };
 
   //Retrieves City Data from Teleport API and displays it to the view.
   let buildDetails = (data) => {
-    $('#coffee-cost').text(data.categories[3].data[3].currency_dollar_value.toFixed(2));
-    $('#fitness-cost').text(data.categories[3].data[5].currency_dollar_value.toFixed(2));
-    $('#meal-cost').text(data.categories[3].data[8].currency_dollar_value.toFixed(2));
-    console.log(data.categories);
+    let smApt = data.categories[8].data[2].currency_dollar_value.toFixed(0);
+    let medApt = data.categories[8].data[1].currency_dollar_value.toFixed(0);
+    let lgApt = data.categories[8].data[0].currency_dollar_value.toFixed(0);
+
+    cardContainer.append(`
+      <div class="info-card" id="coffee-cost">
+        <img class="info-card-img" src="${coffeeImg}" alt="coffee">
+        $${data.categories[3].data[3].currency_dollar_value.toFixed(2)}
+      </div>
+    `);
+    cardContainer.append(`
+      <div class="info-card" id="fitness-cost">
+        <img class="info-card-img" src="${fitnessImg}" alt="fitness">
+        $${data.categories[3].data[5].currency_dollar_value.toFixed(2)}
+      </div>
+    `);
+    cardContainer.append(`
+      <div class="info-card" id="meal-cost">
+        <img class="info-card-img" src="${mealImg}" alt="meal">
+        $${data.categories[3].data[8].currency_dollar_value.toFixed(2)}
+      </div>
+    `);
+    cardContainer.append(`
+      <div class="info-card" id="apartment-cost">
+        <span>Large Apartment: $${lgApt}</span>
+        <span>Medium Apartment: $${medApt}</span>
+        <span>Small Apartment: $${smApt}</span>
+      </div>
+    `);
+    // console.log(data.categories);
   };
 
   const buildWeather = (data) => {
-    console.log(data);
-    $('#today-temp').text(data.main.temp);
+    // console.log(data);
+    cardContainer.append(`
+      <div class="info-card" id="today-temp">
+        ${data.main.temp.toFixed(0) + degreeSymbol}
+      </div>
+    `);
   };
 
-  //========================GOOGLE API METHODS========================
-  let autocomplete = new google.maps.places.Autocomplete(document.getElementById('city-input'));
-  autocomplete.bindTo('bounds', map);
-
-  //Takes input from the search bar and sends it to the getLocationInfo() method. Also re-centers the map onto the location specified.
-  const geoCoder = () => {
-    (!cityInput.val().match(/([0-9])+/)) ? alert('needs to be an address.' +
-        '') : geoCodeIt.geocode({'address': cityInput.val()},
-      (results, status) => {
-        if(status =='OK') {
-          map.setCenter(results[0].geometry.location);
-          new google.maps.Marker({
-            postion: results[0].geometry.location,
-            map: map
-          });
-          console.log(results[0].address_components[3].long_name);
-          getLocationInfo(results[0].address_components[3].long_name);
-          jobSearchByArea(results[0].address_components[3].long_name);
-          console.log(results);
-          requestWeather(results[0].geometry.location.lat, results[0].geometry.location.lng);
-        } else {
-          console.log("Geocode wasn't successful for reason: " + status);
-        }
-      }
-    );
-  };
-
-  //========================GLASSDOOR API METHODS========================
+  //========================Indeed API METHODS========================
   //Retrieves end-user's IP address from Json object and transfers it to the GlassDoor API.
-  $.getJSON('https://freegeoip.net/json/', function(data) {
-  let ip = data.ip;
-  jobSearchByArea(ip);
-  });
+  //Also receives the 'location' parameter from the geoCoder function as a City, State.
+  const ipGetter = (location) => {
+    $.getJSON('https://freegeoip.net/json/', function(data) {
+      let ip = data.ip;
+      jobSearchByArea(ip, location);
+    });
+  };
 
-  //Retrieves Job information by state from GlassDoor API
+  //Retrieves Job information from Indeed API.
+  // NOTE: indeedKey is api key in application.properties. It is passed to ajax.js through hidden input.
   const jobSearchByArea = (ip, location) => {
     const request = $.ajax({
-      url: "http://api.glassdoor.com/api/api.htm?t.p=167558&t.k=kRjES33TNWE",
+      url: "http://api.indeed.com/ads/apisearch?",
       dataType: "jsonp",
       data: {
+        publisher: indeedKey,
         jc: "29",
         userip: ip,
         radius: radius,
         useragent: '',
         format: "json",
         l: location,
-        action: "jobs-stats",
-        v: "1",
-        returnStates: "false",
-        admLevelRequested: "1"
+        latlong: "1",
+        v: "2",
       }
     });
     request.done((data) => {
@@ -190,28 +256,25 @@
     })
   };
 
-  //=================RENTRENT API====================
-  const personsImageChanger = () => {
-    (beds <= 3) ? beds += 1 : beds = 1;
+  let jobsArray = () => {
 
-    switch(beds) {
-      case 1: personsSelectorImage.attr('src', onePersonImg);
-      break;
-      case 2: personsSelectorImage.attr('src', twoPersonImg);
-      break;
-      case 3: personsSelectorImage.attr('src', threePersonImg);
-    }
   };
 
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
-  personsSelector.on('click', personsImageChanger());
+  //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
+  const divClear = () => {
+    cardContainer.html('');
+  };
 
-  //TODO Fix this Go button functionality
-  goButton.submit(geoCoder());
+  goButton.on('click', () => {
+    divClear();
+    geoCoder();
+  });
 
   $(document).keyup(function(e){
     if (e.keyCode === 13) {
-      geoCoder(beds);
+      divClear();
+      geoCoder();
     }
   });
 

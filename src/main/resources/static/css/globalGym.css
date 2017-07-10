@@ -1,0 +1,139 @@
+
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  background: #515151;
+  color: #FFFFFF;
+}
+/*===================NAV BAR===================*/
+.bar {
+  height: 75px;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  top: 0;
+  padding: 5px;
+}
+
+.search {
+  flex: 1;
+}
+.search input {
+  width: 70%;
+}
+
+#logo {
+  display: inline;
+}
+
+#city-input {
+  color: #515151;
+}
+
+#persons-image {
+  width: 32px;
+  height: 32px;
+}
+
+#persons-selector {
+  display: inline;
+  background-color: rgba(0, 180, 255, 0.66);
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+#persons-img:hover .tooltip {
+  visibility: visible;
+}
+
+a:visited {
+  color: #00B4FF;
+}
+
+/*===================CONTENT BELOW NAVBAR===================*/
+
+/*Wraps everything below navbar*/
+#content-wrap {
+  margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/*Wraps location-image, location-name and location-info*/
+#city-info-wrap {
+
+}
+
+#location-image {
+  width: 100%;
+}
+
+#location-name {
+
+}
+
+#location-info {
+  background-color: #1BB0CE;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 #563444;
+  text-align: center;
+}
+
+/*Self-explanatory, sits in its own section*/
+#map {
+  margin: 5px auto;
+  z-index: 1;
+  background-color: azure;
+  height: 300px;
+  width: 90%;
+}
+
+/*==================INFO CARDS CSS==================*/
+#info-card-container {
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  box-shadow: 0 4px 8px 0 #563444;
+  margin: 5px auto;
+  height: 300px;
+  width: 360px;
+  text-align: center;
+  background-color: rgba(235, 235, 188, 0.67);
+}
+
+.info-card-img {
+  width: 32px;
+  height: 32px;
+}
+
+footer{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/*==================MEDIUM AND LARGE SIZE CHANGES==================*/
