@@ -40,8 +40,4 @@ public class UserDetailsLoader implements UserDetailsService {
     }
 
 
-    public Post findOne(long id){
-        return postsDao.findOne(id); // select * from posts where id = ?
-    }
-
 }

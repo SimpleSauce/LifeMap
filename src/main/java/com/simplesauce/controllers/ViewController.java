@@ -20,11 +20,7 @@ public class ViewController {
     public String siteResults() {
         return "nav/results";
     }
-
-    @GetMapping("/profile")
-    public String siteProfile() {
-        return "user/profile";
-    }
+    
 
     @GetMapping("/jobs")
     public String siteJobs() {

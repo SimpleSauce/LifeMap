@@ -3,12 +3,14 @@ package com.simplesauce.controllers;
 import com.simplesauce.repositories.UserRepo;
 import com.simplesauce.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -57,20 +59,14 @@ public class UserController {
 
 
     //update profile
-    @GetMapping("/posts/{id}/edit")
-    public String showEditForm(@PathVariable long id, Model model) {
-        // TODO: Find this post in the data source using the service
-        Post post = postSvc.findOne(id);
-        // TODO: Pass the post found to the view
-        model.addAttribute("post", post);
-        return "posts/edit";
+    @GetMapping("/profile")
+    public String showEditForm(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        model.addAttribute("user", user);
+        return "user/profile";
     }
 
-    @PostMapping("/posts/{id}/edit")
-    public String editPost(@ModelAttribute Post post){
-        postSvc.save(post);
-        return "redirect:/posts/" + post.getId();
-    }
 
 //    @PostMapping("/post/delete")
 //    public String deletePost(@ModelAttribute Post post, Model model){
