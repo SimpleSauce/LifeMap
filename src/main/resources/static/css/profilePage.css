@@ -1,0 +1,53 @@
+body {
+    outline: none;
+}
+
+.cntr-text {
+    width: 100%;
+    text-align: center;
+}
+
+.bar {
+    color: black;
+    height: 14vh;
+}
+
+#logo {
+    width: 5vw;
+    height: 15vh;
+    margin-right: 1%;
+    margin-left: 1%;
+}
+
+#map {
+    border-radius: 8px;
+}
+
+#persons-selector {
+    width: 3vw;
+    height: 10vh;
+    display: inline;
+    background-color: rgba(0, 180, 255, 0.66);
+}
+
+#city-input {
+    width: 50vw;
+    height: 10vh;
+    border-radius: 8px;
+}
+
+#persons-image {
+    width: 4vw;
+    height: 11vh;
+    margin-left: .5vw;
+    margin-right: .5vw;
+    margin-top: .5vh;
+    border-radius: 12px;
+}
+
+.go {
+    width: 4vw;
+    height: 10vh;
+    border-radius: 8px;
+    font-size: x-large;
+}
