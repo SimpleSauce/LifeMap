@@ -47,6 +47,7 @@
 <!--SCRIPTS FRAGMENT-->
 <scripts th:fragment="scripts">
   <input id="openWeatherMapKey" type="hidden" th:value="${@environment.getProperty('openweathermaps.key')}"/>
+  <input id="indeedKey" type="hidden" th:value="${@environment.getProperty('indeed.key')}"/>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script th:src="${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('google.maps.key') + '&amp;libraries=places'}"></script>
   <script th:inline="javascript">
