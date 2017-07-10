@@ -40,7 +40,11 @@
           console.log(results);
           //Calls these two methods and passes the City Name (which Teleport API is set up to use).
           getLocationInfo(results[0].address_components[3].long_name);
-          ipGetter(results[0].address_components[7].long_name);
+
+          //If the results include the zipcode in the 5th index, send to ipGetter. Otherwise, send the 7th index.
+          if(results[0].address_components[5].long_name.match(/([0-9])+/)) {
+            ipGetter(results[0].address_components[5].short_name);
+          } else ipGetter(results[0].address_components[7].short_name);
 
           //Calls requestWeather and passes the latitude and longitude from results.
           requestWeather(results[0].geometry.location.lat, results[0].geometry.location.lng);
@@ -58,14 +62,12 @@
     });
   };
 
-  const addJobsMarker = (location, map) => {
-    let marker = new google.maps.Marker({
-      position: location,
-      map: map
-    })
-  };
-
-  //TODO <<<<------------Marker Placement Goes Here------------>>>>
+  // const addJobsMarker = (location, map) => {
+  //   let marker = new google.maps.Marker({
+  //     position: location,
+  //     map: map
+  //   })
+  // };
 
   //===================LOCATION AJAX REQUEST/BUILD===================
   const getLocationInfo = (cityName) => {
@@ -154,16 +156,22 @@
 
     if(avg >= 6) {
       cardContainer.append(`
-      <div class="info-card" id="happiness">
-        <img class="info-card-img" src="${happyImg}" alt="happiness">
-        ${avg}
+      <div class="colored-tile"></div>
+      <div id="happiness-img" class="section">
+        <div class="info-card" id="happiness">
+          <img class="info-card-img" src="${happyImg}" alt="happiness">
+          ${avg}
+        </div>
       </div>
       `);
     } else {
       cardContainer.append(`
-      <div class="info-card" id="happiness">
-        <img class="info-card-img" src="${sadImg}" alt="happiness">
-        ${avg}
+      <div class="colored-tile"></div>
+      <div id="happiness-img" class="section">
+        <div class="info-card" id="happiness">
+          <img class="info-card-img" src="${sadImg}" alt="happiness">
+          ${avg}
+        </div>
       </div>
       `);
     }
@@ -173,7 +181,7 @@
   };
 
   let buildSalaryInfo = (data) => {
-    // console.log(data);
+    console.log(data);
   };
 
   let locationImageDisplay = (data) => {
@@ -187,28 +195,40 @@
     let lgApt = data.categories[8].data[0].currency_dollar_value.toFixed(0);
 
     cardContainer.append(`
-      <div class="info-card" id="coffee-cost">
-        <img class="info-card-img" src="${coffeeImg}" alt="coffee">
-        $${data.categories[3].data[3].currency_dollar_value.toFixed(2)}
+      <div class="colored-tile"></div>
+      <div id="coffee-img" class="section">
+        <div class="info-card" id="coffee-cost">
+          <img class="info-card-img" src="${coffeeImg}" alt="coffee">
+          $${data.categories[3].data[3].currency_dollar_value.toFixed(2)}
+        </div>
       </div>
     `);
     cardContainer.append(`
-      <div class="info-card" id="fitness-cost">
-        <img class="info-card-img" src="${fitnessImg}" alt="fitness">
-        $${data.categories[3].data[5].currency_dollar_value.toFixed(2)}
+      <div class="colored-tile"></div>
+      <div id="fitness-img" class="section">
+        <div class="info-card" id="fitness-cost">
+          <img class="info-card-img" src="${fitnessImg}" alt="fitness">
+          $${data.categories[3].data[5].currency_dollar_value.toFixed(2)}
+        </div>
       </div>
     `);
     cardContainer.append(`
-      <div class="info-card" id="meal-cost">
-        <img class="info-card-img" src="${mealImg}" alt="meal">
-        $${data.categories[3].data[8].currency_dollar_value.toFixed(2)}
+      <div class="colored-tile"></div>
+      <div id="meal-img" class="section">
+        <div class="info-card" id="meal-cost">
+          <img class="info-card-img" src="${mealImg}" alt="meal">
+          $${data.categories[3].data[8].currency_dollar_value.toFixed(2)}
+        </div>
       </div>
     `);
     cardContainer.append(`
-      <div class="info-card" id="apartment-cost">
-        <span>Large Apartment: $${lgApt}</span>
-        <span>Medium Apartment: $${medApt}</span>
-        <span>Small Apartment: $${smApt}</span>
+      <div class="colored-tile"></div>
+      <div id="apartment-img" class="section">
+        <div class="info-card" id="apartment-cost">
+          <span>Large Apartment: $${lgApt}</span>
+          <span>Medium Apartment: $${medApt}</span>
+          <span>Small Apartment: $${smApt}</span>
+        </div>
       </div>
     `);
     // console.log(data.categories);
@@ -217,8 +237,11 @@
   const buildWeather = (data) => {
     // console.log(data);
     cardContainer.append(`
-      <div class="info-card" id="today-temp">
-        ${data.main.temp.toFixed(0) + degreeSymbol}
+      <div class="colored-tile"></div>
+      <div id="weather-img" class="section">
+        <div class="info-card" id="today-temp">
+          ${data.main.temp.toFixed(0) + degreeSymbol}
+        </div>
       </div>
     `);
   };
