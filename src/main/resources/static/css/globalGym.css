@@ -95,10 +95,12 @@ a:visited {
   width: 100vw;
 }
 
+/*TODO This will be changed to #content-wrap:nth-child(even)*/
 .colored-tile:nth-of-type(even) {
   background-color: #1BB0CE;
 }
 
+/*TODO This will be changed to #content-wrap:nth-child(odd)*/
 .colored-tile:nth-of-type(odd) {
     background-color: #1BB0CE;
 }
