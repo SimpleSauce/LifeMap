@@ -73,5 +73,25 @@
     <script src="/js/ajax.js"></script>
 </scripts>
 
+
+<form th:fragment="formProgfile">
+    <div class="form-group">
+        <label for="username">Username:  </label>
+        <input id="username" type="text" th:field="*{username}"/>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:  </label>
+        <input id="password" type="text" th:field="*{password}"/>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:  </label>
+        <input id="email" type="text" th:field="*{email}"/>
+    </div>
+
+
+    <button class="btn btn-default">Save</button>
+</form>
+
+
 </body>
 </html>
