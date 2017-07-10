@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments :: head('Jobs')" />
+<body>
+<!--Custom navbar for main page-->
+<div class="bar">
+
+    <a class="navbar-item" id="logo" href="/jobs">
+        <img src="http://via.placeholder.com/32x32"/>
+    </a>
+    <input class="navbar-item" id="city-input" placeholder="Company Address" type="text"/>
+    <div class="navbar-item" id="persons-selector">
+        <span class="tooltip">How many ppl are moving?</span>
+        <img class="navbar-item" id="persons-image" src="./img/009-user-black-close-up-shape.svg" alt="one" />
+    </div>
+    <button class="navbar-item" id="get-info">GO</button>
+</div>
+
+<div id="content-wrap">
+    <!--Temp location for Search Info-->
+    <div class="city-info-wrap">
+        <div id="image-container"></div>
+        <h1 id="location-name">Type An Address!</h1>
+        <div id="location-info"></div>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="info-card-container"></div>
+
+    <footer th:replace="fragments :: footer" />
+</div>
+<script th:replace="fragments :: scripts" />
+</body>
+</html>
