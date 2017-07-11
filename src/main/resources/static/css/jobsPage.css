@@ -8,17 +8,52 @@ body {
 }
 
 .bar {
+    z-index: 1;
+    position: fixed;
+    display: flex;
+    align-content: center;
+    width: 100%;
+    background-size: cover;
+    top: 0;
+    padding: 5px;
     color: black;
-    height: 14vh;
+    height: 5.3rem;
+    background-color: rgba(46,46,46,0.6);
+    list-style: none;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
 }
 
-#logo {
-    width: 5vw;
-    height: 10vh;
+.nav-container div {
+    text-decoration: none;
+    display: block;
+    color: white;
+}
+
+.nav-box1 {
+    flex: 1;
+}
+
+.nav-box2 {
+    flex: 3;
+}
+
+.nav-box3 {
+    flex: 1;
+}
+
+.logo {
+    width: 4.4rem;
+    height: 4.4rem;
     margin-right: 1%;
     margin-left: 1%;
     position: fixed;
-    left: 10px;
     display: inline;
 }
 
@@ -27,16 +62,18 @@ body {
 }
 
 #city-input {
-    width: 50vw;
-    height: 10vh;
+    width: 45rem;
+    height: 3.7rem;
     border-radius: 8px;
     text-align: center;
+    font-size: 2rem;
+    color: #515151;
 }
 
 .go {
     color: #FFFFFF;
-    width: 4vw;
-    height: 10vh;
+    width: 4.5rem;
+    height: 3.4rem;
     border-radius: 8px;
     font-size: x-large;
     background: none;
@@ -50,4 +87,227 @@ body {
     position: absolute;
     margin-left: 20vw;
     margin-top: -16vh;
+}
+
+.test-bar {
+    flex-basis: 100%;
+}
+
+html {
+    font-size: 14px;
+}
+
+html, body {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body input:focus {
+    outline: none;
+}
+
+body {
+    margin: 0;
+    font-family: Edelsans, Avenir, sans-serif;
+    background-color: #2c2c2c;
+    color: #FFFFFF;
+}
+/*===================NAV BAR===================*/
+
+.navbar-item {
+    margin: 4px;
+}
+
+.search {
+    flex: 1;
+}
+
+#logo {
+
+}
+
+a:visited {
+    color: #00B4FF;
+}
+
+/*===================CONTENT BELOW NAVBAR===================*/
+
+/*Wraps everything below navbar*/
+#content-wrap {
+    margin-top: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/*Wraps location-image, location-name and location-info*/
+#city-info-wrap {
+    background-color: #abdde9;
+}
+
+#location-image {
+    width: 100%;
+}
+
+#location-name {
+
+}
+
+#location-info {
+    background-color: #1BB0CE;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 #563444;
+    text-align: center;
+}
+
+/*Self-explanatory, sits in its own section*/
+#map {
+    margin: 5px auto;
+    z-index: 0;
+    background-color: azure;
+    height: 300px;
+    width: 90%;
+}
+
+.colored-tile {
+    height: 25vh;
+    width: 100vw;
+}
+
+/*TODO This will be changed to #content-wrap:nth-child(even)*/
+.colored-tile:nth-of-type(even) {
+    background-color: #1BB0CE;
+}
+
+/*TODO This will be changed to #content-wrap:nth-child(odd)*/
+.colored-tile:nth-of-type(odd) {
+    background-color: #1BB0CE;
+}
+
+.section {
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 2vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-size: 4vw;
+}
+
+/*==================INFO CARDS CSS==================*/
+#info-card-container {
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0 4px 8px 0 #563444;
+    margin: 5px auto;
+    height: 300px;
+    width: 360px;
+    font-size: 2vw;
+    text-align: center;
+    background-color: rgba(235, 235, 188, 0.67);
+}
+
+.info-card-img {
+    width: 10vw;
+    height: 10vh;
+    margin-left: -1.2vw;
+    margin-top: -10vh;
+    margin-bottom: 16vh;
+}
+
+/*==================INDIVIDUAL INFO BACKGROUNDS==================*/
+#happiness-img {
+    background-image: url('../img/cloudwalking.png');
+}
+
+#coffee-img {
+
+}
+
+#fitness-img {
+
+}
+
+#meal-img {
+
+}
+
+#apartment-img {
+
+}
+
+#weather-img {
+
+}
+
+footer{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/*==================MEDIUM AND LARGE SIZE CHANGES==================*/
+
+
+@media all and(max-width: 800px) {
+
+    .nav-container {
+        justify-content: space-around;
+    }
+}
+@media all and(max-width: 600px) {
+
+    .nav-container {
+        -webkit-flex-flow: column wrap;
+        flex-flow: column wrap;
+        padding: 0;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .nav-container div {
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid rgba(255,255,255,0.3);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .nav-container div:last-of-type a {
+        border-bottom: none;
+    }
+    .nav-box1 {
+        flex: .1;
+    }
+    .nav-box2 {
+        flex: none;
+    }
+    .nav-box3 {
+        flex: .1;
+        margin-right: 0.5rem;
+    }
+    .logo {
+        width: 3rem;
+        height: 4rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .go {
+        font-size: 0;
+
+    }
+    #city-input {
+        width: 15rem;
+    }
 }

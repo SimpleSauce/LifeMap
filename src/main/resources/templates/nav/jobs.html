@@ -1,21 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments :: head('Jobs')" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
+    <title>Jobs</title>
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/jobsPage.css" />
+    <!--<link rel="shortcut icon" href="./img/logoplaceholder.ico" type="image/ico"/>-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+    </script>
+</head>
 <body>
 <!--Custom navbar for main page-->
-<div class="bar">
-
-    <a class="navbar-item" id="logo" href="/jobs">
-        <img src="/img/placeholder-3.svg" alt="logo" id="logo" />
-    </a>
-    <input class="navbar-item" id="city-input" placeholder="Company Address" type="text"/>
-    <button class="navbar-item go" id="get-info">GO</button>
+<div class="bar nav-container">
+    <div class="nav-box1 nav-boxes">
+        <a class="logo" href="/jobs">
+        <img src="/img/placeholder-3.svg" alt="logo" class="logo" />
+        </a>
+    </div>
+    <div class="nav-box2 nav-boxes">
+        <input class="navbar-item" id="city-input" placeholder="Company Address" type="text"/>
+        <button class="navbar-item go" id="get-info">GO</button>
+    </div>
+    <div class="nav-box3 nav-boxes">
+        <a class="cntr-text" href="/login">Login</a>
+        <a class="cntr-text" href="/logout">Logout</a>
+    </div>
 </div>
 
 <div id="content-wrap">
     <!--Temp location for Search Info-->
     <div class="city-info-wrap">
-        <div></div>
+        <div id="image-container"></div>
             <h1 class="cntr-text" id="location-name">Type An Address!</h1>
         <div id="location-info"></div>
     </div>
@@ -26,6 +45,7 @@
 
     <footer th:replace="fragments :: footer" />
 </div>
+
 <script th:replace="fragments :: scripts" />
 </body>
 </html>

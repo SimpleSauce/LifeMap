@@ -1,3 +1,6 @@
+html {
+    font-size: 14px;
+}
 
 html, body {
   height: 100%;
@@ -91,7 +94,7 @@ a:visited {
 }
 
 .colored-tile {
-  height: 50vh;
+  height: 25vh;
   width: 100vw;
 }
 
