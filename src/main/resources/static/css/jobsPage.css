@@ -276,7 +276,6 @@ footer{
         flex-flow: column wrap;
         padding: 0;
         justify-content: center;
-        flex-direction: column;
     }
     .nav-container div {
         text-align: center;
@@ -305,9 +304,8 @@ footer{
     }
     .go {
         font-size: 0;
-
     }
     #city-input {
-        width: 15rem;
+        width: 4rem;
     }
 }
