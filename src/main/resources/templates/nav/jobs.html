@@ -15,21 +15,15 @@
 </head>
 <body>
 <!--Custom navbar for main page-->
-<div class="bar nav-container">
-    <div class="nav-box1 nav-boxes">
-        <a class="logo" href="/jobs">
-        <img src="/img/placeholder-3.svg" alt="logo" class="logo" />
-        </a>
-    </div>
-    <div class="nav-box2 nav-boxes">
-        <input class="navbar-item" id="city-input" placeholder="Company Address" type="text"/>
-        <button class="navbar-item go" id="get-info">GO</button>
-    </div>
-    <div class="nav-box3 nav-boxes">
-        <a class="cntr-text" href="/login">Login</a>
-        <a class="cntr-text" href="/logout">Logout</a>
-    </div>
-</div>
+<nav class="bar nav-container navbar navbar-fixed-top">
+    <a class="logo" href="/jobs">
+    <img src="/img/placeholder-3.svg" alt="logo" class="logo" />
+    </a>
+    <input class="navbar-item" id="city-input" placeholder="Company Address" type="text"/>
+    <button class="navbar-item go" id="get-info">GO</button>
+    <a class="cntr-text" href="/login">Login</a>
+    <a class="cntr-text" href="/logout">Logout</a>
+</nav>
 
 <div id="content-wrap">
     <!--Temp location for Search Info-->
