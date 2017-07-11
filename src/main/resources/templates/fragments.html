@@ -10,7 +10,13 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
     <link rel="stylesheet" href="js/globalGym.css"/>
+
+    <!--x-editable-->
+    <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+    <!--<link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">-->
+    <!--x-editable-->
 
     <link rel="shortcut icon" href="/img/logoplaceholder.ico" type="image/ico"/>
 </head>
@@ -43,7 +49,7 @@
 </footer>
 
 <!--SCRIPTS FRAGMENT-->
-<scripts th:fragment="scripts">
+<div th:fragment="scripts">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous">
@@ -55,8 +61,17 @@
         const MAPS_KEY = "@environment.getProperty('google.maps.key')";
         /*]]>*/
     </script>
+
     <script src="/js/ajax.js"></script>
-</scripts>
+
+    <!--&lt;!&ndash;x-editable&ndash;&gt;-->
+    <!--<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
+    <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>-->
+    <!--<script src="bootstrap-editable/js/bootstrap-editable.js"></script>-->
+    <!--&lt;!&ndash;x-editable&ndash;&gt;-->
+
+
+</div>
 
 </body>
 </html>
