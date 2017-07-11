@@ -60,19 +60,19 @@
           //   ipGetter(results[0].address_components[5].short_name);
           // } else ipGetter(results[0].address_components[7].short_name);
 
-          //Calls requestWeather and passes the latitude and longitude from results.
-          requestWeather(results[0].geometry.location.lat, results[0].geometry.location.lng);
-        } else {
-          console.log("Geocode wasn't successful for reason: " + status);
-        }
+
+        //Calls requestWeather and passes the latitude and longitude from results.
+        requestWeather(results[0].geometry.location.lat, results[0].geometry.location.lng);
+    } else {
+        console.log("Geocode wasn't successful for reason: " + status);
       }
-    );
+    });
   };
 
   const addLocationMarker = (location, map) => {
     let marker = new google.maps.Marker({
-      position: location,
-      map: map
+        position: location,
+        map: map
     });
   };
 
@@ -80,13 +80,13 @@
   const getLocationInfo = (cityName) => {
     let urlArray = ['data._links[ua:scores].href', 'data._links[ua:salaries].href', 'data._links[ua:images].href', 'data._links[ua:details].href'];
     $.ajax({
-      url: "https://api.teleport.org/api/cities/?search=" + cityName,
-      type: "GET"
+        url: "https://api.teleport.org/api/cities/?search=" + cityName,
+        type: "GET"
     }).done((data) => {
-      $.ajax({
+        $.ajax({
         url: data._embedded['city:search-results'][0]._links['city:item'].href,
         type: "GET"
-      }).done((data) => {
+    }).done((data) => {
         buildLocationInfo(data);
         $.ajax({
           url: data._links['city:urban_area'].href,
@@ -114,64 +114,50 @@
     });
   };
 
-  // const urlLooper = (data) => {
-  //   urlArray.forEach(url => {
-  //     $.ajax({ url, type: "GET" }).done(data => reqHandler(data));
-  //   });
-  // };
-  //
-  // const reqHandler = (data) => {
-  //   if(data.hasOwnProperty('categories[17]')) {
-  //     buildDetails(data)
-  //   } else if(data.hasOwnProperty('salaries')) {
-  //     buildSalaryInfo(data)
-  //   } else if(data.hasOwnProperty('photos')) {
-  //     locationImageDisplay(data)
-  //   } else buildScoreInfo()
-  // };
 
-  //===================WEATHER INFORMATION REQUESTS===================
+
+//===================WEATHER INFORMATION REQUESTS===================
   const requestWeather = (lat, lng) => {
-    $.ajax({
-      url: "http://api.openweathermap.org/data/2.5/weather?",
-      data: {
-      APPID: openMapsKey,
-        units: "imperial",
-        lat: lat,
-        lon: lng
-      }
-    }).done((data) => {
-      buildWeather(data);
+      $.ajax({
+          url: "http://api.openweathermap.org/data/2.5/weather?",
+          data: {
+              APPID: openMapsKey,
+              units: "imperial",
+              lat: lat,
+              lon: lng
+          }
+      }).done((data) => {
+          buildWeather(data);
     })
   };
 
   //===================INFORMATION BUILDERS FOR THE VIEW===================
   let buildLocationInfo = (data) => {
-    // console.log(data);
-    $('#location-info').text(data);
+      // console.log(data);
+      $('#location-info').text(data);
   };
 
   let buildUrbanInfo = (data) => {
-    locationHeader.text(data.full_name);
-    // console.log(data);
+      locationHeader.text(data.full_name);
+      // console.log(data);
   };
 
   //Takes 17 metrics (provided by Teleport API), and averages them all to produce a single metric.
   let buildScoreInfo = (data) => {
-    const scoreArray = [];
-    let sum = 0;
-    let avg;
-    locationDisplay.html(data.summary);
-    data.categories.forEach((val) => {
-      scoreArray.push(val.score_out_of_10);
-    });
-    scoreArray.forEach((val) => {
-      sum += val;
+      const scoreArray = [];
+      let sum = 0;
+      let avg;
+      locationDisplay.html(data.summary);
+      data.categories.forEach((val) => {
+          scoreArray.push(val.score_out_of_10);
+  });
+      scoreArray.forEach((val) => {
+          sum += val;
       avg = (sum / 17).toFixed(1);
-    });
+  });
 
-    if(avg >= 6) {
-      cardContainer.append(`
+    if (avg >= 6) {
+        cardContainer.append(`
       <div class="colored-tile"></div>
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
@@ -182,7 +168,7 @@
       </div>
       `);
     } else {
-      cardContainer.append(`
+        cardContainer.append(`
       <div class="colored-tile"></div>
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
@@ -190,8 +176,7 @@
           <img class="expand-btn" src="${expandImg}" alt="expand">
           ${avg}
         </div>
-      </div>
-      `);
+      </div>`);
     }
 
     // console.log(avg);
@@ -221,7 +206,7 @@
   };
 
   let locationImageDisplay = (data) => {
-    $('#image-container').html(`<img id="location-image" src="${data.photos[0].image.web}" alt="picture"/>`);
+      $('#image-container').html(`<img id="location-image" src="${data.photos[0].image.web}" alt="picture"/>`);
   };
 
   let userDetails = (data) => {
@@ -236,9 +221,11 @@
     console.log(cat[17]);
 
     //Housing Variables
-    let smApt = cat[8].data[2].currency_dollar_value.toFixed(0);
-    let medApt = cat[8].data[1].currency_dollar_value.toFixed(0);
-    let lgApt = cat[8].data[0].currency_dollar_value.toFixed(0);
+
+    let smApt = data.categories[8].data[2].currency_dollar_value.toFixed(0);
+    let medApt = data.categories[8].data[1].currency_dollar_value.toFixed(0);
+    let lgApt = data.categories[8].data[0].currency_dollar_value.toFixed(0);
+
 
     //Cost Of Living Variables
     let coffeeCost = cat[3].data[3].currency_dollar_value.toFixed(2);
@@ -404,6 +391,7 @@
 
   const buildWeather = (data) => {
     currentTemp = data.main.temp.toFixed(0);
+
     // console.log(data);
     cardContainer.append(`
       <div class="colored-tile"></div>
@@ -471,9 +459,8 @@
 
   $(document).keyup((e) => {
     if (e.keyCode === 13) {
-      divClear();
-      geoCoder();
+        divClear();
+        geoCoder();
     }
   });
-
 })();

@@ -46,6 +46,7 @@
 </footer>
 
 <!--SCRIPTS FRAGMENT-->
+<<<<<<< HEAD
 <scripts th:fragment="scripts">
   <input id="openWeatherMapKey" type="hidden" th:value="${@environment.getProperty('openweathermaps.key')}"/>
   <input id="indeedKey" type="hidden" th:value="${@environment.getProperty('indeed.key')}"/>
@@ -63,5 +64,22 @@
   <script src="/JS/ajax.js"></script>
 </scripts>
 
+=======
+<div th:fragment="scripts">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script th:src="${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('google.maps.key') + '&amp;libraries=places'}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const MAPS_KEY = "@environment.getProperty('google.maps.key')";
+        /*]]>*/
+    </script>
+    <script src="/JS/ajax.js"></script>
+  </scripts>
+</div>
+>>>>>>> 14c545950e1dbc43509ae513180030876095c793
 </body>
 </html>
