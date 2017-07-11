@@ -2,28 +2,31 @@
 
 (() = > {
 
-    //Variable Declarations================================
-    const geoCodeIt = new google.maps.Geocoder;
-const degreeSymbol = '\u2109';
-const goButton = $('#get-info');
-const cityInput = $('#city-input');
-const openMapsKey = $('#openWeatherMapKey').val();
-const indeedKey = $('#indeedKey').val();
-const coffeeImg = "./img/011-coffee.svg";
-const mealImg = "./img/006-cereal.svg";
-const fitnessImg = "./img/007-weightlifting.svg";
-const happyImg = "./img/004-happy.svg";
-const sadImg = "./img/003-arrogant.svg";
-let radius = 25;
-let beds = 2;
-const cardContainer = $('#info-card-container');
-let locationDisplay = $('#location-info');
-let locationHeader = $('#location-name');
-const sanAntonioLocation = {lat: 29, lng: -98};
-const map = new google.maps.Map(document.getElementById('map'), {
+  //Variable Declarations================================
+  const geoCodeIt = new google.maps.Geocoder;
+  const degreeSymbol = '\u2109';
+  const goButton = $('#get-info');
+  const cityInput = $('#city-input');
+  const openMapsKey = $('#openWeatherMapKey').val();
+  const indeedKey = $('#indeedKey').val();
+  const coffeeImg = "./img/011-coffee.svg";
+  const mealImg = "./img/006-cereal.svg";
+  const fitnessImg = "./img/007-weightlifting.svg";
+  const happyImg = "./img/004-happy.svg";
+  const sadImg = "./img/003-arrogant.svg";
+  const expandImg = "./img/expand-btn.svg";
+  const workHarderImg = "./img/workharder.png";
+  let radius = 25;
+  const cardContainer = $('#info-card-container');
+  let locationDisplay = $('#location-info');
+  let locationHeader = $('#location-name');
+  const sanAntonioLocation = {lat: 29, lng: -98};
+  let markers = [];
+  let jobsArray = [];
+  const map = new google.maps.Map(document.getElementById('map'), {
     center: sanAntonioLocation,
     zoom: 16
-});
+  });
 
 //========================GOOGLE API METHODS========================
 let autocomplete = new google.maps.places.Autocomplete(document.getElementById('city-input'));
@@ -73,17 +76,8 @@ const addLocationMarker = (location, map) =
 }
 ;
 
-// const addJobsMarker = (location, map) => {
-//   let marker = new google.maps.Marker({
-//     position: location,
-//     map: map
-//   })
-// };
-
-//===================LOCATION AJAX REQUEST/BUILD===================
-const getLocationInfo = (cityName) =
->
-{
+  //===================LOCATION AJAX REQUEST/BUILD===================
+  const getLocationInfo = (cityName) => {
     $.ajax({
         url: "https://api.teleport.org/api/cities/?search=" + cityName,
         type: "GET"
@@ -103,37 +97,29 @@ const getLocationInfo = (cityName) =
         type: "GET"
     }).done((data) = > {
         buildScoreInfo(data);
-})
-    ;
+    });
     $.ajax({
         url: data._links['ua:salaries'].href,
         type: "GET"
     }).done((data) = > {
         buildSalaryInfo(data);
-})
-    ;
+    });
     $.ajax({
         url: data._links['ua:images'].href,
         type: "GET"
     }).done((data) = > {
         locationImageDisplay(data);
-})
-    ;
+    });
     $.ajax({
         url: data._links['ua:details'].href,
         type: "GET"
     }).done((data) = > {
         buildDetails(data);
-})
-    ;
-})
-    ;
-})
-    ;
-})
-    ;
-}
-;
+    });
+  });
+});
+});
+};
 
 //===================WEATHER INFORMATION REQUESTS===================
 const requestWeather = (lat, lng) =
@@ -194,6 +180,7 @@ let buildScoreInfo = (data) =
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
           <img class="info-card-img" src="${happyImg}" alt="happiness">
+          <img class="expand-btn" src="${expandImg}" alt="expand">
           ${avg}
         </div>
       </div>
@@ -204,6 +191,7 @@ let buildScoreInfo = (data) =
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
           <img class="info-card-img" src="${sadImg}" alt="happiness">
+          <img class="expand-btn" src="${expandImg}" alt="expand">
           ${avg}
         </div>
       </div>
@@ -215,12 +203,27 @@ let buildScoreInfo = (data) =
 }
 ;
 
-let buildSalaryInfo = (data) =
->
-{
+  let buildSalaryInfo = (data) => {
+
     console.log(data);
-}
-;
+    let selectBox = '';
+
+    data.salaries.forEach((val) => {
+      selectBox += `<option value="${val.job.title}">${val.job.title}</option>`;
+    });
+
+    let htmlString = `<div class="colored-tile"></div>
+        <div id="salary-img" class="section">
+        <div class="info-card" id="coffee-cost">
+        <img class="info-card-img" src="" alt="coffee">
+        <select id="job-dropdown">
+        ${selectBox}
+        </select>
+        </div>
+        </div>`;
+
+    cardContainer.append(htmlString);
+  };
 
 let locationImageDisplay = (data) =
 >
@@ -229,20 +232,40 @@ let locationImageDisplay = (data) =
 }
 ;
 
-//Retrieves City Data from Teleport API and displays it to the view.
-let buildDetails = (data) =
->
-{
+  let userDetails = (data) => {
+
+  };
+
+  //Retrieves City Data from Teleport API and displays it to the Index view.
+  let buildDetails = (data) => {
+    //Housing Variables
+
     let smApt = data.categories[8].data[2].currency_dollar_value.toFixed(0);
     let medApt = data.categories[8].data[1].currency_dollar_value.toFixed(0);
     let lgApt = data.categories[8].data[0].currency_dollar_value.toFixed(0);
 
+    //Cost Of Living Variables
+    let coffeeCost = data.categories[3].data[3].currency_dollar_value.toFixed(2);
+    let fitnessCost = data.categories[3].data[5].currency_dollar_value.toFixed(2);
+    let mealCost = data.categories[3].data[8].currency_dollar_value.toFixed(2);
+
+    cardContainer.append(`
+      <div class="colored-tile"></div>
+      <div id="startup-img" class="section">
+        <div class="info-card" id="startup-info">
+          <img class="info-card-img" src="${coffeeImg}" alt="coffee">
+          $${coffeeCost}
+        </div>
+      </div>
+    `);
     cardContainer.append(`
       <div class="colored-tile"></div>
       <div id="coffee-img" class="section">
         <div class="info-card" id="coffee-cost">
           <img class="info-card-img" src="${coffeeImg}" alt="coffee">
+          <img class="expand-btn" src="${expandImg}" alt="expand">
           $${data.categories[3].data[3].currency_dollar_value.toFixed(2)}
+          $${coffeeCost}
         </div>
       </div>
     `);
@@ -251,7 +274,9 @@ let buildDetails = (data) =
       <div id="fitness-img" class="section">
         <div class="info-card" id="fitness-cost">
           <img class="info-card-img" src="${fitnessImg}" alt="fitness">
+          <img class="expand-btn" src="${expandImg}" alt="expand">
           $${data.categories[3].data[5].currency_dollar_value.toFixed(2)}
+          $${fitnessCost}
         </div>
       </div>
     `);
@@ -260,7 +285,9 @@ let buildDetails = (data) =
       <div id="meal-img" class="section">
         <div class="info-card" id="meal-cost">
           <img class="info-card-img" src="${mealImg}" alt="meal">
+          <img class="expand-btn" src="${expandImg}" alt="expand">
           $${data.categories[3].data[8].currency_dollar_value.toFixed(2)}
+          $${mealCost}
         </div>
       </div>
     `);
@@ -268,6 +295,7 @@ let buildDetails = (data) =
       <div class="colored-tile"></div>
       <div id="apartment-img" class="section">
         <div class="info-card" id="apartment-cost">
+        <img class="expand-btn" src="${expandImg}" alt="expand">
           <span>Large Apartment: $${lgApt}</span>
           <span>Medium Apartment: $${medApt}</span>
           <span>Small Apartment: $${smApt}</span>
@@ -278,20 +306,18 @@ let buildDetails = (data) =
 }
 ;
 
-const buildWeather = (data) =
->
-{
+const buildWeather = (data) => {
     // console.log(data);
     cardContainer.append(`
       <div class="colored-tile"></div>
       <div id="weather-img" class="section">
         <div class="info-card" id="today-temp">
+        <img class="expand-btn" src="${expandImg}" alt="expand">
           ${data.main.temp.toFixed(0) + degreeSymbol}
         </div>
       </div>
     `);
-}
-;
+  };
 
 //========================Indeed API METHODS========================
 //Retrieves end-user's IP address from Json object and transfers it to the GlassDoor API.
@@ -312,32 +338,26 @@ const jobSearchByArea = (ip, location) =
 >
 {
     const request = $.ajax({
-        url: "http://api.indeed.com/ads/apisearch?",
-        dataType: "jsonp",
-        data: {
-            publisher: indeedKey,
-            jc: "29",
-            userip: ip,
-            radius: radius,
-            useragent: '',
-            format: "json",
-            l: location,
-            latlong: "1",
-            v: "2",
-        }
+      url: "http://api.indeed.com/ads/apisearch?",
+      dataType: "jsonp",
+      data: {
+        st: "jobsite",
+        publisher: indeedKey,
+        jc: "29",
+        userip: ip,
+        radius: radius,
+        useragent: '',
+        format: "json",
+        l: location,
+        latlong: "1",
+        v: "2",
+      }
     });
-    request.done((data) = > {
-        console.log(data);
-})
-}
-;
-
-let jobsArray = () =
->
-{
-
-}
-;
+    request.done((data) => {
+      console.log(data);
+      // jobsArrayPusher(data);
+    })
+  };
 
 //=================CLICKING AND KEYSTROKES FUNCTIONS==================
 //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
@@ -360,8 +380,4 @@ $(document).keyup(function (e) {
         geoCoder();
     }
 });
-
-
-
-
 })();
