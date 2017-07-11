@@ -15,14 +15,22 @@
 </head>
 <body>
 <!--Custom navbar for main page-->
-<nav class="bar nav-container navbar navbar-fixed-top">
-    <a class="logo" href="/jobs">
-    <img src="/img/placeholder-3.svg" alt="logo" class="logo" />
-    </a>
-    <input class="navbar-item" id="city-input" placeholder="Company Address" type="text"/>
-    <button class="navbar-item go" id="get-info">GO</button>
-    <a class="cntr-text" href="/login">Login</a>
-    <a class="cntr-text" href="/logout">Logout</a>
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/jobs">
+                <img src="/img/placeholder-3.svg" id="logo" />
+            </a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
+            <div class="navbar-left">
+                <input type="text" class="form-control navbar-item" id="city-input" placeholder="Company Address"/>
+            </div>
+            <button class="go navbar-item" id="get-info">Search</button>
+    </div>
 </nav>
 
 <div id="content-wrap">

@@ -11,6 +11,15 @@ body {
     text-align: center;
 }
 
+/* New Bootstrap NavBar */
+
+.navbar-inverse {
+    background-color: rgba(42,42,42,0.6);
+}
+
+
+/* End of NavBar */
+
 .bar {
     /*!*z-index: 1;*!*/
     /*!*position: fixed;*!*/
@@ -52,9 +61,9 @@ body {
     /*flex: 1;*/
 /*}*/
 
-.logo {
-    width: 3rem;
-    height: 4rem;
+#logo {
+    width: 5rem;
+    height: 5rem;
     /*margin-right: 1%;*/
     /*margin-left: 1%;*/
     /*position: fixed;*/
@@ -115,10 +124,6 @@ body input:focus {
 /*.search {*/
     /*flex: 1;*/
 /*}*/
-
-#logo {
-
-}
 
 a:visited {
     color: #00B4FF;
