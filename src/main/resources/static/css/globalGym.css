@@ -91,18 +91,22 @@ a:visited {
 }
 
 .colored-tile {
+  align-content: center;
+  color: #ffffff;
+  text-align: center;
+  font-size: 4vw;
   height: 50vh;
   width: 100vw;
 }
 
 /*TODO This will be changed to #content-wrap:nth-child(even)*/
 .colored-tile:nth-of-type(even) {
-  background-color: #1BB0CE;
+  background-color: #73cec7;
 }
 
 /*TODO This will be changed to #content-wrap:nth-child(odd)*/
 .colored-tile:nth-of-type(odd) {
-    background-color: #1BB0CE;
+  background-color: #5fb0a9;
 }
 
 .section {
@@ -128,6 +132,11 @@ a:visited {
   flex-direction: column;
 }
 
+.expand-btn {
+  position: relative;
+
+}
+
 .info-card {
   display: flex;
   flex-direction: column;
@@ -137,17 +146,23 @@ a:visited {
   margin: 5px auto;
   height: 300px;
   width: 360px;
-  font-size: 2vw;
+  font-size: 4vw;
   text-align: center;
   background-color: rgba(235, 235, 188, 0.67);
 }
 
 .info-card-img {
-    width: 10vw;
-    height: 10vh;
-    margin-left: -1.2vw;
-    margin-top: -10vh;
-    margin-bottom: 16vh;
+  width: 10vw;
+  height: 10vh;
+  position: relative;
+}
+
+.extra-info {
+  display: none;
+}
+
+#averages-title {
+  font-weight: bold;
 }
 
 /*==================INDIVIDUAL INFO BACKGROUNDS==================*/
