@@ -32,6 +32,8 @@
     zoom: 16
   });
 
+  //TODO implement anchor tags
+
   //========================GOOGLE API METHODS========================
   let autocomplete = new google.maps.places.Autocomplete(document.getElementById('city-input'));
   autocomplete.bindTo('bounds', map);
@@ -102,7 +104,7 @@
     });
   };
 
-//===================WEATHER INFORMATION REQUESTS===================
+  //===================WEATHER INFORMATION REQUESTS===================
   const requestWeather = (lat, lng) => {
       $.ajax({
           url: "http://api.openweathermap.org/data/2.5/weather?",
@@ -132,6 +134,7 @@
   let buildScoreInfo = (data) => {
     const scoreArray = [];
     const catArray = [];
+    const scoreAndCat = [];
     let sum = 0;
     let avg;
     locationDisplay.html(data.summary);
@@ -145,6 +148,10 @@
     });
 
     console.log(catArray);
+    for(let i = 0; i<scoreArray.length; i++) {
+      scoreAndCat.push(catArray[i] + ": " + scoreArray[i].toFixed(1));
+    }
+
     //TODO Add all metrics involved in making the overall happiness
 
     const happyDisplay = (img) => {
@@ -153,22 +160,22 @@
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
           <img class="info-card-img" src="${img}" alt="happiness">
-          <a class="expand-btn">
+          <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
             ${avg}/10
         </div>
-        <div class="extra-info">
-          
+        <div class="extra-info" id="happiness-extras">
         </div>
       </div>
       `);
+      scoreAndCat.forEach((val) => {
+        $('#happiness-extras').append(`<span>${val}</span>`);
+        console.log(val);
+      });
+      (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
     };
-
     (avg >= 5) ? happyDisplay(happyImg) : happyDisplay(sadImg);
-
-    // console.log(avg);
-    // console.log(data);
   };
 
   let locationImageDisplay = (data) => {
@@ -180,10 +187,11 @@
 
     let selectBox = '<option disabled="disabled" selected="selected">Choose a Job</option>';
 
+    //Each industry gets added as an option to be placed in select tag.
+    //Each median salary gets displayed when its corresponding industry is selected.
     data.salaries.forEach((val) => {
       let salary = parseFloat(val.salary_percentiles.percentile_50).toFixed(0);
       selectBox += `<option class="industry-option" value="$${salary}">${val.job.title}</option>`;
-
     });
 
     let htmlString = `<div class="colored-tile">
@@ -297,7 +305,7 @@
       </div>
       <div id="apartment-img" class="section">
         <div class="info-card">
-          <a class="expand-btn">
+          <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
           <span>Large Apartment: $${lgApt}</span>
@@ -312,7 +320,7 @@
       </div>
       <div id="living-cost-img" class="section">
         <div class="info-card">
-          <a class="expand-btn">
+          <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
           <span>Daily Average: ${dailyliving}</span>
@@ -333,7 +341,7 @@
       <div id="startup-img" class="section">
         <div class="info-card">
           <img class="info-card-img" src="${startupImg}" alt="coffee">
-          <a class="expand-btn">
+          <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
           <span>Average Startup Score: ${avgStartupScore}</span>
@@ -360,7 +368,7 @@
       </div>
       <div id="culture-img" class="section">
         <div class="info-card">
-          <a class="expand-btn">
+          <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
           <span class="intro-title">Culture Score</span>
@@ -381,7 +389,7 @@
       </div>
       <div id="weather-img" class="section">
         <div class="info-card">
-          <a class="expand-btn">
+          <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
         </div>
@@ -401,7 +409,7 @@
       </div>
       <div id="safety-img" class="section">
         <div class="info-card">
-          <a class="expand-btn">
+          <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
         </div>
@@ -417,7 +425,7 @@
       </div>
       <div id="safety-img" class="section">
         <div class="info-card">
-          <a class="expand-btn">
+          <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
         </div>
@@ -431,6 +439,7 @@
       console.log('you clicked the expand button');
       $(this).parent().next().slideToggle(300);
     });
+    (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
   };
 
   //TODO make all the weather appear on the same info card
@@ -439,10 +448,14 @@
 
     // console.log(data);
     cardContainer.append(`
-      <div class="colored-tile"></div>
+      <div class="colored-tile">
+        <span class="intro-title">Current Temp</span>
+      </div>
       <div id="weather-img" class="section">
         <div class="info-card" id="today-temp">
-        <img class="expand-btn" src="${expandImg}" alt="expand">
+          <a class="expand-btn hidden">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
           ${currentTemp + degreeSymbol}
         </div>
         <div class="extra-info">
@@ -450,8 +463,15 @@
         </div>
       </div>
     `);
+    (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
   };
 
+  //TODO Trying to say: if there's a user, remove the class 'hidden' from 'expand-btn' class (or anchors)
+  console.log(user == "", user);
+
+  // };
+  //TODO This expression doesn't work
+  // $('a').removeClass('hidden');
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
   //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
   const divClear = () => {
