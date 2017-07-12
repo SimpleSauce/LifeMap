@@ -32,18 +32,13 @@
     zoom: 16
   });
 
-  $.getJSON('https://freegeoip.net/json/', function(data) {
-    let ip = data.ip;
-    console.log(data);
-    jobSearchByArea(ip, location);
-  });
-
   //========================GOOGLE API METHODS========================
   let autocomplete = new google.maps.places.Autocomplete(document.getElementById('city-input'));
   autocomplete.bindTo('bounds', map);
 
   //Takes input from the search bar and sends it to the getLocationInfo() method. Also re-centers the map onto the location specified.
   const geoCoder = () => {
+
     if(!cityInput.val().match(/([0-9])+/) && cityInput.val() !== '') {
       geoCodeIt.geocode({'address': ipGetter(ip)})
     } else geoCodeIt.geocode({'address': cityInput.val()},
@@ -145,14 +140,16 @@
     avg = (sum / 17).toFixed(1);
     });
 
-    if (avg >= 6) {
+    if (avg >= 5) {
         cardContainer.append(`
       <div class="colored-tile"></div>
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
           <img class="info-card-img" src="${happyImg}" alt="happiness">
-          <img class="expand-btn" src="${expandImg}" alt="expand">
-          ${avg}
+          <a class="expand-btn">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
+            ${avg}
         </div>
       </div>
       `);
@@ -162,10 +159,13 @@
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
           <img class="info-card-img" src="${sadImg}" alt="happiness">
-          <img class="expand-btn" src="${expandImg}" alt="expand">
+          <a class="expand-btn">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
           ${avg}
         </div>
-      </div>`);
+      </div>
+    `);
     }
 
     // console.log(avg);
@@ -184,7 +184,7 @@
     data.salaries.forEach((val) => {
       selectBox += `<option value="${val.job.title}">${val.job.title}</option>`;
     });
-
+    //TODO Attach each of these industries to its corresponding salary average (display to the view as well)
     let htmlString = `<div class="colored-tile"></div>
       <div id="salary-img" class="section">
         <div class="info-card">
@@ -249,9 +249,9 @@
         <span>Apartment Rentals</span>
       </div>
       <div id="apartment-img" class="section">
-        <div class="info-card" id="apartment-cost">
+        <div class="info-card">
           <a class="expand-btn">
-            <img src="${expandImg}" alt="expand">
+            <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
           <span>Large Apartment: $${lgApt}</span>
           <span>Medium Apartment: $${medApt}</span>
@@ -266,7 +266,7 @@
       <div id="living-cost-img" class="section">
         <div class="info-card">
           <a class="expand-btn">
-            <img src="${expandImg}" alt="expand">
+            <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
           <span>Daily Average: ${dailyliving}</span>
           <span>Monthly Average: ${monthlyLiving}</span>
@@ -284,10 +284,10 @@
         <span>Startups</span>
       </div>
       <div id="startup-img" class="section">
-        <div class="info-card" id="startup-info">
+        <div class="info-card">
           <img class="info-card-img" src="${startupImg}" alt="coffee">
           <a class="expand-btn">
-            <img src="${expandImg}" alt="expand">
+            <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
           <span>Average Startup Score: ${avgStartupScore}</span>
           <span>Average Startup Increase (Monthly): ${avgStartupIncrease}</span>
@@ -306,6 +306,7 @@
         </div>
       </div>
     `);
+    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
         <span>Culture</span>
@@ -313,7 +314,7 @@
       <div id="culture-img" class="section">
         <div class="info-card">
           <a class="expand-btn">
-            <img src="${expandImg}" alt="expand">
+            <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
         </div>
         <div class="extra-info">
@@ -321,6 +322,7 @@
         </div>
       </div>
     `);
+    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
         <span>Weather</span>
@@ -328,7 +330,7 @@
       <div id="weather-img" class="section">
         <div class="info-card">
           <a class="expand-btn">
-            <img src="${expandImg}" alt="expand">
+            <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
         </div>
         <div class="extra-info">
@@ -340,6 +342,7 @@
         </div>
       </div>
     `);
+    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
         <span>Safety</span>
@@ -347,7 +350,7 @@
       <div id="safety-img" class="section">
         <div class="info-card">
           <a class="expand-btn">
-            <img src="${expandImg}" alt="expand">
+            <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
         </div>
         <div class="extra-info">
@@ -355,14 +358,16 @@
         </div>
       </div>
     `);
+    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
         <span>Pollution</span>
       </div>
       <div id="safety-img" class="section">
         <div class="info-card">
-          <img class="expand-btn" src="${expandImg}" alt="expand">
-          
+          <a class="expand-btn">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
         </div>
         <div class="extra-info">
           
@@ -370,6 +375,10 @@
       </div>
     `);
     // console.log(data.categories);
+    $('.expand-btn').on('click', function() {
+      console.log('you clicked the expand button');
+      $(this).parent().next().slideToggle(300);
+    });
   };
 
   const buildWeather = (data) => {
@@ -390,50 +399,11 @@
     `);
   };
 
-  //========================Indeed API METHODS========================
-  //Retrieves end-user's IP address from Json object and transfers it to the GlassDoor API.
-  //Also receives the 'location' parameter from the geoCoder function as a City, State.
-  // const ipGetter = (location) => {
-
-  // });
-
-  //Retrieves Job information from Indeed API.
-  // NOTE: indeedKey is api key in application.properties. It is passed to ajax.js through hidden input.
-  const jobSearchByArea = (ip, location) => {
-    const request = $.ajax({
-      url: "http://api.indeed.com/ads/apisearch?",
-      dataType: "jsonp",
-      data: {
-        st: "jobsite",
-        publisher: indeedKey,
-        jc: "29",
-        userip: ip,
-        radius: radius,
-        useragent: '',
-        format: "json",
-        l: location,
-        latlong: "1",
-        v: "2",
-      }
-    });
-    request.done((data) => {
-      console.log(data);
-    })
-  };
-
-  const infoDropdown = () => {
-    $(this).parent().next(".extra-info").slideToggle(300);
-  };
-
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
   //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
   const divClear = () => {
     cardContainer.html('');
   };
-
-  $('.expand-btn').on('click', () => {
-    infoDropdown();
-  });
 
   goButton.on('click', () => {
     divClear();
