@@ -1,23 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments :: headSearch('LifeMap')" />
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments :: head('LifeMap')" />
 <body>
-<nav th:replace="fragments :: navbarSearch"/>
+<!--Custom navbar for main page-->
+<div class="bar">
+
+  <a class="navbar-item" id="logo" href="/">
+    <img src="http://via.placeholder.com/32x32"/>
+  </a>
+  <input class="navbar-item" id="city-input" placeholder="Company Address" type="text"/>
+  <button class="navbar-item" id="get-info">GO</button>
+</div>
+
 <div id="content-wrap">
   <!--Temp location for Search Info-->
-  <div class="city-info-wrap">
-    <div id="image-container"></div>
-    <h1 class="cntr-text" id="location-name">Type An Address!</h1>
-    <div id="location-info"></div>
+  <div id="city-info-wrap">
+      <div id="image-container"></div>
+    <h1 id="location-name">Type An Address!</h1>
+      <div id="location-info"></div>
   </div>
 
   <div id="map"></div>
 
   <div id="info-card-container"></div>
 
-  <footer th:replace="fragments :: footer" />
+    <footer th:replace="fragments :: footer" />
 </div>
-
 <script th:replace="fragments :: scripts" />
 </body>
 </html>

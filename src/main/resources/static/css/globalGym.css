@@ -173,6 +173,10 @@ a:visited {
   position: relative;
 }
 
+.hidden {
+  display: none;
+}
+
 .extra-info {
   display: none;
   position: relative;
