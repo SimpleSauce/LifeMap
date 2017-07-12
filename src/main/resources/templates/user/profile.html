@@ -1,42 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments :: head(Profile)" />
+<head th:replace="fragments :: head(title)" />
 <body>
+
+<link rel="stylesheet" href="JS/profile.css"/>
 <nav th:replace="fragments :: navbar" />
 
-<footer th:replace="fragments :: footer" />
-
-
-
-<nav th:replace="fragments :: my-navbar"/>
 
 
 <!--<form id="test1" th:action="@{/user/profile}" th:method="POST" th:object="${user}">-->
 <div class="container">
 
 
+    <div id="moveAllFlds">
 
+        <div>
+            <h4>Update Your Profile</h4>
+        </div>
 
-    <div>
-    <!--<h1 th:text="${user.username}"></h1>-->
-    <a href="#" id="username" name="username" data-type="text"
-       th:attr="data-token=${_csrf.token},data-param=${_csrf.parameterName},data-pk=${user.id}"
-       data-title="Username:  " th:text="${user.username}">
+        <div>
+            <label for="username">Username:  </label>
+        <!--<h1 th:text="${user.username}"></h1>-->
+        </div>
+            <div>
+                <a href="#" id="username" name="username" data-type="text"
+                   th:attr="data-token=${_csrf.token},data-param=${_csrf.parameterName},data-pk=${user.id}"
+                   data-title="Username:  " th:text="${user.username}">
 
-    </a>
-    </div>
+                </a>
+            </div>
+        <div>
+            <label for="email">Email:  </label>
+        </div>
+        <!--<p th:text="${user.email}"></p>-->
+            <div>
+                <a href="#" id="email" name="email" data-type="text"
+               th:attr="data-token=${_csrf.token},data-param=${_csrf.parameterName},data-pk=${user.id}"
+               data-title="Email:  " th:text="${user.email}">
+            </a>
+            </div>
+        </div>
 
-    <div>
-    <!--<p th:text="${user.email}"></p>-->
-    <a href="#" id="email" name="email" data-type="text"
-       th:attr="data-token=${_csrf.token},data-param=${_csrf.parameterName},data-pk=${user.id}"
-       data-title="Email:  " th:text="${user.email}">
-
-    </a>
-    </div>
-
-
-
+    <footer th:replace="fragments :: footer" />
 
 </div>
 <!--</form>-->

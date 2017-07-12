@@ -37,8 +37,9 @@
   autocomplete.bindTo('bounds', map);
 
   //Takes input from the search bar and sends it to the getLocationInfo() method. Also re-centers the map onto the location specified.
+  //TODO Add ability to search by address, City, or City and State
   const geoCoder = () => {
-
+    //TODO Make this look prettier and function better
     if(!cityInput.val().match(/([0-9])+/) && cityInput.val() !== '') {
       geoCodeIt.geocode({'address': ipGetter(ip)})
     } else geoCodeIt.geocode({'address': cityInput.val()},
@@ -63,6 +64,7 @@
     });
   };
 
+  //TODO Change this ajax tree to be shorter and more efficient.
   //===================TELEPORT API AJAX REQUEST/BUILD===================
   const getLocationInfo = (cityName) => {
     $.ajax({
@@ -129,44 +131,41 @@
   //Takes 17 metrics (provided by Teleport API), and averages them all to produce a single metric.
   let buildScoreInfo = (data) => {
     const scoreArray = [];
+    const catArray = [];
     let sum = 0;
     let avg;
     locationDisplay.html(data.summary);
     data.categories.forEach((val) => {
         scoreArray.push(val.score_out_of_10);
+        catArray.push(val.name);
     });
     scoreArray.forEach((val) => {
         sum += val;
     avg = (sum / 17).toFixed(1);
     });
 
-    if (avg >= 5) {
-        cardContainer.append(`
+    console.log(catArray);
+    //TODO Add all metrics involved in making the overall happiness
+
+    const happyDisplay = (img) => {
+      cardContainer.append(`
       <div class="colored-tile"></div>
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
-          <img class="info-card-img" src="${happyImg}" alt="happiness">
+          <img class="info-card-img" src="${img}" alt="happiness">
           <a class="expand-btn">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
-            ${avg}
+            ${avg}/10
+        </div>
+        <div class="extra-info">
+          
         </div>
       </div>
       `);
-    } else {
-        cardContainer.append(`
-      <div class="colored-tile"></div>
-      <div id="happiness-img" class="section">
-        <div class="info-card" id="happiness">
-          <img class="info-card-img" src="${sadImg}" alt="happiness">
-          <a class="expand-btn">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
-          ${avg}
-        </div>
-      </div>
-    `);
-    }
+    };
+
+    (avg >= 5) ? happyDisplay(happyImg) : happyDisplay(sadImg);
 
     // console.log(avg);
     // console.log(data);
@@ -179,30 +178,46 @@
   let buildSalaryInfo = (data) => {
     console.log(data);
 
-    let selectBox = '';
+    let selectBox = '<option disabled="disabled" selected="selected">Choose a Job</option>';
 
     data.salaries.forEach((val) => {
-      selectBox += `<option value="${val.job.title}">${val.job.title}</option>`;
+      let salary = parseFloat(val.salary_percentiles.percentile_50).toFixed(0);
+      selectBox += `<option class="industry-option" value="$${salary}">${val.job.title}</option>`;
+
     });
-    //TODO Attach each of these industries to its corresponding salary average (display to the view as well)
-    let htmlString = `<div class="colored-tile"></div>
+
+    let htmlString = `<div class="colored-tile">
+                         <span class="intro-title"> Average Salaries (by Industry)</span>
+                      </div>
       <div id="salary-img" class="section">
         <div class="info-card">
           <label for="industry-dropdown" id="dropdown-label">Industry</label>
           <select id="job-dropdown" name="industry-dropdown">
             ${selectBox}
           </select>
+          <div>
+            <span id="salary-median"></span>
+          </div>
         </div>
       </div>`;
       cardContainer.append(htmlString);
+
+    //Add Click functionality to change salary that appears based on selection.
+    $('#job-dropdown').on('change', function() {
+      $('#salary-median').html("Median Salary " + this.value);
+    });
   };
 
-  //Retrieves City Data from Teleport API and displays it to the Index view.
+  //Receives City Data from Teleport API and displays it to the Index view.
   let buildDetails = (data) => {
     //Overall Variables
     const cat = data.categories;
 
-    console.log(cat[17]);
+    console.log(cat[2]);
+    console.log(cat[4]);
+    console.log(cat[7]);
+    console.log(cat[15]);
+    console.log(cat[16]);
 
     //Housing Variables
     let smApt = parseFloat(data.categories[8].data[2].currency_dollar_value.toFixed(0));
@@ -218,6 +233,7 @@
     let pubTransCost = parseFloat(cat[3].data[7].currency_dollar_value.toFixed(2));
 
     //Monthly and Daily Living Cost Estimators
+    //TODO Add The calculations that went into daily/monthly cost to extra info tab.
     const monthlyLiving = '$' + ((fitnessCost + pubTransCost + medApt) + (beerCost * 32) + (cinemaCost * 2) + ((coffeeCost + mealCost) * 15)).toFixed(0);
     const dailyliving = '$' + (coffeeCost + mealCost + (pubTransCost / 30)).toFixed(0);
 
@@ -244,9 +260,40 @@
     let avgLowTemp = (parseFloat(cat[2].data[5].string_value) * 9 / 5 + 32);
     let avgHighTemp = (parseFloat(cat[2].data[4].string_value) * 9 / 5 + 32);
 
+    //Culture Variables
+    let artGalScore = parseFloat(cat[4].data[0].float_value);
+    let cinemaScore = parseFloat(cat[4].data[2].float_value);
+    let comedyScore = parseFloat(cat[4].data[4].float_value);
+    let concertScore = parseFloat(cat[4].data[6].float_value);
+    let historyScore = parseFloat(cat[4].data[8].float_value);
+    let museumScore = parseFloat(cat[4].data[10].float_value);
+    let perfArtScore = parseFloat(cat[4].data[12].float_value);
+    let sportsScore = parseFloat(cat[4].data[14].float_value);
+    let zooScore = parseFloat(cat[4].data[16].float_value);
+
+    //Calculate an average of the Culture Score for basic information:
+    const cultureScoreArray = [artGalScore, cinemaScore, comedyScore, concertScore, historyScore, museumScore, perfArtScore, sportsScore, zooScore];
+
+      let cultScoreSum = 0;
+      let cultAvg;
+      cultureScoreArray.forEach((val) => {
+        cultScoreSum += val;
+      });
+      cultAvg = ((cultScoreSum/cultureScoreArray.length) * 10).toFixed(0);
+
+    let artGalCnt = parseInt(cat[4].data[1].int_value);
+    let cinemaCnt = parseInt(cat[4].data[3].int_value);
+    let comedyCnt = parseInt(cat[4].data[5].int_value);
+    let concertCnt = parseInt(cat[4].data[7].int_value);
+    let historyCnt = parseInt(cat[4].data[9].int_value);
+    let museumCnt = parseInt(cat[4].data[11].int_value);
+    let perfArtCnt = parseInt(cat[4].data[13].int_value);
+    let sportsCnt = parseInt(cat[4].data[15].int_value);
+    let zooCnt = parseInt(cat[4].data[17].int_value);
+
     cardContainer.append(`
       <div class="colored-tile">
-        <span>Apartment Rentals</span>
+        <spanclass="intro-title">Apartment Rentals</span>
       </div>
       <div id="apartment-img" class="section">
         <div class="info-card">
@@ -261,7 +308,7 @@
     `);
     cardContainer.append(`
       <div class="colored-tile">
-        <span>Average Cost of Living</span>
+        <spanclass="intro-title">Average Cost of Living</span>
       </div>
       <div id="living-cost-img" class="section">
         <div class="info-card">
@@ -281,7 +328,7 @@
     `);
     cardContainer.append(`
       <div class="colored-tile">
-        <span>Startups</span>
+        <span class="intro-title">Startups</span>
       </div>
       <div id="startup-img" class="section">
         <div class="info-card">
@@ -316,16 +363,21 @@
           <a class="expand-btn">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
+          <span class="intro-title">Culture Score</span>
+          <span>${cultAvg}/10</span>
         </div>
         <div class="extra-info">
-          
+          ${cultureScoreArray.forEach((val) => {
+            
+          })}
         </div>
       </div>
     `);
+
     //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
-        <span>Weather</span>
+        <span class="intro-title">Weather</span>
       </div>
       <div id="weather-img" class="section">
         <div class="info-card">
@@ -345,7 +397,7 @@
     //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
-        <span>Safety</span>
+        <span class="intro-title">Safety</span>
       </div>
       <div id="safety-img" class="section">
         <div class="info-card">
@@ -361,7 +413,7 @@
     //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
-        <span>Pollution</span>
+        <span class="intro-title">Pollution</span>
       </div>
       <div id="safety-img" class="section">
         <div class="info-card">
@@ -381,6 +433,7 @@
     });
   };
 
+  //TODO make all the weather appear on the same info card
   const buildWeather = (data) => {
     currentTemp = data.main.temp.toFixed(0);
 
