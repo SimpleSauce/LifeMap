@@ -56,7 +56,11 @@
                 <li sec:authorize="!isAuthenticated()"><a href="/register">Register <span class="sr-only">(current)</span></a></li>
                 <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
-                <li sec:authorize="isAuthenticated()"><a href="/login">Logout</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" th:method="post">
+                        <button>Logout</button>
+                    </form>
+                </li>
             </ul>
             <div class="navbar-form navbar-left">
                 <div class="form-group">
@@ -88,7 +92,12 @@
                 <li sec:authorize="!isAuthenticated()"><a href="/register">Register <span class="sr-only">(current)</span></a></li>
                 <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
-                <li sec:authorize="isAuthenticated()"><a href="/login">Logout</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" th:method="post">
+                        <button>Logout</button>
+                    </form>
+                </li>
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
