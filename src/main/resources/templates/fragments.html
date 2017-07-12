@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <!--HEAD FRAGMENT-->
 <head th:fragment="head(title)">
@@ -8,7 +9,7 @@
   <title th:text="${title}"></title>
   <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-  <link rel="stylesheet" href="/css/globalGym.css"/>
+  <link rel="stylesheet" href="/css/globalGym.css" />
   <link rel="stylesheet" href="/css/login.css" />
   <!--<link rel="shortcut icon" href="./img/logoplaceholder.ico" type="image/ico"/>-->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -16,47 +17,123 @@
           crossorigin="anonymous">
   </script>
 </head>
+<!--END OF FRAGMENT-->
+<!--HEAD FRAGMENT-->
+<head th:fragment="headSearch(title)">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
+    <title th:text="${title}"></title>
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/globalGym.css" />
+    <link rel="stylesheet" href="/css/jobsPage.css" />
+    <!--<link rel="shortcut icon" href="./img/logoplaceholder.ico" type="image/ico"/>-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+    </script>
+</head>
+<!--END OF FRAGMENT-->
 
 <body>
 
-<!--NAV BAR FRAGMENT-->
-<nav th:fragment="navbar" class="navbar navbar-default" id="nav-bar">
-  <img src="/img/logoplaceholder.svg" alt="logo" width="32" height="32"/>
-  <a href="/"><h2>LifeMap</h2></a>
-  <ul>
-    <div class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li sec:authorize="isAuthenticated()">
-        <a href="/profile">Profile</a>
-      </li>
-      <li sec:authorize="isAuthenticated()">
-        <form th:action="@{'/logout'}" th:method="post">
-          <button>Log Out</button>
-        </form>
-      </li>
-      <li sec:authorize="!isAuthenticated()"><a href="/login">Log In</a></li>
-      <li sec:authorize="!isAuthenticated()"><a href="/register">Join Us!</a></li>
-    </div>
-  </ul>
+<!--NAV HOME / JOBS FRAGMENT-->
+<nav th:fragment="navbarSearch" class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">LifeMap</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li sec:authorize="!isAuthenticated()"><a href="/register">Register <span class="sr-only">(current)</span></a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" th:method="post">
+                        <button>Logout</button>
+                    </form>
+                </li>
+            </ul>
+            <div class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" id="city-input" class="form-control" placeholder="Enter Address" />
+                </div>
+                <button type="submit" class="btn btn-default go">Search</button>
+            </div>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </nav>
+<!--END OF FRAGMENT-->
 
+<!--NAV BAR FRAGMENT-->
+<nav th:fragment="navbar" class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">LifeMap</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li sec:authorize="!isAuthenticated()"><a href="/register">Register <span class="sr-only">(current)</span></a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" th:method="post">
+                        <button>Logout</button>
+                    </form>
+                </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!--END OF FRAGMENT-->
+  
 <footer th:fragment="footer">
-  <a href="/about">The SimpleSauce Team</a>
+  <a class="cntr-text" href="/about">The SimpleSauce Team</a>
 </footer>
 
 <!--SCRIPTS FRAGMENT-->
 <scripts th:fragment="scripts">
   <input id="openWeatherMapKey" type="hidden" th:value="${@environment.getProperty('openweathermaps.key')}"/>
+  <span class="hidden" id="username" sec:authorize="isAuthenticated()" sec:authentication="name" />
   <input id="indeedKey" type="hidden" th:value="${@environment.getProperty('indeed.key')}"/>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          crossorigin="anonymous">
+  </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script th:src="${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('google.maps.key') + '&amp;libraries=places'}"></script>
   <script th:inline="javascript">
+      /*<![CDATA[*/
+      const MAPS_KEY = "@environment.getProperty('google.maps.key')";
+      /*]]>*/
+  </script>
+  <script th:inline="javascript">
     /*<![CDATA[*/
-    const MAPS_KEY = "@environment.getProperty('google.maps.key')";
+    const user = $('#username').text();
+    console.log(user);
     /*]]>*/
   </script>
   <script src="/JS/ajax.js"></script>
+  <script src="/JS/forms.js"></script>
 </scripts>
+
 
 </body>
 </html>

@@ -1,7 +1,14 @@
+html {
+    font-size: 14px;
+}
 
 html, body {
   height: 100%;
   box-sizing: border-box;
+}
+
+body input:focus {
+    outline: none;
 }
 
 body {
@@ -34,20 +41,12 @@ body {
 }
 
 #logo {
-  position: fixed;
-  left: 10px;
-  display: inline;
+
 }
 
 #city-input {
   color: #515151;
-  width: 50vw;
   border-radius: 8px;
-}
-
-#get-info {
-  background: none;
-  border: none;
 }
 
 a:visited {
@@ -93,17 +92,24 @@ a:visited {
   width: 90%;
 }
 
+/*TODO Change these to have box shading on top and bottom*/
 .colored-tile {
+  align-content: center;
+  color: #ffffff;
+  text-align: center;
+  font-size: 4vw;
   height: 50vh;
   width: 100vw;
 }
 
+/*TODO This will be changed to #content-wrap:nth-child(even)*/
 .colored-tile:nth-of-type(even) {
-  background-color: #1BB0CE;
+  background-color: #73cec7;
 }
 
+/*TODO This will be changed to #content-wrap:nth-child(odd)*/
 .colored-tile:nth-of-type(odd) {
-  background-color: #bffff0;
+  background-color: #5fb0a9;
 }
 
 .section {
@@ -129,22 +135,63 @@ a:visited {
   flex-direction: column;
 }
 
+.expand-btn {
+  position: absolute;
+  top: 130px;
+  right: 5px;
+  height: 32px;
+  width: 32px;
+}
+
+/*TODO Make this change size dynamically with vh and vw*/
+.expand-img {
+  height: 32px;
+  width: 32px;
+}
+
 .info-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  box-shadow: 0 4px 8px 0 #563444;
+  box-shadow: 0 4px 8px 0 #201419;
   margin: 5px auto;
-  height: 300px;
-  width: 360px;
+  margin-bottom: 0;
+  height: 50vh;
+  width: 80vw;
+  font-size: 4vw;
   text-align: center;
   background-color: rgba(235, 235, 188, 0.67);
 }
 
+/*TODO Change the position of this element to be always in the top left of .info-card*/
 .info-card-img {
-  width: 32px;
-  height: 32px;
+  width: 10vw;
+  height: 10vh;
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}
+
+.extra-info {
+  display: none;
+  position: relative;
+  box-shadow: 0 4px 8px 0 #201419;
+  margin: 5px auto;
+  margin-top: 0;
+  height: 50vh;
+  width: 80vw;
+  font-size: 4vw;
+  text-align: center;
+  background-color: rgba(180, 177, 180, 0.67);
+
+}
+
+#averages-title {
+  font-weight: bold;
 }
 
 /*==================INDIVIDUAL INFO BACKGROUNDS==================*/

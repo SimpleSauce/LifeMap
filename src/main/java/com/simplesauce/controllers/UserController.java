@@ -3,13 +3,12 @@ package com.simplesauce.controllers;
 import com.simplesauce.repositories.UserRepo;
 import com.simplesauce.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -51,9 +50,45 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
 
-        return "nav/results";
+        return "redirect:/login";
 
     }
+
+
+    //update profile
+    @GetMapping("/profile")
+    public String showEditForm(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        model.addAttribute("user", user);
+        return "user/profile";
+    }
+
+    @PostMapping("/user/edit/profile")
+    public @ResponseBody User updateProfile(
+            @RequestParam(value="name") String name,
+            @RequestParam(value="value") String value,
+            @RequestParam(value="pk") Long userId,
+            Model model
+    ){
+        User user = usersDao.findOne(userId);
+
+        if ("username".equalsIgnoreCase(name)){
+            user.setUsername(value);
+        } else if ("email".equalsIgnoreCase(name)) {
+            user.setEmail(value);
+        }
+        usersDao.save(user);
+        return user;
+    }
+
+
+//    @PostMapping("/post/delete")
+//    public String deletePost(@ModelAttribute Post post, Model model){
+//        postSvc.deletePost(post.getId());
+//        model.addAttribute("msg", "Your post was deleted correctly");
+//        return "return the view with a success message";
+//    }
 
 
 

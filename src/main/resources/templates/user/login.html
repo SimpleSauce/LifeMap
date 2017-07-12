@@ -2,10 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments :: head(Login)"/>
 <body>
-<nav th:replace="fragments :: navbar"/>
+<nav th:replace="fragments :: navbar" />
 
-
-<div id="moveFldsDiv" class="col-sm-6 col-sm-offset-3 text-center content-wrap">
+<div class="col-sm-6 col-sm-offset-3 text-center moveFldsDiv">
     <h1 id="loginHeader">LifeMap</h1>
 
     <br/>
@@ -28,9 +27,7 @@
 
         <br/>
 
-        <input class="align-center semi-transparent-button" type="submit" value="Log In"/>
-
-
+        <input class="align-center semi-transparent-button btn" type="submit" value="Log In"/>
         <div id="LoginErrorDiv">
             <div class="error" th:if="${param.error}">
                 Invalid Username and Password.
@@ -39,10 +36,7 @@
 
     </form>
 </div>
-
-
 <!--<footer th:replace="fragments :: footer"/>-->
-
 <script th:replace="fragments :: scripts"/>
 </body>
 </html>

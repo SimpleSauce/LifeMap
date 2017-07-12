@@ -3,9 +3,7 @@
 <head th:replace="fragments :: head(Register)" />
 <body>
 <nav th:replace="fragments :: navbar" />
-
-
-<form id="formFlds" th:action="@{/user/register}" th:method="POST" th:object="${user}">
+<form id="formFlds" class="moveFldsDiv" th:action="@{/user/register}" th:method="POST" th:object="${user}">
 
     <div class="form-group group-to-right">
         <label id="usernameLbl" for="username">Username</label>
@@ -31,8 +29,6 @@
     <br/>
     <input class="btn btn-lg btn-primary" id="btnSubmit" type="submit" />
 
-
-
     <!--<div id="RegisterErrorDiv">-->
         <!--<div class="error" th:if="${param.error}">-->
             <!--Invalid Username and Password.-->
@@ -41,7 +37,6 @@
         <!--&lt;!&ndash;You have been logged out.&ndash;&gt;-->
         <!--&lt;!&ndash;</div>&ndash;&gt;-->
     <!--</div>-->
-
 
 </form>
 

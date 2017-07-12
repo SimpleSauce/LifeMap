@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments :: head(Profile)" />
+<head th:replace="fragments :: head(title)" />
 <body>
 <nav th:replace="fragments :: navbar" />
+<div class="container" id="content-wrap">
+    <div id="moveAllFlds">
+        <div>
+            <h4>Update Your Profile</h4>
+        </div>
+        <div>
+            <label for="username">Username:  </label>
+        <!--<h1 th:text="${user.username}"></h1>-->
+        </div>
+            <div>
+                <a href="#" id="username" name="username" data-type="text"
+                   th:attr="data-token=${_csrf.token},data-param=${_csrf.parameterName},data-pk=${user.id}"
+                   data-title="Username:  " th:text="${user.username}">
 
-<footer th:replace="fragments :: footer" />
-
+                </a>
+            </div>
+        <div>
+            <label for="email">Email:  </label>
+        </div>
+        <!--<p th:text="${user.email}"></p>-->
+            <div>
+                <a href="#" id="email" name="email" data-type="text"
+               th:attr="data-token=${_csrf.token},data-param=${_csrf.parameterName},data-pk=${user.id}"
+               data-title="Email:  " th:text="${user.email}">
+            </a>
+            </div>
+        </div>
+    <footer th:replace="fragments :: footer" />
+</div>
 <script th:replace="fragments :: scripts" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 </body>
 </html>
