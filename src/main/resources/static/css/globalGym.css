@@ -90,6 +90,7 @@ a:visited {
   width: 90%;
 }
 
+/*TODO Change these to have box shading on top and bottom*/
 .colored-tile {
   align-content: center;
   color: #ffffff;
