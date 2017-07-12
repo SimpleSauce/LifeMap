@@ -50,7 +50,7 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
 
-        return "nav/results";
+        return "redirect:/login";
 
     }
 
