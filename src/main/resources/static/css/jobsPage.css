@@ -53,8 +53,6 @@ body {
     /*}*/
 /*}*/
 
-
-
 /* End of NavBar */
 
 .bar {
@@ -288,9 +286,8 @@ a:visited {
 }
 
 footer{
-    /*display: flex;*/
-    align-items: center;
     width: 100%;
+    margin-left: 45%;
 }
 
 /*==================MEDIUM AND LARGE SIZE CHANGES==================*/
