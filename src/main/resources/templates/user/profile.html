@@ -6,19 +6,45 @@
 
 <footer th:replace="fragments :: footer" />
 
-<script th:replace="fragments :: scripts" />
 
 
 <nav th:replace="fragments :: my-navbar"/>
+
+
+<!--<form id="test1" th:action="@{/user/profile}" th:method="POST" th:object="${user}">-->
 <div class="container">
-    <form
-            th:action="${'/posts/' + post.id + '/edit'}"
-            method="post"
-            th:object="${post}"
-            th:include="fragments :: form"
-    >
-    </form>
+
+
+
+
+    <div>
+    <!--<h1 th:text="${user.username}"></h1>-->
+    <a href="#" id="username" name="username" data-type="text"
+       th:attr="data-token=${_csrf.token},data-param=${_csrf.parameterName},data-pk=${user.id}"
+       data-title="Username:  " th:text="${user.username}">
+
+    </a>
+    </div>
+
+    <div>
+    <!--<p th:text="${user.email}"></p>-->
+    <a href="#" id="email" name="email" data-type="text"
+       th:attr="data-token=${_csrf.token},data-param=${_csrf.parameterName},data-pk=${user.id}"
+       data-title="Email:  " th:text="${user.email}">
+
+    </a>
+    </div>
+
+
+
+
 </div>
+<!--</form>-->
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script src="/JS/forms.js"></script>
 
 </body>
 </html>
