@@ -17,7 +17,38 @@ body {
     background-color: rgba(42,42,42,0.6);
 }
 
+.navbar-left {
+    margin-left: 100px;
+}
 
+.navbar-nav {
+    margin-left: 50px;
+}
+
+.navbar-header {
+    margin-left: 50px;
+}
+
+@media (min-width: 768px) {
+    .navbar-left {
+        float: left !important;
+        margin-left: 0;
+    }
+    .navbar-nav {
+        margin-left: 35%;
+        position: absolute;
+        margin-top: -19%;
+    }
+    #logo {
+        width: 3rem;
+        height: 3rem;
+    }
+    .go {
+        margin-left: 68%;
+        position: absolute;
+        margin-top: -39%;
+    }
+}
 /* End of NavBar */
 
 .bar {
@@ -71,8 +102,8 @@ body {
 }
 
 #city-input {
-    /*width: 45rem;*/
-    /*height: 3.7rem;*/
+    width: 100%;
+    height: 50px;
     border-radius: 8px;
     text-align: center;
     font-size: 2rem;
@@ -81,13 +112,13 @@ body {
 
 .go {
     color: #FFFFFF;
-    /*width: 4.5rem;*/
-    /*height: 3.4rem;*/
+    height: 50px;
     border-radius: 8px;
     font-size: x-large;
     background: none;
     border: 1px solid #FFFFFF;
     opacity: 0.8;
+    margin-left: 10px;
 }
 
 .expand-btn {
