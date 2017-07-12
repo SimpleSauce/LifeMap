@@ -88,5 +88,14 @@ body, html{
 }
 
 .btn {
-    margin-top: 8px;
+    margin-top: 10px;
+}
+
+#moveFldsDiv{
+    margin-top: 85px;
+}
+
+/*not working */
+#logBtn{
+    margin-top: 15px;
 }

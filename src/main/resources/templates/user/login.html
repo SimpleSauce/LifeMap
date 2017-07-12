@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments :: head(Login)"/>
+<head th:replace="fragments :: head(title)"/>
 <body>
+
 <link rel="stylesheet" href="JS/login.css"/>
-
-<nav th:replace="fragments :: navbar"/>
-
+<nav th:replace="fragments :: navbar" />
 
 <div id="moveFldsDiv" class="col-sm-6 col-sm-offset-3 text-center content-wrap">
     <h1 id="loginHeader">LifeMap</h1>
@@ -30,7 +29,7 @@
 
         <br/>
 
-        <input class="align-center semi-transparent-button" type="submit" value="Log In"/>
+        <input class="align-center semi-transparent-button btn" type="submit" value="Log In"/>
 
 
         <div id="LoginErrorDiv">

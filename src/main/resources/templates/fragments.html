@@ -11,7 +11,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="js/globalGym.css"/>
+    <link rel="stylesheet" href="css/globalGym.css"/>
 
     <!--x-editable-->
     <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
@@ -24,25 +24,80 @@
 <body>
 
 <!--NAV BAR FRAGMENT-->
-<nav th:fragment="navbar" class="navbar navbar-default" id="nav-bar">
-  <img src="/img/logoplaceholder.svg" alt="logo" width="32" height="32"/>
-  <a href="/"><h2>LifeMap</h2></a>
-  <ul>
-    <div class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li sec:authorize="isAuthenticated()">
-        <a href="/profile">Profile</a>
-      </li>
-      <li sec:authorize="isAuthenticated()">
-        <form th:action="@{'/logout'}" th:method="post">
-          <button>Log Out</button>
-        </form>
-      </li>
-      <li sec:authorize="!isAuthenticated()"><a href="/login">Log In</a></li>
-      <li sec:authorize="!isAuthenticated()"><a href="/register">Join Us!</a></li>
-    </div>
-  </ul>
+<nav th:fragment="navbar" class="navbar navbar-default navbar-fixed-top navbar-inverse ">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">LifeMap</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="nav-link" href="/">Home</a></li>
+                <li sec:authorize="isAuthenticated()">
+                <a href="/profile">Profile</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                <form th:action="@{'/logout'}" th:method="post">
+                <div id="logBtn"> <a  href="#">Logout</a> </div>
+                </form>
+                </li>
+                <li sec:authorize="!isAuthenticated()"><a  class="nav-link" href="/login">Log In</a></li>
+                <li sec:authorize="!isAuthenticated()"><a class="nav-link" href="/register">Join Us!</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </nav>
+<!--<nav th:fragment="navbar"  class="navbar navbar-fixed-top navbar-inverse">-->
+    <!--<div class="container-fluid">-->
+
+        <!--<a> <img src="/img/logoplaceholder.svg" alt="logo" width="32" height="32"/>-->
+        <!--</a>-->
+        <!--<ul class=" nav navbar-nav">-->
+            <!--&lt;!&ndash;<div class="nav-links>&ndash;&gt;-->
+            <!--<li class="nav-item"><a class="nav-link" href="/">Home</a></li>-->
+            <!--<li class="nav-item" sec:authorize="isAuthenticated()">-->
+                <!--<a class="nav-link" href="/profile">Profile</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item" sec:authorize="isAuthenticated()">-->
+                <!--<form th:action="@{'/logout'}" th:method="post">-->
+                    <!--<div id="logBtn"> <a class="nav-link" href="#">Logout</a> </div>-->
+                <!--</form>-->
+            <!--</li>-->
+            <!--<li class="nav-item" sec:authorize="!isAuthenticated()"><a  class="nav-link" href="/login">Log In</a></li>-->
+            <!--<li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" href="/register">Join Us!</a></li>-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</ul>-->
+    <!--</div>-->
+<!--</nav>-->
+<!--<nav th:fragment="navbar" class="navbar navbar-default" id="nav-bar">-->
+    <!--<div class="container-fluid">-->
+    <!--<img src="/img/logoplaceholder.svg" alt="logo" width="32" height="32"/>-->
+  <!--<a href="/"><h2>LifeMap</h2></a>-->
+  <!--<ul>-->
+    <!--<div class="nav-links">-->
+          <!--<li><a href="/">Home</a></li>-->
+          <!--<li sec:authorize="isAuthenticated()">-->
+                <!--<a href="/profile">Profile</a>-->
+          <!--</li>-->
+          <!--<li sec:authorize="isAuthenticated()">-->
+            <!--<form th:action="@{'/logout'}" th:method="post">-->
+              <!--<button>Log Out</button>-->
+            <!--</form>-->
+          <!--</li>-->
+          <!--<li sec:authorize="!isAuthenticated()"><a href="/login">Log In</a></li>-->
+          <!--<li sec:authorize="!isAuthenticated()"><a href="/register">Join Us!</a></li>-->
+    <!--</div>-->
+  <!--</ul>-->
+    <!--</div>-->
+<!--</nav>-->
 
 <footer th:fragment="footer">
   <a href="/about">The SimpleSauce Team</a>
