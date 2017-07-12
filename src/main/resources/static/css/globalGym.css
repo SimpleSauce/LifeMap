@@ -94,6 +94,8 @@ a:visited {
 
 /*TODO Change these to have box shading on top and bottom*/
 .colored-tile {
+  display: flex;
+  justify-content: center;
   align-content: center;
   color: #ffffff;
   text-align: center;

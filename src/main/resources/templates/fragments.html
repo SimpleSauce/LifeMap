@@ -58,7 +58,7 @@
                 <li sec:authorize="isAuthenticated()"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
                 <li sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" th:method="post">
-                        <button>Logout</button>
+                        <button class="btn btn-link">Logout</button>
                     </form>
                 </li>
             </ul>
@@ -94,7 +94,7 @@
                 <li sec:authorize="isAuthenticated()"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
                 <li sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" th:method="post">
-                        <button>Logout</button>
+                        <button class="btn btn-link">Logout</button>
                     </form>
                 </li>
 

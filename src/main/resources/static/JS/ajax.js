@@ -152,11 +152,11 @@
       scoreAndCat.push(catArray[i] + ": " + scoreArray[i].toFixed(1));
     }
 
-    //TODO Add all metrics involved in making the overall happiness
-
     const happyDisplay = (img) => {
       cardContainer.append(`
-      <div class="colored-tile"></div>
+      <div class="colored-tile">
+        <span class="intro-title">Overall Happiness</span>
+      </div>
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
           <img class="info-card-img" src="${img}" alt="happiness">
@@ -301,7 +301,7 @@
 
     cardContainer.append(`
       <div class="colored-tile">
-        <spanclass="intro-title">Apartment Rentals</span>
+        <span class="intro-title">Apartment Rentals</span>
       </div>
       <div id="apartment-img" class="section">
         <div class="info-card">
