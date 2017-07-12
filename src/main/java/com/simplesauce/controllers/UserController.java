@@ -78,11 +78,7 @@ public class UserController {
         } else if ("email".equalsIgnoreCase(name)) {
             user.setEmail(value);
         }
-
         usersDao.save(user);
-
-        System.out.println(String.format("%s=%s", name, value));
-
         return user;
     }
 
