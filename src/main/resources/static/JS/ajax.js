@@ -32,18 +32,13 @@
     zoom: 16
   });
 
-  $.getJSON('https://freegeoip.net/json/', function(data) {
-    let ip = data.ip;
-    console.log(data);
-    jobSearchByArea(ip, location);
-  });
-
   //========================GOOGLE API METHODS========================
   let autocomplete = new google.maps.places.Autocomplete(document.getElementById('city-input'));
   autocomplete.bindTo('bounds', map);
 
   //Takes input from the search bar and sends it to the getLocationInfo() method. Also re-centers the map onto the location specified.
   const geoCoder = () => {
+
     if(!cityInput.val().match(/([0-9])+/) && cityInput.val() !== '') {
       geoCodeIt.geocode({'address': ipGetter(ip)})
     } else geoCodeIt.geocode({'address': cityInput.val()},
@@ -54,18 +49,10 @@
           console.log(results);
           //Calls these two methods and passes the City Name (which Teleport API is set up to use).
           getLocationInfo(results[0].address_components[3].long_name);
-
-          //If the results include the zipcode in the 5th index, send to ipGetter. Otherwise, send the 7th index.
-          // if(results[0].address_components[5].long_name.match(/([0-9])+/)) {
-          //   ipGetter(results[0].address_components[5].short_name);
-          // } else ipGetter(results[0].address_components[7].short_name);
-
-
-        //Calls requestWeather and passes the latitude and longitude from results.
-        requestWeather(results[0].geometry.location.lat, results[0].geometry.location.lng);
-    } else {
-        console.log("Geocode wasn't successful for reason: " + status);
-      }
+          requestWeather(results[0].geometry.location.lat, results[0].geometry.location.lng);
+        } else {
+          console.log("Geocode wasn't successful for reason: " + status);
+        }
     });
   };
 
@@ -78,7 +65,6 @@
 
   //===================TELEPORT API AJAX REQUEST/BUILD===================
   const getLocationInfo = (cityName) => {
-    let urlArray = ['data._links[ua:scores].href', 'data._links[ua:salaries].href', 'data._links[ua:images].href', 'data._links[ua:details].href'];
     $.ajax({
         url: "https://api.teleport.org/api/cities/?search=" + cityName,
         type: "GET"
@@ -94,27 +80,25 @@
         }).done((data) => {
           buildUrbanInfo(data);
           $.ajax({
-            url: data._links['ua:scores'].href,
+            url: data._links['ua:images'].href,
             type: "GET"
-          }).done((data) => buildScoreInfo(data));
+          }).done(data => locationImageDisplay(data));
           $.ajax({
             url: data._links['ua:salaries'].href,
             type: "GET"
-          }).done((data) => buildSalaryInfo(data));
+          }).done(data => buildSalaryInfo(data));
           $.ajax({
-            url: data._links['ua:images'].href,
+            url: data._links['ua:scores'].href,
             type: "GET"
-          }).done((data) => locationImageDisplay(data));
+          }).done(data => buildScoreInfo(data));
           $.ajax({
             url: data._links['ua:details'].href,
             type: "GET"
-          }).done((data) => buildDetails(data));
+          }).done(data => buildDetails(data));
         });
       });
     });
   };
-
-
 
 //===================WEATHER INFORMATION REQUESTS===================
   const requestWeather = (lat, lng) => {
@@ -144,26 +128,28 @@
 
   //Takes 17 metrics (provided by Teleport API), and averages them all to produce a single metric.
   let buildScoreInfo = (data) => {
-      const scoreArray = [];
-      let sum = 0;
-      let avg;
-      locationDisplay.html(data.summary);
-      data.categories.forEach((val) => {
-          scoreArray.push(val.score_out_of_10);
-  });
-      scoreArray.forEach((val) => {
-          sum += val;
-      avg = (sum / 17).toFixed(1);
-  });
+    const scoreArray = [];
+    let sum = 0;
+    let avg;
+    locationDisplay.html(data.summary);
+    data.categories.forEach((val) => {
+        scoreArray.push(val.score_out_of_10);
+    });
+    scoreArray.forEach((val) => {
+        sum += val;
+    avg = (sum / 17).toFixed(1);
+    });
 
-    if (avg >= 6) {
+    if (avg >= 5) {
         cardContainer.append(`
       <div class="colored-tile"></div>
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
           <img class="info-card-img" src="${happyImg}" alt="happiness">
-          <img class="expand-btn" src="${expandImg}" alt="expand">
-          ${avg}
+          <a class="expand-btn">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
+            ${avg}
         </div>
       </div>
       `);
@@ -173,44 +159,42 @@
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
           <img class="info-card-img" src="${sadImg}" alt="happiness">
-          <img class="expand-btn" src="${expandImg}" alt="expand">
+          <a class="expand-btn">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
           ${avg}
         </div>
-      </div>`);
+      </div>
+    `);
     }
 
     // console.log(avg);
     // console.log(data);
   };
 
-  let buildSalaryInfo = (data) => {
+  let locationImageDisplay = (data) => {
+      $('#image-container').html(`<img id="location-image" src="${data.photos[0].image.web}" alt="picture"/>`);
+  };
 
+  let buildSalaryInfo = (data) => {
     console.log(data);
+
     let selectBox = '';
 
     data.salaries.forEach((val) => {
       selectBox += `<option value="${val.job.title}">${val.job.title}</option>`;
     });
-
+    //TODO Attach each of these industries to its corresponding salary average (display to the view as well)
     let htmlString = `<div class="colored-tile"></div>
-        <div id="salary-img" class="section">
-        <div class="info-card" id="coffee-cost">
-        <img class="info-card-img" src="" alt="coffee">
-        <select id="job-dropdown">
-        ${selectBox}
-        </select>
+      <div id="salary-img" class="section">
+        <div class="info-card">
+          <label for="industry-dropdown" id="dropdown-label">Industry</label>
+          <select id="job-dropdown" name="industry-dropdown">
+            ${selectBox}
+          </select>
         </div>
-        </div>`;
-
-    cardContainer.append(htmlString);
-  };
-
-  let locationImageDisplay = (data) => {
-      $('#image-container').html(`<img id="location-image" src="${data.photos[0].image.web}" alt="picture"/>`);
-  };
-
-  let userDetails = (data) => {
-
+      </div>`;
+      cardContainer.append(htmlString);
   };
 
   //Retrieves City Data from Teleport API and displays it to the Index view.
@@ -221,33 +205,21 @@
     console.log(cat[17]);
 
     //Housing Variables
-
-    let smApt = data.categories[8].data[2].currency_dollar_value.toFixed(0);
-    let medApt = data.categories[8].data[1].currency_dollar_value.toFixed(0);
-    let lgApt = data.categories[8].data[0].currency_dollar_value.toFixed(0);
-
+    let smApt = parseFloat(data.categories[8].data[2].currency_dollar_value.toFixed(0));
+    let medApt = parseFloat(data.categories[8].data[1].currency_dollar_value.toFixed(0));
+    let lgApt = parseFloat(data.categories[8].data[0].currency_dollar_value.toFixed(0));
 
     //Cost Of Living Variables
-    let coffeeCost = cat[3].data[3].currency_dollar_value.toFixed(2);
-    let fitnessCost = cat[3].data[5].currency_dollar_value.toFixed(2);
-    let beerCost = cat[3].data[6].currency_dollar_value.toFixed(2);
-    let mealCost = cat[3].data[8].currency_dollar_value.toFixed(2);
-    let cinemaCost = cat[3].data[4].currency_dollar_value.toFixed(2);
-    let pubTransCost = cat[3].data[7].currency_dollar_value.toFixed(2);
-
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
+    let coffeeCost = parseFloat(cat[3].data[3].currency_dollar_value.toFixed(2));
+    let fitnessCost = parseFloat(cat[3].data[5].currency_dollar_value.toFixed(2));
+    let beerCost = parseFloat(cat[3].data[6].currency_dollar_value.toFixed(2));
+    let mealCost = parseFloat(cat[3].data[8].currency_dollar_value.toFixed(2));
+    let cinemaCost = parseFloat(cat[3].data[4].currency_dollar_value.toFixed(2));
+    let pubTransCost = parseFloat(cat[3].data[7].currency_dollar_value.toFixed(2));
 
     //Monthly and Daily Living Cost Estimators
-    const monthlyLiving = ((fitnessCost + pubTransCost + medApt) + (beerCost * 32) + (cinemaCost * 2));
-    const dailyliving = (((coffeeCost + mealCost) * 15) + (pubTransCost / 30));
+    const monthlyLiving = '$' + ((fitnessCost + pubTransCost + medApt) + (beerCost * 32) + (cinemaCost * 2) + ((coffeeCost + mealCost) * 15)).toFixed(0);
+    const dailyliving = '$' + (coffeeCost + mealCost + (pubTransCost / 30)).toFixed(0);
 
     //Startup Variables
     let avgStartupScore = cat[17].data[12].float_value;
@@ -265,7 +237,7 @@
     let meetupMembers = cat[17].data[7].int_value;
     let meetupScore = cat[17].data[9].int_value;
 
-    //Weather Variables (all extras)//
+    //Weather Variables (all extras)
     let avgRainy = cat[2].data[2].float_value;
     let climate = cat[2].data[7].string_value;
     let dayLength = cat[2].data[0].float_value;
@@ -274,11 +246,49 @@
 
     cardContainer.append(`
       <div class="colored-tile">
+        <span>Apartment Rentals</span>
+      </div>
+      <div id="apartment-img" class="section">
+        <div class="info-card">
+          <a class="expand-btn">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
+          <span>Large Apartment: $${lgApt}</span>
+          <span>Medium Apartment: $${medApt}</span>
+          <span>Small Apartment: $${smApt}</span>
+        </div>
+      </div>
+    `);
+    cardContainer.append(`
+      <div class="colored-tile">
+        <span>Average Cost of Living</span>
+      </div>
+      <div id="living-cost-img" class="section">
+        <div class="info-card">
+          <a class="expand-btn">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
+          <span>Daily Average: ${dailyliving}</span>
+          <span>Monthly Average: ${monthlyLiving}</span>
+        </div>
+        <div class="extra-info">
+          <img class="info-card-img" src="${coffeeImg}" alt="coffee">$${coffeeCost}
+          <img class="info-card-img" src="${fitnessImg}" alt="fitness">$${fitnessCost}
+          <img class="info-card-img" src="${mealImg}" alt="meal">$${mealCost}
+          <img class="info-card-img" src="${cinemaImg}" alt="cinema"><span>$${cinemaCost}</span>
+        </div>
+      </div>
+    `);
+    cardContainer.append(`
+      <div class="colored-tile">
         <span>Startups</span>
       </div>
       <div id="startup-img" class="section">
-        <div class="info-card" id="startup-info">
+        <div class="info-card">
           <img class="info-card-img" src="${startupImg}" alt="coffee">
+          <a class="expand-btn">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
           <span>Average Startup Score: ${avgStartupScore}</span>
           <span>Average Startup Increase (Monthly): ${avgStartupIncrease}</span>
           <span>Startup Climate Investors: ${investors}</span>
@@ -296,59 +306,32 @@
         </div>
       </div>
     `);
-    cardContainer.append(`
-      <div class="colored-tile">
-        <span>Average Cost of Living</span>
-      </div>
-      <div id="living-cost-img" class="section">
-        <div class="info-card">
-          <img class="expand-btn" src="${expandImg}" alt="expand">
-          <span>Daily Average: ${dailyliving}</span>
-          <span>Monthly Average: ${monthlyLiving}</span>
-        </div>
-        <div class="extra-info">
-          <img class="info-card-img" src="${coffeeImg}" alt="coffee">$${coffeeCost}
-          <img class="info-card-img" src="${fitnessImg}" alt="fitness">$${fitnessCost}
-          <img class="info-card-img" src="${mealImg}" alt="meal">$${mealCost}
-          <img class="info-card-img" src="${cinemaImg}" alt="meal"><span>$${cinemaCost}</span>
-        </div>
-      </div>
-    `);
+    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
         <span>Culture</span>
       </div>
       <div id="culture-img" class="section">
         <div class="info-card">
-          <img class="expand-btn" src="${expandImg}" alt="expand">
-          
+          <a class="expand-btn">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
         </div>
         <div class="extra-info">
           
         </div>
       </div>
     `);
-    cardContainer.append(`
-      <div class="colored-tile">
-        <span>Pollution</span>
-      </div>
-      <div id="safety-img" class="section">
-        <div class="info-card">
-          <img class="expand-btn" src="${expandImg}" alt="expand">
-          
-        </div>
-        <div class="extra-info">
-          
-        </div>
-      </div>
-    `);
+    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
         <span>Weather</span>
       </div>
       <div id="weather-img" class="section">
         <div class="info-card">
-          <img class="expand-btn" src="${expandImg}" alt="expand">
+          <a class="expand-btn">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
         </div>
         <div class="extra-info">
           <span id="averages-title">Averages</span>
@@ -359,34 +342,43 @@
         </div>
       </div>
     `);
+    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
         <span>Safety</span>
       </div>
       <div id="safety-img" class="section">
         <div class="info-card">
-          <img class="expand-btn" src="${expandImg}" alt="expand">
-          
+          <a class="expand-btn">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
         </div>
         <div class="extra-info">
           
         </div>
       </div>
     `);
+    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
-        <span>Apartment Rentals</span>
+        <span>Pollution</span>
       </div>
-      <div id="apartment-img" class="section">
-        <div class="info-card" id="apartment-cost">
-        <img class="expand-btn" src="${expandImg}" alt="expand">
-          <span>Large Apartment: $${lgApt}</span>
-          <span>Medium Apartment: $${medApt}</span>
-          <span>Small Apartment: $${smApt}</span>
+      <div id="safety-img" class="section">
+        <div class="info-card">
+          <a class="expand-btn">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
+        </div>
+        <div class="extra-info">
+          
         </div>
       </div>
     `);
     // console.log(data.categories);
+    $('.expand-btn').on('click', function() {
+      console.log('you clicked the expand button');
+      $(this).parent().next().slideToggle(300);
+    });
   };
 
   const buildWeather = (data) => {
@@ -407,50 +399,11 @@
     `);
   };
 
-  //========================Indeed API METHODS========================
-  //Retrieves end-user's IP address from Json object and transfers it to the GlassDoor API.
-  //Also receives the 'location' parameter from the geoCoder function as a City, State.
-  // const ipGetter = (location) => {
-
-  // });
-
-  //Retrieves Job information from Indeed API.
-  // NOTE: indeedKey is api key in application.properties. It is passed to ajax.js through hidden input.
-  const jobSearchByArea = (ip, location) => {
-    const request = $.ajax({
-      url: "http://api.indeed.com/ads/apisearch?",
-      dataType: "jsonp",
-      data: {
-        st: "jobsite",
-        publisher: indeedKey,
-        jc: "29",
-        userip: ip,
-        radius: radius,
-        useragent: '',
-        format: "json",
-        l: location,
-        latlong: "1",
-        v: "2",
-      }
-    });
-    request.done((data) => {
-      console.log(data);
-    })
-  };
-
-  const infoDropdown = () => {
-    $(this).parent().next(".extra-info").slideToggle(300);
-  };
-
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
   //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
   const divClear = () => {
     cardContainer.html('');
   };
-
-  $('.expand-btn').on('click', () => {
-    infoDropdown();
-  });
 
   goButton.on('click', () => {
     divClear();
