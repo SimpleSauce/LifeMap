@@ -22,4 +22,9 @@ public class ViewController {
     }
     
 
+    @GetMapping("/jobs")
+    public String siteJobs() {
+        return "nav/jobs";
+    }
+
 }
