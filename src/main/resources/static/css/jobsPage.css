@@ -7,7 +7,6 @@ body {
 }
 
 .cntr-text {
-    width: 100%;
     text-align: center;
 }
 
@@ -155,10 +154,6 @@ body input:focus {
 /*.search {*/
     /*flex: 1;*/
 /*}*/
-
-a:visited {
-    color: #00B4FF;
-}
 
 /*===================CONTENT BELOW NAVBAR===================*/
 
