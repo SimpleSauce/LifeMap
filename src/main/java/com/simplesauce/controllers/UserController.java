@@ -50,7 +50,7 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
 
-        return "nav/results";
+        return "redirect:/login";
 
     }
 
@@ -78,11 +78,7 @@ public class UserController {
         } else if ("email".equalsIgnoreCase(name)) {
             user.setEmail(value);
         }
-
         usersDao.save(user);
-
-        System.out.println(String.format("%s=%s", name, value));
-
         return user;
     }
 
