@@ -39,7 +39,7 @@
   //Takes input from the search bar and sends it to the getLocationInfo() method. Also re-centers the map onto the location specified.
   //TODO Add ability to search by address, City, or City and State
   const geoCoder = () => {
-
+    //TODO Make this look prettier and function better
     if(!cityInput.val().match(/([0-9])+/) && cityInput.val() !== '') {
       geoCodeIt.geocode({'address': ipGetter(ip)})
     } else geoCodeIt.geocode({'address': cityInput.val()},
@@ -131,45 +131,41 @@
   //Takes 17 metrics (provided by Teleport API), and averages them all to produce a single metric.
   let buildScoreInfo = (data) => {
     const scoreArray = [];
+    const catArray = [];
     let sum = 0;
     let avg;
     locationDisplay.html(data.summary);
     data.categories.forEach((val) => {
         scoreArray.push(val.score_out_of_10);
+        catArray.push(val.name);
     });
     scoreArray.forEach((val) => {
         sum += val;
     avg = (sum / 17).toFixed(1);
     });
 
+    console.log(catArray);
     //TODO Add all metrics involved in making the overall happiness
-    if (avg >= 5) {
-        cardContainer.append(`
+
+    const happyDisplay = (img) => {
+      cardContainer.append(`
       <div class="colored-tile"></div>
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
-          <img class="info-card-img" src="${happyImg}" alt="happiness">
+          <img class="info-card-img" src="${img}" alt="happiness">
           <a class="expand-btn">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
-            ${avg}
+            ${avg}/10
+        </div>
+        <div class="extra-info">
+          
         </div>
       </div>
       `);
-    } else {
-        cardContainer.append(`
-      <div class="colored-tile"></div>
-      <div id="happiness-img" class="section">
-        <div class="info-card" id="happiness">
-          <img class="info-card-img" src="${sadImg}" alt="happiness">
-          <a class="expand-btn">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
-          ${avg}
-        </div>
-      </div>
-    `);
-    }
+    };
+
+    (avg >= 5) ? happyDisplay(happyImg) : happyDisplay(sadImg);
 
     // console.log(avg);
     // console.log(data);
@@ -212,7 +208,7 @@
     });
   };
 
-  //Retrieves City Data from Teleport API and displays it to the Index view.
+  //Receives City Data from Teleport API and displays it to the Index view.
   let buildDetails = (data) => {
     //Overall Variables
     const cat = data.categories;
@@ -278,12 +274,12 @@
     //Calculate an average of the Culture Score for basic information:
     const cultureScoreArray = [artGalScore, cinemaScore, comedyScore, concertScore, historyScore, museumScore, perfArtScore, sportsScore, zooScore];
 
-      let cultScoreSum;
+      let cultScoreSum = 0;
       let cultAvg;
       cultureScoreArray.forEach((val) => {
-        cultScoreSum = this.sum += val;
+        cultScoreSum += val;
       });
-      cultAvg = (cultScoreSum/cultureScoreArray.length);
+      cultAvg = ((cultScoreSum/cultureScoreArray.length) * 10).toFixed(0);
 
     let artGalCnt = parseInt(cat[4].data[1].int_value);
     let cinemaCnt = parseInt(cat[4].data[3].int_value);
@@ -368,17 +364,20 @@
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
           <span class="intro-title">Culture Score</span>
-          <span>${cultAvg}</span>
+          <span>${cultAvg}/10</span>
         </div>
         <div class="extra-info">
-          
+          ${cultureScoreArray.forEach((val) => {
+            
+          })}
         </div>
       </div>
     `);
+
     //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
-        <span>Weather</span>
+        <span class="intro-title">Weather</span>
       </div>
       <div id="weather-img" class="section">
         <div class="info-card">
@@ -398,7 +397,7 @@
     //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
-        <span>Safety</span>
+        <span class="intro-title">Safety</span>
       </div>
       <div id="safety-img" class="section">
         <div class="info-card">
@@ -414,7 +413,7 @@
     //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
-        <span>Pollution</span>
+        <span class="intro-title">Pollution</span>
       </div>
       <div id="safety-img" class="section">
         <div class="info-card">
@@ -434,6 +433,7 @@
     });
   };
 
+  //TODO make all the weather appear on the same info card
   const buildWeather = (data) => {
     currentTemp = data.main.temp.toFixed(0);
 
