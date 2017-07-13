@@ -162,7 +162,7 @@ a:visited {
   margin-bottom: 0;
   height: 50vh;
   width: 80vw;
-  font-size: 4vw;
+  font-size: 25px;
   text-align: center;
   background-color: rgba(235, 235, 188, 0.67);
 }
@@ -172,6 +172,10 @@ a:visited {
   width: 10vw;
   height: 10vh;
   position: relative;
+}
+
+.interior-card {
+  font-size: 1em;
 }
 
 .hidden {
@@ -186,10 +190,9 @@ a:visited {
   margin-top: 0;
   height: 50vh;
   width: 80vw;
-  font-size: 4vw;
+  font-size: 1.3em;
   text-align: center;
   background-color: rgba(180, 177, 180, 0.67);
-
 }
 
 #averages-title {
@@ -198,27 +201,35 @@ a:visited {
 
 /*==================INDIVIDUAL INFO BACKGROUNDS==================*/
 #happiness-img {
-  background-image: url('../img/cloudwalking.png');
+  background-image: url('../img/happiness.png');
 }
 
-#coffee-img {
-
-}
-
-#fitness-img {
-
-}
-
-#meal-img {
-
+#salary-img {
+  background-image: url('../img/');
 }
 
 #apartment-img {
+  background-image: url('../img/apartments.png');
+}
 
+#living-cost-img {
+  background-image: url('../img/');
+}
+
+#startup-img {
+  background-image: url('../img/startups.png');
+}
+
+#culture-img {
+  background-image: url('../img/culture.png');
 }
 
 #weather-img {
+  background-image: url('../img/cloudwalking.png');
+}
 
+#clean-img {
+  background-image: url('../img/windmills.png');
 }
 
 footer{
