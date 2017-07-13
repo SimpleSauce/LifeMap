@@ -166,6 +166,7 @@ a:visited {
   justify-content: center;
   align-content: center;
   box-shadow: 0 4px 8px 0 #201419;
+  padding: 10px;
   margin: 5px auto;
   margin-bottom: 0;
   height: 50vh;
@@ -188,6 +189,11 @@ a:visited {
 
 .hidden {
   display: none;
+}
+
+#job-dropdown {
+  margin: 0 auto;
+  width: 60%;
 }
 
 .extra-info {
@@ -245,6 +251,11 @@ footer{
   display: flex;
   align-items: center;
   width: 100%;
+}
+
+/*==================PROFILE PAGE CSS==================*/
+#user-options {
+  background-color: #8fa3b4;
 }
 
 /*==================MEDIUM AND LARGE SIZE CHANGES==================*/

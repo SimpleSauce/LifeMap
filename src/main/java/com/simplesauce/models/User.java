@@ -28,6 +28,9 @@ public class User {
   @JsonIgnore
   private String password;
 
+  @OneToOne
+  private SearchConfiguration configuration;
+
   //=================CONSTRUCTORS, GETTERS AND SETTERS=================
   public User() {
   }
@@ -37,10 +40,11 @@ public class User {
     this.password = password;
   }
 
-  public User(long id, String username, String password) {
+  public User(long id, String username, String password, SearchConfiguration config) {
     this.id = id;
     this.username = username;
     this.password = password;
+    this.configuration = config;
   }
 
   public User(User user) {
@@ -48,6 +52,15 @@ public class User {
     this.email = user.email;
     this.username = user.username;
     this.password = user.password;
+    this.configuration = user.configuration;
+  }
+
+  public SearchConfiguration getConfiguration() {
+    return this.configuration;
+  }
+
+  public void setConfiguration(SearchConfiguration configuration) {
+    this.configuration = configuration;
   }
 
   public long getId() {
@@ -81,5 +94,6 @@ public class User {
   public void setPassword(String password) {
     this.password = password;
   }
+
 
 }

@@ -26,7 +26,7 @@
   let locationDisplay = $('#location-info');
   let locationHeader = $('#location-name');
   const sanAntonioLocation = {lat: 29, lng: -98};
-  let currentTemp;
+  let markersArray = [];
   const map = new google.maps.Map(document.getElementById('map'), {
     center: sanAntonioLocation,
     zoom: 16
@@ -42,16 +42,14 @@
   //TODO Add ability to search by address, City, or City and State
   const geoCoder = () => {
     //TODO Make this look prettier and function better
-    if(!cityInput.val().match(/([0-9])+/) && cityInput.val() !== '') {
-      geoCodeIt.geocode({'address': ipGetter(ip)})
-    } else geoCodeIt.geocode({'address': cityInput.val()},
+    geoCodeIt.geocode({'address': cityInput.val()},
       (results, status) => {
         if(status =='OK') {
           map.setCenter(results[0].geometry.location);
           addLocationMarker(results[0].geometry.location, map);
           console.log(results);
           //Calls these two methods and passes the City Name (which Teleport API is set up to use).
-          getLocationInfo(results[0].address_components[3].long_name);
+          getLocationInfo(results[0].geometry.location.lat(), results[0].geometry.location.lng());
           requestWeather(results[0].geometry.location.lat, results[0].geometry.location.lng);
         } else {
           console.log("Geocode wasn't successful for reason: " + status);
@@ -60,13 +58,64 @@
   };
 
   const addLocationMarker = (location, map) => {
+    clearMarker();
     let marker = new google.maps.Marker({
         position: location,
         map: map
     });
+    markersArray.push(marker);
   };
 
-  const requestWeather = (lat, lng) => {
+  const clearMarker = () => {
+    setMapOnAll(null);
+    markersArray = [];
+  };
+
+  const setMapOnAll = (map) => {
+    for (let i = 0; i < markersArray.length; i++) {
+      markersArray[i].setMap(map);
+    }
+  };
+
+  //TODO Change this ajax tree to be shorter and more efficient.
+  //===================TELEPORT API AJAX REQUEST/BUILD===================
+  const getLocationInfo = (lat, lon) => {
+    console.log(lat, lon);
+    $.ajax({
+        url: "https://api.teleport.org/api/locations/" + lat + ", " +  lon + "/",
+        type: "GET",
+    }).done((data) => {
+      console.log('Overall Location Data: ', data);
+        buildLocationInfo(data);
+        $.ajax({
+        url: data._embedded['location:nearest-urban-areas'][0]._links['location:nearest-urban-area'].href,
+        type: "GET"
+    }).done((data) => {
+        buildUrbanInfo(data);
+          console.log('Urban Area Info: ', data);
+        $.ajax({
+          url: data._links['ua:images'].href,
+          type: "GET"
+        }).done(data => locationImageDisplay(data));
+        $.ajax({
+          url: data._links['ua:salaries'].href,
+          type: "GET"
+        }).done(data => buildSalaryInfo(data));
+        $.ajax({
+          url: data._links['ua:scores'].href,
+          type: "GET"
+        }).done(data => buildScoreInfo(data));
+        $.ajax({
+          url: data._links['ua:details'].href,
+          type: "GET"
+        }).done(data => {
+          requestWeather(lat, lon, data);
+        });
+      });
+    });
+  };
+
+  const requestWeather = (lat, lng, data) => {
     $.ajax({
       url: "http://api.openweathermap.org/data/2.5/weather?",
       data: {
@@ -75,46 +124,8 @@
         lat: lat,
         lon: lng
       }
-    }).done((data) => {
-      buildWeather(data);
-    });
-  };
-
-  //TODO Change this ajax tree to be shorter and more efficient.
-  //===================TELEPORT API AJAX REQUEST/BUILD===================
-  const getLocationInfo = (cityName) => {
-    $.ajax({
-        url: "https://api.teleport.org/api/cities/?search=" + cityName,
-        type: "GET"
-    }).done((data) => {
-        $.ajax({
-        url: data._embedded['city:search-results'][0]._links['city:item'].href,
-        type: "GET"
-    }).done((data) => {
-        buildLocationInfo(data);
-        $.ajax({
-          url: data._links['city:urban_area'].href,
-          type: "GET"
-        }).done((data) => {
-          buildUrbanInfo(data);
-          $.ajax({
-            url: data._links['ua:images'].href,
-            type: "GET"
-          }).done(data => locationImageDisplay(data));
-          $.ajax({
-            url: data._links['ua:salaries'].href,
-            type: "GET"
-          }).done(data => buildSalaryInfo(data));
-          $.ajax({
-            url: data._links['ua:scores'].href,
-            type: "GET"
-          }).done(data => buildScoreInfo(data));
-          $.ajax({
-            url: data._links['ua:details'].href,
-            type: "GET"
-          }).done(data => buildDetails(data));
-        });
-      });
+    }).done((weather) => {
+      buildDetails(data, weather.main.temp.toFixed(0));
     });
   };
 
@@ -174,6 +185,7 @@
       });
       (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
     };
+    //If average is less than 5, display sad icon instead of happy.
     (avg >= 5) ? happyDisplay(happyImg) : happyDisplay(sadImg);
   };
 
@@ -216,18 +228,12 @@
   };
 
   //Receives City Data from Teleport API and displays it to the Index view.
-  let buildDetails = (data) => {
-
-
+  let buildDetails = (data, currentTemp) => {
+    console.log(data);
+    console.log(currentTemp);
     //Overall Variables
     const cat = data.categories;
-    console.log(cat[2]);
-    console.log(cat[4]);
-    console.log(cat[7]);
-    console.log(cat[15]);
-    console.log(cat[16]);
-
-
+    console.log(cat[17]);
 
     //Housing Variables
     let smApt = parseFloat(data.categories[8].data[2].currency_dollar_value.toFixed(0));
@@ -248,7 +254,7 @@
 
     //Startup Variables
     let avgStartupScore = cat[17].data[12].float_value;
-    let avgStartupIncrease = cat[17].data[11].int_value;
+    let avgStartupIncrease = cat[17].data[11].float_value;
     let investors = cat[17].data[10].int_value;
     let workFromCoNum = cat[17].data[14].int_value;
     //EXTRAS
@@ -325,7 +331,6 @@
         cultureCatAndCnt.push(cultureCatArray[i] + ": " + cultureCntArray[i]);
       }
 
-
     cardContainer.append(`
       <div class="colored-tile">
         <span class="intro-title">Apartment Rentals</span>
@@ -379,15 +384,15 @@
           <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
-          <span>Average Startup Score: ${avgStartupScore}</span>
-          <span>Average Startup Increase (Monthly): ${avgStartupIncrease}</span>
+          <span>Average Startup Score: ${avgStartupScore.toFixed(1)}/10</span>
+          <span>Average Startup Increase Score: ${avgStartupIncrease}/10</span>
           <span>Startup Climate Investors: ${investors}</span>
           <span>WorkFrom.Co Co-Working Spaces: ${workFromCoNum}</span>
         </div>
         <div class="extra-info">
-          <span>Co-Working Spaces Score (out of 100): ${coWorkScore}</span>
-          <span>Startup Events Score (out of 100): ${eventsScore}</span>
-          <span>Meetups Score (out of 100): ${meetupScore}</span>
+          <span>Co-Working Spaces Score: ${coWorkScore}/10</span>
+          <span>Startup Events Score: ${eventsScore}/10</span>
+          <span>Meetups Score: ${meetupScore}/10</span>
           <span>Startup Events This Month: ${eventsCount}</span>
           <span>Startup Events The Last 12 Months: ${eventsLstYr}</span>
           <span>FunderBeam Total Startups: ${fundrBmStrtups}</span>
@@ -418,7 +423,6 @@
       `);
     });
 
-    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
         <span class="intro-title">Weather</span>
@@ -428,7 +432,7 @@
           <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
-          <span>Current Temp: THIS MIGHT MEAN SOMETHING SOMEDAY</span>
+          <span>Current Temp: ${currentTemp}</span>
         </div>
         <div class="extra-info">
           <span id="averages-title">Averages</span>
@@ -458,6 +462,26 @@
         </div>
       </div>
     `);
+    console.log(business);
+    if(business == 1) {
+      cardContainer.append(`
+      <div class="colored-tile">
+        <span>Business</span>
+      </div>
+      <div id="business-img" class="section">
+        <div class="info-card">
+          <a class="expand-btn hidden">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
+          <span class="intro-title">Business</span>
+          <span></span>
+        </div>
+        <div class="extra-info" id="culture-extras">
+        </div>
+      </div>
+    `);
+    }
+
     // console.log(data.categories);
     $('.expand-btn').on('click', function() {
       console.log('you clicked the expand button');
@@ -466,36 +490,8 @@
     (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
   };
 
-  //TODO make all the weather appear on the same info card
-  const buildWeather = (data) => {
-    currentTemp = data.main.temp.toFixed(0);
 
-    // console.log(data);
-    cardContainer.append(`
-      <div class="colored-tile">
-        <span class="intro-title">Current Temp</span>
-      </div>
-      <div id="weather-img" class="section">
-        <div class="info-card" id="today-temp">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
-          ${currentTemp + degreeSymbol}
-        </div>
-        <div class="extra-info">
 
-        </div>
-      </div>
-    `);
-    (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
-  };
-
-  //TODO Trying to say: if there's a user, remove the class 'hidden' from 'expand-btn' class (or anchors)
-  console.log(user == "", user);
-
-  // };
-  //TODO This expression doesn't work
-  // $('a').removeClass('hidden');
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
   //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
   const divClear = () => {
