@@ -1,4 +1,5 @@
 body, html{
+    background-image: url('../img/lifemapSplash.png');
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;

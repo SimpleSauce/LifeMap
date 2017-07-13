@@ -119,37 +119,47 @@ a:visited {
 
 /*TODO Change these to have box shading on top and bottom*/
 .colored-tile {
-    align-content: center;
-    color: #ffffff;
-    text-align: center;
-    font-size: 4vw;
-    height: 25vh;
-    width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: #ffffff;
+  text-align: center;
+  font-size: 4vw;
+  height: 25vh;
+  width: 100vw;
 }
 
 /*TODO This will be changed to #content-wrap:nth-child(even)*/
 .colored-tile:nth-of-type(even) {
-    background-color: #1BB0CE;
+background-color: #69D2E7;
 }
 
 /*TODO This will be changed to #content-wrap:nth-child(odd)*/
 .colored-tile:nth-of-type(odd) {
-    background-color: #00B4FF;
+  background-color: #69D2E7;
+}
+
+.intro-title {
+  text-align: center;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: #00B4FF;
 }
 
 .section {
-    height: 100vh;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    padding: 2vw;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    font-size: 4vw;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  padding: 2vw;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-size: 4vw;
 }
 
 /*==================INFO CARDS CSS==================*/
@@ -177,19 +187,20 @@ a:visited {
 }
 
 .info-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    box-shadow: 0 4px 8px 0 #563444;
-    margin: 5px auto;
-    margin-bottom: 0;
-    height: 300px;
-    width: 360px;
-    font-size: 2vw;
-    text-align: center;
-    background-color: rgba(235, 235, 188, 0.67);
+  color: #594F4F;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  box-shadow: 0 4px 8px 0 #201419;
+  margin: 5px auto;
+  margin-bottom: 0;
+  height: 50vh;
+  width: 80vw;
+  font-size: 25px;
+  text-align: center;
+  background-color: #E5FCC2;
 }
 
 /*TODO Change the position of this element to be always in the top left of .info-card*/
@@ -202,22 +213,26 @@ a:visited {
     margin-bottom: 16vh;
 }
 
+.interior-card {
+  font-size: 1em;
+}
+
 .hidden {
     display: none;
 }
 
 .extra-info {
-    display: none;
-    position: relative;
-    box-shadow: 0 4px 8px 0 #201419;
-    margin: 5px auto;
-    margin-top: 0;
-    height: 50vh;
-    width: 80vw;
-    font-size: 4vw;
-    text-align: center;
-    background-color: rgba(180, 177, 180, 0.67);
-
+  color: azure;
+  display: none;
+  position: relative;
+  box-shadow: 0 4px 8px 0 #201419;
+  margin: 5px auto;
+  margin-top: 0;
+  height: 50vh;
+  width: 80vw;
+  font-size: 1.3em;
+  text-align: center;
+  background-color: #594F4F;
 }
 
 #averages-title {
@@ -226,32 +241,38 @@ a:visited {
 
 /*==================INDIVIDUAL INFO BACKGROUNDS==================*/
 #happiness-img {
-    background-image: url('../img/cloudwalking.png');
+  background-image: url('../img/happiness.png');
 }
 
-#coffee-img {
-
-}
-
-#fitness-img {
-
-}
-
-#meal-img {
-
+#salary-img {
+  background-image: url('../img/workharder.png');
 }
 
 #apartment-img {
+  background-image: url('../img/apartments.png');
+}
 
+#living-cost-img {
+  background-image: url('../img/');
+}
+
+#startup-img {
+  background-image: url('../img/startups.png');
+}
+
+#culture-img {
+  background-image: url('../img/culture.png');
 }
 
 #weather-img {
+  background-image: url('../img/cloudwalking.png');
+}
 
+#clean-img {
+  background-image: url('../img/windmills.png');
 }
 
 footer {
-    width: 100%;
-    margin-left: 45%;
+  width: 100%;
+  margin-left: 45%;
 }
-
-/*==================MEDIUM AND LARGE SIZE CHANGES==================*/

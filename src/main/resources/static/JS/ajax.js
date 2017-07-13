@@ -66,6 +66,20 @@
     });
   };
 
+  const requestWeather = (lat, lng) => {
+    $.ajax({
+      url: "http://api.openweathermap.org/data/2.5/weather?",
+      data: {
+        APPID: openMapsKey,
+        units: "imperial",
+        lat: lat,
+        lon: lng
+      }
+    }).done((data) => {
+      buildWeather(data);
+    });
+  };
+
   //TODO Change this ajax tree to be shorter and more efficient.
   //===================TELEPORT API AJAX REQUEST/BUILD===================
   const getLocationInfo = (cityName) => {
@@ -104,21 +118,6 @@
     });
   };
 
-  //===================WEATHER INFORMATION REQUESTS===================
-  const requestWeather = (lat, lng) => {
-      $.ajax({
-          url: "http://api.openweathermap.org/data/2.5/weather?",
-          data: {
-              APPID: openMapsKey,
-              units: "imperial",
-              lat: lat,
-              lon: lng
-          }
-      }).done((data) => {
-          buildWeather(data);
-    })
-  };
-
   //===================INFORMATION BUILDERS FOR THE VIEW===================
   let buildLocationInfo = (data) => {
       // console.log(data);
@@ -152,11 +151,11 @@
       scoreAndCat.push(catArray[i] + ": " + scoreArray[i].toFixed(1));
     }
 
-    //TODO Add all metrics involved in making the overall happiness
-
     const happyDisplay = (img) => {
       cardContainer.append(`
-      <div class="colored-tile"></div>
+      <div class="colored-tile">
+        <span class="intro-title">Overall Happiness</span>
+      </div>
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
           <img class="info-card-img" src="${img}" alt="happiness">
@@ -218,14 +217,17 @@
 
   //Receives City Data from Teleport API and displays it to the Index view.
   let buildDetails = (data) => {
+
+
     //Overall Variables
     const cat = data.categories;
-
     console.log(cat[2]);
     console.log(cat[4]);
     console.log(cat[7]);
     console.log(cat[15]);
     console.log(cat[16]);
+
+
 
     //Housing Variables
     let smApt = parseFloat(data.categories[8].data[2].currency_dollar_value.toFixed(0));
@@ -241,7 +243,6 @@
     let pubTransCost = parseFloat(cat[3].data[7].currency_dollar_value.toFixed(2));
 
     //Monthly and Daily Living Cost Estimators
-    //TODO Add The calculations that went into daily/monthly cost to extra info tab.
     const monthlyLiving = '$' + ((fitnessCost + pubTransCost + medApt) + (beerCost * 32) + (cinemaCost * 2) + ((coffeeCost + mealCost) * 15)).toFixed(0);
     const dailyliving = '$' + (coffeeCost + mealCost + (pubTransCost / 30)).toFixed(0);
 
@@ -279,16 +280,6 @@
     let sportsScore = parseFloat(cat[4].data[14].float_value);
     let zooScore = parseFloat(cat[4].data[16].float_value);
 
-    //Calculate an average of the Culture Score for basic information:
-    const cultureScoreArray = [artGalScore, cinemaScore, comedyScore, concertScore, historyScore, museumScore, perfArtScore, sportsScore, zooScore];
-
-      let cultScoreSum = 0;
-      let cultAvg;
-      cultureScoreArray.forEach((val) => {
-        cultScoreSum += val;
-      });
-      cultAvg = ((cultScoreSum/cultureScoreArray.length) * 10).toFixed(0);
-
     let artGalCnt = parseInt(cat[4].data[1].int_value);
     let cinemaCnt = parseInt(cat[4].data[3].int_value);
     let comedyCnt = parseInt(cat[4].data[5].int_value);
@@ -299,9 +290,45 @@
     let sportsCnt = parseInt(cat[4].data[15].int_value);
     let zooCnt = parseInt(cat[4].data[17].int_value);
 
+    let artGalCat = cat[4].data[1].label;
+    let cinemaCat = cat[4].data[3].label;
+    let comedyCat = cat[4].data[5].label;
+    let concertCat = cat[4].data[7].label;
+    let historyCat = cat[4].data[9].label;
+    let museumCat = cat[4].data[11].label;
+    let perfArtCat = cat[4].data[13].label;
+    let sportsCat = cat[4].data[15].label;
+    let zooCat = cat[4].data[17].label;
+
+    //Cleanliness Variables
+    let pollutionScore = cat[15].data[0].float_value;
+    let cleanScore = cat[15].data[1].float_value;
+    let waterScore = cat[15].data[2].float_value;
+    let greeneryScore = cat[15].data[3].float_value;
+
+    const cleanAvg = (((pollutionScore + cleanScore + waterScore + greeneryScore)/4) * 10);
+
+    //Calculate an average of the Culture Score for basic information:
+    const cultureScoreArray = [artGalScore, cinemaScore, comedyScore, concertScore, historyScore, museumScore, perfArtScore, sportsScore, zooScore];
+    const cultureCntArray = [artGalCnt, cinemaCnt, comedyCnt, concertCnt, historyCnt, museumCnt, perfArtCnt, sportsCnt, zooCnt];
+    const cultureCatArray = [artGalCat, cinemaCat, comedyCat, concertCat, historyCat, museumCat, perfArtCat, sportsCat, zooCat];
+    const cultureCatAndCnt = [];
+
+      let cultScoreSum = 0;
+      let cultAvg;
+      cultureScoreArray.forEach((val) => {
+        cultScoreSum += val;
+      });
+      cultAvg = ((cultScoreSum/cultureScoreArray.length) * 10).toFixed(0);
+
+      for(let i = 0; i<cultureScoreArray.length; i++) {
+        cultureCatAndCnt.push(cultureCatArray[i] + ": " + cultureCntArray[i]);
+      }
+
+
     cardContainer.append(`
       <div class="colored-tile">
-        <spanclass="intro-title">Apartment Rentals</span>
+        <span class="intro-title">Apartment Rentals</span>
       </div>
       <div id="apartment-img" class="section">
         <div class="info-card">
@@ -327,6 +354,14 @@
           <span>Monthly Average: ${monthlyLiving}</span>
         </div>
         <div class="extra-info">
+          <div id="monthly-average" class="interior-card">Monthly Average: 
+            <span>Fitness Club Membership - $${fitnessCost}</span>
+            <span>Public Transportation - $${pubTransCost}</span>
+            <span>Medium Apartment - $${medApt}</span>
+            <span>32 Beers - $${(beerCost * 32)}</span>
+            <span>2 Movies - $${(cinemaCost * 2)}</span>
+            <span>Coffee and Lunch (every other day) - $${((coffeeCost + mealCost) * 15)}</span>
+          </div>
           <img class="info-card-img" src="${coffeeImg}" alt="coffee">$${coffeeCost}
           <img class="info-card-img" src="${fitnessImg}" alt="fitness">$${fitnessCost}
           <img class="info-card-img" src="${mealImg}" alt="meal">$${mealCost}
@@ -361,7 +396,6 @@
         </div>
       </div>
     `);
-    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
         <span>Culture</span>
@@ -374,13 +408,15 @@
           <span class="intro-title">Culture Score</span>
           <span>${cultAvg}/10</span>
         </div>
-        <div class="extra-info">
-          ${cultureScoreArray.forEach((val) => {
-            
-          })}
+        <div class="extra-info" id="culture-extras">
         </div>
       </div>
     `);
+    cultureCatAndCnt.forEach((val) => {
+      $('#culture-extras').append(`
+        <span>${val}</span>
+      `);
+    });
 
     //TODO Find and fill out this info
     cardContainer.append(`
@@ -392,6 +428,7 @@
           <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
+          <span>Current Temp: THIS MIGHT MEAN SOMETHING SOMEDAY</span>
         </div>
         <div class="extra-info">
           <span id="averages-title">Averages</span>
@@ -402,35 +439,22 @@
         </div>
       </div>
     `);
-    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
-        <span class="intro-title">Safety</span>
+        <span class="intro-title">Cleanliness</span>
       </div>
-      <div id="safety-img" class="section">
+      <div id="clean-img" class="section">
         <div class="info-card">
           <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
+          <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
         </div>
         <div class="extra-info">
-          
-        </div>
-      </div>
-    `);
-    //TODO Find and fill out this info
-    cardContainer.append(`
-      <div class="colored-tile">
-        <span class="intro-title">Pollution</span>
-      </div>
-      <div id="safety-img" class="section">
-        <div class="info-card">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
-        </div>
-        <div class="extra-info">
-          
+          <span>Pollution Score: ${pollutionScore}</span>
+          <span>Cleanliness Score: ${cleanScore}</span>
+          <span>Water Quality Score: ${waterScore}</span>
+          <span>Urban Greenery Score: ${greeneryScore}</span>
         </div>
       </div>
     `);
@@ -459,7 +483,7 @@
           ${currentTemp + degreeSymbol}
         </div>
         <div class="extra-info">
-          
+
         </div>
       </div>
     `);
