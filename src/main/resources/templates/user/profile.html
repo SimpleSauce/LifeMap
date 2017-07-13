@@ -30,12 +30,31 @@
       </div>
     </div>
     <div id="user-options">
-      <form action="/results"> <!-- TODO This may be pointing to the wrong path-->
-
+      <span>Additional Search Options</span>
+      <form th:action="@{/user/search/config}" th:method="POST" th:object="${user.configuration}">
+        <label for="business-info">Business
+          <input name="_business" value="on" type="hidden"/>
+          <input id="business-info" type="checkbox" checked="checked" th:field = "*{business}" name="business" />
+        </label>
+        <label for="healthcare-info">Health Care
+          <input name="_healthcare" value="on" type="hidden"/>
+          <input id="healthcare-info" type="checkbox" checked="checked" th:field = "*{healthcare}" name="healthcare" />
+        </label>
+        <label for="job-market-info">Job Market
+         <input id="job-market-info" type="checkbox" checked="checked" th:field="*{jobMarket}" name="job-market" />
+        </label>
+        <label for="tolerance-info">Tolerance
+          <input id="tolerance-info" type="checkbox" checked="checked" th:field = "*{tolerance}" name="tolerance" />
+        </label>
+        <label for="outdoors-info">Outdoors
+        <input id="outdoors-info" type="checkbox" checked="checked" th:field = "*{outdoors}" name="outdoors" />
+        </label>
+        <button id="extra-info-search">Search</button>
       </form>
     </div>
     <footer th:replace="fragments :: footer" />
 </div>
+
 <script th:replace="fragments :: scripts" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 </body>

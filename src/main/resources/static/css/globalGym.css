@@ -209,6 +209,11 @@ a:visited {
     display: none;
 }
 
+#job-dropdown {
+  margin: 0 auto;
+  width: 60%;
+}
+
 .extra-info {
     display: none;
     position: relative;

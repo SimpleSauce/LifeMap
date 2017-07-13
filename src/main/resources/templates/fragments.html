@@ -15,9 +15,12 @@
             crossorigin="anonymous">
     </script>
 </head>
-<!--END OF FRAGMENT-->
 
 <body>
+<!--SIDE BAR NAV-->
+<nav>
+
+</nav>
 
 <!--NAV HOME / JOBS FRAGMENT-->
 <nav th:fragment="navbarSearch" class="navbar navbar-fixed-top navbar-inverse">
@@ -55,7 +58,6 @@
         </div>
     </div><!-- /.container-fluid -->
 </nav>
-<!--END OF FRAGMENT-->
 
 <!--NAV BAR FRAGMENT-->
 <nav th:fragment="navbar" class="navbar navbar-fixed-top navbar-inverse">
@@ -86,36 +88,37 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<!--END OF FRAGMENT-->
 
+<!--FOOTER FRAGMENT-->
 <footer th:fragment="footer">
     <a class="cntr-text" href="/about">The SimpleSauce Team</a>
 </footer>
 
 <!--SCRIPTS FRAGMENT-->
 <scripts th:fragment="scripts">
-    <input id="openWeatherMapKey" type="hidden" th:value="${@environment.getProperty('openweathermaps.key')}"/>
-    <span class="hidden" id="username" sec:authorize="isAuthenticated()" sec:authentication="name" />
-    <input id="indeedKey" type="hidden" th:value="${@environment.getProperty('indeed.key')}"/>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script th:src="${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('google.maps.key') + '&amp;libraries=places'}"></script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        const MAPS_KEY = "@environment.getProperty('google.maps.key')";
-        /*]]>*/
-    </script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        const user = $('#username').text();
-        console.log(user);
-        /*]]>*/
-    </script>
-    <script src="/JS/ajax.js"></script>
-    <script src="/JS/forms.js"></script>
+  <input id="openWeatherMapKey" type="hidden" th:value="${@environment.getProperty('openweathermaps.key')}"/>
+  <span class="hidden" id="username" sec:authorize="isAuthenticated()" sec:authentication="name" />
+  <input id="indeedKey" type="hidden" th:value="${@environment.getProperty('indeed.key')}"/>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script th:src="${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('google.maps.key') + '&amp;libraries=places'}"></script>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    const MAPS_KEY = "@environment.getProperty('google.maps.key')";
+    const business = $('#configuration.business').val(); //0 or 1
+    const healthCare = $('#configuration.healthcare').val();
+    const jobMarket  = $('#configuration.jobMarket').val();
+    const tolerance  = $('#configuration.tolerance').val();
+    const outdoors = $('#configuration.outdoors').val();
+    const user = $('#username').text();
+    console.log(user);
+    /*]]>*/
+  </script>
+  <script src="/JS/ajax.js"></script>
+  <script src="/JS/forms.js"></script>
 </scripts>
 
 
