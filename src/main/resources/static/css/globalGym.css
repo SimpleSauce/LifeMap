@@ -3,8 +3,8 @@ html {
 }
 
 html, body {
-  height: 100%;
-  box-sizing: border-box;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 body input:focus {
@@ -12,64 +12,88 @@ body input:focus {
 }
 
 body {
-  margin: 0;
-  font-family: Edelsans, Avenir, sans-serif;
-  background-color: #2c2c2c;
-  color: #FFFFFF;
+    outline: none;
+    margin: 0;
+    font-family: Edelsans, Avenir, sans-serif;
+    color: #FFFFFF;
+    background-color: #2c2c2c;
+
 }
+
+.cntr-text {
+    text-align: center;
+}
+
 /*===================NAV BAR===================*/
 .bar {
-  z-index: 1;
-  position: fixed;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  width: 100vw;
-  background: url('../img/compassandmap.png');
-  background-position: center;
-  background-size: cover;
-  top: 0;
-  padding: 5px;
+    color: black;
+    z-index: 1;
+    position: fixed;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 100vw;
+    background-color: rgba(46, 46, 46, 0.6);
+    background-position: center;
+    background-size: cover;
+    top: 0;
+    padding: 5px;
 }
 
 .navbar-item {
-  margin: 4px;
+    margin: 4px;
+}
+
+.navbar-inverse {
+    background-color: rgba(42, 42, 42, 0.6);
 }
 
 .search {
-  flex: 1;
+    flex: 1;
 }
 
 #logo {
-
+    width: 5rem;
+    height: 5rem;
 }
 
 #city-input {
-  color: #515151;
-  border-radius: 8px;
+    color: #515151;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.go {
+    color: #FFFFFF;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    background: none;
+    border: 1px solid #FFFFFF;
+    opacity: 0.8;
 }
 
 a:visited {
-  color: #00B4FF;
+    color: #00B4FF;
 }
 
 /*===================CONTENT BELOW NAVBAR===================*/
 
 /*Wraps everything below navbar*/
 #content-wrap {
-  margin-top: 75px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    margin-top: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /*Wraps location-image, location-name and location-info*/
 #city-info-wrap {
-  background-color: #abdde9;
+    background-color: #abdde9;
 }
 
 #location-image {
-  width: 100%;
+    width: 100%;
 }
 
 #location-name {
@@ -77,19 +101,20 @@ a:visited {
 }
 
 #location-info {
-  background-color: #1BB0CE;
-  width: 100%;
-  box-shadow: 0 4px 8px 0 #563444;
-  text-align: center;
+    background-color: #1BB0CE;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 #563444;
+    text-align: center;
 }
 
 /*Self-explanatory, sits in its own section*/
 #map {
-  margin: 5px auto;
-  z-index: 0;
-  background-color: azure;
-  height: 300px;
-  width: 90%;
+    margin: 5px auto;
+    z-index: 0;
+    background-color: azure;
+    height: 300px;
+    width: 90%;
+    border-radius: 8px;
 }
 
 /*TODO Change these to have box shading on top and bottom*/
@@ -100,13 +125,13 @@ a:visited {
   color: #ffffff;
   text-align: center;
   font-size: 4vw;
-  height: 50vh;
+  height: 25vh;
   width: 100vw;
 }
 
 /*TODO This will be changed to #content-wrap:nth-child(even)*/
 .colored-tile:nth-of-type(even) {
-  background-color: #69D2E7;
+background-color: #69D2E7;
 }
 
 /*TODO This will be changed to #content-wrap:nth-child(odd)*/
@@ -119,6 +144,7 @@ a:visited {
   display: flex;
   align-content: center;
   justify-content: center;
+  background-color: #00B4FF;
 }
 
 .section {
@@ -138,24 +164,26 @@ a:visited {
 
 /*==================INFO CARDS CSS==================*/
 #info-card-container {
-  justify-content: center;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .expand-btn {
-  position: absolute;
-  top: 130px;
-  right: 5px;
-  height: 32px;
-  width: 32px;
+    position: absolute;
+    top: 130px;
+    right: 5px;
+    width: 10vw;
+    height: 10vh;
+    margin-left: 20vw;
+    margin-top: -16vh;
 }
 
 /*TODO Make this change size dynamically with vh and vw*/
 .expand-img {
-  height: 32px;
-  width: 32px;
+    height: 32px;
+    width: 32px;
 }
 
 .info-card {
@@ -178,9 +206,12 @@ a:visited {
 
 /*TODO Change the position of this element to be always in the top left of .info-card*/
 .info-card-img {
-  width: 10vw;
-  height: 10vh;
-  position: relative;
+    width: 10vw;
+    height: 10vh;
+    position: relative;
+    margin-left: -1.2vw;
+    margin-top: -10vh;
+    margin-bottom: 16vh;
 }
 
 .interior-card {
@@ -188,7 +219,7 @@ a:visited {
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 
 #job-dropdown {
@@ -211,7 +242,7 @@ a:visited {
 }
 
 #averages-title {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 /*==================INDIVIDUAL INFO BACKGROUNDS==================*/
@@ -247,15 +278,10 @@ a:visited {
   background-image: url('../img/windmills.png');
 }
 
-footer{
-  display: flex;
-  align-items: center;
+footer {
   width: 100%;
 }
 
-/*==================PROFILE PAGE CSS==================*/
 #user-options {
   background-color: #8fa3b4;
 }
-
-/*==================MEDIUM AND LARGE SIZE CHANGES==================*/
