@@ -5,6 +5,9 @@ html {
 html, body {
     height: 100%;
     box-sizing: border-box;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 body input:focus {
@@ -119,47 +122,37 @@ a:visited {
 
 /*TODO Change these to have box shading on top and bottom*/
 .colored-tile {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  color: #ffffff;
-  text-align: center;
-  font-size: 4vw;
-  height: 25vh;
-  width: 100vw;
+    align-content: center;
+    color: #ffffff;
+    text-align: center;
+    font-size: 4vw;
+    height: 25vh;
+    width: 100vw;
 }
 
 /*TODO This will be changed to #content-wrap:nth-child(even)*/
 .colored-tile:nth-of-type(even) {
-background-color: #69D2E7;
+    background-color: #1BB0CE;
 }
 
 /*TODO This will be changed to #content-wrap:nth-child(odd)*/
 .colored-tile:nth-of-type(odd) {
-  background-color: #69D2E7;
-}
-
-.intro-title {
-  text-align: center;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  background-color: #00B4FF;
+    background-color: #00B4FF;
 }
 
 .section {
-  height: 100vh;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex-direction: column;
-  padding: 2vw;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  font-size: 4vw;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 2vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-size: 4vw;
 }
 
 /*==================INFO CARDS CSS==================*/
@@ -187,21 +180,19 @@ background-color: #69D2E7;
 }
 
 .info-card {
-  color: #594F4F;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  box-shadow: 0 4px 8px 0 #201419;
-  padding: 10px;
-  margin: 5px auto;
-  margin-bottom: 0;
-  height: 50vh;
-  width: 80vw;
-  font-size: 25px;
-  text-align: center;
-  background-color: #E5FCC2;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0 4px 8px 0 #563444;
+    margin: 5px auto;
+    margin-bottom: 0;
+    height: 300px;
+    width: 360px;
+    font-size: 2vw;
+    text-align: center;
+    background-color: rgba(235, 235, 188, 0.67);
 }
 
 /*TODO Change the position of this element to be always in the top left of .info-card*/
@@ -214,10 +205,6 @@ background-color: #69D2E7;
     margin-bottom: 16vh;
 }
 
-.interior-card {
-  font-size: 1em;
-}
-
 .hidden {
     display: none;
 }
@@ -228,17 +215,17 @@ background-color: #69D2E7;
 }
 
 .extra-info {
-  color: azure;
-  display: none;
-  position: relative;
-  box-shadow: 0 4px 8px 0 #201419;
-  margin: 5px auto;
-  margin-top: 0;
-  height: 50vh;
-  width: 80vw;
-  font-size: 1.3em;
-  text-align: center;
-  background-color: #594F4F;
+    display: none;
+    position: relative;
+    box-shadow: 0 4px 8px 0 #201419;
+    margin: 5px auto;
+    margin-top: 0;
+    height: 50vh;
+    width: 80vw;
+    font-size: 4vw;
+    text-align: center;
+    background-color: rgba(180, 177, 180, 0.67);
+
 }
 
 #averages-title {
@@ -247,41 +234,164 @@ background-color: #69D2E7;
 
 /*==================INDIVIDUAL INFO BACKGROUNDS==================*/
 #happiness-img {
-  background-image: url('../img/happiness.png');
+    background-image: url('../img/happiness.png');
 }
 
 #salary-img {
-  background-image: url('../img/workharder.png');
+    background-image: url('../img/workharder.png');
 }
 
 #apartment-img {
-  background-image: url('../img/apartments.png');
+    background-image: url('../img/apartments.png');
 }
 
 #living-cost-img {
-  background-image: url('../img/');
+    background-image: url('../img/');
 }
 
 #startup-img {
-  background-image: url('../img/startups.png');
+    background-image: url('../img/startups.png');
 }
 
 #culture-img {
-  background-image: url('../img/culture.png');
+    background-image: url('../img/culture.png');
 }
 
 #weather-img {
-  background-image: url('../img/cloudwalking.png');
+    background-image: url('../img/cloudwalking.png');
 }
 
 #clean-img {
-  background-image: url('../img/windmills.png');
+    background-image: url('../img/windmills.png');
 }
 
 footer {
-  width: 100%;
+    margin: auto;
 }
 
-#user-options {
-  background-color: #8fa3b4;
+#moveAllFlds{
+    margin-top: 100px;
+}
+
+#logBtn{
+    margin-top: 15px;
+}
+
+#updateProfile{
+    font-size: 25px;
+    color: white;
+}
+
+#loginHeader{
+    font-family: 'Monoton', cursive;
+    font-size: 3em;
+}
+
+#username{
+    border-radius: 2px;
+    background-color: #515151;
+    color: white;
+}
+
+#password{
+    border-radius: 2px;
+    background-color: #515151;
+    color: white;
+}
+
+#usernameLbl{
+    font-size: 15px;
+}
+
+#passwordLbl{
+    font-size: 15px;
+}
+
+.semi-transparent-button {
+    display: block;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 8px;
+    width: 80%;
+    max-width: 200px;
+    background: #fff; /* fallback color for old browsers */background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: #515151;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-out;
+    position: relative;
+    top: 145px;
+    border: dimgray;
+    border-style: solid;
+    border-width: 1px;
+}
+
+#titleLbl{
+    margin-left: 450px;
+    margin-top: 50px;
+}
+
+.error{
+    color: red;
+    font-size: large;
+}
+
+#errorDiv{
+    margin-top: 160px;
+    margin-left: -90px;
+}
+
+.site-name{
+    color: white;
+    font-size: 1.5em;
+    margin-top: 10px;
+}
+
+.moveFldsDiv{
+    margin-top: 85px;
+}
+
+#logBtn{
+    margin-top: 15px;
+}
+
+.links-row a img{
+    width: 18%;
+    height: 18%;
+}
+
+.pic-self img{
+    width: 60%;
+    height: 50%;
+}
+
+.pic-name {
+    text-align: start;
+    font-size: 2em;
+}
+
+#test-rotate {
+    transform: rotate(180deg);
+}
+
+@media screen and (min-width: 768px) {
+
+/*form#city-input {*/
+    /*color: #515151;*/
+    /*border-radius: 8px;*/
+    /*text-align: center;*/
+    /*font-size: .5rem;*/
+    /*width: 3em;*/
+/*}*/
+    .btn-link {
+        margin-top: 11%;
+    }
+}
+
+#burger {
+    position: absolute;
+    top: -1%;
+    right: 1%;
 }

@@ -61,6 +61,8 @@ public class UserController {
     public String showEditForm(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+        user = usersDao.findOne(user.getId());
+
         model.addAttribute("user", user);
         return "user/profile";
     }
