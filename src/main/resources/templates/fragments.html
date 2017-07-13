@@ -1,25 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-
 <!--HEAD FRAGMENT-->
 <head th:fragment="head(title)">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
-  <title th:text="${title}"></title>
-  <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" />
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-  <link rel="stylesheet" href="/css/globalGym.css" />
-  <link rel="stylesheet" href="/css/login.css" />
-  <!--<link rel="shortcut icon" href="./img/logoplaceholder.ico" type="image/ico"/>-->
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-          crossorigin="anonymous">
-  </script>
-</head>
-<!--END OF FRAGMENT-->
-<!--HEAD FRAGMENT-->
-<head th:fragment="headSearch(title)">
     <meta charset="UTF-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
     <title th:text="${title}"></title>
@@ -57,7 +40,7 @@
                 <li sec:authorize="isAuthenticated()"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
                 <li sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" th:method="post">
-                        <button class="btn btn-link">Logout</button>
+                        <button class="btn btn-link" >Logout</button>
                     </form>
                 </li>
             </ul>
@@ -102,35 +85,35 @@
     </div><!-- /.container-fluid -->
 </nav>
 <!--END OF FRAGMENT-->
-  
+
 <footer th:fragment="footer">
-  <a class="cntr-text" href="/about">The SimpleSauce Team</a>
+    <a class="cntr-text" href="/about">The SimpleSauce Team</a>
 </footer>
 
 <!--SCRIPTS FRAGMENT-->
 <scripts th:fragment="scripts">
-  <input id="openWeatherMapKey" type="hidden" th:value="${@environment.getProperty('openweathermaps.key')}"/>
-  <span class="hidden" id="username" sec:authorize="isAuthenticated()" sec:authentication="name" />
-  <input id="indeedKey" type="hidden" th:value="${@environment.getProperty('indeed.key')}"/>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-          crossorigin="anonymous">
-  </script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script th:src="${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('google.maps.key') + '&amp;libraries=places'}"></script>
-  <script th:inline="javascript">
-      /*<![CDATA[*/
-      const MAPS_KEY = "@environment.getProperty('google.maps.key')";
-      /*]]>*/
-  </script>
-  <script th:inline="javascript">
-    /*<![CDATA[*/
-    const user = $('#username').text();
-    console.log(user);
-    /*]]>*/
-  </script>
-  <script src="/JS/ajax.js"></script>
-  <script src="/JS/forms.js"></script>
+    <input id="openWeatherMapKey" type="hidden" th:value="${@environment.getProperty('openweathermaps.key')}"/>
+    <span class="hidden" id="username" sec:authorize="isAuthenticated()" sec:authentication="name" />
+    <input id="indeedKey" type="hidden" th:value="${@environment.getProperty('indeed.key')}"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script th:src="${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('google.maps.key') + '&amp;libraries=places'}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const MAPS_KEY = "@environment.getProperty('google.maps.key')";
+        /*]]>*/
+    </script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const user = $('#username').text();
+        console.log(user);
+        /*]]>*/
+    </script>
+    <script src="/JS/ajax.js"></script>
+    <script src="/JS/forms.js"></script>
 </scripts>
 
 
