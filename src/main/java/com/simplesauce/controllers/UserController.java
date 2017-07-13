@@ -1,5 +1,6 @@
 package com.simplesauce.controllers;
 
+import com.simplesauce.models.SearchConfiguration;
 import com.simplesauce.repositories.UserRepo;
 import com.simplesauce.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +83,23 @@ public class UserController {
         return user;
     }
 
+    @PostMapping("/user/search/config")
+    public @ResponseBody String updateConfiguration(
+            @ModelAttribute SearchConfiguration configuration
+            /*@RequestParam(name = "business") Boolean business,
+            @RequestParam(name = "healthcare") Boolean healthcare*/
+    ) {
+        /*SearchConfiguration configuration = new SearchConfiguration();
+        configuration.setBusiness(business);
+        configuration.setHealthcare(healthcare);*/
+
+        System.out.println(configuration.isBusiness());
+        System.out.println(configuration.isHealthcare());
+
+        // configDao.save(configuration);
+
+        return "";
+    }
 
 //    @PostMapping("/post/delete")
 //    public String deletePost(@ModelAttribute Post post, Model model){

@@ -14,6 +14,13 @@
     <div id="map"></div>
 
     <div id="info-card-container"></div>
+    <form th:object="${user.configuration}">
+        <input type="hidden" th:field="*{business}"/>
+        <input type="hidden" th:field="*{healthcare}"/>
+        <input type="hidden" th:field="*{jobMarket}"/>
+        <input type="hidden" th:field="*{tolerance}"/>
+        <input type="hidden" th:field="*{outdoors}"/>
+    </form>
 
     <footer th:replace="fragments :: footer"/>
 </div>

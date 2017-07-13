@@ -194,6 +194,7 @@ background-color: #69D2E7;
   justify-content: center;
   align-content: center;
   box-shadow: 0 4px 8px 0 #201419;
+  padding: 10px;
   margin: 5px auto;
   margin-bottom: 0;
   height: 50vh;
@@ -219,6 +220,11 @@ background-color: #69D2E7;
 
 .hidden {
     display: none;
+}
+
+#job-dropdown {
+  margin: 0 auto;
+  width: 60%;
 }
 
 .extra-info {
@@ -274,5 +280,8 @@ background-color: #69D2E7;
 
 footer {
   width: 100%;
-  margin-left: 45%;
+}
+
+#user-options {
+  background-color: #8fa3b4;
 }
