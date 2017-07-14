@@ -23,6 +23,9 @@ public class User {
   @Email(message = "Invalid format")
   private String email;
 
+  @Column(columnDefinition="boolean default true")
+  private boolean active = true;
+
   @Column(nullable = false)
   @NotBlank(message = "Password can\'t be blank")
   @JsonIgnore

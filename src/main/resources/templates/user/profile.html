@@ -30,24 +30,25 @@
       </div>
     </div>
     <div id="user-options">
+      <span th:value="${user.configuration}"></span>
       <span>Additional Search Options</span>
-      <form th:action="@{/user/search/config}" th:method="POST" th:object="${user.configuration}">
+      <form th:action="@{/user/search/config}" th:method="POST" th:object="${user}">
         <label for="business-info">Business
           <input name="_business" value="on" type="hidden"/>
-          <input id="business-info" type="checkbox" checked="checked" th:field = "*{business}" name="business" />
+          <input id="business-info" type="checkbox" checked="checked" th:field = "*{configuration.business}" name="business" />
         </label>
         <label for="healthcare-info">Health Care
           <input name="_healthcare" value="on" type="hidden"/>
-          <input id="healthcare-info" type="checkbox" checked="checked" th:field = "*{healthcare}" name="healthcare" />
+          <input id="healthcare-info" type="checkbox" checked="checked" th:field = "*{configuration.healthcare}" name="healthcare" />
         </label>
         <label for="job-market-info">Job Market
-         <input id="job-market-info" type="checkbox" checked="checked" th:field="*{jobMarket}" name="job-market" />
+         <input id="job-market-info" type="checkbox" checked="checked" th:field="*{configuration.jobMarket}" name="job-market" />
         </label>
         <label for="tolerance-info">Tolerance
-          <input id="tolerance-info" type="checkbox" checked="checked" th:field = "*{tolerance}" name="tolerance" />
+          <input id="tolerance-info" type="checkbox" checked="checked" th:field = "*{configuration.tolerance}" name="tolerance" />
         </label>
         <label for="outdoors-info">Outdoors
-        <input id="outdoors-info" type="checkbox" checked="checked" th:field = "*{outdoors}" name="outdoors" />
+        <input id="outdoors-info" type="checkbox" checked="checked" th:field = "*{configuration.outdoors}" name="outdoors" />
         </label>
         <button id="extra-info-search">Search</button>
       </form>
