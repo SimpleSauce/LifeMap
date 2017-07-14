@@ -29,7 +29,7 @@
   let markersArray = [];
   const map = new google.maps.Map(document.getElementById('map'), {
     center: sanAntonioLocation,
-    zoom: 16
+    zoom: 7
   });
 
   //TODO implement anchor tags
@@ -564,6 +564,7 @@
   };
 
   //=================SIDE NAVIGATION FUNCTIONS==================
+  //TODO Change the scroll to either - scrollTop: "-viewport height" -or- scroll to the next anchor.
   $('.to-top-btn').click(function() {
     $('html, body').animate({scrollTop: "0"});
   });
