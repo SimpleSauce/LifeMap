@@ -488,8 +488,8 @@ i {
     width: 1%;
 }
 
-.additional-item-right{
-    margin-right: 2%;
+.left-margin{
+    margin-left: 1%;
 }
 
 #salary-img div{
@@ -545,3 +545,4 @@ i {
 #clean-img div{
     padding-top: 12%;
 }
+
