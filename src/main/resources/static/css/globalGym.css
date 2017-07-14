@@ -289,10 +289,10 @@ footer {
 }
 
 #moveAllFlds{
-    margin-top: 50px;
     border-color: white;
     border: solid;
     height: 215px;
+    margin-top: -10px;
 
 }
 
@@ -454,11 +454,12 @@ i {
 
 #user-options{
     border: solid;
-    border-color: white;
+    border-color: black;
     height: 215px;
 }
 
 .label-update{
+    color: white;
     background-color: black;
     margin: 0px;
     height: 35px;
@@ -473,6 +474,22 @@ i {
 #move-cred-fields{
     padding-top: 1%;
     padding-left: 1%;
+}
+
+#profile-tag{
+    color: black;
+    padding-top: 33px;
+    font-size: 45px;
+}
+
+#user-pass-space{
+    margin-top: 1%;
+    height: 1%;
+    width: 1%;
+}
+
+.additional-item-right{
+    margin-right: 2%;
 }
 
 #salary-img div{
