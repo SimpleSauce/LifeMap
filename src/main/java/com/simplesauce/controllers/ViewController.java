@@ -22,8 +22,7 @@ public class ViewController {
 
   @GetMapping("/")
   public String siteIndex(Model model) {
-    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    User loggedInUser = usersDao.findOne(user.getId());
+    Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     if (!(user instanceof User)) {
       // Create a user with all the configurations set to false, we only want to see everything
@@ -32,6 +31,7 @@ public class ViewController {
       notLoggedInUser.setConfiguration(new SearchConfiguration());
       model.addAttribute("user", notLoggedInUser);
     }else{
+      User loggedInUser = usersDao.findOne(((User) user).getId());
       model.addAttribute("user", loggedInUser);
     }
     return "nav/index";
