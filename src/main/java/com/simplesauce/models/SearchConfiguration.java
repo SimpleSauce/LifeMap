@@ -26,8 +26,8 @@ public class SearchConfiguration {
   @Column
   private boolean outdoors = false;
 
-  @OneToOne
-  private User user;
+  //@OneToOne
+  //private User user;
 
   public long getId() {
     return id;
@@ -80,11 +80,11 @@ public class SearchConfiguration {
     this.outdoors = outdoors;
   }
 
-  public User getUser() {
+  /*public User getUser() {
     return user;
   }
 
   public void setUser(User user) {
     this.user = user;
-  }
+  }*/
 }

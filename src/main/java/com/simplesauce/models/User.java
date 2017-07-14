@@ -31,7 +31,7 @@ public class User {
   @JsonIgnore
   private String password;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   private SearchConfiguration configuration;
 
   //=================CONSTRUCTORS, GETTERS AND SETTERS=================

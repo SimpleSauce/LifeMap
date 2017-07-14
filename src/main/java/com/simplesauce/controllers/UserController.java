@@ -65,6 +65,9 @@ public class UserController {
         user = usersDao.findOne(user.getId());
 
         model.addAttribute("user", user);
+        SearchConfiguration configuration = user.getConfiguration();
+        if (configuration == null) configuration = new SearchConfiguration();
+        model.addAttribute("configuration", configuration);
         return "user/profile";
     }
 
@@ -88,15 +91,14 @@ public class UserController {
 
     @PostMapping("/user/search/config")
     public String updateConfiguration(
-            @ModelAttribute User user
+            @ModelAttribute SearchConfiguration configuration
     ) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User editedUser = usersDao.findOne(loggedInUser.getId());
-        editedUser.setConfiguration(user.getConfiguration());
-        editedUser.getConfiguration().setUser(editedUser);
-
-        configDao.save(editedUser.getConfiguration());
+        configDao.save(configuration);
+        editedUser.setConfiguration(configuration);
         usersDao.save(editedUser);
+        //}
         return "redirect:/profile";
     }
 }
