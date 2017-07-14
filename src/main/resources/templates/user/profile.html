@@ -6,8 +6,9 @@
 <div class="container" id="content-wrap">
   <div id="moveAllFlds">
     <div>
-        <h4>Update Your Profile</h4>
+        <h4 class="label-update" >Update Your Credentials</h4>
     </div>
+    <div id="move-cred-fields">
     <div>
       <label for="username">Username</label>
     <!--<h1 th:text="${user.username}"></h1>-->
@@ -29,10 +30,15 @@
         </a>
       </div>
     </div>
+    </div>
+    <div id="space-line"></div>
     <div id="user-options">
       <span th:value="${user.configuration}"></span>
-      <span>Additional Search Options</span>
-      <form th:action="@{/user/search/config}" th:method="POST" th:object="${user}">
+      <span th:value="${user}"></span>
+      <div>
+      <h4 class="label-update ">Additional Search Options</h4>
+      </div>
+        <form th:action="@{/user/search/config}" th:method="POST" th:object="${user}">
         <label for="business-info">Business
           <input name="_business" value="on" type="hidden"/>
           <input id="business-info" type="checkbox" checked="checked" th:field = "*{configuration.business}" name="business" />

@@ -69,7 +69,7 @@ public class UserController {
     }
 
     @PostMapping("/user/edit/profile")
-    public @ResponseBody User updateProfile(
+    public User updateProfile(
             @RequestParam(value="name") String name,
             @RequestParam(value="value") String value,
             @RequestParam(value="pk") Long userId,
@@ -87,15 +87,16 @@ public class UserController {
     }
 
     @PostMapping("/user/search/config")
-    public @ResponseBody String updateConfiguration(
-            @ModelAttribute SearchConfiguration configuration,
-            @RequestParam(value="name") String name
+    public String updateConfiguration(
+            @ModelAttribute User user
     ) {
-        System.out.println(configuration.isBusiness());
-        System.out.println(configuration.isHealthcare());
-        usersDao.findByUsername(name).setConfiguration(configuration);
-//        configDao.save(configuration);
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User editedUser = usersDao.findOne(loggedInUser.getId());
+        editedUser.setConfiguration(user.getConfiguration());
+        editedUser.getConfiguration().setUser(editedUser);
 
-        return "";
+        configDao.save(editedUser.getConfiguration());
+        usersDao.save(editedUser);
+        return "redirect:/profile";
     }
 }

@@ -2,6 +2,8 @@ package com.simplesauce.controllers;
 
 import com.simplesauce.models.SearchConfiguration;
 import com.simplesauce.models.User;
+import com.simplesauce.repositories.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ViewController {
+
+  @Autowired
+  UserRepo usersDao;
 
   @GetMapping("/about")
   public String siteAbout() {
@@ -26,7 +31,11 @@ public class ViewController {
       notLoggedInUser.setConfiguration(new SearchConfiguration());
       model.addAttribute("user", notLoggedInUser);
     }else{
-      model.addAttribute("user", user);
+      User loggedInUser = usersDao.findByUsername(((User) user).getUsername());
+      if(loggedInUser.getConfiguration() == null){
+        loggedInUser.setConfiguration(new SearchConfiguration());
+      }
+      model.addAttribute("user", loggedInUser);
     }
     return "nav/index";
   }

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments :: head(Login)"/>
+<head th:replace="fragments :: login(Login)"/>
 <body>
 <nav th:replace="fragments :: navbar" />
 
 <div class="col-sm-6 col-sm-offset-3 text-center moveFldsDiv">
     <h1 id="loginHeader">LifeMap</h1>
-
+    <img th:src="@{/img/005-gps.svg}" alt="gps"/>
     <br/>
 
     <form th:action="@{/login}" th:method="post" class="form-horizontal">
