@@ -34,6 +34,7 @@
 
   //TODO implement anchor tags
 
+  console.log(business);
   //========================GOOGLE API METHODS========================
   let autocomplete = new google.maps.places.Autocomplete(document.getElementById('city-input'));
   autocomplete.bindTo('bounds', map);
@@ -490,7 +491,21 @@
     (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
   };
 
+  //=================SIDE NAVIGATION FUNCTIONS==================
+  $('.to-top-btn').click(function() {
+    $('html, body').animate({scrollTop: "0"});
+  });
 
+  //Show on Scroll
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 400) {
+      $('.to-top-btn').addClass('showme');
+      console.log('it should have added the class!');
+    } else {
+      $('.to-top-btn').removeClass('showme');
+      console.log('it should have removed the class!');
+    }
+  });
 
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
   //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
