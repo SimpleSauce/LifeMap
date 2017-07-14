@@ -289,7 +289,11 @@ footer {
 }
 
 #moveAllFlds{
-    margin-top: 100px;
+    margin-top: 50px;
+    border-color: white;
+    border: solid;
+    height: 215px;
+
 }
 
 #logBtn{
@@ -423,6 +427,11 @@ i {
 }
 
 
+/*new for check boxes*/
+.extra-info{
+    margin-right: 10px;
+}
+
 @media screen and (min-width: 768px) {
 
 /*form#city-input {*/
@@ -441,4 +450,27 @@ i {
     position: absolute;
     top: -1%;
     right: 1%;
+}
+
+#user-options{
+    border: solid;
+    border-color: white;
+    height: 215px;
+}
+
+.label-update{
+    background-color: black;
+    margin: 0px;
+    height: 35px;
+    padding-top: 0.5%;
+    padding-left: 0.5%;
+}
+
+#space-line{
+    height: 10px;
+}
+
+#move-cred-fields{
+    padding-top: 1%;
+    padding-left: 1%;
 }
