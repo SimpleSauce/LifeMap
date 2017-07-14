@@ -31,8 +31,10 @@
     </div>
     <div id="user-options">
       <span th:value="${user.configuration}"></span>
+      <span th:value="${user}"></span>
       <span>Additional Search Options</span>
       <form th:action="@{/user/search/config}" th:method="POST" th:object="${user}">
+        <input type="hidden" th:field="*{configuration.id}" />
         <label for="business-info">Business
           <input name="_business" value="on" type="hidden"/>
           <input id="business-info" type="checkbox" checked="checked" th:field = "*{configuration.business}" name="business" />

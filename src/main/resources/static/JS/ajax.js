@@ -464,7 +464,7 @@
       </div>
     `);
     console.log(business);
-    if(business == 1) {
+    if(business == 'true') {
       cardContainer.append(`
       <div class="colored-tile">
         <span>Business</span>
@@ -477,7 +477,79 @@
           <span class="intro-title">Business</span>
           <span></span>
         </div>
-        <div class="extra-info" id="culture-extras">
+        <div class="extra-info" id="business-extras">
+        </div>
+      </div>
+    `);
+    }
+    if(healthCare == 'true') {
+      cardContainer.append(`
+      <div class="colored-tile">
+        <span>Health Care</span>
+      </div>
+      <div id="business-img" class="section">
+        <div class="info-card">
+          <a class="expand-btn hidden">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
+          <span class="intro-title">Health Care</span>
+          <span></span>
+        </div>
+        <div class="extra-info" id="health-extras">
+        </div>
+      </div>
+    `);
+    }
+    if(jobMarket == 'true') {
+      cardContainer.append(`
+      <div class="colored-tile">
+        <span>Job Market</span>
+      </div>
+      <div id="business-img" class="section">
+        <div class="info-card">
+          <a class="expand-btn hidden">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
+          <span class="intro-title">Job Stats</span>
+          <span></span>
+        </div>
+        <div class="extra-info" id="job-extras">
+        </div>
+      </div>
+    `);
+    }
+    if(tolerance == 'true') {
+      cardContainer.append(`
+      <div class="colored-tile">
+        <span>Tolerance</span>
+      </div>
+      <div id="business-img" class="section">
+        <div class="info-card">
+          <a class="expand-btn hidden">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
+          <span class="intro-title">Scores</span>
+          <span></span>
+        </div>
+        <div class="extra-info" id="tolerance-extras">
+        </div>
+      </div>
+    `);
+    }
+    if(outdoors == 'true') {
+      cardContainer.append(`
+      <div class="colored-tile">
+        <span>Outdoors</span>
+      </div>
+      <div id="business-img" class="section">
+        <div class="info-card">
+          <a class="expand-btn hidden">
+            <img class="expand-img" src="${expandImg}" alt="expand">
+          </a>
+          <span class="intro-title">Outdoors</span>
+          <span></span>
+        </div>
+        <div class="extra-info" id="outdoor-extras">
         </div>
       </div>
     `);
