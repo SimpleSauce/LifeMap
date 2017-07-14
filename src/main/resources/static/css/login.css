@@ -1,0 +1,25 @@
+body {
+  background: url('../img/asanoha-400px.png') repeat;
+  font-family: 'Rubik', sans-serif;
+}
+
+#usernameLbl, #passwordLbl{
+  font-family: 'Pacifico', cursive;
+  font-size: 15px;
+}
+
+#loginHeader{
+  display: inline;
+  background-color: rgba(81, 81, 81, 0.67);
+  border-radius: 50px;
+  color: aquamarine;
+  font-family: 'Rubik', sans-serif;
+  font-size: 5em;
+  padding: 10px;
+}
+
+#username, #password{
+  border-radius: 2px;
+  background-color: #515151;
+  color: white;
+}

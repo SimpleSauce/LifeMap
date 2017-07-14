@@ -28,13 +28,13 @@
         <i class="glyphicon glyphicon-arrow-up"></i>
       </div>
     </div>
-    <form th:object="${user.configuration}">
-        <input type="hidden" th:field="*{business}"/>
-        <input type="hidden" th:field="*{healthcare}"/>
-        <input type="hidden" th:field="*{jobMarket}"/>
-        <input type="hidden" th:field="*{tolerance}"/>
-        <input type="hidden" th:field="*{outdoors}"/>
-    </form>
+    <div style="display: none;" th:object="${user.configuration}">
+      <div id="business" th:data="*{business}"></div>
+      <div id="healthcare" th:data="*{healthcare}"></div>
+      <div id="jobmarket" th:data="*{jobMarket}"></div>
+      <div id="tolerance" th:data="*{tolerance}"></div>
+      <div id="outdoors" th:data="*{outdoors}"></div>
+    </div>
 
     <nav th:replace="fragments :: side-nav"></nav>
 

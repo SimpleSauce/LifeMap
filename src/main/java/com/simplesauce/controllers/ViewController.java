@@ -2,6 +2,8 @@ package com.simplesauce.controllers;
 
 import com.simplesauce.models.SearchConfiguration;
 import com.simplesauce.models.User;
+import com.simplesauce.repositories.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ViewController {
 
+  @Autowired
+  UserRepo usersDao;
+
   @GetMapping("/about")
   public String siteAbout() {
     return "nav/about";
@@ -17,7 +22,8 @@ public class ViewController {
 
   @GetMapping("/")
   public String siteIndex(Model model) {
-    Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User loggedInUser = usersDao.findOne(user.getId());
 
     if (!(user instanceof User)) {
       // Create a user with all the configurations set to false, we only want to see everything
@@ -26,7 +32,7 @@ public class ViewController {
       notLoggedInUser.setConfiguration(new SearchConfiguration());
       model.addAttribute("user", notLoggedInUser);
     }else{
-      model.addAttribute("user", user);
+      model.addAttribute("user", loggedInUser);
     }
     return "nav/index";
   }

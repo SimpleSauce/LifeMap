@@ -16,6 +16,38 @@
     </script>
 </head>
 
+<!--LOGIN HEAD FRAGMENT-->
+<head th:fragment="login(title)">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
+    <title th:text="${title}"></title>
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/globalGym.css" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <!--<link rel="shortcut icon" href="./img/logoplaceholder.ico" type="image/ico"/>-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+    </script>
+</head>
+
+<!--ABOUT HEAD FRAGMENT-->
+<head th:fragment="about(title)">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
+    <title th:text="${title}"></title>
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/globalGym.css" />
+    <link rel="stylesheet" href="/css/about.css" />
+    <!--<link rel="shortcut icon" href="./img/logoplaceholder.ico" type="image/ico"/>-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+    </script>
+</head>
+
 <body>
 <!--SIDE BAR NAV-->
 <nav>
@@ -110,11 +142,11 @@
   <script th:inline="javascript">
     /*<![CDATA[*/
     const MAPS_KEY = "@environment.getProperty('google.maps.key')";
-    const business = $('#configuration.business').val(); //0 or 1
-    const healthCare = $('#configuration.healthcare').val();
-    const jobMarket  = $('#configuration.jobMarket').val();
-    const tolerance  = $('#configuration.tolerance').val();
-    const outdoors = $('#configuration.outdoors').val();
+    const business = $('#business').attr('data'); //0 or 1
+    const healthCare = $('#healthcare').attr('data');
+    const jobMarket  = $('#jobMarket').attr('data');
+    const tolerance  = $('#tolerance').attr('data');
+    const outdoors = $('#outdoors').attr('data');
     const user = $('#username').text();
     console.log(user);
     /*]]>*/
