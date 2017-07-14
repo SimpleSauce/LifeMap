@@ -26,7 +26,7 @@
   let locationDisplay = $('#location-info');
   let locationHeader = $('#location-name');
   const sanAntonioLocation = {lat: 29, lng: -98};
-  let currentTemp;
+  let markersArray = [];
   const map = new google.maps.Map(document.getElementById('map'), {
     center: sanAntonioLocation,
     zoom: 16
@@ -34,6 +34,7 @@
 
   //TODO implement anchor tags
 
+  console.log(business);
   //========================GOOGLE API METHODS========================
   let autocomplete = new google.maps.places.Autocomplete(document.getElementById('city-input'));
   autocomplete.bindTo('bounds', map);
@@ -42,16 +43,14 @@
   //TODO Add ability to search by address, City, or City and State
   const geoCoder = () => {
     //TODO Make this look prettier and function better
-    if(!cityInput.val().match(/([0-9])+/) && cityInput.val() !== '') {
-      geoCodeIt.geocode({'address': ipGetter(ip)})
-    } else geoCodeIt.geocode({'address': cityInput.val()},
+    geoCodeIt.geocode({'address': cityInput.val()},
       (results, status) => {
         if(status =='OK') {
           map.setCenter(results[0].geometry.location);
           addLocationMarker(results[0].geometry.location, map);
           console.log(results);
           //Calls these two methods and passes the City Name (which Teleport API is set up to use).
-          getLocationInfo(results[0].address_components[3].long_name);
+          getLocationInfo(results[0].geometry.location.lat(), results[0].geometry.location.lng());
           requestWeather(results[0].geometry.location.lat, results[0].geometry.location.lng);
         } else {
           console.log("Geocode wasn't successful for reason: " + status);
@@ -60,63 +59,75 @@
   };
 
   const addLocationMarker = (location, map) => {
+    clearMarker();
     let marker = new google.maps.Marker({
         position: location,
         map: map
     });
+    markersArray.push(marker);
+  };
+
+  const clearMarker = () => {
+    setMapOnAll(null);
+    markersArray = [];
+  };
+
+  const setMapOnAll = (map) => {
+    for (let i = 0; i < markersArray.length; i++) {
+      markersArray[i].setMap(map);
+    }
   };
 
   //TODO Change this ajax tree to be shorter and more efficient.
   //===================TELEPORT API AJAX REQUEST/BUILD===================
-  const getLocationInfo = (cityName) => {
+  const getLocationInfo = (lat, lon) => {
+    console.log(lat, lon);
     $.ajax({
-        url: "https://api.teleport.org/api/cities/?search=" + cityName,
-        type: "GET"
+        url: "https://api.teleport.org/api/locations/" + lat + ", " +  lon + "/",
+        type: "GET",
     }).done((data) => {
-        $.ajax({
-        url: data._embedded['city:search-results'][0]._links['city:item'].href,
-        type: "GET"
-    }).done((data) => {
+      console.log('Overall Location Data: ', data);
         buildLocationInfo(data);
         $.ajax({
-          url: data._links['city:urban_area'].href,
+        url: data._embedded['location:nearest-urban-areas'][0]._links['location:nearest-urban-area'].href,
+        type: "GET"
+    }).done((data) => {
+        buildUrbanInfo(data);
+          console.log('Urban Area Info: ', data);
+        $.ajax({
+          url: data._links['ua:images'].href,
           type: "GET"
-        }).done((data) => {
-          buildUrbanInfo(data);
-          $.ajax({
-            url: data._links['ua:images'].href,
-            type: "GET"
-          }).done(data => locationImageDisplay(data));
-          $.ajax({
-            url: data._links['ua:salaries'].href,
-            type: "GET"
-          }).done(data => buildSalaryInfo(data));
-          $.ajax({
-            url: data._links['ua:scores'].href,
-            type: "GET"
-          }).done(data => buildScoreInfo(data));
-          $.ajax({
-            url: data._links['ua:details'].href,
-            type: "GET"
-          }).done(data => buildDetails(data));
+        }).done(data => locationImageDisplay(data));
+        $.ajax({
+          url: data._links['ua:salaries'].href,
+          type: "GET"
+        }).done(data => buildSalaryInfo(data));
+        $.ajax({
+          url: data._links['ua:scores'].href,
+          type: "GET"
+        }).done(data => buildScoreInfo(data));
+        $.ajax({
+          url: data._links['ua:details'].href,
+          type: "GET"
+        }).done(data => {
+          requestWeather(lat, lon, data);
         });
       });
     });
   };
 
-  //===================WEATHER INFORMATION REQUESTS===================
-  const requestWeather = (lat, lng) => {
-      $.ajax({
-          url: "http://api.openweathermap.org/data/2.5/weather?",
-          data: {
-              APPID: openMapsKey,
-              units: "imperial",
-              lat: lat,
-              lon: lng
-          }
-      }).done((data) => {
-          buildWeather(data);
-    })
+  const requestWeather = (lat, lng, data) => {
+    $.ajax({
+      url: "http://api.openweathermap.org/data/2.5/weather?",
+      data: {
+        APPID: openMapsKey,
+        units: "imperial",
+        lat: lat,
+        lon: lng
+      }
+    }).done((weather) => {
+      buildDetails(data, weather.main.temp.toFixed(0));
+    });
   };
 
   //===================INFORMATION BUILDERS FOR THE VIEW===================
@@ -152,11 +163,11 @@
       scoreAndCat.push(catArray[i] + ": " + scoreArray[i].toFixed(1));
     }
 
-    //TODO Add all metrics involved in making the overall happiness
-
     const happyDisplay = (img) => {
       cardContainer.append(`
-      <div class="colored-tile"></div>
+      <div class="colored-tile">
+        <span class="intro-title">Overall Happiness</span>
+      </div>
       <div id="happiness-img" class="section">
         <div class="info-card" id="happiness">
           <img class="info-card-img" src="${img}" alt="happiness">
@@ -175,6 +186,7 @@
       });
       (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
     };
+    //If average is less than 5, display sad icon instead of happy.
     (avg >= 5) ? happyDisplay(happyImg) : happyDisplay(sadImg);
   };
 
@@ -217,15 +229,12 @@
   };
 
   //Receives City Data from Teleport API and displays it to the Index view.
-  let buildDetails = (data) => {
+  let buildDetails = (data, currentTemp) => {
+    console.log(data);
+    console.log(currentTemp);
     //Overall Variables
     const cat = data.categories;
-
-    console.log(cat[2]);
-    console.log(cat[4]);
-    console.log(cat[7]);
-    console.log(cat[15]);
-    console.log(cat[16]);
+    console.log(cat[17]);
 
     //Housing Variables
     let smApt = parseFloat(data.categories[8].data[2].currency_dollar_value.toFixed(0));
@@ -241,13 +250,12 @@
     let pubTransCost = parseFloat(cat[3].data[7].currency_dollar_value.toFixed(2));
 
     //Monthly and Daily Living Cost Estimators
-    //TODO Add The calculations that went into daily/monthly cost to extra info tab.
     const monthlyLiving = '$' + ((fitnessCost + pubTransCost + medApt) + (beerCost * 32) + (cinemaCost * 2) + ((coffeeCost + mealCost) * 15)).toFixed(0);
     const dailyliving = '$' + (coffeeCost + mealCost + (pubTransCost / 30)).toFixed(0);
 
     //Startup Variables
     let avgStartupScore = cat[17].data[12].float_value;
-    let avgStartupIncrease = cat[17].data[11].int_value;
+    let avgStartupIncrease = cat[17].data[11].float_value;
     let investors = cat[17].data[10].int_value;
     let workFromCoNum = cat[17].data[14].int_value;
     //EXTRAS
@@ -279,16 +287,6 @@
     let sportsScore = parseFloat(cat[4].data[14].float_value);
     let zooScore = parseFloat(cat[4].data[16].float_value);
 
-    //Calculate an average of the Culture Score for basic information:
-    const cultureScoreArray = [artGalScore, cinemaScore, comedyScore, concertScore, historyScore, museumScore, perfArtScore, sportsScore, zooScore];
-
-      let cultScoreSum = 0;
-      let cultAvg;
-      cultureScoreArray.forEach((val) => {
-        cultScoreSum += val;
-      });
-      cultAvg = ((cultScoreSum/cultureScoreArray.length) * 10).toFixed(0);
-
     let artGalCnt = parseInt(cat[4].data[1].int_value);
     let cinemaCnt = parseInt(cat[4].data[3].int_value);
     let comedyCnt = parseInt(cat[4].data[5].int_value);
@@ -299,9 +297,44 @@
     let sportsCnt = parseInt(cat[4].data[15].int_value);
     let zooCnt = parseInt(cat[4].data[17].int_value);
 
+    let artGalCat = cat[4].data[1].label;
+    let cinemaCat = cat[4].data[3].label;
+    let comedyCat = cat[4].data[5].label;
+    let concertCat = cat[4].data[7].label;
+    let historyCat = cat[4].data[9].label;
+    let museumCat = cat[4].data[11].label;
+    let perfArtCat = cat[4].data[13].label;
+    let sportsCat = cat[4].data[15].label;
+    let zooCat = cat[4].data[17].label;
+
+    //Cleanliness Variables
+    let pollutionScore = cat[15].data[0].float_value;
+    let cleanScore = cat[15].data[1].float_value;
+    let waterScore = cat[15].data[2].float_value;
+    let greeneryScore = cat[15].data[3].float_value;
+
+    const cleanAvg = (((pollutionScore + cleanScore + waterScore + greeneryScore)/4) * 10);
+
+    //Calculate an average of the Culture Score for basic information:
+    const cultureScoreArray = [artGalScore, cinemaScore, comedyScore, concertScore, historyScore, museumScore, perfArtScore, sportsScore, zooScore];
+    const cultureCntArray = [artGalCnt, cinemaCnt, comedyCnt, concertCnt, historyCnt, museumCnt, perfArtCnt, sportsCnt, zooCnt];
+    const cultureCatArray = [artGalCat, cinemaCat, comedyCat, concertCat, historyCat, museumCat, perfArtCat, sportsCat, zooCat];
+    const cultureCatAndCnt = [];
+
+      let cultScoreSum = 0;
+      let cultAvg;
+      cultureScoreArray.forEach((val) => {
+        cultScoreSum += val;
+      });
+      cultAvg = ((cultScoreSum/cultureScoreArray.length) * 10).toFixed(0);
+
+      for(let i = 0; i<cultureScoreArray.length; i++) {
+        cultureCatAndCnt.push(cultureCatArray[i] + ": " + cultureCntArray[i]);
+      }
+
     cardContainer.append(`
       <div class="colored-tile">
-        <spanclass="intro-title">Apartment Rentals</span>
+        <span class="intro-title">Apartment Rentals</span>
       </div>
       <div id="apartment-img" class="section">
         <div class="info-card">
@@ -327,6 +360,14 @@
           <span>Monthly Average: ${monthlyLiving}</span>
         </div>
         <div class="extra-info">
+          <div id="monthly-average" class="interior-card">Monthly Average: 
+            <span>Fitness Club Membership - $${fitnessCost}</span>
+            <span>Public Transportation - $${pubTransCost}</span>
+            <span>Medium Apartment - $${medApt}</span>
+            <span>32 Beers - $${(beerCost * 32)}</span>
+            <span>2 Movies - $${(cinemaCost * 2)}</span>
+            <span>Coffee and Lunch (every other day) - $${((coffeeCost + mealCost) * 15)}</span>
+          </div>
           <img class="info-card-img" src="${coffeeImg}" alt="coffee">$${coffeeCost}
           <img class="info-card-img" src="${fitnessImg}" alt="fitness">$${fitnessCost}
           <img class="info-card-img" src="${mealImg}" alt="meal">$${mealCost}
@@ -344,15 +385,15 @@
           <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
-          <span>Average Startup Score: ${avgStartupScore}</span>
-          <span>Average Startup Increase (Monthly): ${avgStartupIncrease}</span>
+          <span>Average Startup Score: ${avgStartupScore.toFixed(1)}/10</span>
+          <span>Average Startup Increase Score: ${avgStartupIncrease}/10</span>
           <span>Startup Climate Investors: ${investors}</span>
           <span>WorkFrom.Co Co-Working Spaces: ${workFromCoNum}</span>
         </div>
         <div class="extra-info">
-          <span>Co-Working Spaces Score (out of 100): ${coWorkScore}</span>
-          <span>Startup Events Score (out of 100): ${eventsScore}</span>
-          <span>Meetups Score (out of 100): ${meetupScore}</span>
+          <span>Co-Working Spaces Score: ${coWorkScore}/10</span>
+          <span>Startup Events Score: ${eventsScore}/10</span>
+          <span>Meetups Score: ${meetupScore}/10</span>
           <span>Startup Events This Month: ${eventsCount}</span>
           <span>Startup Events The Last 12 Months: ${eventsLstYr}</span>
           <span>FunderBeam Total Startups: ${fundrBmStrtups}</span>
@@ -361,7 +402,6 @@
         </div>
       </div>
     `);
-    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
         <span>Culture</span>
@@ -374,15 +414,16 @@
           <span class="intro-title">Culture Score</span>
           <span>${cultAvg}/10</span>
         </div>
-        <div class="extra-info">
-          ${cultureScoreArray.forEach((val) => {
-            
-          })}
+        <div class="extra-info" id="culture-extras">
         </div>
       </div>
     `);
+    cultureCatAndCnt.forEach((val) => {
+      $('#culture-extras').append(`
+        <span>${val}</span>
+      `);
+    });
 
-    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
         <span class="intro-title">Weather</span>
@@ -392,6 +433,7 @@
           <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
+          <span>Current Temp: ${currentTemp}</span>
         </div>
         <div class="extra-info">
           <span id="averages-title">Averages</span>
@@ -402,38 +444,45 @@
         </div>
       </div>
     `);
-    //TODO Find and fill out this info
     cardContainer.append(`
       <div class="colored-tile">
-        <span class="intro-title">Safety</span>
+        <span class="intro-title">Cleanliness</span>
       </div>
-      <div id="safety-img" class="section">
+      <div id="clean-img" class="section">
         <div class="info-card">
           <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
+          <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
         </div>
         <div class="extra-info">
-          
+          <span>Pollution Score: ${pollutionScore}</span>
+          <span>Cleanliness Score: ${cleanScore}</span>
+          <span>Water Quality Score: ${waterScore}</span>
+          <span>Urban Greenery Score: ${greeneryScore}</span>
         </div>
       </div>
     `);
-    //TODO Find and fill out this info
-    cardContainer.append(`
+    console.log(business);
+    if(business == 1) {
+      cardContainer.append(`
       <div class="colored-tile">
-        <span class="intro-title">Pollution</span>
+        <span>Business</span>
       </div>
-      <div id="safety-img" class="section">
+      <div id="business-img" class="section">
         <div class="info-card">
           <a class="expand-btn hidden">
             <img class="expand-img" src="${expandImg}" alt="expand">
           </a>
+          <span class="intro-title">Business</span>
+          <span></span>
         </div>
-        <div class="extra-info">
-          
+        <div class="extra-info" id="culture-extras">
         </div>
       </div>
     `);
+    }
+
     // console.log(data.categories);
     $('.expand-btn').on('click', function() {
       console.log('you clicked the expand button');
@@ -442,36 +491,22 @@
     (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
   };
 
-  //TODO make all the weather appear on the same info card
-  const buildWeather = (data) => {
-    currentTemp = data.main.temp.toFixed(0);
+  //=================SIDE NAVIGATION FUNCTIONS==================
+  $('.to-top-btn').click(function() {
+    $('html, body').animate({scrollTop: "0"});
+  });
 
-    // console.log(data);
-    cardContainer.append(`
-      <div class="colored-tile">
-        <span class="intro-title">Current Temp</span>
-      </div>
-      <div id="weather-img" class="section">
-        <div class="info-card" id="today-temp">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
-          ${currentTemp + degreeSymbol}
-        </div>
-        <div class="extra-info">
-          
-        </div>
-      </div>
-    `);
-    (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
-  };
+  //Show on Scroll
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 400) {
+      $('.to-top-btn').addClass('showme');
+      console.log('it should have added the class!');
+    } else {
+      $('.to-top-btn').removeClass('showme');
+      console.log('it should have removed the class!');
+    }
+  });
 
-  //TODO Trying to say: if there's a user, remove the class 'hidden' from 'expand-btn' class (or anchors)
-  console.log(user == "", user);
-
-  // };
-  //TODO This expression doesn't work
-  // $('a').removeClass('hidden');
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
   //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
   const divClear = () => {

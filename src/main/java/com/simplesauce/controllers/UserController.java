@@ -1,5 +1,8 @@
 package com.simplesauce.controllers;
 
+import com.simplesauce.models.SearchConfiguration;
+import com.simplesauce.repositories.SearchConfigRepo;
+import com.simplesauce.repositories.SearchResultsRepo;
 import com.simplesauce.repositories.UserRepo;
 import com.simplesauce.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-/**
- * Created by everardosifuentes on 7/5/17.
- */
+
 
 @Controller
 public class UserController {
@@ -25,6 +26,8 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    SearchConfigRepo configDao;
 
     @GetMapping("/login")
     public String showLoginForm() {
@@ -54,11 +57,12 @@ public class UserController {
 
     }
 
-
-    //update profile
+    //Update Profile
     @GetMapping("/profile")
     public String showEditForm(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        user = usersDao.findOne(user.getId());
 
         model.addAttribute("user", user);
         return "user/profile";
@@ -82,20 +86,16 @@ public class UserController {
         return user;
     }
 
+    @PostMapping("/user/search/config")
+    public @ResponseBody String updateConfiguration(
+            @ModelAttribute SearchConfiguration configuration,
+            @RequestParam(value="name") String name
+    ) {
+        System.out.println(configuration.isBusiness());
+        System.out.println(configuration.isHealthcare());
+        usersDao.findByUsername(name).setConfiguration(configuration);
+//        configDao.save(configuration);
 
-//    @PostMapping("/post/delete")
-//    public String deletePost(@ModelAttribute Post post, Model model){
-//        postSvc.deletePost(post.getId());
-//        model.addAttribute("msg", "Your post was deleted correctly");
-//        return "return the view with a success message";
-//    }
-
-
-
-
-
-
-
-
-
+        return "";
+    }
 }

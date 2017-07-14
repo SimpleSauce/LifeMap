@@ -4,34 +4,58 @@
 <body>
 <nav th:replace="fragments :: navbar" />
 <div class="container" id="content-wrap">
-    <div id="moveAllFlds">
-        <div>
-            <h4>Update Your Profile</h4>
-        </div>
-        <div>
-            <label for="username">Username:  </label>
-        <!--<h1 th:text="${user.username}"></h1>-->
-        </div>
-            <div>
-                <a href="#" id="username" name="username" data-type="text"
-                   th:attr="data-token=${_csrf.token},data-param=${_csrf.parameterName},data-pk=${user.id}"
-                   data-title="Username:  " th:text="${user.username}">
-
-                </a>
-            </div>
-        <div>
-            <label for="email">Email:  </label>
-        </div>
-        <!--<p th:text="${user.email}"></p>-->
-            <div>
-                <a href="#" id="email" name="email" data-type="text"
-               th:attr="data-token=${_csrf.token},data-param=${_csrf.parameterName},data-pk=${user.id}"
-               data-title="Email:  " th:text="${user.email}">
-            </a>
-            </div>
-        </div>
+  <div id="moveAllFlds">
+    <div>
+        <h4>Update Your Profile</h4>
+    </div>
+    <div>
+      <label for="username">Username</label>
+    <!--<h1 th:text="${user.username}"></h1>-->
+    </div>
+      <div>
+        <a href="#" id="username" name="username" data-type="text"
+           th:attr="data-token=${_csrf.token},data-param=${_csrf.parameterName},data-pk=${user.id}"
+           data-title="Username: " th:text="${user.username}">
+        </a>
+      </div>
+      <div>
+          <label for="email">Email</label>
+      </div>
+      <!--<p th:text="${user.email}"></p>-->
+      <div>
+        <a href="#" id="email" name="email" data-type="text"
+         th:attr="data-token=${_csrf.token},data-param=${_csrf.parameterName},data-pk=${user.id}"
+         data-title="Email: " th:text="${user.email}">
+        </a>
+      </div>
+    </div>
+    <div id="user-options">
+      <span th:value="${user.configuration}"></span>
+      <span>Additional Search Options</span>
+      <form th:action="@{/user/search/config}" th:method="POST" th:object="${user}">
+        <label for="business-info">Business
+          <input name="_business" value="on" type="hidden"/>
+          <input id="business-info" type="checkbox" checked="checked" th:field = "*{configuration.business}" name="business" />
+        </label>
+        <label for="healthcare-info">Health Care
+          <input name="_healthcare" value="on" type="hidden"/>
+          <input id="healthcare-info" type="checkbox" checked="checked" th:field = "*{configuration.healthcare}" name="healthcare" />
+        </label>
+        <label for="job-market-info">Job Market
+         <input id="job-market-info" type="checkbox" checked="checked" th:field="*{configuration.jobMarket}" name="job-market" />
+        </label>
+        <label for="tolerance-info">Tolerance
+          <input id="tolerance-info" type="checkbox" checked="checked" th:field = "*{configuration.tolerance}" name="tolerance" />
+        </label>
+        <label for="outdoors-info">Outdoors
+        <input id="outdoors-info" type="checkbox" checked="checked" th:field = "*{configuration.outdoors}" name="outdoors" />
+        </label>
+        <button id="extra-info-search">Search</button>
+      </form>
+    </div>
     <footer th:replace="fragments :: footer" />
 </div>
+
 <script th:replace="fragments :: scripts" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 </body>
