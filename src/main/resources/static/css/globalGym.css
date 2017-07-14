@@ -204,8 +204,8 @@ a:visited {
     box-shadow: 0 4px 8px 0 #563444;
     margin: 5px auto;
     margin-bottom: 0;
-    height: 300px;
-    width: 360px;
+    height: 400px;
+    width: 650px;
     font-size: 1em;
     text-align: center;
     background-color: #dde4d3;
@@ -473,4 +473,58 @@ i {
 #move-cred-fields{
     padding-top: 1%;
     padding-left: 1%;
+}
+
+#salary-img div{
+    padding-top: 7%;
+}
+
+#job-dropdown {
+    width: 95%;
+    font-size: 0.5em;
+}
+
+#happiness-img div{
+    padding-top: 11%;
+    font-size: 2em;
+}
+
+#happiness-img div img{
+    position: absolute;
+    width: 15%;
+    height: 15%;
+    margin-left: 15%;
+    margin-top: 15%;
+    margin-bottom: 0;
+}
+
+#apartment-img div{
+    padding-top: 8%;
+}
+
+#living-cost-img div{
+    padding-top: 11%;
+}
+
+#startup-img div{
+    padding-top: 9%;
+    font-size: 0.7em;
+}
+
+#startup-img div img{
+    position: absolute;
+}
+
+#culture-img div{
+    padding-top: 9%;
+    font-size: 1.5em;
+}
+
+#weather-img div{
+    padding-top: 13%;
+    font-size: 1.4em;
+}
+
+#clean-img div{
+    padding-top: 12%;
 }
