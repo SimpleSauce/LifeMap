@@ -4,6 +4,9 @@
 <body>
 <nav th:replace="fragments :: navbar" />
 <div class="container" id="content-wrap">
+  <div id="profile-tag">
+    Profile
+  </div>
   <div id="moveAllFlds">
     <div>
         <h4 class="label-update" >Update Your Credentials</h4>
@@ -19,6 +22,7 @@
            data-title="Username: " th:text="${user.username}">
         </a>
       </div>
+      <div id="user-pass-space"></div>
       <div>
           <label for="email">Email</label>
       </div>
@@ -40,22 +44,22 @@
       </div>
         <form th:action="@{/user/search/config}" th:method="POST" th:object="${configuration}">
           <input type="hidden" th:field="*{id}" />
-        <label for="business-info">Business
+        <label  class="left-margin" for="business-info">Business
           <input id="business-info" type="checkbox" th:field = "*{business}" />
         </label>
-        <label for="healthcare-info">Health Care
+        <label  class="left-margin" for="healthcare-info">Health Care
           <input id="healthcare-info" type="checkbox" th:field = "*{healthcare}" />
         </label>
-          <label for="job-market-info">Job Market
+          <label class="left-margin" for="job-market-info">Job Market
             <input id="job-market-info" type="checkbox" th:field="*{jobMarket}" />
           </label>
-          <label for="tolerance-info">Tolerance
+          <label  class="left-margin" for="tolerance-info">Tolerance
             <input id="tolerance-info" type="checkbox" th:field = "*{tolerance}" />
           </label>
-          <label for="outdoors-info">Outdoors
+          <label  class="left-margin" for="outdoors-info">Outdoors
             <input id="outdoors-info" type="checkbox" th:field = "*{outdoors}" />
         </label>
-        <button id="extra-info-search">Search</button>
+        <button class="left-margin" id="extra-info-search">Update</button>
       </form>
     </div>
     <footer th:replace="fragments :: footer" />
