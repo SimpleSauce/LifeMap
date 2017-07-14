@@ -43,24 +43,24 @@
       <h4 class="label-update ">Additional Search Options</h4>
       </div>
         <form th:action="@{/user/search/config}" th:method="POST" th:object="${user}">
-        <label class="Additional-item-right" for="business-info">Business
+        <label class="left-margin" for="business-info">Business
           <input name="_business" value="on" type="hidden"/>
           <input id="business-info" type="checkbox" checked="checked" th:field = "*{configuration.business}" name="business" />
         </label>
-        <label class="Additional-item-right" for="healthcare-info">Health Care
+        <label class="left-margin" for="healthcare-info">Health Care
           <input name="_healthcare" value="on" type="hidden"/>
           <input id="healthcare-info" type="checkbox" checked="checked" th:field = "*{configuration.healthcare}" name="healthcare" />
         </label>
-        <label class="Additional-item-right" for="job-market-info">Job Market
+        <label class="left-margin" for="job-market-info">Job Market
          <input id="job-market-info" type="checkbox" checked="checked" th:field="*{configuration.jobMarket}" name="job-market" />
         </label>
-        <label class="Additional-item-right" for="tolerance-info">Tolerance
+        <label class="left-margin" for="tolerance-info">Tolerance
           <input id="tolerance-info" type="checkbox" checked="checked" th:field = "*{configuration.tolerance}" name="tolerance" />
         </label>
-        <label class="Additional-item-right" for="outdoors-info">Outdoors
+        <label class="left-margin" for="outdoors-info">Outdoors
         <input id="outdoors-info" type="checkbox" checked="checked" th:field = "*{configuration.outdoors}" name="outdoors" />
         </label>
-        <button id="extra-info-search">Search</button>
+        <button class="left-margin" id="extra-info-search">Update</button>
       </form>
     </div>
     <footer th:replace="fragments :: footer" />
