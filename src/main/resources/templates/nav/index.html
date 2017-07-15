@@ -5,6 +5,9 @@
 <nav th:replace="fragments :: navbarSearch"/>
 <div id="content-wrap">
     <!--Temp location for Search Info-->
+
+  <div id="lifemap">LifeMap</div>
+
   <div id="map-backdrop">
     <img id="map-backdrop-img" th:src="@{/img/006-map.svg}" alt=""/>
     <div id="map"></div>
@@ -24,9 +27,6 @@
     </div>
 
     <div id="info-card-container">
-      <div class="btn to-top-btn hidden-xs hidden-sm">
-        <i class="glyphicon glyphicon-arrow-up"></i>
-      </div>
     </div>
     <div style="display: none;" th:object="${user.configuration}">
       <div id="business" th:data="*{business}"></div>
