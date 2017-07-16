@@ -1,25 +1,41 @@
 body {
-  background: url('../img/asanoha-400px.png') repeat;
+  /*background: url('../img/asanoha-400px.png') repeat;*/
   font-family: 'Rubik', sans-serif;
+  background-color: black;
 }
 
 #usernameLbl, #passwordLbl{
-  font-family: 'Pacifico', cursive;
-  font-size: 15px;
+  font-family: Edelsans, Avenir, sans-serif;
+  font-size: 1.5em;
+  color: white
 }
 
 #loginHeader{
   display: inline;
-  background-color: rgba(81, 81, 81, 0.67);
+  /*background-color: rgba(81, 81, 81, 0.67);*/
   border-radius: 50px;
-  color: aquamarine;
-  font-family: 'Rubik', sans-serif;
-  font-size: 5em;
+  /*color: aquamarine;*/
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 6.3em;
   padding: 10px;
+/*new additions*/
+  position: absolute;
+  margin-top: 16%;
+  margin-left: -1%;
 }
+
+ /*new additions*/
+#loginImage{
+  width: 55%;
+}
+
 
 #username, #password{
   border-radius: 2px;
-  background-color: #515151;
-  color: white;
+  background-color: #00b4ff;
+  color: #515151;
+  font-size: 1.3em;
+  font-weight: bold;
+  border-radius: 8px;
 }
