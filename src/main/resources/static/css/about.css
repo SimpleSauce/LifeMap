@@ -43,7 +43,7 @@ body {
 }
 
 .links-row a img:hover {
-  background-color: rgba(81, 81, 81, 0.8);
+  background-color: rgba(0, 180, 255, 0.8);
 }
 
 .links-row:first-child img{

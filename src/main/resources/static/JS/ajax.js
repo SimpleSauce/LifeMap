@@ -1,7 +1,6 @@
 "use strict";
 
 (() => {
-
   //Variable Declarations================================
   const geoCodeIt = new google.maps.Geocoder;
   const degreeSymbol = '\u2109';
@@ -14,17 +13,28 @@
   const fitnessImg = './img/007-weightlifting.svg';
   const happyImg = './img/004-happy.svg';
   const sadImg = './img/003-arrogant.svg';
-  const expandImg = './img/expand-btn.svg';
-  const workHarderImg = './img/workharder.png';
   const startupImg = './img/005-team.svg';
   const cinemaImg = './img/002-theater.svg';
-  const safetyImg = './img/003-burglar.svg';
+  const weatherImg = './img/010-cloud.svg';
+  const healthImg = './img/005-hospital.svg';
+  const businessImg = './img/004-manager.svg';
+  const cultureImg = './img/008-transport.svg';
+  const toleranceImg = './img/003-gays.svg';
+  const outdoorsImg = './img/002-tree.svg';
+  const aptImg = './img/009-real-estate.svg';
+  const jobMarketImg = './img/006-store.svg';
+  const transImg = './img/001-bus.svg';
+  const costOfLiving = './img/001-budget.svg';
+  const cleanlinessImg = './img/007-eolic.svg';
   const salaryImg = './img/004-salary.svg';
   const pollutionImg = './img/001-factory.svg';
-  let radius = 25;
   const cardContainer = $('#info-card-container');
+  const iconContainer = $('#icon-container');
   let locationDisplay = $('#location-info');
   let locationHeader = $('#location-name');
+  let avg;
+  let info = $('.info');
+
   const sanAntonioLocation = {lat: 29, lng: -98};
   let markersArray = [];
   const map = new google.maps.Map(document.getElementById('map'), {
@@ -32,9 +42,6 @@
     zoom: 7
   });
 
-  //TODO implement anchor tags
-
-  console.log(business);
   //========================GOOGLE API METHODS========================
   let autocomplete = new google.maps.places.Autocomplete(document.getElementById('city-input'));
   autocomplete.bindTo('bounds', map);
@@ -77,7 +84,6 @@
     }
   };
 
-  //TODO Change this ajax tree to be shorter and more efficient.
   //===================TELEPORT API AJAX REQUEST/BUILD===================
   const getLocationInfo = (lat, lon) => {
     console.log(lat, lon);
@@ -140,53 +146,100 @@
       // console.log(data);
   };
 
+  const iconDisplay = (img) => {
+    iconContainer.html(`
+      <a id='center' class="icon" >
+        <img id="happiness-img" src="${img}" alt="icon">
+      </a>
+      <a id='deg0' class="icon" >
+        <img id="apt-img" src="${aptImg}" alt="icon">
+      </a>
+      <a id='deg27692' class="icon" >
+        <img id="living-cost-img" src="${costOfLiving}" alt="icon">
+      </a>
+      <a id='deg55384' class="icon" >
+        <img id="startup-img" src="${startupImg}" alt="icon">
+      </a>
+      <a id='deg83076' class="icon" >
+        <img id="culture-img" src="${cultureImg}" alt="icon">
+      </a>
+      <a id='deg11076' class="icon" >
+        <img id="weather-img" src="${weatherImg}" alt="icon">
+      </a>
+      <a id='deg13846' class="icon" >
+        <img id="clean-img" src="${cleanlinessImg}" alt="icon">
+      </a>
+      <a id='deg16615' class="icon" >
+        <img id="salary-img" src="${salaryImg}" alt="icon">
+      </a>
+      <a id='deg19384' class="icon" >
+        <img src="${businessImg}" alt="icon">
+      </a>
+      <a id='deg22153' class="icon" >
+        <img src="${healthImg}" alt="icon">
+      </a>
+      <a id='deg24923' class="icon" >
+        <img src="${jobMarketImg}" alt="icon">
+      </a>
+      <a id='deg276-92' class="icon" >
+        <img src="${toleranceImg}" alt="icon">
+      </a>
+      <a id='deg30461' class="icon" >
+        <img src="${outdoorsImg}" alt="icon">
+      </a>      
+    `);
+  };
+
   //Takes 17 metrics (provided by Teleport API), and averages them all to produce a single metric.
   let buildScoreInfo = (data) => {
     const scoreArray = [];
     const catArray = [];
     const scoreAndCat = [];
     let sum = 0;
-    let avg;
     locationDisplay.html(data.summary);
     data.categories.forEach((val) => {
-        scoreArray.push(val.score_out_of_10);
-        catArray.push(val.name);
+      scoreArray.push(val.score_out_of_10);
+      catArray.push(val.name);
     });
     scoreArray.forEach((val) => {
-        sum += val;
-    avg = (sum / 17).toFixed(1);
+      sum += val;
     });
 
+    avg = (sum / 17).toFixed(1);
     console.log(catArray);
-    for(let i = 0; i<scoreArray.length; i++) {
+    for (let i = 0; i < scoreArray.length; i++) {
       scoreAndCat.push(catArray[i] + ": " + scoreArray[i].toFixed(1));
     }
 
-    const happyDisplay = (img) => {
-      cardContainer.append(`
-      <div class="colored-tile">
-        <span class="intro-title">Overall Happiness</span>
-      </div>
-      <div id="happiness-img" class="section">
-        <div class="info-card" id="happiness">
-          <img class="info-card-img" src="${img}" alt="happiness">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
-            ${avg}/10
+    if (user == "") {
+      $('#happiness').html(`
+        <div>
+          <span class="intro-title">Average Happiness</span> 
         </div>
-        <div class="extra-info" id="happiness-extras">
+        <div>${avg}/10</div>
+      `);
+    } else {
+      $('#happiness').html(`
+        <div>
+          <span class="intro-title">Average Happiness</span> 
         </div>
-      </div>
+        <div>${avg}/10</div>
       `);
       scoreAndCat.forEach((val) => {
-        $('#happiness-extras').append(`<span>${val}</span>`);
-        console.log(val);
+        $('#happiness').append(`
+          <div class="happy-score">
+            <span>${val}</span>
+          </div>
+        `);
       });
-      (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
-    };
-    //If average is less than 5, display sad icon instead of happy.
-    (avg >= 5) ? happyDisplay(happyImg) : happyDisplay(sadImg);
+    }
+
+    if (avg >= 5) {
+      iconDisplay(happyImg);
+    }
+    else {
+      iconDisplay(sadImg);
+    }
   };
 
   let locationImageDisplay = (data) => {
@@ -205,21 +258,20 @@
       selectBox += `<option class="industry-option" value="$${salary}">${val.job.title}</option>`;
     });
 
-    let htmlString = `<div class="colored-tile">
-                         <span class="intro-title"> Average Salaries (by Industry)</span>
-                      </div>
-      <div id="salary-img" class="section">
-        <div class="info-card">
-          <label for="industry-dropdown" id="dropdown-label">Industry</label>
-          <select id="job-dropdown" name="industry-dropdown">
-            ${selectBox}
-          </select>
-          <div>
-            <span id="salary-median"></span>
-          </div>
+    let htmlString = `
+      <div class="intro-title">
+         <span> Average Salaries (by Industry)</span>
+      </div>
+      <div>
+        <label for="industry-dropdown" id="dropdown-label">Industry</label>
+        <select id="job-dropdown" name="industry-dropdown">
+          ${selectBox}
+        </select>
+        <div>
+          <span id="salary-median"></span>
         </div>
       </div>`;
-      cardContainer.append(htmlString);
+      $('#salary').append(htmlString);
 
     //Add Click functionality to change salary that appears based on selection.
     $('#job-dropdown').on('change', function() {
@@ -383,145 +435,187 @@
         cultureCatAndCnt.push(cultureCatArray[i] + ": " + cultureCntArray[i]);
       }
 
-    cardContainer.append(`
-      <div class="colored-tile">
-        <span class="intro-title">Apartment Rentals</span>
+    $('#apartment').html(`
+      <div class="intro-title">
+        <span>Apartment Rentals</span>
       </div>
-      <div id="apartment-img" class="section">
-        <div class="info-card">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
-          <span>Large Apartment: $${lgApt}</span>
-          <span>Medium Apartment: $${medApt}</span>
-          <span>Small Apartment: $${smApt}</span>
-        </div>
+      <div>
+        <span>Large Apartment: $${lgApt}</span>
+        <span>Medium Apartment: $${medApt}</span>
+        <span>Small Apartment: $${smApt}</span>
       </div>
     `);
-    cardContainer.append(`
-      <div class="colored-tile">
-        <spanclass="intro-title">Average Cost of Living</span>
+
+    if(user == "") {
+      $('#cost-of-living').html(`
+      <div class="intro-title">
+        <span>Average Cost of Living</span>
       </div>
-      <div id="living-cost-img" class="section">
-        <div class="info-card">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
+      <div>
+        <span>Daily Average: ${dailyliving}</span>
+        <span>Monthly Average: ${monthlyLiving}</span>
+      </div>
+      `);
+    } else {
+      $('#cost-of-living').html(`
+        <div class="intro-title">
+          <span>Average Cost of Living</span>
+        </div>
+        <div>
           <span>Daily Average: ${dailyliving}</span>
           <span>Monthly Average: ${monthlyLiving}</span>
         </div>
-        <div class="extra-info">
-          <div id="monthly-average" class="interior-card">Monthly Average: 
-            <span>Fitness Club Membership - $${fitnessCost}</span>
+        <div class="extra-info-container">
+          <div id="monthly-average">Monthly Average:
+            <span>Fitness Club Membership - $${fitnessCost}
+              <img class="info-card-img" src="${fitnessImg}" alt="fitness">$${fitnessCost}
+            </span>
             <span>Public Transportation - $${pubTransCost}</span>
             <span>Medium Apartment - $${medApt}</span>
             <span>32 Beers - $${(beerCost * 32)}</span>
             <span>2 Movies - $${(cinemaCost * 2)}</span>
             <span>Coffee and Lunch (every other day) - $${((coffeeCost + mealCost) * 15)}</span>
           </div>
-          <img class="info-card-img" src="${coffeeImg}" alt="coffee">$${coffeeCost}
-          <img class="info-card-img" src="${fitnessImg}" alt="fitness">$${fitnessCost}
-          <img class="info-card-img" src="${mealImg}" alt="meal">$${mealCost}
-          <img class="info-card-img" src="${cinemaImg}" alt="cinema"><span>$${cinemaCost}</span>
+          <div id="daily-average">Daily Average:
+            <span>Cost of Lunch - $${mealCost}
+              <img class="info-card-img" src="${mealImg}" alt="meal">
+            </span>
+            <span>Daily Public Transportation - $${(pubTransCost / 30)}
+              <img class="info-card-img" src="${transImg}" alt="cinema">
+            </span>
+            <span>Coffee - $${coffeeCost}
+              <img class="info-card-img" src="${coffeeImg}" alt="coffee">
+            </span>
+          </div>
         </div>
+      `);
+    }
+
+    if(user == "") {
+      $('#startups').html(`
+      <div class="intro-title">
+        <span>Startups</span>
       </div>
-    `);
-    cardContainer.append(`
-      <div class="colored-tile">
-        <span class="intro-title">Startups</span>
-      </div>
-      <div id="startup-img" class="section">
-        <div class="info-card">
-          <img class="info-card-img" src="${startupImg}" alt="coffee">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
+        <div>
           <span>Average Startup Score: ${avgStartupScore.toFixed(1)}/10</span>
           <span>Average Startup Increase Score: ${avgStartupIncrease}/10</span>
           <span>Startup Climate Investors: ${investors}</span>
           <span>WorkFrom.Co Co-Working Spaces: ${workFromCoNum}</span>
         </div>
-        <div class="extra-info">
-          <span>Co-Working Spaces Score: ${coWorkScore}/10</span>
-          <span>Startup Events Score: ${eventsScore}/10</span>
-          <span>Meetups Score: ${meetupScore}/10</span>
-          <span>Startup Events This Month: ${eventsCount}</span>
-          <span>Startup Events The Last 12 Months: ${eventsLstYr}</span>
-          <span>FunderBeam Total Startups: ${fundrBmStrtups}</span>
-          <span>Total Upcoming Meetups: ${meetupEvents}</span>
-          <span>Meetups Groups: ${meetupGroups}</span>
+        `)
+    } else {
+      $('#startups').html(`
+        <div class="intro-title">
+          <span>Startups</span>
         </div>
-      </div>
-    `);
-    cardContainer.append(`
-      <div class="colored-tile">
+        <div>
+          <span>Average Startup Score: ${avgStartupScore.toFixed(1)}/10</span>
+          <span>Average Startup Increase Score: ${avgStartupIncrease}/10</span>
+          <span>Startup Climate Investors: ${investors}</span>
+          <span>WorkFrom.Co Co-Working Spaces: ${workFromCoNum}</span>
+        </div>
+        <div class="extra-info-container">
+          <div>
+            <span>Co-Working Spaces Score: ${coWorkScore}/10</span>
+            <span>Startup Events Score: ${eventsScore}/10</span>
+            <span>Meetups Score: ${meetupScore}/10</span>
+            <span>Startup Events This Month: ${eventsCount}</span>
+            <span>Startup Events The Last 12 Months: ${eventsLstYr}</span>
+            <span>FunderBeam Total Startups: ${fundrBmStrtups}</span>
+            <span>Total Upcoming Meetups: ${meetupEvents}</span>
+            <span>Meetups Groups: ${meetupGroups}</span>
+          </div>
+        </div>
+      `);
+    }
+
+    //================CULTURE================
+
+    if(user == "") {
+      $('#culture').html(`
+      <div class="intro-title">
         <span>Culture</span>
       </div>
-      <div id="culture-img" class="section">
-        <div class="info-card">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
-          <span class="intro-title">Culture Score</span>
-          <span>${cultAvg}/10</span>
-        </div>
-        <div class="extra-info" id="culture-extras">
-        </div>
+      <div class="info-card">
+        <span>${cultAvg}/10</span>
       </div>
     `);
-    cultureCatAndCnt.forEach((val) => {
-      $('#culture-extras').append(`
-        <span>${val}</span>
-      `);
-    });
-    cardContainer.append(`
-      <div class="colored-tile">
-        <span class="intro-title">Weather</span>
-      </div>
-      <div id="weather-img" class="section">
-        <div class="info-card">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
-          <span>Current Temp: ${currentTemp}</span>
+    } else {
+      $('#culture').html(`
+        <div class="intro-title">
+          <span>Culture</span>
         </div>
-        <div class="extra-info">
+        <div class="info-card">
+          <span>${cultAvg}/10</span>
+        </div>
+        <div id="culture-extras"></div>
+      `);
+      cultureCatAndCnt.forEach((val) => {
+        $('#culture-extras').append(`
+        <span>${val}</span>
+        `);
+      });
+    }
+
+    if(user == "") {
+      $('#weather').html(`
+      <div class="intro-title">
+        <span>Weather</span>
+      </div>
+      <div class="info-card">
+        <span>Current Temp: ${currentTemp}${degreeSymbol}</span>
+      </div>
+    `);
+    } else {
+      $('#weather').html(`
+        <div class="intro-title">
+          <span>Weather</span>
+        </div>
+        <div class="info-card">
+          <span>Current Temp: ${currentTemp}${degreeSymbol}</span>
           <span id="averages-title">Averages</span>
           <span>Day Length: ${dayLength}</span>
           <span>High/Low Temps: ${avgHighTemp}/${avgLowTemp}</span>
           <span>Rainy Days/Year: ${avgRainy}</span>
           <span>Climate Type: ${climate}</span>
         </div>
-      </div>
-    `);
-    cardContainer.append(`
-      <div class="colored-tile">
-        <span class="intro-title">Cleanliness</span>
-      </div>
-      <div id="clean-img" class="section">
+      `);
+    }
+
+    if(user == "") {
+      $('#cleanliness').html(`
+        <div class="intro-title">
+          <span>Cleanliness</span>
+        </div>
         <div class="info-card">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
           <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
         </div>
-        <div class="extra-info">
+      `);
+    } else {
+      $('#cleanliness').html(`
+        <div class="intro-title">
+          <span>Cleanliness</span>
+        </div>
+        <div class="info-card">
+          <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
+        </div>
+        <div>
           <span>Pollution Score: ${pollutionScore}</span>
           <span>Cleanliness Score: ${cleanScore}</span>
           <span>Water Quality Score: ${waterScore}</span>
           <span>Urban Greenery Score: ${greeneryScore}</span>
         </div>
-      </div>
-    `);
+      `);
+    }
 
     if(business == 'true') {
-      cardContainer.append(`
-      <div class="colored-tile">
+      $('#business-div').html(`
+      <div class="intro-title">
         <span>Business</span>
       </div>
       <div id="business-img" class="section">
         <div class="info-card">
-          <span class="intro-title">Business</span>
+          <img class="info-card-img" src="${businessImg}" alt="icon">
           <span>Business Freedom: ${businessFreedom}%</span>
           <span>Overall Business Freedom Score: ${(busiFreedomScore.toFixed(1) * 10)}/10</span>
           <span>Freedom From Corruption: ${corruptionFreedom}%</span>
@@ -532,118 +626,100 @@
         </div>
       </div>
     `);
-    }
+    } else $('#business-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
+
     if(healthCare == 'true') {
-      cardContainer.append(`
-      <div class="colored-tile">
+      $('#healthcare-div').html(`
+      <div class="intro-title">
         <span>Health Care</span>
       </div>
-      <div id="business-img" class="section">
-        <div class="info-card">
-          <span class="intro-title">Health Care</span>
-          <span>Overall Health Quality Score: ${(healthQualScore.toFixed(1) * 10)}/10</span>
-          <span>Cost of Health Care Score: ${(healthCostScore.toFixed(1) * 10)}/10</span>
-          <span>Average Life Expectancy (Years): ${lifeExpect.toFixed(0)}</span>
-          <span>Life Expectancy Score: ${(lifeExpectScore.toFixed(1) * 10)}/10</span>
-        </div>
+      <div>
+        <span>Overall Health Quality Score: ${(healthQualScore.toFixed(1) * 10)}/10</span>
+        <span>Cost of Health Care Score: ${(healthCostScore.toFixed(1) * 10)}/10</span>
+        <span>Average Life Expectancy (Years): ${lifeExpect.toFixed(0)}</span>
+        <span>Life Expectancy Score: ${(lifeExpectScore.toFixed(1) * 10)}/10</span>
       </div>
     `);
-    }
+    } else $('#healthcare-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
+
     if(jobMarket == 'true') {
-      cardContainer.append(`
-      <div class="colored-tile">
+      $('#jobmarket-div').html(`
+      <div class="intro-title">
         <span>Job Market</span>
       </div>
-      <div id="business-img" class="section">
-        <div class="info-card">
-          <span class="intro-title">Job Stats</span>
-          <span>${maxSsToEmpLabel}: $${maxSsToEmployee}</span>
-          <span>${empSsTaxRateLabel}: ${employeeSsTaxRate}%</span>
-          <span>${availStartJobLabel}: ${availStartupJobs}</span>
-          <span>Available Startup Jobs Score${(availStartJobScore * 10)}/10</span>
-          <span>${avgStartSalLabel}: $${avgStartupSalary}</span>
-          <span>Startup Salary Score: ${(startupSalaryScore * 10)}/10</span>
-        </div>
+      <div class="info-card">
+        <img class="info-card-img" src="${jobMarketImg}" alt="icon">
+        <span>${maxSsToEmpLabel}: $${maxSsToEmployee}</span>
+        <span>${empSsTaxRateLabel}: ${employeeSsTaxRate}%</span>
+        <span>${availStartJobLabel}: ${availStartupJobs}</span>
+        <span>Available Startup Jobs Score${(availStartJobScore * 10)}/10</span>
+        <span>${avgStartSalLabel}: $${avgStartupSalary}</span>
+        <span>Startup Salary Score: ${(startupSalaryScore * 10)}/10</span>
       </div>
     `);
-    }
+    } else $('#jobmarket-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
+
     if(tolerance == 'true') {
-      cardContainer.append(`
-      <div class="colored-tile">
+      $('#tolerance-div').html(`
+      <div class="intro-title">
         <span>Minority/LGBT Tolerance</span>
       </div>
-      <div id="business-img" class="section">
-        <div class="info-card">
-          <span class="intro-title">Tolerance</span>
-          <span>${adoptRightsLabel}: ${adoptRights}</span>
-          <span>${discrimLabel}: ${discrimination}</span>
-          <span>${homoRightsLabel}: ${homoRights}</span>
-          <span>${marryRightsLabel}: ${marriageRights}</span>
-          <span>${equalIndexLabel}: ${equalityIndex.toFixed(1)}</span>
-          <span>${(equalIndexScore.toFixed(1) * 10)}/10</span>
-        </div>
+      <div class="info-card">
+        <img class="info-card-img" src="${toleranceImg}" alt="icon">
+        <span>${adoptRightsLabel}: ${adoptRights}</span>
+        <span>${discrimLabel}: ${discrimination}</span>
+        <span>${homoRightsLabel}: ${homoRights}</span>
+        <span>${marryRightsLabel}: ${marriageRights}</span>
+        <span>${equalIndexLabel}: ${equalityIndex.toFixed(1)}</span>
+        <span>Equality Index Score: ${(equalIndexScore.toFixed(1) * 10)}/10</span>
       </div>
     `);
-    }
+    } else $('#tolerance-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
+
     if(outdoors == 'true') {
-      cardContainer.append(`
-      <div class="colored-tile">
+      $('#outdoors-div').html(`
+      <div class="intro-title">
         <span>Outdoors</span>
       </div>
-      <div id="business-img" class="section">
-        <div class="info-card">
-          <span class="intro-title">Outdoors</span>
-          <span>Elevation: ${elevation}</span>
-          <span>Hills/Mountains Average: ${(hillyScore.toFixed(1)) * 10}/10</span>
-        </div>
+      <div class="info-card">
+        <img class="info-card-img" src="${outdoorsImg}" alt="icon">
+        <span class="intro-title">Outdoors</span>
+        <span>Elevation: ${elevation}</span>
+        <span>Hills/Mountains Average: ${(hillyScore.toFixed(1)) * 10} (Higher is more hilly)</span>
       </div>
     `);
-    }
+    } else $('#outdoors-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
 
-    // console.log(data.categories);
     $('.expand-btn').on('click', function() {
       console.log('you clicked the expand button');
       $(this).parent().next().slideToggle(300);
     });
     (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
+
+    $('.icon').each(function (i, icon) {
+      $(icon).click(function () {
+        console.log('icon clicked');
+        console.log(i);
+        console.log(icon);
+        console.log($(info[i]));
+        $('.shown').toggleClass('hidden').toggleClass('shown');
+        $(info[i]).toggleClass('hidden').toggleClass('shown');
+      });
+    });
   };
-
-  //=================SIDE NAVIGATION FUNCTIONS==================
-  //TODO Change the scroll to either - scrollTop: "-viewport height" -or- scroll to the next anchor.
-  $('.to-top-btn').click(function() {
-    $('html, body').animate({scrollTop: "0"});
-  });
-
-  $('.to-btm-btn').click(function() {
-    $('html, body').animate({scrollTop: ($(document).height() - $(window).height() - $(window).scrollTop())})
-  });
-
-  //Show on Scroll
-  $(window).scroll(function() {
-    if ($(this).scrollTop() > 600) {
-      $('.to-top-btn').addClass('showme');
-      $('.to-btm-btn').addClass('showme');
-    } else {
-      $('.to-top-btn').removeClass('showme');
-      $('.to-btm-btn').removeClass('showme');
-    }
-  });
 
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
   //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
-  const divClear = () => {
-    cardContainer.html('');
-  };
 
   goButton.on('click', () => {
-    divClear();
+    $('.shown').toggleClass('hidden').toggleClass('shown');
     geoCoder();
   });
 
   $(document).keyup((e) => {
     if (e.keyCode === 13) {
-        divClear();
-        geoCoder();
+      $('.shown').toggleClass('hidden').toggleClass('shown');
+      geoCoder();
     }
   });
 })();

@@ -59,6 +59,9 @@ body {
 }
 
 #search-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
     color: #e9d8a8;
 }
 
@@ -143,16 +146,49 @@ a:visited {
     border-radius: 3%;
 }
 
-/*TODO Change these to have box shading on top and bottom*/
-.colored-tile {
-    background-image: url('../img/congruent_pentagon.png');
-    box-shadow: 0 4px 8px 0 #563444;
-    color: #ffffff;
-    text-align: center;
-    font-size: 3em;
-    height: 25vh;
-    width: 100vw;
+#icon-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
+
+#icon-container {
+  background-color: #515151;
+  position: relative;
+  width: 20em;
+  height: 20em;
+  padding: 2.8em;
+  /*2.8em = 2em*1.4 (2em = half the width of a link with img, 1.4 = sqrt(2))*/
+  border: dashed 1px;
+  border-radius: 50%;
+  margin: 1.75em auto 0;
+}
+#icon-container a {
+  display: block;
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 4em; height: 4em;
+  margin: -2em;
+}
+
+/*ICON PLACEMENT AROUND AXIS*/
+#icon-container img {
+  background: rgba(44, 44, 44, 0.8);
+  border-radius: 50%;
+  display: block; width: 100%;
+}
+#deg0 { transform: translate(10em); } /* 12em = half the width of the wrapper */
+#deg27692 { transform: rotate(27.692deg) translate(10em) rotate(-27.692deg); }
+#deg55384 { transform: rotate(55.384deg) translate(10em) rotate(-55.384deg); }
+#deg83076 { transform: rotate(83.076deg) translate(10em) rotate(-83.076deg); }
+#deg11076 { transform: rotate(110.76deg) translate(10em) rotate(-110.76deg); }
+#deg13846 { transform: rotate(138.46deg) translate(10em) rotate(-138.46deg); }
+#deg16615 { transform: rotate(166.15deg) translate(10em) rotate(-166.15deg); }
+#deg19384 { transform: rotate(193.84deg) translate(10em) rotate(-193.84deg); }
+#deg22153 { transform: rotate(221.53deg) translate(10em) rotate(-221.53deg); }
+#deg24923 { transform: rotate(249.23deg) translate(10em) rotate(-249.23deg); }
+#deg276-92 { transform: rotate(276.92deg) translate(10em) rotate(-276.92deg); }
+#deg30461 { transform: rotate(304.61deg) translate(10em) rotate(-304.61deg); }
 
 .intro-title {
   padding: 5px;
@@ -162,22 +198,7 @@ a:visited {
   transform: translateY(-50%);
 }
 
-.section {
-  height: 100vh;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex-direction: column;
-  padding: 2vw;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  font-size: 4vw;
-}
-
-/*==================INFO CARDS CSS==================*/
+/*==================ICONS==================*/
 #info-card-container {
     justify-content: center;
     width: 100%;
@@ -185,34 +206,29 @@ a:visited {
     flex-direction: column;
 }
 
-.expand-btn {
-    position: absolute;
-    top: 130px;
-    right: 5px;
-    width: 10vw;
-    height: 10vh;
-    margin-left: 20vw;
-    margin-top: -16vh;
+.info .extra-info{
+  height: 80%;
+  width: 80%;
 }
 
-/*TODO Make this change size dynamically with vh and vw*/
-.expand-img {
-    height: 32px;
-    width: 32px;
+.icon {
+  height: 32px;
+  width: 32px;
 }
 
 .info-card {
-    border-radius: 8px;
-    color: #201419;
-    position: relative;
-    box-shadow: 0 4px 8px 0 #19211f;
-    margin: 5px auto;
-    margin-bottom: 0;
-    height: 400px;
-    width: 650px;
-    font-size: 1em;
-    text-align: center;
-    background-color: #bffff0;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 8px;
+  color: #201419;
+  position: relative;
+  box-shadow: 0 4px 8px 0 #19211f;
+  margin: 5px auto;
+  margin-bottom: 0;
+  width: 90%;
+  font-size: 1em;
+  text-align: center;
+  background-color: #bffff0;
 }
 
 /*TODO Change the position of this element to be always in the top left of .info-card*/
@@ -227,6 +243,10 @@ a:visited {
 
 .hidden {
     display: none;
+}
+
+.shown {
+  /*display: inherit;*/
 }
 
 #job-dropdown {
@@ -496,57 +516,61 @@ i {
     margin-left: 1%;
 }
 
-#salary-img div{
-    padding-top: 7%;
-}
 
 #job-dropdown {
     width: 95%;
     font-size: 0.5em;
 }
 
-#happiness-img div{
-    padding-top: 11%;
-    font-size: 2em;
-}
+/*#salary-img div{*/
+    /*padding-top: 7%;*/
+/*}*/
 
-#happiness-img div img{
-    position: absolute;
-    width: 15%;
-    height: 15%;
-    margin-left: 15%;
-    margin-top: -15%;
-    margin-bottom: 0;
-}
+/*#happiness-img div{*/
+    /*padding-top: 11%;*/
+    /*font-size: 2em;*/
+/*}*/
 
-#apartment-img div{
-    padding-top: 8%;
-}
+/*#happiness-img div img{*/
+    /*position: absolute;*/
+    /*width: 15%;*/
+    /*height: 15%;*/
+    /*margin-left: 15%;*/
+    /*margin-top: -15%;*/
+    /*margin-bottom: 0;*/
+/*}*/
 
-#living-cost-img div{
-    padding-top: 11%;
-}
+/*#apartment-img div{*/
+    /*padding-top: 8%;*/
+/*}*/
 
-#startup-img div{
-    padding-top: 9%;
-    font-size: 0.7em;
-}
+/*#living-cost-img div{*/
+    /*padding-top: 11%;*/
+/*}*/
 
-#startup-img div img{
-    position: absolute;
-}
+/*#startup-img div{*/
+    /*padding-top: 9%;*/
+    /*font-size: 0.7em;*/
+/*}*/
 
-#culture-img div{
-    padding-top: 9%;
-    font-size: 1.5em;
-}
+/*#startup-img div img{*/
+    /*position: absolute;*/
+/*}*/
 
-#weather-img div{
-    padding-top: 13%;
-    font-size: 1.4em;
-}
+/*#culture-img div{*/
+    /*padding-top: 9%;*/
+    /*font-size: 1.5em;*/
+/*}*/
 
-#clean-img div{
-    padding-top: 12%;
-}
+/*#weather-img div{*/
+    /*padding-top: 13%;*/
+    /*font-size: 1.4em;*/
+/*}*/
 
+/*#clean-img div{*/
+    /*padding-top: 12%;*/
+/*}*/
+
+@media (min-width: 768px) {
+
+}
