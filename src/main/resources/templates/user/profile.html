@@ -37,8 +37,6 @@
     </div>
     <div id="space-line"></div>
     <div id="user-options">
-      <span th:value="${user.configuration}"></span>
-      <span th:value="${user}"></span>
       <div>
       <h4 class="label-update ">Additional Search Options</h4>
       </div>
@@ -51,7 +49,7 @@
           <input id="healthcare-info" type="checkbox" th:field = "*{healthcare}" />
         </label>
           <label class="left-margin" for="job-market-info">Job Market
-            <input id="job-market-info" type="checkbox" th:field="*{jobMarket}" />
+            <input id="job-market-info" type="checkbox" th:field="*{jobmarket}" />
           </label>
           <label  class="left-margin" for="tolerance-info">Tolerance
             <input id="tolerance-info" type="checkbox" th:field = "*{tolerance}" />

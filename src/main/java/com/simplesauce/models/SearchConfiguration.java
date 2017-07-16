@@ -18,16 +18,13 @@ public class SearchConfiguration {
   private boolean healthcare = false;
 
   @Column
-  private boolean jobMarket = false;
+  private boolean jobmarket = false;
 
   @Column
   private boolean tolerance = false;
 
   @Column
   private boolean outdoors = false;
-
-  //@OneToOne
-  //private User user;
 
   public long getId() {
     return id;
@@ -56,12 +53,12 @@ public class SearchConfiguration {
     this.healthcare = healthcare;
   }
 
-  public boolean isJobMarket() {
-    return jobMarket;
+  public boolean isJobmarket() {
+    return jobmarket;
   }
 
-  public void setJobMarket(boolean jobMarket) {
-    this.jobMarket = jobMarket;
+  public void setJobmarket(boolean jobmarket) {
+    this.jobmarket = jobmarket;
   }
 
   public boolean isTolerance() {
@@ -80,11 +77,4 @@ public class SearchConfiguration {
     this.outdoors = outdoors;
   }
 
-  /*public User getUser() {
-    return user;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
-  }*/
 }
