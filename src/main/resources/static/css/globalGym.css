@@ -284,10 +284,6 @@ a:visited {
     background-image: url('../img/windmills.png');
 }
 
-footer {
-    margin: auto;
-}
-
 #moveAllFlds{
     border-color: white;
     border: solid;
@@ -546,3 +542,13 @@ i {
     padding-top: 12%;
 }
 
+.footer {
+    display: block;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+footer {
+    width: 18%;
+    margin: 1% auto;
+}

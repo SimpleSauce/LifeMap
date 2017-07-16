@@ -1,25 +1,48 @@
 body {
-  background: url('../img/asanoha-400px.png') repeat;
-  font-family: 'Rubik', sans-serif;
+    background: url('../img/asanoha-400px.png') repeat;
+    font-family: 'Rubik', sans-serif;
 }
 
-#usernameLbl, #passwordLbl{
-  font-family: 'Pacifico', cursive;
-  font-size: 15px;
+#usernameLbl, #passwordLbl, #emailLbl {
+    font-size: 1.5em;
+    margin-left: 25%;
 }
 
-#loginHeader{
-  display: inline;
-  background-color: rgba(81, 81, 81, 0.67);
-  border-radius: 50px;
-  color: aquamarine;
-  font-family: 'Rubik', sans-serif;
-  font-size: 5em;
-  padding: 10px;
+#loginHeader {
+    display: inline;
+    background-color: rgba(81, 81, 81, 0.67);
+    border-radius: 50px;
+    color: aquamarine;
+    font-family: 'Rubik', sans-serif;
+    font-size: 5em;
+    padding: 10px;
 }
 
-#username, #password{
-  border-radius: 2px;
-  background-color: #515151;
-  color: white;
+#username, #password {
+    border-radius: 8px;
+    background-color: #515151;
+    color: #00B4FF;
+    margin: 0 auto;
+    width: 50%;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+#email {
+    border-radius: 8px;
+    background-color: #00B4FF;
+    color: #515151;
+    margin: 0 auto;
+    width: 50%;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+#btnSubmit {
+    display: block;
+    margin: 1% auto;
+}
+
+#regHead {
+    margin: 1% auto;
 }

@@ -1,49 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments :: head(Register)" />
+<head th:replace="fragments :: head(Register)"/>
 <body>
-<nav th:replace="fragments :: navbar" />
-<form id="formFlds" class="moveFldsDiv" th:action="@{/user/register}" th:method="POST" th:object="${user}">
+<nav th:replace="fragments :: navbar"/>
 
-    <div class="form-group group-to-right">
-        <label id="usernameLbl" for="username">Username</label>
-        <!--<input id="username" class="form-control" th:field="*{username}" />-->
-        <input id="username" class="form-control" th:field="*{username}" />
-        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" ></p>
-    </div>
-
-    <div class="form-group group-to-right">
-        <label id="emailLbl" for="email">Email</label>
-        <!--<input id="email" class="form-control" th:field="*{email}" />-->
-        <input id="email" class="form-control" th:field="*{email}" />
-        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></p>
-    </div>
-
-    <div class="form-group group-to-right">
-        <label id="passwordLbl" for="password">Password</label>
-        <!--<input id="password" type="password" class="form-control" th:field="*{password}" />-->
-        <input id="password" type="password" class="form-control" th:field="*{password}" />
-        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" ></p>
-    </div>
-
-    <br/>
-    <input class="btn btn-lg btn-primary" id="btnSubmit" type="submit" />
-
-    <!--<div id="RegisterErrorDiv">-->
-        <!--<div class="error" th:if="${param.error}">-->
-            <!--Invalid Username and Password.-->
-        <!--</div>-->
-        <!--&lt;!&ndash;<div class="error" th:if="${param.logout}">&ndash;&gt;-->
-        <!--&lt;!&ndash;You have been logged out.&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--</div>-->
-
-</form>
-
-
-
-<footer th:replace="fragments :: footer" />
-
-<script th:replace="fragments :: scripts" />
+<div class="container-fluid">
+    <form id="formFlds" class="moveFldsDiv" th:action="@{/user/register}" th:method="POST" th:object="${user}">
+        <p id="regHead">Register Here</p>
+        <div class="form-group group-to-right">
+            <label id="usernameLbl" for="username">Username</label>
+            <!--<input id="username" class="form-control" th:field="*{username}" />-->
+            <input id="username" class="form-control" autofocus="true" th:field="*{username}"/>
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+        </div>
+        <div class="form-group group-to-right">
+            <label id="emailLbl" for="email">Email</label>
+            <!--<input id="email" class="form-control" th:field="*{email}" />-->
+            <input id="email" class="form-control" th:field="*{email}"/>
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+        </div>
+        <div class="form-group group-to-right">
+            <label id="passwordLbl" for="password">Password</label>
+            <!--<input id="password" type="password" class="form-control" th:field="*{password}" />-->
+            <input id="password" type="password" class="form-control" th:field="*{password}"/>
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+        </div>
+        <input class="btn btn-lg btn-primary" id="btnSubmit" type="submit"/>
+    </form>
+    <footer th:replace="fragments :: footer"/>
+</div>
+<script th:replace="fragments :: scripts"/>
 </body>
 </html>
