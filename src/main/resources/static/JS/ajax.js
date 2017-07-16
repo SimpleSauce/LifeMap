@@ -1,7 +1,6 @@
 "use strict";
 
 (() => {
-
   //Variable Declarations================================
   const geoCodeIt = new google.maps.Geocoder;
   const degreeSymbol = '\u2109';
@@ -14,7 +13,6 @@
   const fitnessImg = './img/007-weightlifting.svg';
   const happyImg = './img/004-happy.svg';
   const sadImg = './img/003-arrogant.svg';
-  const expandImg = './img/expand-btn.svg';
   const startupImg = './img/005-team.svg';
   const cinemaImg = './img/002-theater.svg';
   const weatherImg = './img/010-cloud.svg';
@@ -35,6 +33,7 @@
   let locationDisplay = $('#location-info');
   let locationHeader = $('#location-name');
   let avg;
+  let info = $('.info');
 
   const sanAntonioLocation = {lat: 29, lng: -98};
   let markersArray = [];
@@ -43,9 +42,6 @@
     zoom: 7
   });
 
-  //TODO implement anchor tags
-
-  console.log(business);
   //========================GOOGLE API METHODS========================
   let autocomplete = new google.maps.places.Autocomplete(document.getElementById('city-input'));
   autocomplete.bindTo('bounds', map);
@@ -151,7 +147,7 @@
   };
 
   const iconDisplay = (img) => {
-    iconContainer.append(`
+    iconContainer.html(`
       <a id='center' class="icon" >
         <img id="happiness-img" src="${img}" alt="icon">
       </a>
@@ -174,7 +170,7 @@
         <img id="clean-img" src="${cleanlinessImg}" alt="icon">
       </a>
       <a id='deg16615' class="icon" >
-        <img id="salary-img" class="icon" src="${salaryImg}" alt="icon">
+        <img id="salary-img" src="${salaryImg}" alt="icon">
       </a>
       <a id='deg19384' class="icon" >
         <img src="${businessImg}" alt="icon">
@@ -240,23 +236,10 @@
 
     if (avg >= 5) {
       iconDisplay(happyImg);
-      // divChanger(happyImg, happyDiv);
     }
     else {
       iconDisplay(sadImg);
-      // divChanger(sadImg, $('#happiness'));
     }
-
-    let info = $('.info');
-
-    //Assign each icon a corresponding div to respond to.
-    $('.icon').each(function (i, icon) {
-      $(icon).click(function () {
-        console.log($(info));
-        $('.shown').toggleClass('hidden').toggleClass('shown');
-        $(info[i]).toggleClass('hidden').toggleClass('shown');
-      });
-    });
   };
 
   let locationImageDisplay = (data) => {
@@ -472,7 +455,7 @@
         <span>Daily Average: ${dailyliving}</span>
         <span>Monthly Average: ${monthlyLiving}</span>
       </div>
-      `)
+      `);
     } else {
       $('#cost-of-living').html(`
         <div class="intro-title">
@@ -483,7 +466,7 @@
           <span>Monthly Average: ${monthlyLiving}</span>
         </div>
         <div class="extra-info-container">
-          <div id="monthly-average" class="extra-info">Monthly Average:
+          <div id="monthly-average">Monthly Average:
             <span>Fitness Club Membership - $${fitnessCost}
               <img class="info-card-img" src="${fitnessImg}" alt="fitness">$${fitnessCost}
             </span>
@@ -493,7 +476,7 @@
             <span>2 Movies - $${(cinemaCost * 2)}</span>
             <span>Coffee and Lunch (every other day) - $${((coffeeCost + mealCost) * 15)}</span>
           </div>
-          <div id="daily-average" class="extra-info">Daily Average:
+          <div id="daily-average">Daily Average:
             <span>Cost of Lunch - $${mealCost}
               <img class="info-card-img" src="${mealImg}" alt="meal">
             </span>
@@ -532,7 +515,7 @@
           <span>WorkFrom.Co Co-Working Spaces: ${workFromCoNum}</span>
         </div>
         <div class="extra-info-container">
-          <div class="extra-info">
+          <div>
             <span>Co-Working Spaces Score: ${coWorkScore}/10</span>
             <span>Startup Events Score: ${eventsScore}/10</span>
             <span>Meetups Score: ${meetupScore}/10</span>
@@ -565,9 +548,10 @@
         <div class="info-card">
           <span>${cultAvg}/10</span>
         </div>
+        <div id="culture-extras"></div>
       `);
       cultureCatAndCnt.forEach((val) => {
-        $('#culture').append(`
+        $('#culture-extras').append(`
         <span>${val}</span>
         `);
       });
@@ -579,7 +563,7 @@
         <span>Weather</span>
       </div>
       <div class="info-card">
-        <span>Current Temp: ${currentTemp}</span>
+        <span>Current Temp: ${currentTemp}${degreeSymbol}</span>
       </div>
     `);
     } else {
@@ -588,26 +572,24 @@
           <span>Weather</span>
         </div>
         <div class="info-card">
-          <span>Current Temp: ${currentTemp}</span>
-        </div>
-        <div class="extra-info">
+          <span>Current Temp: ${currentTemp}${degreeSymbol}</span>
           <span id="averages-title">Averages</span>
           <span>Day Length: ${dayLength}</span>
           <span>High/Low Temps: ${avgHighTemp}/${avgLowTemp}</span>
           <span>Rainy Days/Year: ${avgRainy}</span>
           <span>Climate Type: ${climate}</span>
         </div>
-      `)
+      `);
     }
 
     if(user == "") {
       $('#cleanliness').html(`
-      <div class="intro-title">
-        <span>Cleanliness</span>
-      </div>
-      <div class="info-card">
-        <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
-      </div>
+        <div class="intro-title">
+          <span>Cleanliness</span>
+        </div>
+        <div class="info-card">
+          <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
+        </div>
       `);
     } else {
       $('#cleanliness').html(`
@@ -617,7 +599,7 @@
         <div class="info-card">
           <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
         </div>
-        <div class="extra-info">
+        <div>
           <span>Pollution Score: ${pollutionScore}</span>
           <span>Cleanliness Score: ${cleanScore}</span>
           <span>Water Quality Score: ${waterScore}</span>
@@ -625,8 +607,6 @@
         </div>
       `);
     }
-
-
 
     if(business == 'true') {
       $('#business-div').html(`
@@ -636,7 +616,6 @@
       <div id="business-img" class="section">
         <div class="info-card">
           <img class="info-card-img" src="${businessImg}" alt="icon">
-          <span class="intro-title">Business</span>
           <span>Business Freedom: ${businessFreedom}%</span>
           <span>Overall Business Freedom Score: ${(busiFreedomScore.toFixed(1) * 10)}/10</span>
           <span>Freedom From Corruption: ${corruptionFreedom}%</span>
@@ -655,7 +634,6 @@
         <span>Health Care</span>
       </div>
       <div>
-        <span class="intro-title">Health Care</span>
         <span>Overall Health Quality Score: ${(healthQualScore.toFixed(1) * 10)}/10</span>
         <span>Cost of Health Care Score: ${(healthCostScore.toFixed(1) * 10)}/10</span>
         <span>Average Life Expectancy (Years): ${lifeExpect.toFixed(0)}</span>
@@ -664,7 +642,6 @@
     `);
     } else $('#healthcare-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
 
-
     if(jobMarket == 'true') {
       $('#jobmarket-div').html(`
       <div class="intro-title">
@@ -672,7 +649,6 @@
       </div>
       <div class="info-card">
         <img class="info-card-img" src="${jobMarketImg}" alt="icon">
-        <span class="intro-title">Job Stats</span>
         <span>${maxSsToEmpLabel}: $${maxSsToEmployee}</span>
         <span>${empSsTaxRateLabel}: ${employeeSsTaxRate}%</span>
         <span>${availStartJobLabel}: ${availStartupJobs}</span>
@@ -690,13 +666,12 @@
       </div>
       <div class="info-card">
         <img class="info-card-img" src="${toleranceImg}" alt="icon">
-        <span class="intro-title">Tolerance</span>
         <span>${adoptRightsLabel}: ${adoptRights}</span>
         <span>${discrimLabel}: ${discrimination}</span>
         <span>${homoRightsLabel}: ${homoRights}</span>
         <span>${marryRightsLabel}: ${marriageRights}</span>
         <span>${equalIndexLabel}: ${equalityIndex.toFixed(1)}</span>
-        <span>${(equalIndexScore.toFixed(1) * 10)}/10</span>
+        <span>Equality Index Score: ${(equalIndexScore.toFixed(1) * 10)}/10</span>
       </div>
     `);
     } else $('#tolerance-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
@@ -710,7 +685,7 @@
         <img class="info-card-img" src="${outdoorsImg}" alt="icon">
         <span class="intro-title">Outdoors</span>
         <span>Elevation: ${elevation}</span>
-        <span>Hills/Mountains Average: ${(hillyScore.toFixed(1)) * 10}/10 (Higher is more hilly)</span>
+        <span>Hills/Mountains Average: ${(hillyScore.toFixed(1)) * 10} (Higher is more hilly)</span>
       </div>
     `);
     } else $('#outdoors-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
@@ -720,17 +695,30 @@
       $(this).parent().next().slideToggle(300);
     });
     (user == "") ? console.log('theres no user!') : $('.expand-btn').removeClass('hidden');
+
+    $('.icon').each(function (i, icon) {
+      $(icon).click(function () {
+        console.log('icon clicked');
+        console.log(i);
+        console.log(icon);
+        console.log($(info[i]));
+        $('.shown').toggleClass('hidden').toggleClass('shown');
+        $(info[i]).toggleClass('hidden').toggleClass('shown');
+      });
+    });
   };
 
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
   //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
 
   goButton.on('click', () => {
+    $('.shown').toggleClass('hidden').toggleClass('shown');
     geoCoder();
   });
 
   $(document).keyup((e) => {
     if (e.keyCode === 13) {
+      $('.shown').toggleClass('hidden').toggleClass('shown');
       geoCoder();
     }
   });
