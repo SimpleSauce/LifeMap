@@ -40,7 +40,6 @@
   autocomplete.bindTo('bounds', map);
 
   //Takes input from the search bar and sends it to the getLocationInfo() method. Also re-centers the map onto the location specified.
-  //TODO Add ability to search by address, City, or City and State
   const geoCoder = () => {
     //TODO Make this look prettier and function better
     geoCodeIt.geocode({'address': cityInput.val()},
@@ -234,7 +233,12 @@
     console.log(currentTemp);
     //Overall Variables
     const cat = data.categories;
-    console.log(cat[17]);
+    console.log(cat[0]);
+    console.log(cat[1]);
+    console.log(cat[7]);
+    console.log(cat[10]);
+    console.log(cat[12]);
+    console.log(cat[14]);
 
     //Housing Variables
     let smApt = parseFloat(data.categories[8].data[2].currency_dollar_value.toFixed(0));
@@ -312,6 +316,53 @@
     let cleanScore = cat[15].data[1].float_value;
     let waterScore = cat[15].data[2].float_value;
     let greeneryScore = cat[15].data[3].float_value;
+
+    //Business Freedom variables
+    let businessFreedom = parseFloat(cat[0].data[0].float_value);
+    let busiFreedomScore = parseFloat(cat[0].data[1].float_value);
+    let corruptionFreedom = parseFloat(cat[0].data[2].float_value);
+    let corrFreedomScore = parseFloat(cat[0].data[3].float_value);
+    let lackLaborRestrict = parseFloat(cat[0].data[4].float_value);
+    let lackLaborRestScore = parseFloat(cat[0].data[5].float_value);
+    let businessOpenTime = parseFloat(cat[0].data[6].float_value);
+    let busiOpenTimeScore = parseFloat(cat[0].data[7].float_value);
+
+    //Health Care Variables
+    let healthCostScore = parseFloat(cat[7].data[0].float_value);
+    let lifeExpect = parseFloat(cat[7].data[1].float_value);
+    let lifeExpectScore = parseFloat(cat[7].data[2].float_value);
+    let healthQualScore = parseFloat(cat[7].data[3].float_value);
+
+    let population = parseFloat(cat[1].data[0].float_value);
+
+    //Job Market Variables
+    let maxSsToEmployee = parseFloat(cat[10].data[0].currency_dollar_value.toFixed(2));
+    let maxSsToEmpLabel = cat[10].data[0].label;
+    let employeeSsTaxRate = parseFloat(cat[10].data[2].percent_value.toFixed(1));
+    let empSsTaxRateLabel = cat[10].data[2].label;
+    let availStartupJobs = cat[10].data[3].int_value;
+    let availStartJobLabel = cat[10].data[3].label;
+    let availStartJobScore = parseFloat(cat[10].data[4].float_value);
+    let startupSalaryScore = parseFloat(cat[10].data[5].float_value);
+    let avgStartupSalary = parseFloat(cat[10].data[6].currency_dollar_value.toFixed(2));
+    let avgStartSalLabel = cat[10].data[6].label;
+
+    //Tolerance Variables
+    let adoptRights = cat[12].data[0].string_value;
+    let adoptRightsLabel = cat[12].data[0].label;
+    let discrimination = cat[12].data[4].string_value;
+    let discrimLabel = cat[12].data[4].label;
+    let homoRights = cat[12].data[7].string_value;
+    let homoRightsLabel = cat[12].data[7].label;
+    let marriageRights = cat[12].data[9].string_value;
+    let marryRightsLabel = cat[12].data[9].label;
+    let equalityIndex = parseFloat(cat[12].data[10].float_value);
+    let equalIndexLabel = cat[12].data[10].label;
+    let equalIndexScore = parseFloat(cat[12].data[11].float_value);
+
+    //Outdoors Variables
+    let elevation = parseFloat(cat[14].data[0].float_value);
+    let hillyScore = parseFloat(cat[14].data[3].float_value);
 
     const cleanAvg = (((pollutionScore + cleanScore + waterScore + greeneryScore)/4) * 10);
 
@@ -423,7 +474,6 @@
         <span>${val}</span>
       `);
     });
-
     cardContainer.append(`
       <div class="colored-tile">
         <span class="intro-title">Weather</span>
@@ -463,7 +513,7 @@
         </div>
       </div>
     `);
-    console.log(business);
+
     if(business == 'true') {
       cardContainer.append(`
       <div class="colored-tile">
@@ -471,13 +521,14 @@
       </div>
       <div id="business-img" class="section">
         <div class="info-card">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
           <span class="intro-title">Business</span>
-          <span></span>
-        </div>
-        <div class="extra-info" id="business-extras">
+          <span>Business Freedom: ${businessFreedom}%</span>
+          <span>Overall Business Freedom Score: ${(busiFreedomScore.toFixed(1) * 10)}/10</span>
+          <span>Freedom From Corruption: ${corruptionFreedom}%</span>
+          <span>Score: ${(corrFreedomScore.toFixed(1) * 10)}/10</span>
+          <span>Lack of Labor Restrictions: ${lackLaborRestrict}%</span>
+          <span>Score: ${(lackLaborRestScore * 10)}/10</span>
+          <span>Time To Open A Business Score: ${(busiOpenTimeScore.toFixed(1) * 10)}/10</span>
         </div>
       </div>
     `);
@@ -489,13 +540,11 @@
       </div>
       <div id="business-img" class="section">
         <div class="info-card">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
           <span class="intro-title">Health Care</span>
-          <span></span>
-        </div>
-        <div class="extra-info" id="health-extras">
+          <span>Overall Health Quality Score: ${(healthQualScore.toFixed(1) * 10)}/10</span>
+          <span>Cost of Health Care Score: ${(healthCostScore.toFixed(1) * 10)}/10</span>
+          <span>Average Life Expectancy (Years): ${lifeExpect.toFixed(0)}</span>
+          <span>Life Expectancy Score: ${(lifeExpectScore.toFixed(1) * 10)}/10</span>
         </div>
       </div>
     `);
@@ -507,13 +556,13 @@
       </div>
       <div id="business-img" class="section">
         <div class="info-card">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
           <span class="intro-title">Job Stats</span>
-          <span></span>
-        </div>
-        <div class="extra-info" id="job-extras">
+          <span>${maxSsToEmpLabel}: $${maxSsToEmployee}</span>
+          <span>${empSsTaxRateLabel}: ${employeeSsTaxRate}%</span>
+          <span>${availStartJobLabel}: ${availStartupJobs}</span>
+          <span>Available Startup Jobs Score${(availStartJobScore * 10)}/10</span>
+          <span>${avgStartSalLabel}: $${avgStartupSalary}</span>
+          <span>Startup Salary Score: ${(startupSalaryScore * 10)}/10</span>
         </div>
       </div>
     `);
@@ -521,17 +570,17 @@
     if(tolerance == 'true') {
       cardContainer.append(`
       <div class="colored-tile">
-        <span>Tolerance</span>
+        <span>Minority/LGBT Tolerance</span>
       </div>
       <div id="business-img" class="section">
         <div class="info-card">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
-          <span class="intro-title">Scores</span>
-          <span></span>
-        </div>
-        <div class="extra-info" id="tolerance-extras">
+          <span class="intro-title">Tolerance</span>
+          <span>${adoptRightsLabel}: ${adoptRights}</span>
+          <span>${discrimLabel}: ${discrimination}</span>
+          <span>${homoRightsLabel}: ${homoRights}</span>
+          <span>${marryRightsLabel}: ${marriageRights}</span>
+          <span>${equalIndexLabel}: ${equalityIndex.toFixed(1)}</span>
+          <span>${(equalIndexScore.toFixed(1) * 10)}/10</span>
         </div>
       </div>
     `);
@@ -543,13 +592,9 @@
       </div>
       <div id="business-img" class="section">
         <div class="info-card">
-          <a class="expand-btn hidden">
-            <img class="expand-img" src="${expandImg}" alt="expand">
-          </a>
           <span class="intro-title">Outdoors</span>
-          <span></span>
-        </div>
-        <div class="extra-info" id="outdoor-extras">
+          <span>Elevation: ${elevation}</span>
+          <span>Hills/Mountains Average: ${(hillyScore.toFixed(1)) * 10}/10</span>
         </div>
       </div>
     `);
@@ -569,14 +614,18 @@
     $('html, body').animate({scrollTop: "0"});
   });
 
+  $('.to-btm-btn').click(function() {
+    $('html, body').animate({scrollTop: ($(document).height() - $(window).height() - $(window).scrollTop())})
+  });
+
   //Show on Scroll
   $(window).scroll(function() {
-    if ($(this).scrollTop() > 400) {
+    if ($(this).scrollTop() > 600) {
       $('.to-top-btn').addClass('showme');
-      console.log('it should have added the class!');
+      $('.to-btm-btn').addClass('showme');
     } else {
       $('.to-top-btn').removeClass('showme');
-      console.log('it should have removed the class!');
+      $('.to-btm-btn').removeClass('showme');
     }
   });
 
