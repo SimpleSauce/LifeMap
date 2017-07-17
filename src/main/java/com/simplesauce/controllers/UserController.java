@@ -70,7 +70,7 @@ public class UserController {
     }
 
     @PostMapping("/user/edit/profile")
-    public User updateProfile(
+    public @ResponseBody User updateProfile(
             @RequestParam(value="name") String name,
             @RequestParam(value="value") String value,
             @RequestParam(value="pk") Long userId,
