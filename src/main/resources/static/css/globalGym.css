@@ -60,14 +60,14 @@ body {
 
 #search-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
     color: #e9d8a8;
 }
 
 #city-input {
     margin: 0 auto;
-    width: 50%;
+    width: 345px;
     background-color: #cefffc;
     border-style: inset;
     border-radius: 8px;
@@ -76,13 +76,13 @@ body {
 }
 
 #get-info {
-    margin: 0 auto;
-    color: #FFFFFF;
-    border-radius: 8px;
-    font-size: 1.3em;
-    background: none;
-    border: 1px solid #FFFFFF;
-    opacity: 0.8;
+  margin: 0 auto;
+  color: #FFFFFF;
+  border-radius: 8px;
+  font-size: 1.3em;
+  background: rgba(0, 180, 255, 0.8);
+  border: 1px solid #FFFFFF;
+  opacity: 0.8;
 }
 
 a:visited {
@@ -248,25 +248,9 @@ a:visited {
 }
 
 #job-dropdown {
+  font-size: medium;
   margin: 0 auto;
   width: 60%;
-}
-
-.extra-info {
-    display: none;
-    position: relative;
-    color: #201419;
-    justify-content: center;
-    align-content: center;
-    box-shadow: 0 4px 8px 0 #563444;
-    margin: 5px auto;
-    margin-bottom: 0;
-    height: 300px;
-    width: 360px;
-    font-size: 2vw;
-    text-align: center;
-    background-color: #dde4d3;
-
 }
 
 #averages-title {
@@ -343,92 +327,7 @@ footer {
     margin-top: 15px;
 }
 
-/*SIDE NAVIGATION*/
-.to-top-btn {
-    position: fixed;
-    bottom: 150px;
-    right: -100px;
-    z-index: 999999;
-    background: gray;
-    color: white;
-    margin: 0;
-    padding: 0;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-    opacity: 0.8;
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-}
-
-.to-top-btn:hover {
-     color: white;
-     background: black;
-     cursor: pointer;
- }
-
-.to-btm-btn {
-  position: fixed;
-  bottom: 50px;
-  right: -100px;
-  z-index: 999999;
-  background: gray;
-  color: white;
-  margin: 0;
-  padding: 0;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-  opacity: 0.8;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-
-.to-btm-btn:hover {
-  color: white;
-  background: black;
-  cursor: pointer;
-}
-
-.showme {
-    position: fixed;
-    /*bottom: 50px;*/
-    z-index: 999999;
-    background: gray;
-    color: white;
-    margin: 0;
-    padding: 0;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-    opacity: 0.8;
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    right: 30px;
- }
-
-i {
-    font-size: 30px;
-    margin-top: 7px;
-    margin-left: -2px;
-}
-
-/*new for check boxes*/
-.extra-info{
-    margin-right: 10px;
-}
-
 @media screen and (min-width: 768px) {
-
     .btn-link {
         margin-top: 11%;
     }
@@ -485,55 +384,6 @@ i {
     width: 95%;
     font-size: 0.5em;
 }
-
-/*#salary-img div{*/
-    /*padding-top: 7%;*/
-/*}*/
-
-/*#happiness-img div{*/
-    /*padding-top: 11%;*/
-    /*font-size: 2em;*/
-/*}*/
-
-/*#happiness-img div img{*/
-    /*position: absolute;*/
-    /*width: 15%;*/
-    /*height: 15%;*/
-    /*margin-left: 15%;*/
-    /*margin-top: -15%;*/
-    /*margin-bottom: 0;*/
-/*}*/
-
-/*#apartment-img div{*/
-    /*padding-top: 8%;*/
-/*}*/
-
-/*#living-cost-img div{*/
-    /*padding-top: 11%;*/
-/*}*/
-
-/*#startup-img div{*/
-    /*padding-top: 9%;*/
-    /*font-size: 0.7em;*/
-/*}*/
-
-/*#startup-img div img{*/
-    /*position: absolute;*/
-/*}*/
-
-/*#culture-img div{*/
-    /*padding-top: 9%;*/
-    /*font-size: 1.5em;*/
-/*}*/
-
-/*#weather-img div{*/
-    /*padding-top: 13%;*/
-    /*font-size: 1.4em;*/
-/*}*/
-
-/*#clean-img div{*/
-    /*padding-top: 12%;*/
-/*}*/
 
 @media (min-width: 768px) {
 
