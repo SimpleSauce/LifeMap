@@ -302,7 +302,7 @@
     let lgApt = parseFloat(data.categories[8].data[0].currency_dollar_value.toFixed(0));
 
     //Cost Of Living Variables
-    let coffeeCost = parseFloat(cat[3].data[3].currency_dollar_value.toFixed(2));
+    let coffeeCost = parseFloat(cat[3].data[3].currency_dollar_value.toFixed(3));
     let fitnessCost = parseFloat(cat[3].data[5].currency_dollar_value.toFixed(2));
     let beerCost = parseFloat(cat[3].data[6].currency_dollar_value.toFixed(2));
     let mealCost = parseFloat(cat[3].data[8].currency_dollar_value.toFixed(2));
@@ -484,10 +484,10 @@
           <span>Cost of Lunch - $${mealCost}
             <img class="cost-icon" src="${mealImg}" alt="meal">
           </span>
-          <span>Daily Public Transportation - $${(pubTransCost / 30)}
+          <span>Daily Public Transportation - $${(pubTransCost / 30).toFixed(2)}
             <img class="cost-icon" src="${transImg}" alt="cinema">
           </span>
-          <span>Coffee - $${coffeeCost}
+          <span>Coffee - $${coffeeCost.toFixed(2)}
             <img class="cost-icon" src="${coffeeImg}" alt="coffee">
           </span>
         </div>
