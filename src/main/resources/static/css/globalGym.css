@@ -75,6 +75,25 @@ a:visited {
     justify-content: center;
 }
 
+#intro-search-container {
+  order: 1;
+  width: 100%;
+  background: url('../img/congruent_pentagon.png');
+}
+
+#intro-div {
+  color: #ffffff;
+}
+
+#intro-div h2 {
+  background: url('../img/dark_mosaic.png');
+}
+
+#intro-div p {
+  margin-left: 10px;
+  background-color: rgba(18, 18, 18, 0.8);
+}
+
 #search-wrapper {
   margin: 0 auto;
   width: 345px;
@@ -89,31 +108,31 @@ a:visited {
   width: 345px;
   background-color: #cefffc;
   border-style: inset;
-  border-radius: 8px;
+  border-radius: 8px 0 0 8px;
   text-align: center;
   font-size: 2rem;
 }
 
 #get-info {
   position: relative;
-  left: -40px;
+  left: 0;
+  bottom: 0;
   padding: 2px;
-  height: 32px;
+  height: 34px;
   width: 45px;
   margin: 0 auto;
   color: #201419;;
-  border-style: none;
+  border-style: outset;
+  border-radius: 0 8px 8px 0;
   font-size: 1.3em;
-  background: transparent;
+  background: #cefffc;
   /*border: 1px solid #FFFFFF;*/
   opacity: 0.8;
 }
 
-#icon-container {
-  font-size: 1em;
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
+#get-info:hover {
+  color: #ffffff;
+  border-style: inset;
 }
 
 #icon-container {
@@ -125,6 +144,7 @@ a:visited {
   border-radius: 50%;
   margin: 2.7em auto;
 }
+
 #icon-container a {
   display: block;
   position: absolute;
@@ -248,9 +268,18 @@ a:visited {
   background-color: #bffff0;
 }
 
+#initial-info-message {
+  text-align: center;
+  color: #00b4ff;
+  margin: 0 auto;
+  display: inline-block;
+  font-size: 2em;
+}
+
 .hidden {
   display: none;
 }
+
 #job-dropdown {
   text-align: center;
   width: 70%;
@@ -382,12 +411,6 @@ footer {
     margin-top: 15px;
 }
 
-@media screen and (min-width: 768px) {
-    .btn-link {
-        margin-top: 11%;
-    }
-}
-
 #burger {
     position: absolute;
     top: -1%;
@@ -445,10 +468,6 @@ footer {
     margin: 1% auto;
 }
 
-@media (min-width: 768px) {
-
-}
-
 .inputLabels {
     font-size: 1.5em;
     margin-left: 25%;
@@ -487,8 +506,82 @@ footer {
 
 /*MEDIA QUERIES*/
 @media (min-width: 768px) {
-  #info-card-container {
-    width: 50%;
-    margin: 1.6em auto;
+
+  #intro-search-container {
+    color: white;
+    background: url('../img/congruent_pentagon.png');
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    order: 1;
+    width: 100%;
   }
+
+  #content-wrap {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  #search-wrapper {
+    display: flex;
+    align-items: center;
+    order: 1;
+  }
+
+  #icons-info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    order: 2;
+    width: 100%;
+  }
+
+  #icon-container {
+    margin: 5% 10%;
+    background-position: center;
+  }
+
+  #map-backdrop {
+    margin: 0 auto;
+    order: 3;
+  }
+
+  .city-info-wrap {
+    margin: 0 auto;
+    width: 50%;
+    order: 4;
+  }
+
+  footer {
+    width: 100%;
+    order: 999;
+  }
+
+  #info-card-container {
+    color: #EEEEEE;
+    overflow: scroll;
+    z-index: 2;
+    background-image: url('../img/dark_mosaic.png');
+    border: 2px inset cyan;
+    border-radius: 20px;
+    font-size: 1.4em;
+    margin-right: 1.6em;
+    margin-top: 1.6em;
+    margin-bottom: 1.6em;
+    justify-content: center;
+    width: 50%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #image-container {
+    width: 100%
+  }
+
+  .btn-link {
+    margin-top: 11%;
+  }
+
 }

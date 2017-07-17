@@ -4,23 +4,26 @@
 <body>
 <nav th:replace="fragments :: navbarSearch"/>
 <div id="content-wrap">
-    <!--Temp location for Search Info-->
-
-  <!--<div id="lifemap">LifeMap</div>-->
-
   <div id="map-backdrop">
     <img id="map-backdrop-img" th:src="@{/img/006-map.svg}" alt=""/>
     <div id="map"></div>
   </div>
 
-  <div id="search-wrapper" class="form-group">
-    <input type="text" id="city-input" class="form-control" placeholder="Enter Address" />
-    <button id="get-info" type="submit" class="btn btn-default go">Go</button>
+  <div id="intro-search-container">
+    <div id="intro-div">
+      <h2>LifeMap</h2>
+      <p>A minimalist, at-a-glance view of life in another city.</p>
+    </div>
+    <div id="search-wrapper" class="form-group">
+      <input type="text" id="city-input" class="form-control" placeholder="Enter Address" />
+      <button id="get-info" type="submit" class="btn btn-default go">Go</button>
+    </div>
   </div>
 
+  <div id="icons-info-container">
     <div id="icon-container"></div>
-
     <div id="info-card-container">
+      <div id="initial-info-message" class="shown">Information Appears Here!</div>
       <div id="happiness" class="info hidden"></div>
       <div id="apartment" class="info hidden"></div>
       <div id="cost-of-living" class="info hidden"></div>
@@ -35,24 +38,25 @@
       <div id="tolerance-div" class="info hidden"></div>
       <div id="outdoors-div" class="info hidden"></div>
     </div>
+  </div>
 
-    <div class="city-info-wrap">
-      <div id="image-container"></div>
-      <h1 id="location-name"></h1>
-      <div id="test-search" class="navbar-form col-2 col-sm-4 col-md-7 col-lg-7">
-      </div>
-      <div id="location-info"></div>
+  <div class="city-info-wrap">
+    <div id="image-container"></div>
+    <h1 id="location-name"></h1>
+    <div id="test-search" class="navbar-form col-2 col-sm-4 col-md-7 col-lg-7">
     </div>
+    <div id="location-info"></div>
+  </div>
 
-    <div style="display: none;" th:object="${user.configuration}">
-      <div id="business" th:data="*{business}"></div>
-      <div id="healthcare" th:data="*{healthcare}"></div>
-      <div id="jobmarket" th:data="*{jobmarket}"></div>
-      <div id="tolerance" th:data="*{tolerance}"></div>
-      <div id="outdoors" th:data="*{outdoors}"></div>
-    </div>
+  <div style="display: none;" th:object="${user.configuration}">
+    <div id="business" th:data="*{business}"></div>
+    <div id="healthcare" th:data="*{healthcare}"></div>
+    <div id="jobmarket" th:data="*{jobmarket}"></div>
+    <div id="tolerance" th:data="*{tolerance}"></div>
+    <div id="outdoors" th:data="*{outdoors}"></div>
+  </div>
 
-    <footer th:replace="fragments :: footer"/>
+  <footer th:replace="fragments :: footer"/>
 </div>
 <script th:replace="fragments :: scripts"/>
 </body>
