@@ -601,22 +601,23 @@ footer {
     margin-top: 11%;
   }
 
-.cost-icon {
+  .cost-icon {
     width: 8%;
-}
+  }
 
-#monthly-average span {
+  #monthly-average span {
     display: block;
-}
+  }
 
-#daily-average span {
+  #daily-average span {
     display: block;
-}
+  }
 
-#icon-container a img {
+  #icon-container a img {
     transition: all .2s ease-in-out;
-}
+  }
 
-#icon-container a img:hover {
+  #icon-container a img:hover {
     transform: scale(1.4);
+  }
 }
