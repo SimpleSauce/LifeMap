@@ -107,7 +107,7 @@ a:visited {
 #search-wrapper {
   position: relative;
   margin: 5px auto;
-  width: 330px;
+  max-width: 98%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -193,15 +193,17 @@ a:visited {
 #deg30461 { transform: rotate(330deg) translate(10em) rotate(-330deg); border: 2px solid #00b4ff; border-radius: 50%; }
 
 .intro-title {
-  text-align: center;
-  display: block;
+  font-size: 1.5em;
+  display: flex;
+  align-content: center;
+  justify-content: center;
   width: 100%;
-    height: 17%;
+  height: 17%;
   margin-top: 2em;
   padding: 5px;
   background-color: #00b4ff;
   position: relative;
-  top: -8.5%;
+  top: -33px;
   transform: translateY(-50%);
 }
 
@@ -331,9 +333,7 @@ a:visited {
 }
 
 #map-backdrop {
-  position: relative;
-  left: -5px;
-    height: 345px;
+  max-width: 100%;
 }
 
 #map-backdrop-img {
@@ -573,6 +573,7 @@ footer {
   }
 
   #map-backdrop {
+    height: 345px;
     margin: 0 auto;
     order: 3;
   }
