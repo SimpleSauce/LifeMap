@@ -148,7 +148,8 @@ a:visited {
 }
 
 #icon-container img:hover {
-  border: 2px solid #ffffff;
+    border: 2px solid #ffffff;
+    cursor: pointer;
 }
 
 #deg0 { transform: translate(10em); } /* 12em = half the width of the wrapper */
