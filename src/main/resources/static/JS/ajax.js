@@ -150,43 +150,43 @@
   const iconDisplay = (img) => {
     iconContainer.html(`
       <a id='center' class="icon" >
-        <img id="happiness-img" src="${img}" alt="icon">
+        <img id="happiness-img" src="${img}" title="Happiness" alt="icon">
       </a>
       <a id='deg0' class="icon" >
-        <img id="apt-img" src="${aptImg}" alt="icon">
+        <img id="apt-img" src="${aptImg}" title="Rental Cost" alt="icon">
       </a>
       <a id='deg27692' class="icon" >
-        <img id="living-cost-img" src="${costOfLiving}" alt="icon">
+        <img id="living-cost-img" src="${costOfLiving}" title="Cost Of Living" alt="icon">
       </a>
       <a id='deg55384' class="icon" >
-        <img id="startup-img" src="${startupImg}" alt="icon">
+        <img id="startup-img" src="${startupImg}" title="Startups" alt="icon">
       </a>
       <a id='deg83076' class="icon" >
-        <img id="culture-img" src="${cultureImg}" alt="icon">
+        <img id="culture-img" src="${cultureImg}" title="Culture" alt="icon">
       </a>
       <a id='deg11076' class="icon" >
-        <img id="weather-img" src="${weatherImg}" alt="icon">
+        <img id="weather-img" src="${weatherImg}" title="Weather" alt="icon">
       </a>
       <a id='deg13846' class="icon" >
-        <img id="clean-img" src="${cleanlinessImg}" alt="icon">
+        <img id="clean-img" src="${cleanlinessImg}" title="Cleanliness" alt="icon">
       </a>
       <a id='deg16615' class="icon" >
-        <img id="salary-img" src="${salaryImg}" alt="icon">
+        <img id="salary-img" src="${salaryImg}" title="Salaries by Industry" alt="icon">
       </a>
       <a id='deg19384' class="icon" >
-        <img src="${businessImg}" alt="icon">
+        <img src="${businessImg}" title="Businesses" alt="icon">
       </a>
       <a id='deg22153' class="icon" >
-        <img src="${healthImg}" alt="icon">
+        <img src="${healthImg}" title="Health" alt="icon">
       </a>
       <a id='deg24923' class="icon" >
-        <img src="${jobMarketImg}" alt="icon">
+        <img src="${jobMarketImg}" title="Job Market" alt="icon">
       </a>
       <a id='deg276-92' class="icon" >
-        <img src="${toleranceImg}" alt="icon">
+        <img src="${toleranceImg}" title="LGBT Tolerance" alt="icon">
       </a>
       <a id='deg30461' class="icon" >
-        <img src="${outdoorsImg}" alt="icon">
+        <img src="${outdoorsImg}" title="Outdoors" alt="icon">
       </a>      
     `);
   };
