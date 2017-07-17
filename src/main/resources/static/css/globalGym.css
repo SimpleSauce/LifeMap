@@ -85,7 +85,7 @@ a:visited {
 
 #intro-search-container {
   border: 1px solid black;
-  order: 1;
+  order: 0;
   width: 100%;
   background: url('../img/congruent_pentagon.png');
 }
@@ -95,6 +95,7 @@ a:visited {
 }
 
 #intro-div h2 {
+  padding-left: 10px;
   background: url('../img/dark_mosaic.png');
 }
 
@@ -104,8 +105,9 @@ a:visited {
 }
 
 #search-wrapper {
-  margin: 0 auto;
-  width: 345px;
+  position: relative;
+  margin: 5px auto;
+  width: 330px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -329,13 +331,15 @@ a:visited {
 }
 
 #map-backdrop {
+  position: relative;
+  left: -5px;
     height: 345px;
 }
 
 #map-backdrop-img {
     display: block;
     height: 100%;
-    margin: auto;
+    /*margin: auto;*/
 }
 
 /*Self-explanatory, sits in its own section*/
@@ -531,15 +535,26 @@ footer {
     width: 100%;
   }
 
+  #intro-div {
+    margin-left: 1em;
+  }
+
   #content-wrap {
     flex-direction: row;
     flex-wrap: wrap;
   }
 
   #search-wrapper {
+    position: relative;
+    right: -440px;
+    margin: 0;
+    width: 345px;
     display: flex;
     align-items: center;
     order: 1;
+    flex-direction: row;
+    justify-content: center;
+    color: #e9d8a8;
   }
 
   #icons-info-container {
