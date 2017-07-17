@@ -694,6 +694,18 @@
     });
   };
 
+  // //NAV BAR STICKINESS
+  // let stickyNav = $('#intro-search-container').offset().top;
+  //
+  // $(window).scroll(function() {
+  //   if ($(window).scrollTop() > stickyNav) {
+  //     $('#intro-search-container').addClass('affix');
+  //   }
+  //   else {
+  //     $('#intro-search-container').removeClass('affix');
+  //   }
+  // });
+
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
   //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
   goButton.on('click', () => {
