@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head('Ooops, ' + ${error})"></head>
+<style>
+  body {
+    background-color: #00b4ff;
+    color: #2c2c2c;
+    font-size: 3em;
+  }
+
+  div {
+    background-color: #e6e6e6;
+    font-size: 3em;
+  }
+</style>
+<body>
+<th:block th:switch="${error}">
+  <div th:case="'Not Found'">
+    <h1>Page not found!!</h1>
+  </div>
+  <div th:case="'Forbidden'">
+    <h1>You don't have permission to view this page.</h1>
+  </div>
+</th:block>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+<script th:replace="fragments :: scripts"></script>
+</html>

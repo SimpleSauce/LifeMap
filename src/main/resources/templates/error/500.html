@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head('Ooops, ' + ${error})"></head>
+<style>
+  body {
+    background-color: #00b4ff;
+    color: #2c2c2c;
+    font-size: 3em;
+  }
+
+  div {
+    background-color: #e6e6e6;
+    font-size: 3em;
+  }
+</style>
+<body>
+<th:block>
+  <div>
+    <h1>Rut Roh! Internal Error!</h1>
+  </div>
+</th:block>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+<script th:replace="fragments :: scripts"></script>
+</html>
