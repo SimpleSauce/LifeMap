@@ -15,7 +15,7 @@
 
   <div id="search-wrapper" class="form-group">
     <input type="text" id="city-input" class="form-control" placeholder="Enter Address" />
-    <button id="get-info" type="submit" class="btn btn-default go">Search</button>
+    <button id="get-info" type="submit" class="btn btn-default go">Go</button>
   </div>
 
     <div id="icon-container"></div>
@@ -51,8 +51,6 @@
       <div id="tolerance" th:data="*{tolerance}"></div>
       <div id="outdoors" th:data="*{outdoors}"></div>
     </div>
-
-    <nav th:replace="fragments :: side-nav"></nav>
 
     <footer th:replace="fragments :: footer"/>
 </div>

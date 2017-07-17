@@ -216,6 +216,7 @@
         <div>
           <span class="intro-title">Average Happiness</span> 
         </div>
+        <img class="info-card-img" src="${happyImg}" alt="icon">
         <div>${avg}/10</div>
       `);
     } else {
@@ -223,6 +224,7 @@
         <div>
           <span class="intro-title">Average Happiness</span> 
         </div>
+        <img class="info-card-img" src="${happyImg}" alt="icon">
         <div>${avg}/10</div>
       `);
       scoreAndCat.forEach((val) => {
@@ -262,7 +264,8 @@
       <div class="intro-title">
          <span> Average Salaries (by Industry)</span>
       </div>
-      <div>
+      <img class="info-card-img" src="${salaryImg}" alt="icon">
+      <div id="dropdown-container">
         <label for="industry-dropdown" id="dropdown-label">Industry</label>
         <select id="job-dropdown" name="industry-dropdown">
           ${selectBox}
@@ -439,6 +442,7 @@
       <div class="intro-title">
         <span>Apartment Rentals</span>
       </div>
+      <img class="info-card-img" src="${aptImg}" alt="icon">
       <div>
         <span>Large Apartment: $${lgApt}</span>
         <span>Medium Apartment: $${medApt}</span>
@@ -451,6 +455,7 @@
       <div class="intro-title">
         <span>Average Cost of Living</span>
       </div>
+      <img class="info-card-img" src="${costOfLiving}" alt="icon">
       <div>
         <span>Daily Average: ${dailyliving}</span>
         <span>Monthly Average: ${monthlyLiving}</span>
@@ -461,32 +466,29 @@
         <div class="intro-title">
           <span>Average Cost of Living</span>
         </div>
-        <div>
-          <span>Daily Average: ${dailyliving}</span>
-          <span>Monthly Average: ${monthlyLiving}</span>
+        <img class="info-card-img" src="${costOfLiving}" alt="icon">
+        <span>Daily Average: ${dailyliving}</span>
+        <span>Monthly Average: ${monthlyLiving}</span>
+        <div id="monthly-average">Monthly Average:
+          <span>Fitness Club Membership - $${fitnessCost}
+            <img class="cost-icon" src="${fitnessImg}" alt="fitness">$${fitnessCost}
+          </span>
+          <span>Public Transportation - $${pubTransCost}</span>
+          <span>Medium Apartment - $${medApt}</span>
+          <span>32 Beers - $${(beerCost * 32)}</span>
+          <span>2 Movies - $${(cinemaCost * 2)}</span>
+          <span>Coffee and Lunch (every other day) - $${((coffeeCost + mealCost) * 15)}</span>
         </div>
-        <div class="extra-info-container">
-          <div id="monthly-average">Monthly Average:
-            <span>Fitness Club Membership - $${fitnessCost}
-              <img class="info-card-img" src="${fitnessImg}" alt="fitness">$${fitnessCost}
-            </span>
-            <span>Public Transportation - $${pubTransCost}</span>
-            <span>Medium Apartment - $${medApt}</span>
-            <span>32 Beers - $${(beerCost * 32)}</span>
-            <span>2 Movies - $${(cinemaCost * 2)}</span>
-            <span>Coffee and Lunch (every other day) - $${((coffeeCost + mealCost) * 15)}</span>
-          </div>
-          <div id="daily-average">Daily Average:
-            <span>Cost of Lunch - $${mealCost}
-              <img class="info-card-img" src="${mealImg}" alt="meal">
-            </span>
-            <span>Daily Public Transportation - $${(pubTransCost / 30)}
-              <img class="info-card-img" src="${transImg}" alt="cinema">
-            </span>
-            <span>Coffee - $${coffeeCost}
-              <img class="info-card-img" src="${coffeeImg}" alt="coffee">
-            </span>
-          </div>
+        <div id="daily-average">Daily Average:
+          <span>Cost of Lunch - $${mealCost}
+            <img class="cost-icon" src="${mealImg}" alt="meal">
+          </span>
+          <span>Daily Public Transportation - $${(pubTransCost / 30)}
+            <img class="cost-icon" src="${transImg}" alt="cinema">
+          </span>
+          <span>Coffee - $${coffeeCost}
+            <img class="cost-icon" src="${coffeeImg}" alt="coffee">
+          </span>
         </div>
       `);
     }
@@ -496,6 +498,7 @@
       <div class="intro-title">
         <span>Startups</span>
       </div>
+      <img class="info-card-img" src="${startupImg}" alt="icon">
         <div>
           <span>Average Startup Score: ${avgStartupScore.toFixed(1)}/10</span>
           <span>Average Startup Increase Score: ${avgStartupIncrease}/10</span>
@@ -508,6 +511,7 @@
         <div class="intro-title">
           <span>Startups</span>
         </div>
+        <img class="info-card-img" src="${startupImg}" alt="icon">
         <div>
           <span>Average Startup Score: ${avgStartupScore.toFixed(1)}/10</span>
           <span>Average Startup Increase Score: ${avgStartupIncrease}/10</span>
@@ -536,18 +540,16 @@
       <div class="intro-title">
         <span>Culture</span>
       </div>
-      <div class="info-card">
-        <span>${cultAvg}/10</span>
-      </div>
+      <img class="info-card-img" src="${cultureImg}" alt="icon">
+      <span>${cultAvg}/10</span>
     `);
     } else {
       $('#culture').html(`
         <div class="intro-title">
           <span>Culture</span>
         </div>
-        <div class="info-card">
-          <span>${cultAvg}/10</span>
-        </div>
+        <img class="info-card-img" src="${cultureImg}" alt="icon">
+        <span>${cultAvg}/10</span>
         <div id="culture-extras"></div>
       `);
       cultureCatAndCnt.forEach((val) => {
@@ -562,23 +564,21 @@
       <div class="intro-title">
         <span>Weather</span>
       </div>
-      <div class="info-card">
-        <span>Current Temp: ${currentTemp}${degreeSymbol}</span>
-      </div>
+      <img class="info-card-img" src="${weatherImg}" alt="icon">
+      <span>Current Temp: ${currentTemp}${degreeSymbol}</span>
     `);
     } else {
       $('#weather').html(`
         <div class="intro-title">
           <span>Weather</span>
         </div>
-        <div class="info-card">
-          <span>Current Temp: ${currentTemp}${degreeSymbol}</span>
-          <span id="averages-title">Averages</span>
-          <span>Day Length: ${dayLength}</span>
-          <span>High/Low Temps: ${avgHighTemp}/${avgLowTemp}</span>
-          <span>Rainy Days/Year: ${avgRainy}</span>
-          <span>Climate Type: ${climate}</span>
-        </div>
+        <img class="info-card-img" src="${weatherImg}" alt="icon">
+        <span>Current Temp: ${currentTemp}${degreeSymbol}</span>
+        <span id="averages-title">Averages</span>
+        <span>Day Length: ${dayLength}</span>
+        <span>High/Low Temps: ${avgHighTemp}/${avgLowTemp}</span>
+        <span>Rainy Days/Year: ${avgRainy}</span>
+        <span>Climate Type: ${climate}</span>
       `);
     }
 
@@ -587,24 +587,21 @@
         <div class="intro-title">
           <span>Cleanliness</span>
         </div>
-        <div class="info-card">
-          <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
-        </div>
+        <img class="info-card-img" src="${cleanlinessImg}" alt="icon">
+        <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
+
       `);
     } else {
       $('#cleanliness').html(`
         <div class="intro-title">
           <span>Cleanliness</span>
         </div>
-        <div class="info-card">
-          <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
-        </div>
-        <div>
-          <span>Pollution Score: ${pollutionScore}</span>
-          <span>Cleanliness Score: ${cleanScore}</span>
-          <span>Water Quality Score: ${waterScore}</span>
-          <span>Urban Greenery Score: ${greeneryScore}</span>
-        </div>
+        <img class="info-card-img" src="${cleanlinessImg}" alt="icon">
+        <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
+        <span>Pollution Score: ${pollutionScore}</span>
+        <span>Cleanliness Score: ${cleanScore}</span>
+        <span>Water Quality Score: ${waterScore}</span>
+        <span>Urban Greenery Score: ${greeneryScore}</span>
       `);
     }
 
@@ -613,82 +610,70 @@
       <div class="intro-title">
         <span>Business</span>
       </div>
-      <div id="business-img" class="section">
-        <div class="info-card">
-          <img class="info-card-img" src="${businessImg}" alt="icon">
-          <span>Business Freedom: ${businessFreedom}%</span>
-          <span>Overall Business Freedom Score: ${(busiFreedomScore.toFixed(1) * 10)}/10</span>
-          <span>Freedom From Corruption: ${corruptionFreedom}%</span>
-          <span>Score: ${(corrFreedomScore.toFixed(1) * 10)}/10</span>
-          <span>Lack of Labor Restrictions: ${lackLaborRestrict}%</span>
-          <span>Score: ${(lackLaborRestScore * 10)}/10</span>
-          <span>Time To Open A Business Score: ${(busiOpenTimeScore.toFixed(1) * 10)}/10</span>
-        </div>
-      </div>
+      <img class="info-card-img" src="${businessImg}" alt="icon">
+      <span>Business Freedom: ${businessFreedom}%</span>
+      <span>Overall Business Freedom Score: ${(busiFreedomScore.toFixed(1) * 10)}/10</span>
+      <span>Freedom From Corruption: ${corruptionFreedom}%</span>
+      <span>Score: ${(corrFreedomScore.toFixed(1) * 10)}/10</span>
+      <span>Lack of Labor Restrictions: ${lackLaborRestrict}%</span>
+      <span>Score: ${(lackLaborRestScore * 10)}/10</span>
+      <span>Time To Open A Business Score: ${(busiOpenTimeScore.toFixed(1) * 10)}/10</span>
     `);
-    } else $('#business-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
+    } else $('#business-div').html(`<div class="warning-div"><div class="text-div">Please log in or update your search preferences from your profile page to see this information!</div></div>`);
 
     if(healthCare == 'true') {
       $('#healthcare-div').html(`
       <div class="intro-title">
         <span>Health Care</span>
       </div>
-      <div>
-        <span>Overall Health Quality Score: ${(healthQualScore.toFixed(1) * 10)}/10</span>
-        <span>Cost of Health Care Score: ${(healthCostScore.toFixed(1) * 10)}/10</span>
-        <span>Average Life Expectancy (Years): ${lifeExpect.toFixed(0)}</span>
-        <span>Life Expectancy Score: ${(lifeExpectScore.toFixed(1) * 10)}/10</span>
-      </div>
+      <img class="info-card-img" src="${healthImg}" alt="icon">
+      <span>Overall Health Quality Score: ${(healthQualScore.toFixed(1) * 10)}/10</span>
+      <span>Cost of Health Care Score: ${(healthCostScore.toFixed(1) * 10)}/10</span>
+      <span>Average Life Expectancy (Years): ${lifeExpect.toFixed(0)}</span>
+      <span>Life Expectancy Score: ${(lifeExpectScore.toFixed(1) * 10)}/10</span>
     `);
-    } else $('#healthcare-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
+    } else $('#healthcare-div').html(`<div class="warning-div"><div class="text-div">Please log in or update your search preferences from your profile page to see this information!</div></div>`);
 
     if(jobMarket == 'true') {
       $('#jobmarket-div').html(`
       <div class="intro-title">
         <span>Job Market</span>
       </div>
-      <div class="info-card">
-        <img class="info-card-img" src="${jobMarketImg}" alt="icon">
-        <span>${maxSsToEmpLabel}: $${maxSsToEmployee}</span>
-        <span>${empSsTaxRateLabel}: ${employeeSsTaxRate}%</span>
-        <span>${availStartJobLabel}: ${availStartupJobs}</span>
-        <span>Available Startup Jobs Score${(availStartJobScore * 10)}/10</span>
-        <span>${avgStartSalLabel}: $${avgStartupSalary}</span>
-        <span>Startup Salary Score: ${(startupSalaryScore * 10)}/10</span>
-      </div>
+      <img class="info-card-img" src="${jobMarketImg}" alt="icon">
+      <span>${maxSsToEmpLabel}: $${maxSsToEmployee}</span>
+      <span>${empSsTaxRateLabel}: ${employeeSsTaxRate}%</span>
+      <span>${availStartJobLabel}: ${availStartupJobs}</span>
+      <span>Available Startup Jobs Score${(availStartJobScore * 10)}/10</span>
+      <span>${avgStartSalLabel}: $${avgStartupSalary}</span>
+      <span>Startup Salary Score: ${(startupSalaryScore * 10)}/10</span>
     `);
-    } else $('#jobmarket-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
+    } else $('#jobmarket-div').html(`<div class="warning-div"><div class="text-div">Please log in or update your search preferences from your profile page to see this information!</div></div>`);
 
     if(tolerance == 'true') {
       $('#tolerance-div').html(`
       <div class="intro-title">
         <span>Minority/LGBT Tolerance</span>
       </div>
-      <div class="info-card">
-        <img class="info-card-img" src="${toleranceImg}" alt="icon">
-        <span>${adoptRightsLabel}: ${adoptRights}</span>
-        <span>${discrimLabel}: ${discrimination}</span>
-        <span>${homoRightsLabel}: ${homoRights}</span>
-        <span>${marryRightsLabel}: ${marriageRights}</span>
-        <span>${equalIndexLabel}: ${equalityIndex.toFixed(1)}</span>
-        <span>Equality Index Score: ${(equalIndexScore.toFixed(1) * 10)}/10</span>
-      </div>
+      <img class="info-card-img" src="${toleranceImg}" alt="icon">
+      <span>${adoptRightsLabel}: ${adoptRights}</span>
+      <span>${discrimLabel}: ${discrimination}</span>
+      <span>${homoRightsLabel}: ${homoRights}</span>
+      <span>${marryRightsLabel}: ${marriageRights}</span>
+      <span>${equalIndexLabel}: ${equalityIndex.toFixed(1)}</span>
+      <span>Equality Index Score: ${(equalIndexScore.toFixed(1) * 10)}/10</span>
     `);
-    } else $('#tolerance-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
+    } else $('#tolerance-div').html(`<div class="warning-div"><div class="text-div">Please log in or update your search preferences from your profile page to see this information!</div></div>`);
 
     if(outdoors == 'true') {
       $('#outdoors-div').html(`
       <div class="intro-title">
         <span>Outdoors</span>
       </div>
-      <div class="info-card">
-        <img class="info-card-img" src="${outdoorsImg}" alt="icon">
-        <span class="intro-title">Outdoors</span>
-        <span>Elevation: ${elevation}</span>
-        <span>Hills/Mountains Average: ${(hillyScore.toFixed(1)) * 10} (Higher is more hilly)</span>
-      </div>
+      <img class="info-card-img" src="${outdoorsImg}" alt="icon">
+      <span>Elevation: ${elevation}</span>
+      <span>Hills/Mountains Average: ${(hillyScore.toFixed(1)) * 10} (Higher is more hilly)</span>
     `);
-    } else $('#outdoors-div').html(`Please log in or update your search preferences from your profile page to see this information!`);
+    } else $('#outdoors-div').html(`<div class="warning-div"><div class="text-div">Please log in or update your search preferences from your profile page to see this information!</div></div>`);
 
     $('.expand-btn').on('click', function() {
       console.log('you clicked the expand button');
@@ -710,7 +695,6 @@
 
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
   //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.
-
   goButton.on('click', () => {
     $('.shown').toggleClass('hidden').toggleClass('shown');
     geoCoder();

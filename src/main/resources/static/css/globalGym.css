@@ -13,6 +13,7 @@ html, body {
 }
 
 body {
+  /*font-size: 1.4em;*/
   background-size: cover;
   background: url('../img/gplaypattern.png') repeat fixed #99bab8;
   outline: none;
@@ -58,33 +59,6 @@ body {
     height: 5rem;
 }
 
-#search-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-    color: #e9d8a8;
-}
-
-#city-input {
-    margin: 0 auto;
-    width: 345px;
-    background-color: #cefffc;
-    border-style: inset;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 2rem;
-}
-
-#get-info {
-  margin: 0 auto;
-  color: #FFFFFF;
-  border-radius: 8px;
-  font-size: 1.3em;
-  background: rgba(0, 180, 255, 0.8);
-  border: 1px solid #FFFFFF;
-  opacity: 0.8;
-}
-
 a:visited {
     color: #00B4FF;
 }
@@ -99,6 +73,192 @@ a:visited {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+#search-wrapper {
+  margin: 0 auto;
+  width: 345px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #e9d8a8;
+}
+
+#city-input {
+  margin: 0 auto;
+  width: 345px;
+  background-color: #cefffc;
+  border-style: inset;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 2rem;
+}
+
+#get-info {
+  position: relative;
+  left: -40px;
+  padding: 2px;
+  height: 32px;
+  width: 45px;
+  margin: 0 auto;
+  color: #201419;;
+  border-style: none;
+  font-size: 1.3em;
+  background: transparent;
+  /*border: 1px solid #FFFFFF;*/
+  opacity: 0.8;
+}
+
+#icon-container {
+  font-size: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+#icon-container {
+  background-image: url('../img/002-compass.svg');
+  position: relative;
+  width: 20em;
+  height: 20em;
+  padding: 2.8em;
+  border-radius: 50%;
+  margin: 1.75em auto 0;
+}
+#icon-container a {
+  display: block;
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 4em; height: 4em;
+  margin: -2em;
+}
+
+/*ICON PLACEMENT AROUND AXIS*/
+#icon-container img {
+  background: rgba(44, 44, 44, 0.8);
+  border-radius: 50%;
+  display: block; width: 100%;
+}
+#deg0 { transform: translate(10em); } /* 12em = half the width of the wrapper */
+#deg27692 { transform: rotate(30deg) translate(10em) rotate(-30deg); }
+#deg55384 { transform: rotate(60deg) translate(10em) rotate(-60deg); }
+#deg83076 { transform: rotate(90deg) translate(10em) rotate(-90deg); }
+#deg11076 { transform: rotate(120deg) translate(10em) rotate(-120deg); }
+#deg13846 { transform: rotate(150deg) translate(10em) rotate(-150deg); }
+#deg16615 { transform: rotate(180deg) translate(10em) rotate(-180deg); }
+#deg19384 { transform: rotate(210deg) translate(10em) rotate(-210deg); border: 1px solid #00b4ff; border-radius: 50%;}
+#deg22153 { transform: rotate(240deg) translate(10em) rotate(-240deg); border: 1px solid #00b4ff; border-radius: 50%; }
+#deg24923 { transform: rotate(270deg) translate(10em) rotate(-270deg); border: 1px solid #00b4ff; border-radius: 50%; }
+#deg276-92 { transform: rotate(300deg) translate(10em) rotate(-300deg); border: 1px solid #00b4ff; border-radius: 50%; }
+#deg30461 { transform: rotate(330deg) translate(10em) rotate(-330deg); border: 1px solid #00b4ff; border-radius: 50%; }
+
+.intro-title {
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin-top: 2em;
+  padding: 5px;
+  background-color: #00b4ff;
+  position: relative;
+  top: 0;
+  transform: translateY(-50%);
+}
+
+/*==================ICONS==================*/
+#info-card-container {
+  color: #EEEEEE;
+  overflow: scroll;
+  z-index: 2;
+  background-image: url('../img/dark_mosaic.png');
+  border: 2px inset cyan;
+  border-radius: 20px;
+  font-size: 1.4em;
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  justify-content: center;
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-card-img {
+  width: 2em;
+  height: 2em;
+  position: relative;
+  left: 5px;
+  top: -57px;
+}
+
+.warning-div {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  justify-content: center;
+  border-radius: 19px;
+  text-align: center;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  font-size: 1.4em;
+  background-color: #e9d8a8;
+
+}
+
+.text-div {
+  height: 50%;
+  display: inline-block;
+  background-color: #cefffc;
+  color: #201419;
+}
+
+.icon {
+  height: 32px;
+  width: 32px;
+}
+
+.user-icon {
+  background-color: #00b4ff;
+}
+
+.info {
+  height: 100%;
+  width: 100%;
+}
+
+.info-card {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 8px;
+  color: #201419;
+  position: relative;
+  box-shadow: 0 4px 8px 0 #19211f;
+  margin: 5px auto;
+  margin-bottom: 0;
+  width: 90%;
+  font-size: 1em;
+  text-align: center;
+  background-color: #bffff0;
+}
+
+/*TODO Change the position of this element to be always in the top left of .info-card*/
+
+
+.hidden {
+  display: none;
+}
+#job-dropdown {
+  text-align: center;
+  width: 70%;
+  background: grey;
+  font-size: 1.2em;
+  height: 12%;
+}
+
+#dropdown-container {
+  height: 100%;
+  width: 100%;
 }
 
 /*Wraps location-image, location-name and location-info*/
@@ -137,120 +297,12 @@ a:visited {
 #map {
     position: relative;
     top: -270px;
-    /*right: 25%;*/
     margin: 5px auto;
     z-index: 0;
     background-color: rgba(240, 255, 255, 0.65);
     height: 200px;
     width: 300px;
     border-radius: 3%;
-}
-
-#icon-container {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-#icon-container {
-  background-image: url('../img/002-compass.svg');
-  position: relative;
-  width: 20em;
-  height: 20em;
-  padding: 2.8em;
-  border-radius: 50%;
-  margin: 1.75em auto 0;
-}
-#icon-container a {
-  display: block;
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 4em; height: 4em;
-  margin: -2em;
-}
-
-/*ICON PLACEMENT AROUND AXIS*/
-#icon-container img {
-  background: rgba(44, 44, 44, 0.8);
-  border-radius: 50%;
-  display: block; width: 100%;
-}
-#deg0 { transform: translate(10em); } /* 12em = half the width of the wrapper */
-#deg27692 { transform: rotate(30deg) translate(10em) rotate(-30deg); }
-#deg55384 { transform: rotate(60deg) translate(10em) rotate(-60deg); }
-#deg83076 { transform: rotate(90deg) translate(10em) rotate(-90deg); }
-#deg11076 { transform: rotate(120deg) translate(10em) rotate(-120deg); }
-#deg13846 { transform: rotate(150deg) translate(10em) rotate(-150deg); }
-#deg16615 { transform: rotate(180deg) translate(10em) rotate(-180deg); }
-#deg19384 { transform: rotate(210deg) translate(10em) rotate(-210deg); }
-#deg22153 { transform: rotate(240deg) translate(10em) rotate(-240deg); }
-#deg24923 { transform: rotate(270deg) translate(10em) rotate(-270deg); }
-#deg276-92 { transform: rotate(300deg) translate(10em) rotate(-300deg); }
-#deg30461 { transform: rotate(330deg) translate(10em) rotate(-330deg); }
-
-.intro-title {
-  padding: 5px;
-  background-color: #201419;
-  position: relative;
-  top: 30%;
-  transform: translateY(-50%);
-}
-
-/*==================ICONS==================*/
-#info-card-container {
-    justify-content: center;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.info .extra-info{
-  height: 80%;
-  width: 80%;
-}
-
-.icon {
-  height: 32px;
-  width: 32px;
-}
-
-.info-card {
-  display: flex;
-  flex-wrap: wrap;
-  border-radius: 8px;
-  color: #201419;
-  position: relative;
-  box-shadow: 0 4px 8px 0 #19211f;
-  margin: 5px auto;
-  margin-bottom: 0;
-  width: 90%;
-  font-size: 1em;
-  text-align: center;
-  background-color: #bffff0;
-}
-
-/*TODO Change the position of this element to be always in the top left of .info-card*/
-.info-card-img {
-    width: 10vw;
-    height: 10vh;
-    position: relative;
-    margin-left: -1.2vw;
-    margin-top: -10vh;
-    margin-bottom: 16vh;
-}
-
-.hidden {
-    display: none;
-}
-
-.shown {
-  /*display: inherit;*/
-}
-
-#job-dropdown {
-  font-size: medium;
-  margin: 0 auto;
-  width: 60%;
 }
 
 #averages-title {
@@ -379,11 +431,6 @@ footer {
     margin-left: 1%;
 }
 
-#job-dropdown {
-    width: 95%;
-    font-size: 0.5em;
-}
-
 .footer {
     display: block;
     text-align: center;
@@ -393,10 +440,6 @@ footer {
 footer {
     width: 19%;
     margin: 1% auto;
-}
-
-@media (min-width: 768px) {
-
 }
 
 #usernameLbl, #passwordLbl, #emailLbl {
@@ -442,4 +485,12 @@ footer {
     text-align: center;
     font-size: 4em;
     font-weight: bold;
+}
+
+/*MEDIA QUERIES*/
+@media (min-width: 768px) {
+  #info-card-container {
+    width: 50%;
+    margin: 1.6em auto;
+  }
 }
