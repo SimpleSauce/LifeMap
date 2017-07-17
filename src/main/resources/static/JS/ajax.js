@@ -146,6 +146,7 @@
       // console.log(data);
   };
 
+  //TODO Make this function fade-in icons.
   const iconDisplay = (img) => {
     iconContainer.html(`
       <a id='center' class="icon" >
@@ -699,6 +700,12 @@
     $('.shown').toggleClass('hidden').toggleClass('shown');
     geoCoder();
   });
+
+  if(user == "") {
+    //TODO If there's not a user, hovering over the exclusive icons will show message.
+  }
+
+  //TODO hamburger-wrapped side-bar for icon keys
 
   $(document).keyup((e) => {
     if (e.keyCode === 13) {
