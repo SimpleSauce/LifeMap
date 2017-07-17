@@ -89,24 +89,31 @@ a:visited {
   width: 345px;
   background-color: #cefffc;
   border-style: inset;
-  border-radius: 8px;
+  border-radius: 8px 0 0 8px;
   text-align: center;
   font-size: 2rem;
 }
 
 #get-info {
   position: relative;
-  left: -40px;
+  left: 0;
+  bottom: 0;
   padding: 2px;
-  height: 32px;
+  height: 34px;
   width: 45px;
   margin: 0 auto;
   color: #201419;;
-  border-style: none;
+  border-style: outset;
+  border-radius: 0 8px 8px 0;
   font-size: 1.3em;
-  background: transparent;
+  background: #cefffc;
   /*border: 1px solid #FFFFFF;*/
   opacity: 0.8;
+}
+
+#get-info:hover {
+  color: #ffffff;
+  border-style: inset;
 }
 
 #icon-container {
@@ -245,6 +252,14 @@ a:visited {
   font-size: 1em;
   text-align: center;
   background-color: #bffff0;
+}
+
+#initial-info-message {
+  text-align: center;
+  color: #00b4ff;
+  margin: 0 auto;
+  display: inline-block;
+  font-size: 2em;
 }
 
 .hidden {
