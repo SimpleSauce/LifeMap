@@ -399,21 +399,13 @@ footer {
 
 }
 
-#usernameLbl, #passwordLbl, #emailLbl {
+
+.inputLabels {
     font-size: 1.5em;
     margin-left: 25%;
 }
 
-#loginHeader {
-    display: inline;
-    background-color: rgba(81, 81, 81, 0.67);
-    border-radius: 50px;
-    color: aquamarine;
-    font-size: 5em;
-    padding: 10px;
-}
-
-#username, #password {
+.regUsePwr {
     border-radius: 8px;
     background-color: #515151;
     color: #00B4FF;
@@ -423,7 +415,7 @@ footer {
     font-weight: bold;
 }
 
-#email {
+.regEmail {
     border-radius: 8px;
     background-color: #00B4FF;
     color: #515151;
@@ -433,7 +425,7 @@ footer {
     font-weight: bold;
 }
 
-#btnSubmit {
+.regBtn {
     display: block;
     margin: 1% auto;
 }
