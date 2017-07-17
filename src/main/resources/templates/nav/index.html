@@ -5,6 +5,9 @@
 <nav th:replace="fragments :: navbarSearch"/>
 <div id="content-wrap">
     <!--Temp location for Search Info-->
+
+  <div id="lifemap">LifeMap</div>
+
   <div id="map-backdrop">
     <img id="map-backdrop-img" th:src="@{/img/006-map.svg}" alt=""/>
     <div id="map"></div>
@@ -24,14 +27,27 @@
     </div>
 
     <div id="info-card-container">
-      <div class="btn to-top-btn hidden-xs hidden-sm">
-        <i class="glyphicon glyphicon-arrow-up"></i>
-      </div>
+      <div id="happiness" class="info hidden"></div>
+      <div id="apartment" class="info hidden"></div>
+      <div id="cost-of-living" class="info hidden"></div>
+      <div id="startups" class="info hidden"></div>
+      <div id="culture" class="info hidden"></div>
+      <div id="weather" class="info hidden"></div>
+      <div id="cleanliness" class="info hidden"></div>
+      <div id="salary" class="info hidden"></div>
+      <div id="business-div" class="info hidden"></div>
+      <div id="healthcare-div" class="info hidden"></div>
+      <div id="jobmarket-div" class="info hidden"></div>
+      <div id="tolerance-div" class="info hidden"></div>
+      <div id="outdoors-div" class="info hidden"></div>
     </div>
+
+    <div id="icon-container"></div>
+
     <div style="display: none;" th:object="${user.configuration}">
       <div id="business" th:data="*{business}"></div>
       <div id="healthcare" th:data="*{healthcare}"></div>
-      <div id="jobmarket" th:data="*{jobMarket}"></div>
+      <div id="jobmarket" th:data="*{jobmarket}"></div>
       <div id="tolerance" th:data="*{tolerance}"></div>
       <div id="outdoors" th:data="*{outdoors}"></div>
     </div>

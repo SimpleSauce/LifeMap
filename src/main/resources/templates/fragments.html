@@ -2,22 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <!--HEAD FRAGMENT-->
-<head th:fragment="head(title)">
+<div th:fragment="head(title)">
     <meta charset="UTF-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
     <title th:text="${title}"></title>
     <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
     <link rel="stylesheet" href="/css/globalGym.css" />
-    <!--<link rel="shortcut icon" href="./img/logoplaceholder.ico" type="image/ico"/>-->
+    <link rel="shortcut icon" th:href="@{/img/006-map.ico}" type="image/ico"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous">
     </script>
-</head>
+</div>
 
 <!--LOGIN HEAD FRAGMENT-->
-<head th:fragment="login(title)">
+<div th:fragment="login(title)">
     <meta charset="UTF-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
     <title th:text="${title}"></title>
@@ -30,10 +30,10 @@
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous">
     </script>
-</head>
+</div>
 
 <!--ABOUT HEAD FRAGMENT-->
-<head th:fragment="about(title)">
+<div th:fragment="about(title)">
     <meta charset="UTF-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
     <title th:text="${title}"></title>
@@ -46,7 +46,7 @@
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous">
     </script>
-</head>
+</div>
 
 <body>
 <!--SIDE BAR NAV-->
@@ -120,12 +120,14 @@
     <div class="btn to-top-btn hidden-xs hidden-sm">
         <i class="glyphicon glyphicon-arrow-up"></i>
     </div>
-    <p>&nbsp;</p>
+    <div class="btn to-btm-btn hidden-xs hidden-sm">
+        <i class="glyphicon glyphicon-arrow-down"></i>
+    </div>
 </nav>
 
 <!--FOOTER FRAGMENT-->
 <footer th:fragment="footer">
-    <a class="cntr-text" href="/about">The SimpleSauce Team</a>
+    <a class="footer" href="/about">The SimpleSauce Team</a>
 </footer>
 
 <!--SCRIPTS FRAGMENT-->
@@ -144,7 +146,7 @@
     const MAPS_KEY = "@environment.getProperty('google.maps.key')";
     const business = $('#business').attr('data'); //0 or 1
     const healthCare = $('#healthcare').attr('data');
-    const jobMarket  = $('#jobMarket').attr('data');
+    const jobMarket  = $('#jobmarket').attr('data');
     const tolerance  = $('#tolerance').attr('data');
     const outdoors = $('#outdoors').attr('data');
     const user = $('#username').text();
@@ -154,7 +156,6 @@
   <script src="/JS/ajax.js"></script>
   <script src="/JS/forms.js"></script>
 </scripts>
-
 
 </body>
 </html>
