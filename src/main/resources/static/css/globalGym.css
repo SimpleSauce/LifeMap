@@ -153,13 +153,11 @@ a:visited {
 }
 
 #icon-container {
-  background-color: #515151;
+  background-image: url('../img/002-compass.svg');
   position: relative;
   width: 20em;
   height: 20em;
   padding: 2.8em;
-  /*2.8em = 2em*1.4 (2em = half the width of a link with img, 1.4 = sqrt(2))*/
-  border: dashed 1px;
   border-radius: 50%;
   margin: 1.75em auto 0;
 }
@@ -178,17 +176,17 @@ a:visited {
   display: block; width: 100%;
 }
 #deg0 { transform: translate(10em); } /* 12em = half the width of the wrapper */
-#deg27692 { transform: rotate(27.692deg) translate(10em) rotate(-27.692deg); }
-#deg55384 { transform: rotate(55.384deg) translate(10em) rotate(-55.384deg); }
-#deg83076 { transform: rotate(83.076deg) translate(10em) rotate(-83.076deg); }
-#deg11076 { transform: rotate(110.76deg) translate(10em) rotate(-110.76deg); }
-#deg13846 { transform: rotate(138.46deg) translate(10em) rotate(-138.46deg); }
-#deg16615 { transform: rotate(166.15deg) translate(10em) rotate(-166.15deg); }
-#deg19384 { transform: rotate(193.84deg) translate(10em) rotate(-193.84deg); }
-#deg22153 { transform: rotate(221.53deg) translate(10em) rotate(-221.53deg); }
-#deg24923 { transform: rotate(249.23deg) translate(10em) rotate(-249.23deg); }
-#deg276-92 { transform: rotate(276.92deg) translate(10em) rotate(-276.92deg); }
-#deg30461 { transform: rotate(304.61deg) translate(10em) rotate(-304.61deg); }
+#deg27692 { transform: rotate(30deg) translate(10em) rotate(-30deg); }
+#deg55384 { transform: rotate(60deg) translate(10em) rotate(-60deg); }
+#deg83076 { transform: rotate(90deg) translate(10em) rotate(-90deg); }
+#deg11076 { transform: rotate(120deg) translate(10em) rotate(-120deg); }
+#deg13846 { transform: rotate(150deg) translate(10em) rotate(-150deg); }
+#deg16615 { transform: rotate(180deg) translate(10em) rotate(-180deg); }
+#deg19384 { transform: rotate(210deg) translate(10em) rotate(-210deg); }
+#deg22153 { transform: rotate(240deg) translate(10em) rotate(-240deg); }
+#deg24923 { transform: rotate(270deg) translate(10em) rotate(-270deg); }
+#deg276-92 { transform: rotate(300deg) translate(10em) rotate(-300deg); }
+#deg30461 { transform: rotate(330deg) translate(10em) rotate(-330deg); }
 
 .intro-title {
   padding: 5px;
@@ -275,39 +273,6 @@ a:visited {
     font-weight: bold;
 }
 
-/*==================INDIVIDUAL INFO BACKGROUNDS==================*/
-#happiness-img {
-    background-image: url('../img/happiness.png');
-}
-
-#salary-img {
-    background-image: url('../img/workharder.png');
-}
-
-#apartment-img {
-    background-image: url('../img/apartments.png');
-}
-
-#living-cost-img {
-    background-image: url('../img/');
-}
-
-#startup-img {
-    background-image: url('../img/startups.png');
-}
-
-#culture-img {
-    background-image: url('../img/culture.png');
-}
-
-#weather-img {
-    background-image: url('../img/cloudwalking.png');
-}
-
-#clean-img {
-    background-image: url('../img/windmills.png');
-}
-
 footer {
     margin: auto;
 }
@@ -317,7 +282,6 @@ footer {
     border: solid;
     height: 215px;
     margin-top: -10px;
-
 }
 
 #logBtn{
