@@ -16,7 +16,8 @@ body {
   display: inline;
   /*background-color: rgba(81, 81, 81, 0.67);*/
   border-radius: 50px;
-  /*color: aquamarine;*/
+  color: #ffffff;
+  box-shadow: 0 4px 8px 0 #19211f;
   font-family: monospace;
   font-weight: bold;
   font-size: 6.3em;
