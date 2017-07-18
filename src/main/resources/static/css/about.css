@@ -1,8 +1,7 @@
 html, body {
   box-sizing: border-box;
-  background: url('../img/maps-board.png') no-repeat fixed center;
+  background: url('../img/swirl_pattern.png') repeat fixed center;
   background-color: #2c2c2c;
-  background-size: cover;
 }
 
 #content-wrap {
@@ -14,13 +13,57 @@ html, body {
   background: none;
 }
 
+.intro-search-container {
+  border: 1px solid black;
+  order: 0;
+  width: 100%;
+  background: url('../img/congruent_pentagon.png');
+}
+
+.intro-div {
+  padding: 0 5px;
+  background-color: rgba(14, 17, 16, 0.83);
+  color: #9ffff2;
+}
+
+.intro-div a h2 {
+  position: relative;
+  top: -30px;
+  color: #ffffff;
+}
+
+.intro-div p {
+  color: #ffffff;
+  margin-left: 10px;
+  /*background-color: rgba(18, 18, 18, 0.8);*/
+}
+
+a:link {
+  background: none;
+  color: #000000;
+}
+
+.navbar-nav li a:hover {
+  color: #ffffff;
+  background-color: rgba(14, 17, 16, 0.83);
+}
+
+a:visited {
+  color: #000000;
+}
+
+a:hover {
+  background-color: #000000;
+}
+
+.disappear {
+  display: none;
+}
+
 .pic-self {
   background-image: linear-gradient(to top, #515151 92%, #00B4FF 8%);
   margin: 5px;
 }
-
-/*
-*/
 
 .pic-name {
   text-align: center;
@@ -28,13 +71,6 @@ html, body {
   color: #EEEEEE;
   font-size: 2em;
 }
-
-/*.pic-self img{*/
-  /*border: 2px solid #ffffff;*/
-  /*border-radius: 10px;*/
-  /*width: 100%;*/
-  /*height: 80%;*/
-/*}*/
 
 .pic-img{
   border: 2px solid #ffffff;
@@ -70,6 +106,42 @@ html, body {
 }
 
 @media (min-width: 768px) {
+  .intro-div a h2 {
+    position: relative;
+    top: -25px;
+    color: #ffffff;
+  }
+
+  .flexed-search-item {
+    position: relative;
+    top: -20px;
+  }
+
+  .disappear {
+    display: block;
+  }
+
+  .intro-search-container {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    color: white;
+    background: url('../img/congruent_pentagon.png');
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    order: 1;
+    width: 100%;
+  }
+
+  #mobile-nav {
+    display: none;
+  }
+
+  .intro-div {
+    margin-left: 1em;
+  }
+
   #content-wrap {
     padding: 0;
   }
@@ -85,11 +157,6 @@ html, body {
     margin: 2px;
   }
 
-  /*.pic-self:first-child {*/
-    /*background-image: linear-gradient(to top, #515151 86%, #00B4FF 14%);*/
-    /*width: 30%;*/
-    /*height: 50%;*/
-  /*}*/
 }
 
 @media (max-width: 768px) {

@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments :: about(About)" />
 <body>
-<nav th:replace="fragments :: navbar" />
+<nav th:replace="fragments :: navbarSearch" />
+<div th:replace="fragments :: nosearch"></div>
 <div class="container-fluid" id="content-wrap">
     <div id="pic-container">
         <div class="pic-self col-4 col-sm-4 col-md-4 col-lg-4">
