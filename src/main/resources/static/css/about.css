@@ -1,8 +1,17 @@
-body {
+html, body {
   box-sizing: border-box;
   background: url('../img/maps-board.png') no-repeat fixed center;
   background-color: #2c2c2c;
   background-size: cover;
+}
+
+#content-wrap {
+  width: 90%;
+  margin-top: 75px;
+}
+
+.container-fluid {
+  background: none;
 }
 
 .pic-self {
@@ -17,7 +26,6 @@ body {
 
 .pic-name {
   text-align: center;
-  /*background-color: #00B4FF;*/
   width: 100%;
   color: #EEEEEE;
   font-size: 2em;
