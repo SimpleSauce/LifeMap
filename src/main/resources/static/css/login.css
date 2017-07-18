@@ -7,7 +7,7 @@ body {
 #usernameLbl, #passwordLbl {
   font-family: Edelsans, Avenir, sans-serif;
   font-size: 1.5em;
-  color: white;
+  color: black;
   display: block;
   margin-left: 25%;
 }

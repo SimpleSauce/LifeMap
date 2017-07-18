@@ -67,7 +67,7 @@ body {
 }
 
 a:visited {
-    color: #9ffff2;
+    color: black;
 }
 
 /*===================CONTENT BELOW NAVBAR===================*/
@@ -339,6 +339,7 @@ a:visited {
 
 #map-backdrop {
   max-width: 100%;
+  max-height: 380px;
 }
 
 #map-backdrop-img {
@@ -428,7 +429,7 @@ footer {
 
 .moveFldsDiv {
   margin-top: 85px;
-  color: white;
+  color: black;
 }
 
 #logBtn {
@@ -522,6 +523,18 @@ footer {
   text-align: center;
   font-size: 4em;
   font-weight: bold;
+}
+
+#monthly-average span {
+  display: block;
+}
+
+#daily-average span {
+  display: block;
+}
+
+.cost-icon {
+  width: 8%;
 }
 
 /*MEDIA QUERIES*/
