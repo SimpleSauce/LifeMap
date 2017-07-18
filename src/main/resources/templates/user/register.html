@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments :: head(Register)"/>
 <body>
-<nav th:replace="fragments :: navbar"/>
+<nav th:replace="fragments :: nosearch"/>
 
 <div class="container-fluid">
     <form id="formFlds" class="moveFldsDiv" th:action="@{/user/register}" th:method="POST" th:object="${user}">
