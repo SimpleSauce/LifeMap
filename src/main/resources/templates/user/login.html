@@ -7,31 +7,26 @@
 <nav th:replace="fragments :: navbar" />
 
 <div class="moveFldsDiv container-fluid">
-    <h1 id="loginHeader">LifeMap</h1>
-    <img id="loginImage" th:src="@{/img/005-gps.svg}" alt="gps"/>
+    <div class="img-Container">
+        <img id="loginImage" th:src="@{/img/005-gps.svg}" alt="gps"/>
+        <span id="loginHeader">LifeMap</span>
+    </div>
     <form th:action="@{/login}" th:method="post">
-
         <div class="form-group">
             <label id="usernameLbl" for="username" class=" control-label">Username</label>
             <input id="username" class="" name="username" autofocus="true" type="text"/>
         </div>
-
         <div class="form-group">
             <label id="passwordLbl" for="password" class=" control-label">Password</label>
             <input id="password" class="" name="password" type="password"/>
         </div>
-
-        <br/>
-
         <input class="btn btn-lg btn-primary regBtn" id="btnSubmit" type="submit" value="Log In"/>
         <div id="LoginErrorDiv">
             <div class="error" th:if="${param.error}">
                 Invalid Username and Password.
             </div>
         </div>
-
     </form>
-    <br/>
     <footer th:replace="fragments :: footer"/>
 </div>
 <!--<footer th:replace="fragments :: footer"/>-->

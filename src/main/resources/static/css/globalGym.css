@@ -5,8 +5,8 @@ html {
 }
 
 html, body {
-    height: 100%;
-    box-sizing: border-box;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .affix {
@@ -16,7 +16,7 @@ html, body {
 }
 
 *:focus {
-    outline: none;
+  outline: none;
 }
 
 body {
@@ -30,40 +30,40 @@ body {
 }
 
 .cntr-text {
-    text-align: center;
+  text-align: center;
 }
 
 /*===================NAV BAR===================*/
 .bar {
-    color: black;
-    z-index: 1;
-    position: fixed;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    width: 100vw;
-    background-color: rgba(46, 46, 46, 0.6);
-    background-position: center;
-    background-size: cover;
-    top: 0;
-    padding: 5px;
+  color: black;
+  z-index: 1;
+  position: fixed;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  width: 100vw;
+  background-color: rgba(46, 46, 46, 0.6);
+  background-position: center;
+  background-size: cover;
+  top: 0;
+  padding: 5px;
 }
 
 .navbar-item {
-    margin: 4px;
+  margin: 4px;
 }
 
 .navbar-inverse {
-    background-color: rgba(42, 42, 42, 0.6);
+  background-color: rgba(42, 42, 42, 0.6);
 }
 
 .search {
-    flex: 1;
+  flex: 1;
 }
 
 #logo {
-    width: 5rem;
-    height: 5rem;
+  width: 5rem;
+  height: 5rem;
 }
 
 a:visited {
@@ -162,26 +162,26 @@ a:visited {
 }
 
 #icon-container a {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 4em;
-    height: 4em;
-    margin: -2em;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4em;
+  height: 4em;
+  margin: -2em;
 }
 
 /*ICON PLACEMENT AROUND AXIS*/
 #icon-container img {
-    background: rgba(44, 44, 44, 0.8);
-    border-radius: 50%;
-    display: block;
-    width: 100%;
+  background: rgba(44, 44, 44, 0.8);
+  border-radius: 50%;
+  display: block;
+  width: 100%;
 }
 
 #icon-container img:hover {
-    border: 2px solid #ffffff;
-    cursor: pointer;
+  border: 2px solid #ffffff;
+  cursor: pointer;
 }
 
 #deg0 { transform: translate(10em); } /* 12em = half the width of the wrapper */
@@ -331,10 +331,10 @@ a:visited {
 
 #location-info {
   color: #e4eeec;
-    background-color: #121212;
-    width: 100%;
-    box-shadow: 0 4px 8px 0 #563444;
-    text-align: center;
+  background-color: #121212;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 #563444;
+  text-align: center;
 }
 
 #map-backdrop {
@@ -342,189 +342,186 @@ a:visited {
 }
 
 #map-backdrop-img {
-    display: block;
-    height: 100%;
-    /*margin: auto;*/
+  display: block;
+  height: 100%;
+  /*margin: auto;*/
 }
 
 /*Self-explanatory, sits in its own section*/
 #map {
-    position: relative;
-    top: -270px;
-    margin: 5px auto;
-    z-index: 0;
-    background-color: rgba(240, 255, 255, 0.65);
-    height: 200px;
-    width: 300px;
-    border-radius: 3%;
+  position: relative;
+  top: -270px;
+  margin: 5px auto;
+  z-index: 0;
+  background-color: rgba(240, 255, 255, 0.65);
+  height: 200px;
+  width: 300px;
+  border-radius: 3%;
 }
 
 #averages-title {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 footer {
-    margin: auto;
+  margin: auto;
 }
 
 #moveAllFlds{
-    border-color: white;
-    border: solid;
-    height: 215px;
-    margin-top: -10px;
+  border-color: white;
+  border: solid;
+  height: 215px;
+  margin-top: -10px;
 }
 
 #logBtn{
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 #updateProfile{
-    font-size: 25px;
-    color: white;
+  font-size: 25px;
+  color: white;
 }
 
 .semi-transparent-button {
-    display: block;
-    box-sizing: border-box;
-    margin: 0 auto;
-    padding: 8px;
-    width: 80%;
-    max-width: 200px;
-    background: #fff; /* fallback color for old browsers */
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-    color: #515151;
-    text-align: center;
-    text-decoration: none;
-    letter-spacing: 1px;
-    transition: all 0.3s ease-out;
-    position: relative;
-    top: 145px;
-    border: dimgray;
-    border-style: solid;
-    border-width: 1px;
+  display: block;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 8px;
+  width: 80%;
+  max-width: 200px;
+  background: #fff; /* fallback color for old browsers */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  color: #515151;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-out;
+  position: relative;
+  top: 145px;
+  border: dimgray;
+  border-style: solid;
+  border-width: 1px;
 }
 
 #titleLbl {
-    margin-left: 450px;
-    margin-top: 50px;
+  margin-left: 450px;
+  margin-top: 50px;
 }
 
 .error {
-    color: red;
-    font-size: large;
+  color: red;
+  font-size: large;
 }
 
 #errorDiv {
-    margin-top: 160px;
-    margin-left: -90px;
+  margin-top: 160px;
+  margin-left: -90px;
 }
 
 .site-name {
-    color: white;
-    font-size: 1.5em;
-    margin-top: 10px;
+  color: white;
+  font-size: 1.5em;
+  margin-top: 10px;
 }
 
 .moveFldsDiv {
-    margin-top: 85px;
+  margin-top: 85px;
+  color: white;
 }
 
 #logBtn {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 #burger {
-    position: absolute;
-    top: -1%;
-    right: 1%;
+  position: absolute;
+  top: -1%;
+  right: 1%;
 }
 
 #user-options {
-    border: solid;
-    border-color: black;
-    height: 215px;
+  border: solid;
+  border-color: black;
+  height: 215px;
 }
 
 .label-update {
-    color: white;
-    background-color: black;
-    margin: 0px;
-    height: 35px;
-    padding-top: 0.5%;
-    padding-left: 0.5%;
+  color: white;
+  background-color: black;
+  margin: 0px;
+  height: 35px;
+  padding-top: 0.5%;
+  padding-left: 0.5%;
 }
 
 #space-line {
-    height: 10px;
+  height: 10px;
 }
 
 #move-cred-fields {
-    padding-top: 1%;
-    padding-left: 1%;
+  padding-top: 1%;
+  padding-left: 1%;
 }
 
 #profile-tag {
-    color: black;
-    padding-top: 33px;
-    font-size: 45px;
+  color: black;
+  padding-top: 33px;
+  font-size: 45px;
 }
 
 #user-pass-space {
-    margin-top: 1%;
-    height: 1%;
-    width: 1%;
+  margin-top: 1%;
+  height: 1%;
+  width: 1%;
 }
 
 .left-margin {
-    margin-left: 1%;
+  margin-left: 1%;
 }
 
 .footer {
-    display: block;
-    text-align: center;
-    font-size: 1.5em;
-}
-
-footer {
-    width: 19%;
-    margin: 1% auto;
+  display: block;
+  text-align: center;
+  font-size: 1.5em;
+  margin: 4% auto;
 }
 
 .inputLabels {
-    font-size: 1.5em;
-    margin-left: 25%;
+  font-size: 1.5em;
+  margin-left: 25%;
 }
 
 .regUsePwr {
-    border-radius: 8px;
-    background-color: #515151;
-    color: #00B4FF;
-    margin: 0 auto;
-    width: 50%;
-    font-size: 1.3em;
-    font-weight: bold;
+  border-radius: 8px;
+  background-color: #515151;
+  color: #00B4FF;
+  margin: 0 auto;
+  width: 50%;
+  font-size: 1.3em;
+  font-weight: bold;
 }
 
 .regEmail {
-    border-radius: 8px;
-    background-color: #00B4FF;
-    color: #515151;
-    margin: 0 auto;
-    width: 50%;
-    font-size: 1.3em;
-    font-weight: bold;
+  border-radius: 8px;
+  background-color: #00B4FF;
+  color: #515151;
+  margin: 0 auto;
+  width: 50%;
+  font-size: 1.3em;
+  font-weight: bold;
 }
 
 .regBtn {
-    display: block;
-    margin: 1% auto;
+  display: block;
+  margin: 1% auto;
 }
 
 #regHead {
-    text-align: center;
-    font-size: 4em;
-    font-weight: bold;
+  text-align: center;
+  font-size: 4em;
+  font-weight: bold;
 }
 
 /*MEDIA QUERIES*/
