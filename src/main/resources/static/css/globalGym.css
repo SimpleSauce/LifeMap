@@ -435,7 +435,7 @@ footer {
 
 .moveFldsDiv {
   margin-top: 85px;
-  color: white;
+  color: black;
 }
 
 #logBtn {
@@ -531,11 +531,22 @@ footer {
   font-weight: bold;
 }
 
+#monthly-average span {
+  display: block;
+}
+
+#daily-average span {
+  display: block;
+}
+
+.cost-icon {
+  width: 8%;
+}
+
 /*MEDIA QUERIES============================*/
 @media (min-width: 768px) {
 
   #intro-search-container {
-    /*display: block;*/
     z-index: 999;
     position: fixed;
     top: 0;
