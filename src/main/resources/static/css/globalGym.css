@@ -195,6 +195,10 @@ a:hover {
   margin: -2em;
 }
 
+#icon-container a:hover {
+  background: transparent;
+}
+
 /*ICON PLACEMENT AROUND AXIS*/
 #icon-container img {
   background: rgba(44, 44, 44, 0.8);
