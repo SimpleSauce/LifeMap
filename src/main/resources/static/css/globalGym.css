@@ -480,11 +480,7 @@ footer {
   display: block;
   text-align: center;
   font-size: 1.5em;
-}
-
-footer {
-  width: 19%;
-  margin: 1% auto;
+  margin: 4% auto;
 }
 
 .inputLabels {
