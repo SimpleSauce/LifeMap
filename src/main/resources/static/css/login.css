@@ -13,6 +13,7 @@ body {
 }
 
 #loginHeader {
+  color: #87BDB1;
   position: absolute;
   font-size: 7vw;
   font-weight: bold;

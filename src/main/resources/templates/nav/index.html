@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments :: head('LifeMap')"/>
 <body>
-<!--<nav th:replace="fragments :: navbarSearch"/>-->
+<nav th:replace="fragments :: navbarSearch"/>
 <div id="backdrop-container">
   <div id="content-wrap">
     <div id="map-backdrop">
@@ -11,20 +11,23 @@
     </div>
 
     <div id="intro-search-container">
-      <div id="intro-div">
-        <a class="navbar-brand" href="/"><h2>LifeMap</h2></a>
-        <p>A minimalist, at-a-glance view of life in another city.</p>
-        <ul class="nav navbar-nav">
-          <li sec:authorize="!isAuthenticated()"><a href="/register">Register <span class="sr-only">(current)</span></a></li>
-          <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
-          <li sec:authorize="isAuthenticated()"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
-          <li sec:authorize="isAuthenticated()">
-            <form th:action="@{/logout}" th:method="post">
-              <button class="btn btn-link" >Logout</button>
-            </form>
-          </li>
-        </ul>
-      </div>
+        <div id="intro-div">
+          <a class="navbar-brand" href="/"><h2>LifeMap</h2></a>
+          <p>A minimalist, at-a-glance view of life in another city.</p>
+        </div>
+
+        <div class="disappear">
+            <ul class="nav navbar-nav">
+              <li sec:authorize="!isAuthenticated()"><a href="/register">Register <span class="sr-only">(current)</span></a></li>
+              <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+              <li sec:authorize="isAuthenticated()"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
+              <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" th:method="post">
+                  <button class="btn btn-link" >Logout</button>
+                </form>
+              </li>
+            </ul>
+        </div>
 
       <div id="search-wrapper" class="form-group">
         <input type="text" id="city-input" class="form-control" placeholder="Enter Address" />
@@ -67,7 +70,7 @@
     </div>
 
     <footer th:replace="fragments :: footer"/>
-  </div>
+</div>
 </div>
 <script th:replace="fragments :: scripts"/>
 </body>

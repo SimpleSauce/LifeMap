@@ -53,8 +53,14 @@ body {
   margin: 4px;
 }
 
+
+
 .navbar-inverse {
-  background-color: rgba(42, 42, 42, 0.6);
+  background: url('../img/congruent_pentagon.png');
+}
+
+.disappear {
+  display: none;
 }
 
 .search {
@@ -338,6 +344,7 @@ a:visited {
 }
 
 #map-backdrop {
+  max-height: 60vh;
   max-width: 100%;
 }
 
@@ -524,10 +531,11 @@ footer {
   font-weight: bold;
 }
 
-/*MEDIA QUERIES*/
+/*MEDIA QUERIES============================*/
 @media (min-width: 768px) {
 
   #intro-search-container {
+    /*display: block;*/
     z-index: 999;
     position: fixed;
     top: 0;
@@ -538,6 +546,10 @@ footer {
     justify-items: center;
     order: 1;
     width: 100%;
+  }
+
+  #mobile-nav {
+    display: none;
   }
 
   #intro-div {
