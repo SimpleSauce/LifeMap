@@ -129,7 +129,7 @@ a.footer:hover {
   border: 1px solid black;
   order: 0;
   width: 100%;
-  background: url('../img/congruent_pentagon.png');
+  background-color: #7ed3cf;
 }
 
 .intro-div {
@@ -184,8 +184,6 @@ a.footer:hover {
   font-size: 1.3em;
   background: #cefffc;
 }
-
-/**/
 
 #get-info:hover {
   color: #ffffff;
@@ -242,15 +240,16 @@ a.footer:hover {
 #deg276-92 { transform: rotate(300deg) translate(10em) rotate(-300deg); border: 2px solid #00b4ff; border-radius: 50%; }
 #deg30461 { transform: rotate(330deg) translate(10em) rotate(-330deg); border: 2px solid #00b4ff; border-radius: 50%; }
 
+/*TODO Fix text and icon alignment in .intro-title*/
 .intro-title {
+  color: #ffffff;
   font-size: 1em;
-  display: flex;
-  align-content: center;
-  justify-content: center;
+  text-align: center;
   width: 100%;
-  height: 17%;
+  height: auto;
   margin-top: 2em;
-  padding: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   background-color: #7ed3cf;
   position: relative;
   top: -20px;
@@ -259,11 +258,10 @@ a.footer:hover {
 
 /*==================ICONS==================*/
 #info-card-container {
-  color: #EEEEEE;
+  color: #7ed3cf;
   overflow: scroll;
   z-index: 2;
   background-image: url('../img/escheresque_ste.png');
-  border: 2px inset cyan;
   border-radius: 20px;
   font-size: 1.4em;
   margin-top: 1.6em;
@@ -276,11 +274,11 @@ a.footer:hover {
 }
 
 .info-card-img {
-  width: 2em;
+  width: 1.65em;
+  position: absolute;
   height: 1.95em;
-  position: relative;
-  left: 5px;
-  top: -99px;
+  left: 15px;
+  top: 0;
 }
 
 .warning-div {
@@ -324,25 +322,18 @@ a.footer:hover {
 }
 
 .info-span {
+  background-color: rgba(126, 211, 207, 0.61);
+  margin-bottom: 5px;
+  color: #ffffff;
   text-align: center;
   display: block;
 }
 
-.info-span:first-of-type {
-  border-top: 1px solid cyan;
-}
-
-.info-span:last-of-type {
-  border-bottom: 1px solid cyan;
-}
-
 .info-div {
+  color: #ffffff;
   font-size: 1.4em;
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-  margin-bottom: 5px;
-  background-color: rgba(126, 211, 207, 0.61);
+  margin-bottom: 15px;
+  /*background-color: rgba(126, 211, 207, 0.61);*/
   text-align: center;
 }
 
@@ -353,7 +344,6 @@ a.footer:hover {
 
 #initial-info-message {
   text-align: center;
-  color: #9ffff2;
   margin: 0 auto;
   display: inline-block;
   font-size: 2em;
@@ -371,6 +361,7 @@ a.footer:hover {
   background: #7ed3cf;
   font-size: 1.2em;
   height: 12%;
+  margin-bottom: 10px;
 }
 
 #dropdown-container {
@@ -626,7 +617,6 @@ footer {
     position: fixed;
     top: 0;
     color: white;
-    background: url('../img/congruent_pentagon.png');
     display: flex;
     flex-direction: row;
     justify-items: center;
@@ -682,7 +672,6 @@ footer {
   }
 
   #icon-container {
-    /*margin: 5% 10%;*/
     background-position: center;
   }
 
@@ -700,16 +689,13 @@ footer {
   #backdrop-container {
     height: 100%;
     width: 100%;
-    /*background: url('../img/escheresque_ste.png');*/
   }
 
   .city-info-wrap {
     position: relative;
-    color: #EEEEEE;
     overflow: scroll;
     z-index: 2;
     background-image: url('../img/escheresque_ste.png');
-    border: 2px inset cyan;
     border-radius: 20px;
     font-size: 1.4em;
     justify-content: center;
@@ -721,11 +707,9 @@ footer {
   }
 
   #info-card-container {
-    color: #EEEEEE;
     overflow: scroll;
     z-index: 2;
     background-image: url('../img/escheresque_ste.png');
-    border: 2px inset cyan;
     border-radius: 20px;
     font-size: 1.4em;
     justify-content: center;
@@ -736,9 +720,9 @@ footer {
   }
 
   #image-container {
+    color: #7ed3cf;
     font-size: 2em;
     text-align: center;
-    color: #9ffff2;
     border: none;
     width: 100%
   }
