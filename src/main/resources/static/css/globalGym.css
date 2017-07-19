@@ -800,7 +800,9 @@ footer {
   }
 
   .btn-link {
-    margin-top: 11%;
+    position: relative;
+    display: block;
+    padding: 14px 15px;
   }
 
   .cost-icon {
