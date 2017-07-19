@@ -218,7 +218,7 @@
           <span class="intro-title">Average Happiness</span> 
         </div>
         <img class="info-card-img" src="${happyImg}" alt="icon">
-        <div>${avg}/10</div>
+        <div class="info-div">${avg}/10</div>
       `);
     } else {
       $('#happiness').html(`
@@ -230,8 +230,8 @@
       `);
       scoreAndCat.forEach((val) => {
         $('#happiness').append(`
-          <div class="happy-score">
-            <span>${val}</span>
+          <div class="info-div">
+            <span class="info-span">${val}</span>
           </div>
         `);
       });
@@ -252,7 +252,7 @@
   let buildSalaryInfo = (data) => {
     console.log(data);
 
-    let selectBox = '<option disabled="disabled" selected="selected">Choose a Job</option>';
+    let selectBox = '<option disabled="disabled" selected="selected">Choose an Industry</option>';
 
     //Each industry gets added as an option to be placed in select tag.
     //Each median salary gets displayed when its corresponding industry is selected.
@@ -267,7 +267,6 @@
       </div>
       <img class="info-card-img" src="${salaryImg}" alt="icon">
       <div id="dropdown-container">
-        <label for="industry-dropdown" id="dropdown-label">Industry</label>
         <select id="job-dropdown" name="industry-dropdown">
           ${selectBox}
         </select>
@@ -279,7 +278,7 @@
 
     //Add Click functionality to change salary that appears based on selection.
     $('#job-dropdown').on('change', function() {
-      $('#salary-median').html("Median Salary " + this.value);
+      $('#salary-median').html(`<span class="info-span">Median Salary: ` + this.value + "</span>");
     });
   };
 
@@ -444,10 +443,10 @@
         <span>Apartment Rentals</span>
       </div>
       <img class="info-card-img" src="${aptImg}" alt="icon">
-      <div>
-        <span>Large Apartment: $${lgApt}</span>
-        <span>Medium Apartment: $${medApt}</span>
-        <span>Small Apartment: $${smApt}</span>
+      <div class="info-div">
+        <span class="info-span">Large Apartment: $${lgApt}</span>
+        <span class="info-span">Medium Apartment: $${medApt}</span>
+        <span class="info-span">Small Apartment: $${smApt}</span>
       </div>
     `);
 
@@ -457,9 +456,9 @@
         <span>Average Cost of Living</span>
       </div>
       <img class="info-card-img" src="${costOfLiving}" alt="icon">
-      <div>
-        <span>Daily Average: ${dailyliving}</span>
-        <span>Monthly Average: ${monthlyLiving}</span>
+      <div class="info-div">
+        <span class="info-span">Daily Average: ${dailyliving}</span>
+        <span class="info-span">Monthly Average: ${monthlyLiving}</span>
       </div>
       `);
     } else {
@@ -468,26 +467,26 @@
           <span>Average Cost of Living</span>
         </div>
         <img class="info-card-img" src="${costOfLiving}" alt="icon">
-        <span>Daily Average: ${dailyliving}</span>
-        <span>Monthly Average: ${monthlyLiving}</span>
-        <div id="monthly-average">Monthly Average:
-          <span>Fitness Club Membership - $${fitnessCost}
-            <img class="cost-icon" src="${fitnessImg}" alt="fitness">$${fitnessCost}
+        <span class="info-span">Daily Average: ${dailyliving}</span>
+        <span class="info-span">Monthly Average: ${monthlyLiving}</span>
+        <div class="info-div">Monthly Average Calculation:
+          <span class="info-span">
+            <img class="cost-icon" src="${fitnessImg}" alt="fitness">Fitness Club Membership - $${(fitnessCost).toFixed(2)}
           </span>
-          <span>Public Transportation - $${pubTransCost}</span>
-          <span>Medium Apartment - $${medApt}</span>
-          <span>32 Beers - $${(beerCost * 32)}</span>
-          <span>2 Movies - $${(cinemaCost * 2)}</span>
-          <span>Coffee and Lunch (every other day) - $${((coffeeCost + mealCost) * 15)}</span>
+          <span class="info-span">Public Transportation - $${(pubTransCost).toFixed(2)}</span>
+          <span class="info-span">Medium Apartment - $${medApt}</span>
+          <span class="info-span">32 Beers - $${(beerCost * 32).toFixed(2)}</span>
+          <span class="info-span">2 Movies - $${(cinemaCost * 2).toFixed(2)}</span>
+          <span class="info-span">Coffee and Lunch (every other day) - $${((coffeeCost + mealCost) * 15).toFixed(2)}</span>
         </div>
-        <div id="daily-average">Daily Average:
-          <span>Cost of Lunch - $${mealCost}
+        <div class="info-div">Daily Average Calculation:
+          <span class="info-span">Cost of Lunch - $${(mealCost).toFixed(2)}
             <img class="cost-icon" src="${mealImg}" alt="meal">
           </span>
-          <span>Daily Public Transportation - $${(pubTransCost / 30).toFixed(2)}
+          <span class="info-span">Daily Public Transportation - $${(pubTransCost / 30).toFixed(2)}
             <img class="cost-icon" src="${transImg}" alt="cinema">
           </span>
-          <span>Coffee - $${coffeeCost.toFixed(2)}
+          <span class="info-span">Coffee - $${coffeeCost.toFixed(2)}
             <img class="cost-icon" src="${coffeeImg}" alt="coffee">
           </span>
         </div>
@@ -500,11 +499,11 @@
         <span>Startups</span>
       </div>
       <img class="info-card-img" src="${startupImg}" alt="icon">
-        <div>
-          <span>Average Startup Score: ${avgStartupScore.toFixed(1)}/10</span>
-          <span>Average Startup Increase Score: ${avgStartupIncrease}/10</span>
-          <span>Startup Climate Investors: ${investors}</span>
-          <span>WorkFrom.Co Co-Working Spaces: ${workFromCoNum}</span>
+        <div class="info-div">
+          <span class="info-span">Average Startup Score: ${avgStartupScore.toFixed(1)}/10</span>
+          <span class="info-span">Average Startup Increase Score: ${avgStartupIncrease}/10</span>
+          <span class="info-span">Startup Climate Investors: ${investors}</span>
+          <span class="info-span">WorkFrom.Co Co-Working Spaces: ${workFromCoNum}</span>
         </div>
         `)
     } else {
@@ -513,23 +512,21 @@
           <span>Startups</span>
         </div>
         <img class="info-card-img" src="${startupImg}" alt="icon">
-        <div>
-          <span>Average Startup Score: ${avgStartupScore.toFixed(1)}/10</span>
-          <span>Average Startup Increase Score: ${avgStartupIncrease}/10</span>
-          <span>Startup Climate Investors: ${investors}</span>
-          <span>WorkFrom.Co Co-Working Spaces: ${workFromCoNum}</span>
+        <div class="info-div">
+          <span class="info-span">Average Startup Score: ${(avgStartupScore * 10).toFixed(1)}/10</span>
+          <span class="info-span">Average Startup Increase Score: ${(avgStartupIncrease * 10).toFixed(1)}/10</span>
+          <span class="info-span">Startup Climate Investors: ${investors}</span>
+          <span class="info-span">WorkFrom.Co Co-Working Spaces: ${workFromCoNum}</span>
         </div>
-        <div class="extra-info-container">
-          <div>
-            <span>Co-Working Spaces Score: ${coWorkScore}/10</span>
-            <span>Startup Events Score: ${eventsScore}/10</span>
-            <span>Meetups Score: ${meetupScore}/10</span>
-            <span>Startup Events This Month: ${eventsCount}</span>
-            <span>Startup Events The Last 12 Months: ${eventsLstYr}</span>
-            <span>FunderBeam Total Startups: ${fundrBmStrtups}</span>
-            <span>Total Upcoming Meetups: ${meetupEvents}</span>
-            <span>Meetups Groups: ${meetupGroups}</span>
-          </div>
+        <div class="info-div">
+          <span class="info-span">Co-Working Spaces Score: ${(coWorkScore * 10).toFixed(1)}/10</span>
+          <span class="info-span">Startup Events Score: ${(eventsScore * 10).toFixed(1)}/10</span>
+          <span class="info-span">Meetups Score: ${(meetupScore / 10).toFixed(1)}/10</span>
+          <span class="info-span">Startup Events This Month: ${eventsCount}</span>
+          <span class="info-span">Startup Events The Last 12 Months: ${eventsLstYr}</span>
+          <span class="info-span">FunderBeam Total Startups: ${fundrBmStrtups}</span>
+          <span class="info-span">Total Upcoming Meetups: ${meetupEvents}</span>
+          <span class="info-span">Meetups Groups: ${meetupGroups}</span>
         </div>
       `);
     }
@@ -542,20 +539,24 @@
         <span>Culture</span>
       </div>
       <img class="info-card-img" src="${cultureImg}" alt="icon">
-      <span>${cultAvg}/10</span>
+      <div class="info-div">
+        <span class="info-span">${cultAvg}/10</span>
+      </div>
     `);
     } else {
       $('#culture').html(`
         <div class="intro-title">
-          <span>Culture</span>
+          <span class="info-span">Culture</span>
         </div>
         <img class="info-card-img" src="${cultureImg}" alt="icon">
-        <span>${cultAvg}/10</span>
-        <div id="culture-extras"></div>
+        <div class="info-div">
+          <span class="info-span">${cultAvg}/10</span>
+        </div>
+        <div id="culture-extras" class="info-div"></div>
       `);
       cultureCatAndCnt.forEach((val) => {
         $('#culture-extras').append(`
-        <span>${val}</span>
+        <span class="info-span">${val}</span>
         `);
       });
     }
@@ -566,7 +567,9 @@
         <span>Weather</span>
       </div>
       <img class="info-card-img" src="${weatherImg}" alt="icon">
-      <span>Current Temp: ${currentTemp}${degreeSymbol}</span>
+      <div class="info-div">
+        <span class="info-span">Current Temp: ${currentTemp}${degreeSymbol}</span>
+      </div>
     `);
     } else {
       $('#weather').html(`
@@ -574,12 +577,14 @@
           <span>Weather</span>
         </div>
         <img class="info-card-img" src="${weatherImg}" alt="icon">
-        <span>Current Temp: ${currentTemp}${degreeSymbol}</span>
-        <span id="averages-title">Averages</span>
-        <span>Day Length: ${dayLength}</span>
-        <span>High/Low Temps: ${avgHighTemp}/${avgLowTemp}</span>
-        <span>Rainy Days/Year: ${avgRainy}</span>
-        <span>Climate Type: ${climate}</span>
+        <div class="info-div">
+          <span class="info-span">Current Temp: ${currentTemp}${degreeSymbol}</span>
+          <span id="averages-title">Averages</span>
+          <span class="info-span">Day Length: ${dayLength}</span>
+          <span class="info-span">High/Low Temps: ${(avgHighTemp).toFixed(0)}/${(avgLowTemp).toFixed(0)}</span>
+          <span class="info-span">Rainy Days/Year: ${avgRainy}</span>
+          <span class="info-span">Climate Type: ${climate}</span>
+        </div>
       `);
     }
 
@@ -589,8 +594,9 @@
           <span>Cleanliness</span>
         </div>
         <img class="info-card-img" src="${cleanlinessImg}" alt="icon">
-        <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
-
+        <div class="info-div">
+          <span class="info-span">Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
+        </div>
       `);
     } else {
       $('#cleanliness').html(`
@@ -598,11 +604,13 @@
           <span>Cleanliness</span>
         </div>
         <img class="info-card-img" src="${cleanlinessImg}" alt="icon">
-        <span>Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
-        <span>Pollution Score: ${pollutionScore}</span>
-        <span>Cleanliness Score: ${cleanScore}</span>
-        <span>Water Quality Score: ${waterScore}</span>
-        <span>Urban Greenery Score: ${greeneryScore}</span>
+        <div class="info-div">
+          <span class="info-span">Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
+          <span class="info-span">Pollution Score: ${(pollutionScore * 10).toFixed(1)}/10</span>
+          <span class="info-span">Cleanliness Score: ${(cleanScore * 10).toFixed(1)}/10</span>
+          <span class="info-span">Water Quality Score: ${(waterScore * 10).toFixed(1)}/10</span>
+          <span class="info-span">Urban Greenery Score: ${(greeneryScore * 10).toFixed(1)}/10</span>
+        </div>
       `);
     }
 
@@ -612,13 +620,15 @@
         <span>Business</span>
       </div>
       <img class="info-card-img" src="${businessImg}" alt="icon">
-      <span>Business Freedom: ${businessFreedom}%</span>
-      <span>Overall Business Freedom Score: ${(busiFreedomScore.toFixed(1) * 10)}/10</span>
-      <span>Freedom From Corruption: ${corruptionFreedom}%</span>
-      <span>Score: ${(corrFreedomScore.toFixed(1) * 10)}/10</span>
-      <span>Lack of Labor Restrictions: ${lackLaborRestrict}%</span>
-      <span>Score: ${(lackLaborRestScore * 10)}/10</span>
-      <span>Time To Open A Business Score: ${(busiOpenTimeScore.toFixed(1) * 10)}/10</span>
+      <div class="info-div">
+        <span class="info-span">Business Freedom: ${businessFreedom}%</span>
+        <span class="info-span">Overall Business Freedom Score: ${(busiFreedomScore.toFixed(1) * 10)}/10</span>
+        <span class="info-span">Freedom From Corruption: ${corruptionFreedom}%</span>
+        <span class="info-span">Score: ${(corrFreedomScore.toFixed(1) * 10)}/10</span>
+        <span class="info-span">Lack of Labor Restrictions: ${lackLaborRestrict}%</span>
+        <span class="info-span">Score: ${(lackLaborRestScore * 10)}/10</span>
+        <span class="info-span">Time To Open A Business Score: ${(busiOpenTimeScore.toFixed(1) * 10)}/10</span>
+      </div>
     `);
     } else $('#business-div').html(`<div class="warning-div"><div class="text-div">Please log in or update your search preferences from your profile page to see this information!</div></div>`);
 
@@ -628,10 +638,12 @@
         <span>Health Care</span>
       </div>
       <img class="info-card-img" src="${healthImg}" alt="icon">
-      <span>Overall Health Quality Score: ${(healthQualScore.toFixed(1) * 10)}/10</span>
-      <span>Cost of Health Care Score: ${(healthCostScore.toFixed(1) * 10)}/10</span>
-      <span>Average Life Expectancy (Years): ${lifeExpect.toFixed(0)}</span>
-      <span>Life Expectancy Score: ${(lifeExpectScore.toFixed(1) * 10)}/10</span>
+      <div class="info-div">
+        <span class="info-span">Overall Health Quality Score: ${(healthQualScore.toFixed(1) * 10)}/10</span>
+        <span class="info-span">Cost of Health Care Score: ${(healthCostScore.toFixed(1) * 10)}/10</span>
+        <span class="info-span">Average Life Expectancy (Years): ${lifeExpect.toFixed(0)}</span>
+        <span class="info-span">Life Expectancy Score: ${(lifeExpectScore.toFixed(1) * 10)}/10</span>
+      </div>
     `);
     } else $('#healthcare-div').html(`<div class="warning-div"><div class="text-div">Please log in or update your search preferences from your profile page to see this information!</div></div>`);
 
@@ -641,12 +653,14 @@
         <span>Job Market</span>
       </div>
       <img class="info-card-img" src="${jobMarketImg}" alt="icon">
-      <span>${maxSsToEmpLabel}: $${maxSsToEmployee}</span>
-      <span>${empSsTaxRateLabel}: ${employeeSsTaxRate}%</span>
-      <span>${availStartJobLabel}: ${availStartupJobs}</span>
-      <span>Available Startup Jobs Score${(availStartJobScore * 10)}/10</span>
-      <span>${avgStartSalLabel}: $${avgStartupSalary}</span>
-      <span>Startup Salary Score: ${(startupSalaryScore * 10)}/10</span>
+      <div class="info-div">
+        <span class="info-span">${maxSsToEmpLabel}: $${maxSsToEmployee}</span>
+        <span class="info-span">${empSsTaxRateLabel}: ${employeeSsTaxRate}%</span>
+        <span class="info-span">${availStartJobLabel}: ${availStartupJobs}</span>
+        <span class="info-span">Available Startup Jobs Score${(availStartJobScore * 10)}/10</span>
+        <span class="info-span">${avgStartSalLabel}: $${avgStartupSalary}</span>
+        <span class="info-span">Startup Salary Score: ${(startupSalaryScore * 10)}/10</span>
+      </div>
     `);
     } else $('#jobmarket-div').html(`<div class="warning-div"><div class="text-div">Please log in or update your search preferences from your profile page to see this information!</div></div>`);
 
@@ -656,12 +670,14 @@
         <span>Minority/LGBT Tolerance</span>
       </div>
       <img class="info-card-img" src="${toleranceImg}" alt="icon">
-      <span>${adoptRightsLabel}: ${adoptRights}</span>
-      <span>${discrimLabel}: ${discrimination}</span>
-      <span>${homoRightsLabel}: ${homoRights}</span>
-      <span>${marryRightsLabel}: ${marriageRights}</span>
-      <span>${equalIndexLabel}: ${equalityIndex.toFixed(1)}</span>
-      <span>Equality Index Score: ${(equalIndexScore.toFixed(1) * 10)}/10</span>
+      <div class="info-div">
+        <span class="info-span">${adoptRightsLabel}: ${adoptRights}</span>
+        <span class="info-span">${discrimLabel}: ${discrimination}</span>
+        <span class="info-span">${homoRightsLabel}: ${homoRights}</span>
+        <span class="info-span">${marryRightsLabel}: ${marriageRights}</span>
+        <span class="info-span">${equalIndexLabel}: ${equalityIndex.toFixed(1)}</span>
+        <span class="info-span">Equality Index Score: ${(equalIndexScore.toFixed(1) * 10)}/10</span>
+      </div>
     `);
     } else $('#tolerance-div').html(`<div class="warning-div"><div class="text-div">Please log in or update your search preferences from your profile page to see this information!</div></div>`);
 
@@ -671,8 +687,10 @@
         <span>Outdoors</span>
       </div>
       <img class="info-card-img" src="${outdoorsImg}" alt="icon">
-      <span>Elevation: ${elevation}</span>
-      <span>Hills/Mountains Average: ${(hillyScore.toFixed(1)) * 10} (Higher is more hilly)</span>
+      <div class="info-div">
+        <span class="info-span">Elevation: ${elevation}</span>
+        <span class="info-span">Hills/Mountains Average: ${(hillyScore.toFixed(1)) * 10} (Higher is more hilly</span>
+      </div>
     `);
     } else $('#outdoors-div').html(`<div class="warning-div"><div class="text-div">Please log in or update your search preferences from your profile page to see this information!</div></div>`);
 
@@ -693,18 +711,6 @@
       });
     });
   };
-
-  // //NAV BAR STICKINESS
-  // let stickyNav = $('#intro-search-container').offset().top;
-  //
-  // $(window).scroll(function() {
-  //   if ($(window).scrollTop() > stickyNav) {
-  //     $('#intro-search-container').addClass('affix');
-  //   }
-  //   else {
-  //     $('#intro-search-container').removeClass('affix');
-  //   }
-  // });
 
   //=================CLICKING AND KEYSTROKES FUNCTIONS==================
   //Clicking the "Go" button or pressing the "Enter" key will clear current info and request new info.

@@ -85,6 +85,17 @@ a:link {
   background-color: rgba(14, 17, 16, 0.83);
 }
 
+#logout-button {
+  background: none;
+  color: #000000;
+}
+
+#logout-button:hover {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: rgba(14, 17, 16, 0.83);
+}
+
 a:visited {
     color: #000000;
 }
@@ -93,17 +104,21 @@ a:hover {
   background-color: #000000;
 }
 
+a.footer:hover {
+  background-color: transparent;
+  text-decoration: none;
+}
+
 /*===================CONTENT BELOW NAVBAR===================*/
 
 /*Wraps everything below navbar*/
 #content-wrap {
-  /*background: url('../img/gplaypattern.png') repeat;*/
     width: 90%;
     margin: 0 auto;
     margin-top: 75px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 #location-image {
@@ -226,7 +241,7 @@ a:hover {
 #deg30461 { transform: rotate(330deg) translate(10em) rotate(-330deg); border: 2px solid #00b4ff; border-radius: 50%; }
 
 .intro-title {
-  font-size: 1.5em;
+  font-size: 1em;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -236,7 +251,7 @@ a:hover {
   padding: 5px;
   background-color: #7ed3cf;
   position: relative;
-  top: -33px;
+  top: -20px;
   transform: translateY(-50%);
 }
 
@@ -263,7 +278,7 @@ a:hover {
   height: 1.95em;
   position: relative;
   left: 5px;
-  top: -102px;
+  top: -99px;
 }
 
 .warning-div {
@@ -298,24 +313,37 @@ a:hover {
   background-color: #00b4ff;
 }
 
+/*===================INFORMATION CARDS=====================*/
 .info {
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*align-items: flex-start;*/
   height: 100%;
   width: 100%;
 }
 
-.info-card {
-  display: flex;
-  flex-wrap: wrap;
-  border-radius: 8px;
-  color: #201419;
-  position: relative;
-  box-shadow: 0 4px 8px 0 #19211f;
-  margin: 5px auto;
-  margin-bottom: 0;
-  width: 90%;
-  font-size: 1em;
+.info-span {
   text-align: center;
-  background-color: #bffff0;
+  display: block;
+}
+
+.info-span:first-of-type {
+  border-top: 1px solid cyan;
+}
+
+.info-span:last-of-type {
+  border-bottom: 1px solid cyan;
+}
+
+.info-div {
+  margin-bottom: 5px;
+  background-color: rgba(126, 211, 207, 0.61);
+  text-align: center;
+}
+
+#averages-title {
+  display: block;
+  text-align: center;
 }
 
 #initial-info-message {
@@ -331,19 +359,25 @@ a:hover {
 }
 
 #job-dropdown {
+  border: 1px solid cyan;
+  color: #515151;
   text-align: center;
   width: 70%;
-  background: grey;
+  background: #7ed3cf;
   font-size: 1.2em;
   height: 12%;
 }
 
 #dropdown-container {
-  height: 100%;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
 }
 
-/*Wraps location-image, location-name and location-info*/
+/*====================CITY INFORMATION WRAPPER=====================*/
 #city-info-wrap {
   background: url('../img/escheresque_ste.png') repeat;
 }
@@ -352,9 +386,6 @@ a:hover {
     font-size: 1em;
     color: #00b4ff;
     width: 100%;
-}
-
-#location-name {
 }
 
 #location-info {
@@ -596,6 +627,12 @@ footer {
     width: 100%;
   }
 
+  .intro-title {
+    position: relative;
+    top: -33px;
+    font-size: 1.4em;
+  }
+
   #mobile-nav {
     display: none;
   }
@@ -660,6 +697,7 @@ footer {
   }
 
   .city-info-wrap {
+    position: relative;
     color: #EEEEEE;
     overflow: scroll;
     z-index: 2;
@@ -704,14 +742,6 @@ footer {
 
   .cost-icon {
     width: 8%;
-  }
-
-  #monthly-average span {
-    display: block;
-  }
-
-  #daily-average span {
-    display: block;
   }
 
   #icon-container a img {
