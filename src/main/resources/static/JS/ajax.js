@@ -218,7 +218,9 @@
         <img class="info-card-img" src="${happyImg}" alt="icon">
           <span>Average Happiness</span> 
         </div>
-        <div class="info-div">${avg}/10</div>
+        <div class="info-div">
+          <span class="info-span">Overall Happiness: ${avg}/10</span>
+        </div>
       `);
     } else {
       $('#happiness').html(`
@@ -226,7 +228,9 @@
         <img class="info-card-img" src="${happyImg}" alt="icon">
           <span>Average Happiness</span> 
         </div>
-        <div class="info-div">${avg}/10</div>
+        <div class="info-div">
+          <span class="info-span">Overall Happiness: ${avg}/10</span>
+        </div>
       `);
       scoreAndCat.forEach((val) => {
         $('#happiness').append(`
@@ -274,7 +278,7 @@
           <span id="salary-median"></span>
         </div>
       </div>`;
-      $('#salary').append(htmlString);
+      $('#salary').html(htmlString);
 
     //Add Click functionality to change salary that appears based on selection.
     $('#job-dropdown').on('change', function() {
@@ -540,7 +544,7 @@
         <span>Culture</span>
       </div>
       <div class="info-div">
-        <span class="info-span">${cultAvg}/10</span>
+        <span class="info-span">Overall Score: ${cultAvg}/10</span>
       </div>
     `);
     } else {
@@ -550,7 +554,7 @@
           <span class="info-span">Culture</span>
         </div>
         <div class="info-div">
-          <span class="info-span">${cultAvg}/10</span>
+          <span class="info-span">Overall Score: ${cultAvg}/10</span>
         </div>
         <div id="culture-extras" class="info-div"></div>
       `);
