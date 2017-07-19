@@ -298,9 +298,11 @@ a.footer:hover {
 }
 
 .text-div {
+  text-align: center;
+  border: 1px solid cyan;
   height: 50%;
   display: inline-block;
-  background-color: #cefffc;
+  background-color: #7ed3cf;
   color: #201419;
 }
 
@@ -315,9 +317,6 @@ a.footer:hover {
 
 /*===================INFORMATION CARDS=====================*/
 .info {
-  /*display: flex;*/
-  /*flex-direction: column;*/
-  /*align-items: flex-start;*/
   height: 100%;
   width: 100%;
 }
@@ -336,6 +335,10 @@ a.footer:hover {
 }
 
 .info-div {
+  font-size: 1.4em;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
   margin-bottom: 5px;
   background-color: rgba(126, 211, 207, 0.61);
   text-align: center;
@@ -471,7 +474,9 @@ footer {
 }
 
 .error {
-  color: red;
+  border-radius: 8px;
+  background-color: #ff9274;
+  color: #ff4c4f;
   font-size: large;
 }
 

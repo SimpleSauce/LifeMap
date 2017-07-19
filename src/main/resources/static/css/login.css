@@ -4,6 +4,49 @@ body {
   background-color: black;
 }
 
+.flexed-search-item {
+  position: relative;
+  top: -5px;
+}
+
+a:link {
+  background: none;
+  color: #000000;
+}
+
+.navbar-nav li a:hover {
+  color: #ffffff;
+  background-color: rgba(14, 17, 16, 0.83);
+}
+
+#logout-button {
+  background: none;
+  color: #000000;
+}
+
+#logout-button:hover {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: rgba(14, 17, 16, 0.83);
+}
+
+.disappear {
+  display: none;
+}
+
+a:visited {
+  color: #000000;
+}
+
+a:hover {
+  background-color: #000000;
+}
+
+a.footer:hover {
+  background-color: transparent;
+  text-decoration: none;
+}
+
 #usernameLbl, #passwordLbl {
   font-family: Edelsans, Avenir, sans-serif;
   font-size: 1.5em;
@@ -13,12 +56,19 @@ body {
 }
 
 #loginHeader {
+  position: relative;
+  top: -2.1em;
+  left: 4.7em;
   color: #87BDB1;
-  position: absolute;
   font-size: 7vw;
   font-weight: bold;
-  top: 13%;
-  right: 36%;
+  -webkit-text-stroke: 1px #9ffff2;
+  text-shadow:
+          3px 3px 0 #000,
+          -1px -1px 0 #000,
+          1px -1px 0 #000,
+          -1px 1px 0 #000,
+          1px 1px 0 #000;
 }
 
 /*new additions*/
@@ -29,10 +79,10 @@ body {
 }
 
 #password {
-  background-color: #00b4ff;
-  color: black;
+  border: 1px inset cyan;
+  background: url('../img/escheresque_ste.png');
+  color: #87BDB1;
   font-size: 1.3em;
-  font-weight: bold;
   border-radius: 8px;
   width: 50%;
   display: block;
@@ -40,17 +90,109 @@ body {
 }
 
 #username {
-  background-color: #515151;
-  color: #00b4ff;
+  border: 1px inset cyan;
+  background: url('../img/escheresque_ste.png');
+  color: #87BDB1;
   font-size: 1.3em;
-  font-weight: bold;
   border-radius: 8px;
   width: 50%;
   display: block;
   margin: 0 auto;
 }
 
+#btnSubmit {
+  border: 1px solid cyan;
+  color: #ffffff;
+  background-color: #87BDB1;
+}
+
 .img-Container {
+  max-height: 60%;
   position: relative;
   width: 100%;
+}
+
+#content-wrap {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.intro-search-container {
+  border: 1px solid black;
+  order: 0;
+  width: 100%;
+  background: url('../img/congruent_pentagon.png');
+}
+
+.intro-div {
+  padding: 0 5px;
+  background-color: rgba(14, 17, 16, 0.83);
+  color: #9ffff2;
+}
+
+.intro-div a h2 {
+  position: relative;
+  top: -30px;
+  color: #ffffff;
+}
+
+.intro-div p {
+  color: #ffffff;
+  margin-left: 10px;
+  /*background-color: rgba(18, 18, 18, 0.8);*/
+}
+
+@media (min-width: 768px) {
+
+  #loginHeader {
+    top: -2.3em;
+    left: 5.05em;
+  }
+
+  .intro-div a h2 {
+    position: relative;
+    top: -25px;
+    color: #ffffff;
+  }
+
+  .flexed-search-item {
+    position: relative;
+    top: -20px;
+  }
+
+  .disappear {
+    display: block;
+  }
+
+  .intro-search-container {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    color: white;
+    background: url('../img/congruent_pentagon.png');
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    order: 1;
+    width: 100%;
+  }
+
+  .intro-title {
+    position: relative;
+    top: -33px;
+    font-size: 1.4em;
+  }
+
+  #mobile-nav {
+    display: none;
+  }
+
+  .intro-div {
+    margin-left: 1em;
+  }
+
 }
