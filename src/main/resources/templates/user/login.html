@@ -3,8 +3,8 @@
 <head th:replace="fragments :: login(Login)"/>
 <link href="https://fonts.googleapis.com/css?family=Bungee+Inline" rel="stylesheet"/>
 <body>
-
-<nav th:replace="fragments :: navbar" />
+<nav th:replace="fragments :: navbarSearch" />
+<nav th:replace="fragments :: nosearch" />
 
 <div class="moveFldsDiv container-fluid">
     <div class="img-Container">
@@ -13,12 +13,10 @@
     </div>
     <form th:action="@{/login}" th:method="post">
         <div class="form-group">
-            <label id="usernameLbl" for="username" class=" control-label">Username</label>
-            <input id="username" class="" name="username" autofocus="true" type="text"/>
+            <input id="username" class="" placeholder="Username" name="username" autofocus="true" type="text"/>
         </div>
         <div class="form-group">
-            <label id="passwordLbl" for="password" class=" control-label">Password</label>
-            <input id="password" class="" name="password" type="password"/>
+            <input id="password" class="" placeholder="Password" name="password" type="password"/>
         </div>
         <input class="btn btn-lg btn-primary regBtn" id="btnSubmit" type="submit" value="Log In"/>
         <div id="LoginErrorDiv">

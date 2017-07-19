@@ -270,7 +270,7 @@
         <select id="job-dropdown" name="industry-dropdown">
           ${selectBox}
         </select>
-        <div>
+        <div class="info-div">
           <span id="salary-median"></span>
         </div>
       </div>`;

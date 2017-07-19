@@ -13,6 +13,11 @@ html, body {
   background: none;
 }
 
+.flexed-search-item {
+  position: relative;
+  top: -5px;
+}
+
 .intro-search-container {
   border: 1px solid black;
   order: 0;
@@ -110,11 +115,6 @@ a:hover {
     position: relative;
     top: -25px;
     color: #ffffff;
-  }
-
-  .flexed-search-item {
-    position: relative;
-    top: -20px;
   }
 
   .disappear {
