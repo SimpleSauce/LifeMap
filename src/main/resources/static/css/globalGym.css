@@ -261,7 +261,6 @@ a.footer:hover {
   overflow: scroll;
   z-index: 2;
   background-image: url('../img/escheresque_ste.png');
-  border: 2px inset cyan;
   border-radius: 20px;
   font-size: 1.4em;
   margin-top: 1.6em;
@@ -271,6 +270,16 @@ a.footer:hover {
   height: 50vh;
   display: flex;
   flex-direction: column;
+}
+
+.profile-info-container {
+  color: #EEEEEE;
+  overflow: scroll;
+  background-image: url('../img/escheresque_ste.png');
+  border-radius: 20px;
+  font-size: 1.4em;
+  margin-bottom: 1.6em;
+  height: 250px;
 }
 
 .info-card-img {
@@ -515,9 +524,9 @@ footer {
 .label-update {
   color: white;
   background-color: black;
-  margin: 0px;
+  margin: 0;
   height: 35px;
-  padding-top: 0.5%;
+  padding-top: 1.5%;
   padding-left: 0.5%;
 }
 
@@ -534,6 +543,7 @@ footer {
   color: black;
   padding-top: 33px;
   font-size: 45px;
+  text-align: center;
 }
 
 #user-pass-space {
@@ -601,6 +611,17 @@ footer {
   width: 8%;
 }
 
+#extra-info-search {
+  color: black;
+  border-radius: 4px;
+}
+
+#profile-wrap {
+  align-items: center;
+  text-align: center;
+  margin-top: 30px;
+}
+
 /*MEDIA QUERIES============================*/
 @media (min-width: 768px) {
 
@@ -653,6 +674,12 @@ footer {
     align-items: center;
     justify-content: center;
     justify-items: center;
+  }
+
+  #profile-wrap {
+    align-items: center;
+    text-align: center;
+    margin: 2% 20%;
   }
 
   #search-wrapper {
@@ -733,6 +760,15 @@ footer {
     flex-direction: column;
   }
 
+  .profile-info-container {
+    color: #EEEEEE;
+    overflow: scroll;
+    background-image: url('../img/escheresque_ste.png');
+    border-radius: 20px;
+    font-size: 1.3em;
+    height: 250px;
+  }
+
   #image-container {
     font-size: 2em;
     text-align: center;
@@ -755,5 +791,10 @@ footer {
 
   #icon-container a img:hover {
     transform: scale(1.4);
+  }
+
+  #extra-info-search {
+    color: black;
+    border-radius: 4px;
   }
 }
