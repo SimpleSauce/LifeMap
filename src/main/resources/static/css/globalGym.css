@@ -524,7 +524,7 @@ footer {
 
 .label-update {
   color: white;
-  background-color: black;
+  background-color: #7ed3cf;
   margin: 0;
   height: 35px;
   padding-top: 1.5%;
@@ -587,6 +587,15 @@ footer {
   width: 50%;
   font-size: 1.3em;
   font-weight: bold;
+}
+
+#email, #username {
+  font-size: 1.4em;
+  color: #7ed3cf;
+}
+
+#email, #username:hover {
+  text-decoration: none;
 }
 
 .regBtn {
@@ -768,8 +777,18 @@ footer {
     overflow: scroll;
     background-image: url('../img/escheresque_ste.png');
     border-radius: 20px;
-    font-size: 1.3em;
+    font-size: 1.4em;
     height: 250px;
+  }
+
+  .profile-info-container form {
+    font-size: 1.4em;
+    margin: 10px;
+  }
+
+  #extra-info-search {
+    background-color: #7ed3cf;
+    border: 1px solid cyan;
   }
 
   #image-container {
