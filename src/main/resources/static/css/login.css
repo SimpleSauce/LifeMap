@@ -125,7 +125,7 @@ a.footer:hover {
   border: 1px solid black;
   order: 0;
   width: 100%;
-  background: url('../img/congruent_pentagon.png');
+  background-color: #7ed3cf;
 }
 
 .intro-div {
@@ -173,7 +173,6 @@ a.footer:hover {
     position: fixed;
     top: 0;
     color: white;
-    background: url('../img/congruent_pentagon.png');
     display: flex;
     flex-direction: row;
     justify-items: center;

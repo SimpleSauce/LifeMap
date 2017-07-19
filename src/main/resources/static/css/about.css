@@ -22,7 +22,7 @@ html, body {
   border: 1px solid black;
   order: 0;
   width: 100%;
-  background: url('../img/congruent_pentagon.png');
+  background-color: #7ed3cf;
 }
 
 .intro-div {
@@ -57,16 +57,12 @@ a:visited {
   color: #000000;
 }
 
-a:hover {
-  background-color: #000000;
-}
-
 .disappear {
   display: none;
 }
 
 .pic-self {
-  background-image: linear-gradient(to top, #515151 92%, #00B4FF 8%);
+  background-image: linear-gradient(to top, #515151 92%, #7ed3cf 8%);
   margin: 5px;
 }
 
@@ -126,7 +122,6 @@ a:hover {
     position: fixed;
     top: 0;
     color: white;
-    background: url('../img/congruent_pentagon.png');
     display: flex;
     flex-direction: row;
     justify-items: center;
@@ -152,7 +147,7 @@ a:hover {
   }
 
   .pic-self {
-    background-image: linear-gradient(to top, #515151 92%, #00B4FF 8%);
+    background-image: linear-gradient(to top, #515151 92%, #7ed3cf 8%);
     width: 31%;
     margin: 2px;
   }

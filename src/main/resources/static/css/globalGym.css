@@ -59,7 +59,7 @@ body {
 }
 
 .navbar-inverse {
-  background: url('../img/congruent_pentagon.png');
+  background-color: #7ed3cf;
 }
 
 .disappear {
@@ -322,6 +322,7 @@ a.footer:hover {
 }
 
 .info-span {
+  padding: 5px;
   background-color: rgba(126, 211, 207, 0.61);
   margin-bottom: 5px;
   color: #ffffff;
@@ -432,6 +433,12 @@ footer {
 
 #logBtn{
   margin-top: 15px;
+}
+
+#btnSubmit {
+  border: 1px solid cyan;
+  color: #ffffff;
+  background-color: #87BDB1;
 }
 
 #updateProfile{
@@ -561,10 +568,10 @@ footer {
   font-weight: bold;
 }
 
-.regEmail {
+.regEmail, .regUsePwr {
+  color: #7ed3cf;
   border-radius: 8px;
-  background-color: #00B4FF;
-  color: #515151;
+  background: url('../img/escheresque_ste.png');
   margin: 0 auto;
   width: 50%;
   font-size: 1.3em;
@@ -577,9 +584,18 @@ footer {
 }
 
 #regHead {
+  color: #87BDB1;
   text-align: center;
-  font-size: 4em;
+  position: relative;
+  font-size: 7vw;
   font-weight: bold;
+  -webkit-text-stroke: 1px #9ffff2;
+  text-shadow:
+          3px 3px 0 #000,
+          -1px -1px 0 #000,
+          1px -1px 0 #000,
+          -1px 1px 0 #000,
+          1px 1px 0 #000;
 }
 
 #monthly-average span {
