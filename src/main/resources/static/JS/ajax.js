@@ -214,19 +214,19 @@
 
     if (user == "") {
       $('#happiness').html(`
-        <div>
-          <span class="intro-title">Average Happiness</span> 
-        </div>
+        <div class="intro-title">
         <img class="info-card-img" src="${happyImg}" alt="icon">
+          <span>Average Happiness</span> 
+        </div>
         <div class="info-div">${avg}/10</div>
       `);
     } else {
       $('#happiness').html(`
-        <div>
-          <span class="intro-title">Average Happiness</span> 
-        </div>
+        <div class="intro-title">
         <img class="info-card-img" src="${happyImg}" alt="icon">
-        <div>${avg}/10</div>
+          <span>Average Happiness</span> 
+        </div>
+        <div class="info-div">${avg}/10</div>
       `);
       scoreAndCat.forEach((val) => {
         $('#happiness').append(`
@@ -263,9 +263,9 @@
 
     let htmlString = `
       <div class="intro-title">
+      <img class="info-card-img" src="${salaryImg}" alt="icon">
          <span> Average Salaries (by Industry)</span>
       </div>
-      <img class="info-card-img" src="${salaryImg}" alt="icon">
       <div id="dropdown-container">
         <select id="job-dropdown" name="industry-dropdown">
           ${selectBox}
@@ -440,9 +440,9 @@
 
     $('#apartment').html(`
       <div class="intro-title">
+      <img class="info-card-img" src="${aptImg}" alt="icon">
         <span>Apartment Rentals</span>
       </div>
-      <img class="info-card-img" src="${aptImg}" alt="icon">
       <div class="info-div">
         <span class="info-span">Large Apartment: $${lgApt}</span>
         <span class="info-span">Medium Apartment: $${medApt}</span>
@@ -453,9 +453,9 @@
     if(user == "") {
       $('#cost-of-living').html(`
       <div class="intro-title">
+      <img class="info-card-img" src="${costOfLiving}" alt="icon">
         <span>Average Cost of Living</span>
       </div>
-      <img class="info-card-img" src="${costOfLiving}" alt="icon">
       <div class="info-div">
         <span class="info-span">Daily Average: ${dailyliving}</span>
         <span class="info-span">Monthly Average: ${monthlyLiving}</span>
@@ -464,9 +464,9 @@
     } else {
       $('#cost-of-living').html(`
         <div class="intro-title">
+        <img class="info-card-img" src="${costOfLiving}" alt="icon">
           <span>Average Cost of Living</span>
         </div>
-        <img class="info-card-img" src="${costOfLiving}" alt="icon">
         <span class="info-span">Daily Average: ${dailyliving}</span>
         <span class="info-span">Monthly Average: ${monthlyLiving}</span>
         <div class="info-div">Monthly Average Calculation:
@@ -496,9 +496,9 @@
     if(user == "") {
       $('#startups').html(`
       <div class="intro-title">
+      <img class="info-card-img" src="${startupImg}" alt="icon">
         <span>Startups</span>
       </div>
-      <img class="info-card-img" src="${startupImg}" alt="icon">
         <div class="info-div">
           <span class="info-span">Average Startup Score: ${avgStartupScore.toFixed(1)}/10</span>
           <span class="info-span">Average Startup Increase Score: ${avgStartupIncrease}/10</span>
@@ -509,9 +509,9 @@
     } else {
       $('#startups').html(`
         <div class="intro-title">
+        <img class="info-card-img" src="${startupImg}" alt="icon">
           <span>Startups</span>
         </div>
-        <img class="info-card-img" src="${startupImg}" alt="icon">
         <div class="info-div">
           <span class="info-span">Average Startup Score: ${(avgStartupScore * 10).toFixed(1)}/10</span>
           <span class="info-span">Average Startup Increase Score: ${(avgStartupIncrease * 10).toFixed(1)}/10</span>
@@ -521,7 +521,7 @@
         <div class="info-div">
           <span class="info-span">Co-Working Spaces Score: ${(coWorkScore * 10).toFixed(1)}/10</span>
           <span class="info-span">Startup Events Score: ${(eventsScore * 10).toFixed(1)}/10</span>
-          <span class="info-span">Meetups Score: ${(meetupScore / 10).toFixed(1)}/10</span>
+          <span class="info-span">Meetups Score: ${(meetupScore / 100).toFixed(1)}/10</span>
           <span class="info-span">Startup Events This Month: ${eventsCount}</span>
           <span class="info-span">Startup Events The Last 12 Months: ${eventsLstYr}</span>
           <span class="info-span">FunderBeam Total Startups: ${fundrBmStrtups}</span>
@@ -536,9 +536,9 @@
     if(user == "") {
       $('#culture').html(`
       <div class="intro-title">
+      <img class="info-card-img" src="${cultureImg}" alt="icon">
         <span>Culture</span>
       </div>
-      <img class="info-card-img" src="${cultureImg}" alt="icon">
       <div class="info-div">
         <span class="info-span">${cultAvg}/10</span>
       </div>
@@ -546,9 +546,9 @@
     } else {
       $('#culture').html(`
         <div class="intro-title">
+        <img class="info-card-img" src="${cultureImg}" alt="icon">
           <span class="info-span">Culture</span>
         </div>
-        <img class="info-card-img" src="${cultureImg}" alt="icon">
         <div class="info-div">
           <span class="info-span">${cultAvg}/10</span>
         </div>
@@ -564,9 +564,9 @@
     if(user == "") {
       $('#weather').html(`
       <div class="intro-title">
+      <img class="info-card-img" src="${weatherImg}" alt="icon">
         <span>Weather</span>
       </div>
-      <img class="info-card-img" src="${weatherImg}" alt="icon">
       <div class="info-div">
         <span class="info-span">Current Temp: ${currentTemp}${degreeSymbol}</span>
       </div>
@@ -574,9 +574,9 @@
     } else {
       $('#weather').html(`
         <div class="intro-title">
+        <img class="info-card-img" src="${weatherImg}" alt="icon">
           <span>Weather</span>
         </div>
-        <img class="info-card-img" src="${weatherImg}" alt="icon">
         <div class="info-div">
           <span class="info-span">Current Temp: ${currentTemp}${degreeSymbol}</span>
           <span id="averages-title">Averages</span>
@@ -591,9 +591,9 @@
     if(user == "") {
       $('#cleanliness').html(`
         <div class="intro-title">
+        <img class="info-card-img" src="${cleanlinessImg}" alt="icon">
           <span>Cleanliness</span>
         </div>
-        <img class="info-card-img" src="${cleanlinessImg}" alt="icon">
         <div class="info-div">
           <span class="info-span">Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
         </div>
@@ -601,9 +601,9 @@
     } else {
       $('#cleanliness').html(`
         <div class="intro-title">
+        <img class="info-card-img" src="${cleanlinessImg}" alt="icon">
           <span>Cleanliness</span>
         </div>
-        <img class="info-card-img" src="${cleanlinessImg}" alt="icon">
         <div class="info-div">
           <span class="info-span">Overall Cleanliness Score: ${cleanAvg.toFixed(1)}/10</span>
           <span class="info-span">Pollution Score: ${(pollutionScore * 10).toFixed(1)}/10</span>
@@ -617,9 +617,9 @@
     if(business == 'true') {
       $('#business-div').html(`
       <div class="intro-title">
+      <img class="info-card-img" src="${businessImg}" alt="icon">
         <span>Business</span>
       </div>
-      <img class="info-card-img" src="${businessImg}" alt="icon">
       <div class="info-div">
         <span class="info-span">Business Freedom: ${businessFreedom}%</span>
         <span class="info-span">Overall Business Freedom Score: ${(busiFreedomScore.toFixed(1) * 10)}/10</span>
@@ -635,9 +635,9 @@
     if(healthCare == 'true') {
       $('#healthcare-div').html(`
       <div class="intro-title">
+      <img class="info-card-img" src="${healthImg}" alt="icon">
         <span>Health Care</span>
       </div>
-      <img class="info-card-img" src="${healthImg}" alt="icon">
       <div class="info-div">
         <span class="info-span">Overall Health Quality Score: ${(healthQualScore.toFixed(1) * 10)}/10</span>
         <span class="info-span">Cost of Health Care Score: ${(healthCostScore.toFixed(1) * 10)}/10</span>
@@ -650,9 +650,9 @@
     if(jobMarket == 'true') {
       $('#jobmarket-div').html(`
       <div class="intro-title">
+      <img class="info-card-img" src="${jobMarketImg}" alt="icon">
         <span>Job Market</span>
       </div>
-      <img class="info-card-img" src="${jobMarketImg}" alt="icon">
       <div class="info-div">
         <span class="info-span">${maxSsToEmpLabel}: $${maxSsToEmployee}</span>
         <span class="info-span">${empSsTaxRateLabel}: ${employeeSsTaxRate}%</span>
@@ -667,9 +667,9 @@
     if(tolerance == 'true') {
       $('#tolerance-div').html(`
       <div class="intro-title">
+      <img class="info-card-img" src="${toleranceImg}" alt="icon">
         <span>Minority/LGBT Tolerance</span>
       </div>
-      <img class="info-card-img" src="${toleranceImg}" alt="icon">
       <div class="info-div">
         <span class="info-span">${adoptRightsLabel}: ${adoptRights}</span>
         <span class="info-span">${discrimLabel}: ${discrimination}</span>
@@ -684,9 +684,9 @@
     if(outdoors == 'true') {
       $('#outdoors-div').html(`
       <div class="intro-title">
+      <img class="info-card-img" src="${outdoorsImg}" alt="icon">
         <span>Outdoors</span>
       </div>
-      <img class="info-card-img" src="${outdoorsImg}" alt="icon">
       <div class="info-div">
         <span class="info-span">Elevation: ${elevation}</span>
         <span class="info-span">Hills/Mountains Average: ${(hillyScore.toFixed(1)) * 10} (Higher is more hilly</span>
